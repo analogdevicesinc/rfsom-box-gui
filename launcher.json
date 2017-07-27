@@ -1,0 +1,132 @@
+[
+  {
+    "params": {
+      "timers": [
+        100,
+        500,
+        1000
+      ],
+      "elements": [
+        {
+          "description": "ip",
+          "type": "cmd_read",
+          "timer": 1,
+          "cmd": "ifconfig | grep -Eo 'inet (addr:)?([0-9]*\\.){3}[0-9]*' | grep -Eo '([0-9]*\\.){3}[0-9]*' | grep -v '127.0.0.1'",
+          "one_row": false,
+          "swap_toprow": "false",
+          "text_align": "left",
+          "stylesheet": ""
+        },
+        {
+          "description": "charge",
+          "timer": 2,
+          "type": "cmd_read",
+          "cmd": "cat charge",
+          "one_row": false,
+          "swap_toprow": false,
+          "icon_path": "./charge.png",
+          "text_align": "left",
+          "stylesheet": "\"\""
+        },
+        {
+          "description": "editElement",
+          "type": "edit",
+          "subtype": "numeric",
+          "nr_of_digits": 11,
+          "cmd_read": "cat charge",
+          "cmd_read_timer": 1,
+          "cmd_write": "echo $EDIT_VAL > charge",
+          "swap_toprow": false,
+          "icon_path": "./charge.png",
+          "text_align": "left",
+          "stylesheet": "\"\""
+        },
+        {
+          "description": "ipRead",
+          "timer": 2,
+          "type": "cmd_read",
+          "cmd": "cat ip",
+          "one_row": false,
+          "swap_toprow": false,
+          "icon_path": "./icons/004-computer.png",
+          "text_align": "left",
+          "stylesheet": "\"\""
+        },
+        {
+          "description": "ipelement",
+          "type": "edit",
+          "subtype": "ip",
+          "cmd_read": "cat ip",
+          "cmd_read_timer": 1,
+          "cmd_write": "echo $EDIT_VAL > ip",
+          "swap_toprow": false,
+          "icon_path": "./charge.png",
+          "text_align": "left",
+          "stylesheet": "\"\""
+        }
+      ]
+    },
+    "name": "Network",
+    "type": "list"
+  },
+  {
+    "params": {
+      "timers": [
+        100,
+        500,
+        1000
+      ],
+      "elements": [
+        {
+          "description": "state",
+          "type": "cmd_read",
+          "timer": 1,
+          "cmd": "cat chargepanel",
+          "one_row": false,
+          "swap_toprow": "false",
+          "text_align": "left",
+          "stylesheet": ""
+        },
+        {
+          "description": "press me!",
+          "type": "btn",
+          "cmd": "echo \"button pressed\" > chargepanel",
+          "stylesheet": ""
+        },
+        {
+          "description": "checkbox desription",
+          "type": "checkbox",
+          "cmd_write": "echo $CHECKBOX_VAL > checkbox",
+          "cmd_read": "cat checkbox",
+          "cmd_read_timer": "2",
+          "one_row": false,
+          "swap_toprow": false,
+          "icon_path": "./charge.png",
+          "text_align": "left",
+          "stylesheet": "\"\""
+        },
+        {
+          "description": "editWithReadOnly",
+          "type": "edit",
+          "cmd_read_only": "cat checkbox",
+          "cmd_read": "cat charge",
+          "cmd_read_timer": 1,
+          "cmd_write": "echo $EDIT_VAL > charge",
+          "swap_toprow": false,
+          "icon_path": "./charge.png",
+          "text_align": "left",
+          "stylesheet": "\"\""
+        }
+      ]
+    },
+    "type": "list",
+    "name": "Charge"
+  },
+  {
+    "params": {
+      "cmd": "mplayer -vf scale -zoom -xy 160 -nosound -vo fbdev MVI_0043.AVI"
+    },
+    "type": "video",
+    "name": "Play Video"
+  }
+]

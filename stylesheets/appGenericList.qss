@@ -1,0 +1,48 @@
+QListView
+{
+show-decoration-selected: 1;
+/*alternate-background-color:black;*/
+padding:0 2px;
+/*font-size:18px;*/
+}
+
+QListView:item
+{
+height: 30px;
+padding:1px 2px ;
+}
+
+QListView:item:selected
+{
+padding: 1px ;
+border: 1px solid blue;
+}
+
+QScrollBar:vertical {
+     background: #272730;
+     width: 10px;
+
+}
+
+QScrollBar::handle:vertical {
+    background-color: black;
+    min-width: 10px;
+    height:10px
+
+}
+
+QScrollBar::down-arrow:vertical, QScrollBar::up-arrow:vertical
+{
+      border: none;
+      background: none;
+      color: none;
+}
+QScrollBar::add-line:vertical {
+      border: none;
+      background: none;
+}
+
+QScrollBar::sub-line:vertical {
+      border: none;
+      background: none;
+}

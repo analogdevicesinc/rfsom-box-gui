@@ -10,24 +10,13 @@ MainWindow::MainWindow(QWidget *parent) :
 {
 	QApplication::setOverrideCursor(Qt::BlankCursor);
 	ui->setupUi(this);
-	ui->main_menu->initialize(ui);
-	//ui->main_menu->loadLandingPage();
-
+	ui->main_menu->initialize(ui);	
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *e)
 {
-//	ui->main_menu->inputHandling(e);
-	qDebug()<<"mainWindow";
 	QMainWindow::keyPressEvent(e);
 }
-
-/*void MainWindow::wheelEvent(QWheelEvent *e)
-{
-//	ui->main_menu->inputHandling(e);
-	qDebug()<<"mainwindow" << e;
-	QMainWindow::wheelEvent(e);
-}*/
 
 MainWindow::~MainWindow()
 {

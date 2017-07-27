@@ -7,8 +7,9 @@ IPAddressElement::IPAddressElement(QWidget *parent) : NumericElementUi(parent)
 	nrOfDigits=4;
 	cursorPosition = 0;
 }
-IPAddressElement::~IPAddressElement(){
 
+IPAddressElement::~IPAddressElement()
+{
 }
 
 void IPAddressElement::increment()
@@ -39,6 +40,7 @@ bool IPAddressElement::cursorLeft()
 	if (cursorPosition<nrOfDigits) {
 		cursorPosition++;
 	}
+
 	updateCursorPosition();
 	return true;
 }
@@ -46,7 +48,7 @@ bool IPAddressElement::cursorLeft()
 void IPAddressElement::updateCursorPosition()
 {
 	auto cursorPos = ui->editbox->text().length() - ((cursorPosition+1)*3 +
-			 cursorPosition);
+	                 cursorPosition);
 	ui->editbox->setCursorPosition(cursorPos);
 	ui->editbox->setSelection(cursorPos,3);
 }

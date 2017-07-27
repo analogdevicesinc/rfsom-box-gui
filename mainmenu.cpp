@@ -7,16 +7,8 @@ MainMenu::MainMenu(QWidget *parent) : QStackedWidget(parent)
 {
 }
 
-
-/*void MainMenu::destroyUi()
-{
-}*/
-
 void MainMenu::keyPressEvent(QKeyEvent *e)
 {
-
-	qDebug()<<"mainMenu";
-
 	switch (e->key()) {
 	case Qt::Key_Left:
 		pages[currentIndex()]->unload();
@@ -35,13 +27,11 @@ void MainMenu::keyPressEvent(QKeyEvent *e)
 		QCoreApplication::quit();
 		return;
 	}
-
 	QStackedWidget::keyPressEvent(e);
 }
 
 void MainMenu::initialize(Ui::MainWindow *_ui)
 {
-	qInfo()<<"MainMenu initialize";
 	ui=_ui;
 	landingPage = ui->landingPage;
 	launcherPage = ui->listPage;
@@ -53,7 +43,6 @@ void MainMenu::initialize(Ui::MainWindow *_ui)
 	for (auto& page : pages) {
 		page->init(ui);
 	}
-
 	launcherPage->loadJsonConfig(jsonFileName);
 	setCurrentIndex(landingPageId);
 	landingPage->load();

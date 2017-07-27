@@ -58,7 +58,7 @@ public:
 	void setReadOnlyFlag(bool value);
 
 	quint8 getTextLength() const;
-	void setTextLength(const quint8 &value);
+	void setTextLength(const quint8& value);
 
 protected:
 	virtual void updateCursorPosition();
@@ -72,17 +72,18 @@ public slots:
 		if (cursorPosition>0) {
 			cursorPosition--;
 		}
+
 		updateCursorPosition();
 		return true;
 	}
 	virtual bool cursorRight()
 	{
 		if (cursorPosition<textLength) {
-			cursorPosition++;		}
+			cursorPosition++;
+		}
 		updateCursorPosition();
 		return true;
 	}
-
 };
 
 #endif // EditboxELEMENTUI_H

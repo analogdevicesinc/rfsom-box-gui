@@ -46,7 +46,6 @@ ReadOnlyElementUi::ReadOnlyElementUi(QWidget *parent) : QWidget(parent)
 {
 	icon = false;
 	iconRight = false;
-//	valRight = false;
 	oneRow = false;
 	iconSize = 16;
 	strVal=nullptr;

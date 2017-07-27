@@ -16,8 +16,6 @@ public slots:
 	virtual void destroyUi() {}
 	virtual void load() {}
 	virtual void unload() {}
-
-
 };
 
 #endif // APP_H

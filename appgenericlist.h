@@ -27,7 +27,6 @@ public slots:
 	virtual void buildUi();
 	virtual void destroyUi();
 	void confirmListSelection();
-//	virtual void keyPressEvent(QKeyEvent *e);
 
 private:
 	void setupTimers();

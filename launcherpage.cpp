@@ -33,9 +33,7 @@ void LauncherPage::loadJsonConfig(QString jsonFileName)
 		auto name = val.toObject()["name"];
 		ui->listWidget->addItem(name.toString());
 	}
-
 }
-
 
 void LauncherPage::buildUi(int index)
 {
@@ -66,23 +64,15 @@ void LauncherPage::buildUi(int index)
 			currentApp = new AppVideoPlayer(params,ui->appLayout, ui->appPage);
 
 		default:
-			// error screen
-			// set keys
 			break;
 		}
 
 		currentApp->buildUi();
 		oldIndex = index;
 
-		//qDebug()<<"params "<<params;
-		// currentAppWidget = bla
 	} else {
 		currentApp->load();
 	}
-
-	//load();
-
-
 }
 
 void LauncherPage::unload()
@@ -90,16 +80,6 @@ void LauncherPage::unload()
 	qInfo()<<"unload";
 }
 
-/*
-void delay( int millisecondsToWait )
-{
-    QTime dieTime = QTime::currentTime().addMSecs( millisecondsToWait );
-    while( QTime::currentTime() < dieTime )
-    {
-	QCoreApplication::processEvents( QEventLoop::AllEvents, 100 );
-    }
-}
-*/
 void LauncherPage::load()
 {
 	qInfo()<<"load";
@@ -108,8 +88,6 @@ void LauncherPage::load()
 	qDebug()<<updatesEnabled();
 	update();
 	QCoreApplication::processEvents();
-
-
 }
 
 void LauncherPage::initialize()
@@ -127,11 +105,6 @@ void LauncherPage::keyPressEvent(QKeyEvent *e)
 	}
 
 	MenuPage::keyPressEvent(e);
-}
-
-void LauncherPage::loadApp()
-{
-	//emit list->itemDoubleClicked(list->currentItem());
 }
 
 QListWidget *LauncherPage::getList() const

@@ -19,12 +19,6 @@ public:
 	void loadJsonConfig(QString);
 	QListWidget *getList() const;
 
-public slots:
-	//void scrollUp();
-	//void scrollDown();
-	void loadApp();
-
-
 private:
 	QJsonArray launcher;
 	virtual void initialize();

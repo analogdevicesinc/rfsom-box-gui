@@ -1,7 +1,6 @@
 #ifndef APPPAGE_H
 #define APPPAGE_H
 
-
 #include "menupage.h"
 #include <QTimer>
 #include "sysfsvalue.h"

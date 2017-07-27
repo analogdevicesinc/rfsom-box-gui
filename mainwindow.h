@@ -25,9 +25,7 @@ public:
 private:
 	Ui::MainWindow *ui;
 protected:
-	//bool eventFilter(QObject*,QEvent*);
 	void keyPressEvent(QKeyEvent *e);
-	//void wheelEvent(QWheelEvent *event);
 
 };
 

@@ -39,7 +39,6 @@ public:
 	ScriptResult *getScript() const;
 	void setScript(ScriptResult *value);
 
-
 public slots:
 	virtual void click();
 };

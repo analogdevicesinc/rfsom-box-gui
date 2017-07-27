@@ -32,10 +32,6 @@ public:
 
 
 public slots:
-	/*	void unloadAll();
-		void loadLandingPage();
-		void loadLauncherPage();
-		void loadAppPage();*/
 private:
 	const QString jsonFileName = "launcher.json";
 
@@ -44,15 +40,8 @@ private:
 	LandingPage *landingPage;
 	LauncherPage *launcherPage;
 	AppPage *appPage;
-	//App *currentApp;
 	Ui::MainWindow *ui;
-
-
 	void loadJsonConfig();
-//private slots:
-	//void buildUi(int index);
-	//void destroyUi();
-
 };
 
 #endif // MAINMENU_H

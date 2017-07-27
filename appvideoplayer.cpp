@@ -7,18 +7,13 @@
 AppVideoPlayer::AppVideoPlayer(QJsonValue params, QLayout *lay,
                                QWidget *parent) : App(parent) , params(params)
 {
-
 	proc=nullptr;
 	cmd = params.toObject()["cmd"].toString();
-	/*setStyleSheet("background-color:red");
-	canvas = new QWidget(this);
-	canvas->setStyleSheet("background-color:red");
-	lay->addWidget(canvas);*/
 }
 
 AppVideoPlayer::~AppVideoPlayer()
 {
-//	delete canvas;
+
 }
 
 void AppVideoPlayer::buildUi()

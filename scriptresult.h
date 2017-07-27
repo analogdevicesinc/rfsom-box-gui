@@ -25,8 +25,6 @@ public:
 protected:
 	virtual QString run_script();
 	virtual QString convert(QString);
-
-
 };
 
 

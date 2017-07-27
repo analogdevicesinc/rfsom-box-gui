@@ -44,7 +44,6 @@ QString ScriptResult::run_script()
 	QString ret = proc->readAll();
 	delete proc;
 	return ret;
-
 }
 
 QString ScriptResult::convert(QString v)

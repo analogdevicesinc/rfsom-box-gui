@@ -156,12 +156,10 @@ QWidget *AppGenericList::setupEditElementUi(QJsonObject obj)
 		if (obj["subtype"].toString()=="numeric") {
 			ui_element = new NumericElementUi(list);
 			num_element = dynamic_cast<NumericElementUi *>(ui_element);
-		} else if (obj["subtype"].toString()=="ip"){
+		} else if (obj["subtype"].toString()=="ip") {
 			ui_element = new IPAddressElement(list);
-			ip_element = dynamic_cast<IPAddressElement*>(ui_element);
-		}
-		else
-		{
+			ip_element = dynamic_cast<IPAddressElement *>(ui_element);
+		} else {
 			ui_element = new EditboxElementUi(list);
 		}
 	} else {

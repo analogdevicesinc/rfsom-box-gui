@@ -25,7 +25,6 @@ void EditboxElementUi::setIconPath(const QString& value)
 		icon=true;
 		iconPath = value;
 	}
-
 }
 
 void EditboxElementUi::increment()
@@ -45,6 +44,7 @@ void EditboxElementUi::increment()
 		text.replace(position,1,newchar);
 		ui->editbox->setText(text);
 	}
+
 	updateCursorPosition();
 }
 
@@ -60,11 +60,11 @@ void EditboxElementUi::decrement()
 		if (ascii>0x20) {
 			ascii--;
 		}
-
 		QChar newchar = QChar(ascii);
 		text.replace(position,1,newchar);
 		ui->editbox->setText(text);
 	}
+
 	updateCursorPosition();
 
 }
@@ -109,7 +109,7 @@ quint8 EditboxElementUi::getTextLength() const
 	return textLength;
 }
 
-void EditboxElementUi::setTextLength(const quint8 &value)
+void EditboxElementUi::setTextLength(const quint8& value)
 {
 	textLength = value;
 }

@@ -11,12 +11,11 @@ class LandingPage : public MenuPage
 public:
 
 	explicit LandingPage(QWidget *parent = 0);
-
 	virtual void unload();
 	virtual void load();
 	virtual void initialize();
-
 	void keyPressEvent(QKeyEvent *);
+
 public slots:
 	virtual void updateUi();
 

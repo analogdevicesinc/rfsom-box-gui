@@ -233,11 +233,13 @@ void AppGenericList::setupTimers()
 	// search for timers
 	if (params.toObject().contains("timers")) {
 		for (QJsonValue val : params.toObject()["timers"].toArray()) {
-			if (val.toInt() > cMinimumTimerPeriod) {
+			auto period = val.toInt(cMinimumTimerPeriod);
+			if (period < cMinimumTimerPeriod) {
+				period = cMinimumTimerPeriod;
+			}
 				QTimer *tim = new QTimer(this);
 				timers.append(tim);
-				tim->start(val.toInt());
-			}
+				tim->start(period);
 		}
 	} else {
 		qInfo()<<"No timers defined in the configuration json. Creating default 1 second timer";

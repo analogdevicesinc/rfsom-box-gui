@@ -1,7 +1,7 @@
 #include "checkboxelementui.h"
 #include <ui_checkboxElement.h>
 
-CheckboxElementUi::CheckboxElementUi(QWidget *parent) : QWidget(parent)
+CheckboxElementUi::CheckboxElementUi(QWidget *parent) : UiElement(parent)
 {
 	read=nullptr;
 	write=nullptr;

@@ -3,12 +3,13 @@
 
 #include <QWidget>
 #include <scriptresult.h>
+#include "uielement.h"
 
 namespace Ui {
 class checkboxElement;
 }
 
-class CheckboxElementUi : public QWidget
+class CheckboxElementUi : public UiElement
 {
 	Q_OBJECT
 	QString description;

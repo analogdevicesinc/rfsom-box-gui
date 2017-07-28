@@ -3,12 +3,13 @@
 
 #include <QWidget>
 #include "stringvalue.h"
+#include "uielement.h"
 
 namespace Ui {
 class ReadOnlyValueUi;
 }
 
-class ReadOnlyElementUi : public QWidget
+class ReadOnlyElementUi : public UiElement
 {
 	Q_OBJECT
 	QString description;

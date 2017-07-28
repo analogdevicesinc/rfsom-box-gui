@@ -3,12 +3,13 @@
 
 #include <QWidget>
 #include <scriptresult.h>
+#include "uielement.h"
 
 namespace Ui {
 class buttonElement;
 }
 
-class ButtonElementUi : public QWidget
+class ButtonElementUi : public UiElement
 {
 	Q_OBJECT
 	QString description;

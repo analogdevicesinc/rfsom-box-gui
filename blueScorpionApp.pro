@@ -63,7 +63,8 @@ HEADERS  += mainwindow.h \
     sysfsvalue.h \
     numericelementui.h \
     appvideoplayer.h \
-    ipaddresselementui.h
+    ipaddresselementui.h \
+    uielement.h
 
 FORMS    += mainwindow.ui \
     readonlyvalue.ui \

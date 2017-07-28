@@ -60,6 +60,7 @@ void EditboxElementUi::decrement()
 		if (ascii>0x20) {
 			ascii--;
 		}
+
 		QChar newchar = QChar(ascii);
 		text.replace(position,1,newchar);
 		ui->editbox->setText(text);
@@ -114,7 +115,7 @@ void EditboxElementUi::setTextLength(const quint8& value)
 	textLength = value;
 }
 
-EditboxElementUi::EditboxElementUi(QWidget *parent) : QWidget(parent)
+EditboxElementUi::EditboxElementUi(QWidget *parent) : UiElement(parent)
 {
 	read=nullptr;
 	write=nullptr;

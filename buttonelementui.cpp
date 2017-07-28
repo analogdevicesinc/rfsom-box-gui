@@ -41,7 +41,7 @@ QString ButtonElementUi::iconString()
 	}
 }
 
-ButtonElementUi::ButtonElementUi(QWidget *parent) : QWidget(parent)
+ButtonElementUi::ButtonElementUi(QWidget *parent) : UiElement(parent)
 {
 	icon = false;
 	iconRight = false;

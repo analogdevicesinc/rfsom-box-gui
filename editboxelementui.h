@@ -3,12 +3,13 @@
 
 #include <QWidget>
 #include <scriptresult.h>
+#include "uielement.h"
 
 namespace Ui {
 class editboxElement;
 }
 
-class EditboxElementUi : public QWidget
+class EditboxElementUi : public UiElement
 {
 	Q_OBJECT
 
@@ -81,6 +82,7 @@ public slots:
 		if (cursorPosition<textLength) {
 			cursorPosition++;
 		}
+
 		updateCursorPosition();
 		return true;
 	}

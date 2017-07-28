@@ -42,7 +42,7 @@ QString ReadOnlyElementUi::iconString()
 	}
 }
 
-ReadOnlyElementUi::ReadOnlyElementUi(QWidget *parent) : QWidget(parent)
+ReadOnlyElementUi::ReadOnlyElementUi(QWidget *parent) : UiElement(parent)
 {
 	icon = false;
 	iconRight = false;

@@ -66,7 +66,7 @@ color:white;
        <number>0</number>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="LandingPage" name="landingPage">
        <property name="styleSheet">
@@ -118,7 +118,7 @@ color:white;
 font: 9pt &quot;DejaVu Sans Mono&quot; white;
 }</string>
           </property>
-          <layout class="QGridLayout" name="gridLayout">
+          <layout class="QVBoxLayout" name="devStatusLayout">
            <property name="leftMargin">
             <number>0</number>
            </property>
@@ -131,86 +131,6 @@ font: 9pt &quot;DejaVu Sans Mono&quot; white;
            <property name="bottomMargin">
             <number>0</number>
            </property>
-           <property name="horizontalSpacing">
-            <number>0</number>
-           </property>
-           <property name="verticalSpacing">
-            <number>3</number>
-           </property>
-           <item row="4" column="0">
-            <widget class="QLabel" name="imgNetwork">
-             <property name="text">
-              <string>&lt;img src=&quot;:/png/icons/004-computer.png&quot; height=16&gt;</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="0">
-            <widget class="QLabel" name="imgRadio">
-             <property name="text">
-              <string>&lt;img src=&quot;:/png/icons/001-wifi-low-signal-symbol.png&quot; height=&quot;16&quot; &gt;</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="0">
-            <widget class="QLabel" name="imgCharge">
-             <property name="text">
-              <string>&lt;img src=&quot;:/png/icons/005-technology.png&quot; height=&quot;16&quot; &gt;</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="0">
-            <widget class="QLabel" name="imgTemp">
-             <property name="text">
-              <string>&lt;img src=&quot;:/png/icons/006-weather.png&quot; height=&quot;16&quot; &gt;</string>
-             </property>
-            </widget>
-           </item>
-           <item row="4" column="1">
-            <widget class="QLabel" name="labelNetwork">
-             <property name="autoFillBackground">
-              <bool>false</bool>
-             </property>
-             <property name="text">
-              <string>10/100 Mbps</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="1">
-            <widget class="QLabel" name="labelRadio">
-             <property name="autoFillBackground">
-              <bool>false</bool>
-             </property>
-             <property name="text">
-              <string>-100.5 dbm</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="1">
-            <widget class="QLabel" name="labelCharge">
-             <property name="text">
-              <string>76%</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="1">
-            <widget class="QLabel" name="labelTemp">
-             <property name="text">
-              <string>24.5</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-             </property>
-            </widget>
-           </item>
           </layout>
          </widget>
         </item>

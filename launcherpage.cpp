@@ -20,8 +20,8 @@ void LauncherPage::loadJsonConfig(QString jsonFileName)
 {
 	QString val;
 	QFile file;
-	qDebug() << "App path : " << qApp->applicationDirPath();
-	file.setFileName(qApp->applicationDirPath()+"/"+jsonFileName);
+	//qDebug() << "App path : " << qApp->applicationDirPath();
+	file.setFileName(jsonFileName);
 	file.open(QIODevice::ReadOnly | QIODevice::Text);
 	val = file.readAll();
 	file.close();

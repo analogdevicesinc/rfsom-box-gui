@@ -33,15 +33,11 @@ public:
 
 public slots:
 private:
-	const QString jsonFileName = "launcher.json";
-
-	QJsonArray launcher;
 	QList<MenuPage *> pages;
 	LandingPage *landingPage;
 	LauncherPage *launcherPage;
 	AppPage *appPage;
 	Ui::MainWindow *ui;
-	void loadJsonConfig();
 };
 
 #endif // MAINMENU_H

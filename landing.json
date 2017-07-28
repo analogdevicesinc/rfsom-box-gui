@@ -1,0 +1,36 @@
+{
+  "timers": [
+    100,
+    1000,
+    500
+  ],
+  "elements": [
+    {
+      "description": "",
+      "timer": 0,
+      "cmd_read": "cat ip",
+      "iconSize": 16,
+      "icon": "/home/analog/blueScorpionApp/icons/003-plug-connector.png"
+    },
+    {
+      "description": "",
+      "timer": 1,
+      "cmd_read": "cat temp",
+      "iconSize": 12,
+      "icon": "/home/analog/blueScorpionApp/icons/006-weather.png"
+    },
+    {
+      "description": "",
+      "timer": 2,
+      "cmd_read": "cat charge",
+      "iconSize": 16,
+      "icon": "/home/analog/blueScorpionApp/icons/005-technology.png"
+    },
+    {
+      "description": "",
+      "cmd_read": "cat test",
+      "iconSize": 12,
+      "icon": "/home/analog/blueScorpionApp/icons/004-computer.png"
+    }
+  ]
+}

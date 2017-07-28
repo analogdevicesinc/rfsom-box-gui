@@ -1,5 +1,6 @@
 #include <QDebug>
 #include <QJsonDocument>
+#include <QFile>
 #include "mainmenu.h"
 #include "ui_mainwindow.h"
 
@@ -27,6 +28,7 @@ void MainMenu::keyPressEvent(QKeyEvent *e)
 		QCoreApplication::quit();
 		return;
 	}
+
 	QStackedWidget::keyPressEvent(e);
 }
 
@@ -43,7 +45,18 @@ void MainMenu::initialize(Ui::MainWindow *_ui)
 	for (auto& page : pages) {
 		page->init(ui);
 	}
-	launcherPage->loadJsonConfig(jsonFileName);
+
+	QFile file("/home/analog/blueScorpionApp/bin/main.json");
+
+	file.open(QIODevice::ReadOnly);
+	QString jsonContent = file.readAll();
+	file.close();
+	QJsonDocument main = QJsonDocument::fromJson(jsonContent.toUtf8());
+	QJsonObject obj = main.object();
+
+	launcherPage->loadJsonConfig(obj["launcher"].toString());
+	landingPage->loadJsonConfig(obj["landing"].toString());
+
 	setCurrentIndex(landingPageId);
 	landingPage->load();
 }

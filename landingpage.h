@@ -14,23 +14,15 @@ public:
 	virtual void unload();
 	virtual void load();
 	virtual void initialize();
+	virtual void loadJsonConfig(QString);
 	void keyPressEvent(QKeyEvent *);
 
 public slots:
 	virtual void updateUi();
 
 private:
-	const QString temperaturePath="/home/analog/temperature";
-	const QString chargePath="/home/analog/charge";
-	const QString rssiPath="/home/analog/rssi";
-	const QString networkPath="/home/analog/network";
-
-	SysFSValue *temperature;
-	SysFSValue *charge;
-	SysFSValue *rssi;
-	SysFSValue *network;
-
-	QTimer *refreshTimer;
+	QList<QTimer *> timers;
+	const int cMinimumTimerPeriod = 100;
 };
 
 

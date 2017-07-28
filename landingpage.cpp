@@ -1,7 +1,10 @@
 #include "landingpage.h"
 #include <QDebug>
+#include <QJsonDocument>
 #include <QFile>
 #include "ui_mainwindow.h"
+#include "readonlyelementui.h"
+#include "scriptresult.h"
 
 LandingPage::LandingPage(QWidget *parent) : MenuPage(parent)
 {
@@ -10,24 +13,21 @@ LandingPage::LandingPage(QWidget *parent) : MenuPage(parent)
 void LandingPage::load()
 {
 	setFocus();
-	refreshTimer->start(250);
+
+	for (auto timer : timers) {
+		timer->start();
+	}
 }
 
 void LandingPage::unload()
 {
-	qInfo()<<"unload";
-	refreshTimer->stop();
+	for (auto timer : timers) {
+		timer->stop();
+	}
 }
 
 void LandingPage::initialize()
 {
-	rssi = new SysFSValue(rssiPath,this);
-	network = new SysFSValue(networkPath,this);
-	temperature = new SysFSValue(temperaturePath,this);
-	charge = new SysFSValue(chargePath,this);
-	refreshTimer = new QTimer(this);
-	connect(refreshTimer,SIGNAL(timeout()),this,SLOT(updateUi()));
-	refreshTimer->start(250);
 }
 
 void LandingPage::keyPressEvent(QKeyEvent *e)
@@ -36,10 +36,56 @@ void LandingPage::keyPressEvent(QKeyEvent *e)
 	MenuPage::keyPressEvent(e);
 }
 
+void LandingPage::loadJsonConfig(QString jsonFileName)
+{
+	QFile file(jsonFileName);
+	file.open(QIODevice::ReadOnly);
+	QString jsonContent = file.readAll();
+	file.close();
+	QJsonDocument doc = QJsonDocument::fromJson(jsonContent.toUtf8());
+	QJsonObject obj = doc.object();
+
+	if (obj.contains("timers")) {
+		for (QJsonValue val :obj["timers"].toArray()) {
+			auto period = val.toInt(cMinimumTimerPeriod);
+			if (period < cMinimumTimerPeriod) {
+				period = cMinimumTimerPeriod;
+			}
+				QTimer *tim = new QTimer(this);
+				timers.append(tim);
+				tim->start(period);
+		}
+
+	} else {
+		qInfo()<<"No timers defined in the configuration json. Creating default 1 second timer";
+		QTimer *tim  = new QTimer(this);
+		timers.append(tim);
+		tim->start(1000); // default 1 second timer
+	}
+
+	for (auto element : obj["elements"].toArray()) {
+		auto wid = new ReadOnlyElementUi(this);
+		auto elObj = element.toObject();
+		wid->setOneRow(true);
+		wid->setIconPath(elObj["icon"].toString());
+		ScriptResult *scr = new ScriptResult(elObj["cmd_read"].toString(),wid);
+		wid->setStrVal(scr);
+		wid->setDescription(elObj["description"].toString());
+		wid->setIconSize(elObj["iconSize"].toInt());
+		ui->devStatusLayout->addWidget(wid);
+
+		int timerId = 0;
+
+		if (elObj.contains("timer")) {
+			timerId = elObj["timer"].toInt();
+		}
+
+		connect(timers[timerId],SIGNAL(timeout()),wid,SLOT(update()));
+		wid->update();
+
+	}
+}
+
 void LandingPage::updateUi()
 {
-	ui->labelRadio->setText(rssi->get());
-	ui->labelNetwork->setText(network->get());
-	ui->labelCharge->setText(charge->get());
-	ui->labelTemp->setText(temperature->get());
 }

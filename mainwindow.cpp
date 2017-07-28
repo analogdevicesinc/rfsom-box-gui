@@ -10,7 +10,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
 	QApplication::setOverrideCursor(Qt::BlankCursor);
 	ui->setupUi(this);
-	ui->main_menu->initialize(ui);	
+	ui->main_menu->initialize(ui);
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *e)

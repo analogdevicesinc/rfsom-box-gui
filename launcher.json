@@ -35,7 +35,7 @@
           "nr_of_digits": 11,
           "cmd_read": "cat charge",
           "cmd_read_timer": 1,
-          "cmd_write": "echo $EDIT_VAL > charge",
+          "cmd_write": "echo $EDIT_VAL > test",
           "swap_toprow": false,
           "icon_path": "./charge.png",
           "text_align": "left",

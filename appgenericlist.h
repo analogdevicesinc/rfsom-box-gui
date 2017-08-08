@@ -6,6 +6,8 @@
 #include <QLayout>
 #include <QJsonValue>
 #include <QTimer>
+#include <QProcess>
+#include "scriptresult.h"
 #include "app.h"
 
 class AppGenericList : public App
@@ -14,6 +16,7 @@ class AppGenericList : public App
 	QListWidget *list;
 	QJsonValue params;
 	QList<QTimer *> timers;
+	QList<ScriptResult*> tasks;
 	const int cMinimumTimerPeriod = 100;
 public:
 	explicit AppGenericList(QJsonValue params, QLayout *lay, QWidget *parent = 0);
@@ -29,6 +32,7 @@ public slots:
 	void confirmListSelection();
 
 private:
+	void setupTasks();
 	void setupTimers();
 	QWidget *setupReadOnlyElementUi(QJsonObject obj);
 	QWidget *setupButtonElementUi(QJsonObject obj);

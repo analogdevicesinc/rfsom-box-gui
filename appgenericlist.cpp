@@ -228,6 +228,21 @@ QWidget *AppGenericList::setupEditElementUi(QJsonObject obj)
 
 }
 
+void AppGenericList::setupTasks()
+{
+	if (params.toObject().contains("tasks")) {
+		for (QJsonValue val : params.toObject()["tasks"].toArray()) {
+			auto obj = val.toObject();
+			if(obj.contains("cmd"))
+			{
+				ScriptResult *res = new ScriptResult(obj["cmd"].toString(),this);
+				res->setProc(proc);
+				connect(timers[obj["timer"].toInt()],SIGNAL(timeout()),res,SLOT(run()));
+			}
+		}
+	}
+}
+
 void AppGenericList::setupTimers()
 {
 	// search for timers
@@ -253,6 +268,7 @@ void AppGenericList::buildUi()
 {
 
 	setupTimers();
+	setupTasks();
 
 	// search for Ui elements
 	if (!params.toObject().contains("elements")) {

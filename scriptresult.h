@@ -18,9 +18,11 @@ public:
 	ScriptResult(QString cmd, QObject *parent=0);
 	virtual ~ScriptResult();
 	QString get();
-	virtual QString run();
 	QString getCmd() const;
 	void setCmd(const QString& value);
+
+public slots:
+	virtual QString run();
 
 protected:
 	virtual QString run_script();

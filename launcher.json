@@ -33,7 +33,7 @@
           "type": "edit",
           "subtype": "numeric",
           "nr_of_digits": 11,
-          "cmd_read": "cat charge",
+          "cmd_read": "cat test",
           "cmd_read_timer": 1,
           "cmd_write": "echo $EDIT_VAL > test",
           "swap_toprow": false,
@@ -121,6 +121,53 @@
     },
     "type": "list",
     "name": "Charge"
+  },
+  {
+    "params": {
+      "timers": [
+        1000
+      ],
+      "tasks": [
+        {
+          "cmd": "./getcoord.sh",
+          "timer": 0
+        }
+      ],
+      "elements": [
+        {
+          "description": "lat",
+          "type": "cmd_read",
+          "timer": 0,
+          "cmd": "cat $lat",
+          "one_row": false,
+          "swap_toprow": "false",
+          "text_align": "left",
+          "stylesheet": ""
+        },
+        {
+          "description": "long",
+          "type": "cmd_read",
+          "timer": 0,
+          "cmd": "cat $lon",
+          "one_row": false,
+          "swap_toprow": "false",
+          "text_align": "left",
+          "stylesheet": ""
+        },
+        {
+          "description": "alt",
+          "type": "cmd_read",
+          "timer": 0,
+          "cmd": "cat $alt",
+          "one_row": false,
+          "swap_toprow": "false",
+          "text_align": "left",
+          "stylesheet": ""
+        }
+      ]
+    },
+    "type": "list",
+    "name": "GPS"
   },
   {
     "params": {

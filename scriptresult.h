@@ -12,6 +12,7 @@ class ScriptResult : public StringValue
 	QString cmd;
 	QProcess *proc;
 	QString setVars();
+	bool runInBackground;
 public:
 	QMap<QString, QString> vars;
 
@@ -20,6 +21,9 @@ public:
 	QString get();
 	QString getCmd() const;
 	void setCmd(const QString& value);
+
+	bool getRunInBackground() const;
+	void setRunInBackground(bool value);
 
 public slots:
 	virtual QString run();

@@ -2,8 +2,19 @@
 #include <QDebug>
 #include <QCoreApplication>
 
+bool ScriptResult::getRunInBackground() const
+{
+	return runInBackground;
+}
+
+void ScriptResult::setRunInBackground(bool value)
+{
+	runInBackground = value;
+}
+
 ScriptResult::ScriptResult(QString cmd, QObject *parent) : StringValue(parent),
-	cmd(cmd)
+	cmd(cmd),runInBackground(false)
+
 {
 
 }
@@ -38,11 +49,21 @@ QString ScriptResult::run_script()
 	}
 
 	proc->setProcessEnvironment(qpe);
-
 	proc->start("/bin/sh",QStringList() << "-c" <<  cmd);
-	proc->waitForFinished(100);
-	QString ret = proc->readAll();
-	delete proc;
+	QString ret="";
+	if(!runInBackground)
+	{
+		proc->waitForFinished(100);
+		ret = proc->readAll();
+		delete proc;
+		proc=nullptr;
+	}
+	else
+	{
+		ret = proc->readAll();
+		qDebug()<<ret;
+		connect(proc,SIGNAL(finished(int)),proc,SLOT(deleteLater()));
+	}
 	return ret;
 }
 

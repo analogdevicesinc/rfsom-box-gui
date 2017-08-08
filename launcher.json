@@ -125,12 +125,13 @@
   {
     "params": {
       "timers": [
-        1000
+        1000,
+        10000
       ],
       "tasks": [
         {
           "cmd": "./getcoord.sh",
-          "timer": 0
+          "timer": 1
         }
       ],
       "elements": [
@@ -138,7 +139,7 @@
           "description": "lat",
           "type": "cmd_read",
           "timer": 0,
-          "cmd": "cat $lat",
+          "cmd": "cat gpslat",
           "one_row": false,
           "swap_toprow": "false",
           "text_align": "left",
@@ -148,7 +149,7 @@
           "description": "long",
           "type": "cmd_read",
           "timer": 0,
-          "cmd": "cat $lon",
+          "cmd": "cat gpslon",
           "one_row": false,
           "swap_toprow": "false",
           "text_align": "left",
@@ -158,7 +159,7 @@
           "description": "alt",
           "type": "cmd_read",
           "timer": 0,
-          "cmd": "cat $alt",
+          "cmd": "cat gpsalt",
           "one_row": false,
           "swap_toprow": "false",
           "text_align": "left",

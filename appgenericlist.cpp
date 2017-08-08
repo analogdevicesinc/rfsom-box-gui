@@ -236,8 +236,18 @@ void AppGenericList::setupTasks()
 			if(obj.contains("cmd"))
 			{
 				ScriptResult *res = new ScriptResult(obj["cmd"].toString(),this);
-				res->setProc(proc);
-				connect(timers[obj["timer"].toInt()],SIGNAL(timeout()),res,SLOT(run()));
+				//res->setProc(proc);
+				res->setRunInBackground(true);
+				auto timerid = obj["timer"].toInt();
+				if(timerid == -1)
+				{
+					res->run();
+				}
+				else
+				{
+				connect(timers[timerid],SIGNAL(timeout()),res,SLOT(run()));
+				}
+
 			}
 		}
 	}

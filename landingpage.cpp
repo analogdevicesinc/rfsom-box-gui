@@ -48,12 +48,14 @@ void LandingPage::loadJsonConfig(QString jsonFileName)
 	if (obj.contains("timers")) {
 		for (QJsonValue val :obj["timers"].toArray()) {
 			auto period = val.toInt(cMinimumTimerPeriod);
+
 			if (period < cMinimumTimerPeriod) {
 				period = cMinimumTimerPeriod;
 			}
-				QTimer *tim = new QTimer(this);
-				timers.append(tim);
-				tim->start(period);
+
+			QTimer *tim = new QTimer(this);
+			timers.append(tim);
+			tim->start(period);
 		}
 
 	} else {

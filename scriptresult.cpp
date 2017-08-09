@@ -51,19 +51,18 @@ QString ScriptResult::run_script()
 	proc->setProcessEnvironment(qpe);
 	proc->start("/bin/sh",QStringList() << "-c" <<  cmd);
 	QString ret="";
-	if(!runInBackground)
-	{
+
+	if (!runInBackground) {
 		proc->waitForFinished(100);
 		ret = proc->readAll();
 		delete proc;
 		proc=nullptr;
-	}
-	else
-	{
+	} else {
 		ret = proc->readAll();
 		qDebug()<<ret;
 		connect(proc,SIGNAL(finished(int)),proc,SLOT(deleteLater()));
 	}
+
 	return ret;
 }
 

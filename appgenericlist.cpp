@@ -233,19 +233,17 @@ void AppGenericList::setupTasks()
 	if (params.toObject().contains("tasks")) {
 		for (QJsonValue val : params.toObject()["tasks"].toArray()) {
 			auto obj = val.toObject();
-			if(obj.contains("cmd"))
-			{
+
+			if (obj.contains("cmd")) {
 				ScriptResult *res = new ScriptResult(obj["cmd"].toString(),this);
 				//res->setProc(proc);
 				res->setRunInBackground(true);
 				auto timerid = obj["timer"].toInt();
-				if(timerid == -1)
-				{
+
+				if (timerid == -1) {
 					res->run();
-				}
-				else
-				{
-				connect(timers[timerid],SIGNAL(timeout()),res,SLOT(run()));
+				} else {
+					connect(timers[timerid],SIGNAL(timeout()),res,SLOT(run()));
 				}
 
 			}
@@ -259,12 +257,14 @@ void AppGenericList::setupTimers()
 	if (params.toObject().contains("timers")) {
 		for (QJsonValue val : params.toObject()["timers"].toArray()) {
 			auto period = val.toInt(cMinimumTimerPeriod);
+
 			if (period < cMinimumTimerPeriod) {
 				period = cMinimumTimerPeriod;
 			}
-				QTimer *tim = new QTimer(this);
-				timers.append(tim);
-				tim->start(period);
+
+			QTimer *tim = new QTimer(this);
+			timers.append(tim);
+			tim->start(period);
 		}
 	} else {
 		qInfo()<<"No timers defined in the configuration json. Creating default 1 second timer";

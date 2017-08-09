@@ -16,7 +16,7 @@ class AppGenericList : public App
 	QListWidget *list;
 	QJsonValue params;
 	QList<QTimer *> timers;
-	QList<ScriptResult*> tasks;
+	QList<ScriptResult *> tasks;
 	const int cMinimumTimerPeriod = 100;
 public:
 	explicit AppGenericList(QJsonValue params, QLayout *lay, QWidget *parent = 0);

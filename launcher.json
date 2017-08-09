@@ -11,7 +11,7 @@
           "description": "ip",
           "type": "cmd_read",
           "timer": 1,
-          "cmd": "ifconfig | grep -Eo 'inet (addr:)?([0-9]*\\.){3}[0-9]*' | grep -Eo '([0-9]*\\.){3}[0-9]*' | grep -v '127.0.0.1'",
+          "cmd": "ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\\.){3}[0-9]*).*/\\2/p'",
           "one_row": false,
           "swap_toprow": "false",
           "text_align": "left",

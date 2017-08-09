@@ -63,6 +63,24 @@
           "icon_path": "./charge.png",
           "text_align": "left",
           "stylesheet": "\"\""
+        },
+        {
+          "description": "enumelement",
+          "type": "edit",
+          "subtype": "enum",
+          "cmd_read": "cat enum",
+          "cmd_read_timer": 1,
+          "cmd_write": "echo $EDIT_VAL > enum",
+          "swap_toprow": false,
+          "icon_path": "./charge.png",
+          "text_align": "left",
+          "stylesheet": "\"\"",
+          "enum": [
+            "never gonna",
+            "give you up",
+            "never gonna",
+            "let you down"
+          ]
         }
       ]
     },
@@ -126,7 +144,7 @@
     "params": {
       "timers": [
         1000,
-        10000
+        5000
       ],
       "tasks": [
         {

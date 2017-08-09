@@ -43,7 +43,8 @@ SOURCES += main.cpp\
     editboxelementui.cpp \
     numericelementui.cpp \
     appvideoplayer.cpp \
-    ipaddresselementui.cpp
+    ipaddresselementui.cpp \
+    enumelementui.cpp
 
 HEADERS  += mainwindow.h \
     app.h \
@@ -64,7 +65,8 @@ HEADERS  += mainwindow.h \
     numericelementui.h \
     appvideoplayer.h \
     ipaddresselementui.h \
-    uielement.h
+    uielement.h \
+    enumelementui.h
 
 FORMS    += mainwindow.ui \
     readonlyvalue.ui \

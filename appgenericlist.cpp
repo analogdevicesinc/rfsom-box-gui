@@ -13,6 +13,7 @@
 #include "editboxelementui.h"
 #include "numericelementui.h"
 #include "ipaddresselementui.h"
+#include "enumelementui.h"
 #include <QDirIterator>
 #include <QKeyEvent>
 #include <QApplication>
@@ -151,6 +152,7 @@ QWidget *AppGenericList::setupEditElementUi(QJsonObject obj)
 	EditboxElementUi *ui_element;
 	NumericElementUi *num_element = nullptr;
 	IPAddressElement *ip_element = nullptr;
+	EnumElementUi *enum_element=nullptr;
 
 	if (obj.contains("subtype")) {
 		if (obj["subtype"].toString()=="numeric") {
@@ -159,6 +161,9 @@ QWidget *AppGenericList::setupEditElementUi(QJsonObject obj)
 		} else if (obj["subtype"].toString()=="ip") {
 			ui_element = new IPAddressElement(list);
 			ip_element = dynamic_cast<IPAddressElement *>(ui_element);
+		} else if (obj["subtype"].toString()=="enum") {
+			ui_element = new EnumElementUi(list);
+			enum_element = dynamic_cast<EnumElementUi *>(ui_element);
 		} else {
 			ui_element = new EditboxElementUi(list);
 		}
@@ -220,6 +225,23 @@ QWidget *AppGenericList::setupEditElementUi(QJsonObject obj)
 		}
 
 		return num_element;
+
+	}
+
+	if (enum_element!=nullptr) {
+		if (obj.contains("enum")) {
+			QStringList strlist;
+
+			if (obj["enum"].isArray()) {
+				for (QJsonValue val : obj["enum"].toArray()) {
+					if (val.isString()) {
+						strlist.append(val.toString());
+					}
+				}
+			}
+
+			enum_element->setElements(strlist);
+		}
 
 	}
 

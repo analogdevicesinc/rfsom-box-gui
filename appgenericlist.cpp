@@ -312,13 +312,13 @@ void AppGenericList::buildUi()
 		auto obj = val.toObject();
 		QWidget *element = nullptr;
 
-		if (obj["type"]=="cmd_read") {
+		if (obj["type"].toString()=="cmd_read") {
 			element = setupReadOnlyElementUi(obj);
-		} else if (obj["type"]=="btn") {
+		} else if (obj["type"].toString()=="btn") {
 			element = setupButtonElementUi(obj);
-		} else if (obj["type"]=="checkbox") {
+		} else if (obj["type"].toString()=="checkbox") {
 			element = setupCheckboxElementUi(obj);
-		} else if (obj["type"]=="edit")	{
+		} else if (obj["type"].toString()=="edit")	{
 			element = setupEditElementUi(obj);
 		}
 

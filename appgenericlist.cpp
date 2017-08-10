@@ -289,7 +289,7 @@ void AppGenericList::setupTimers()
 			tim->start(period);
 		}
 	} else {
-		qInfo()<<"No timers defined in the configuration json. Creating default 1 second timer";
+		qDebug()<<"No timers defined in the configuration json. Creating default 1 second timer";
 		QTimer *tim  = new QTimer(this);
 		timers.append(tim);
 		tim->start(1000); // default 1 second timer

@@ -77,12 +77,12 @@ void LauncherPage::buildUi(int index)
 
 void LauncherPage::unload()
 {
-	qInfo()<<"unload";
+	qDebug()<<"unload";
 }
 
 void LauncherPage::load()
 {
-	qInfo()<<"load";
+	qDebug()<<"load";
 	currentApp->unload();
 	list->setFocus();
 	qDebug()<<updatesEnabled();

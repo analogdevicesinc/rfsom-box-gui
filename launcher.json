@@ -149,6 +149,58 @@
       ],
       "elements": [
         {
+          "description": "PMC Temperature (°C)",
+          "type": "cmd_read",
+          "timer": 3,
+          "cmd": "echo \"scale=2; ($(iio_attr -q -c ad7291-ccbox temp0 mean_raw) * 250) / 1000\" | bc",
+          "one_row": false,
+          "swap_toprow": "false",
+          "text_align": "left",
+          "stylesheet": ""
+        },
+        {
+          "description": "ZYNQ Temperature (°C)",
+          "type": "cmd_read",
+          "timer": 3,
+          "cmd": "echo \"scale=2; (($(iio_attr -q -c xadc temp0 raw) - 2219) * 123.040771484)/1000\" | bc",
+          "one_row": false,
+          "swap_toprow": "false",
+          "text_align": "left",
+          "stylesheet": ""
+        },
+        {
+          "description": "AD936x Temperature (°C)",
+          "type": "cmd_read",
+          "timer": 3,
+          "cmd": "echo \"scale=2; $(iio_attr -q -c ad9361-phy temp0 input) / 1000\" | bc",
+          "one_row": false,
+          "swap_toprow": "false",
+          "text_align": "left",
+          "stylesheet": ""
+        },
+       {
+          "description": "IMU Temperature (°C)",
+          "type": "cmd_read",
+          "timer": 3,
+          "cmd": "echo \"scale=2; (($(iio_attr -q -c adis16460 temp0 raw) + 500) * 50)/1000\" | bc",
+          "one_row": false,
+          "swap_toprow": "false",
+          "text_align": "left",
+          "stylesheet": ""
+        }
+        ]
+    },
+    "type": "list",
+    "name": "Temperatures"
+  },  {
+    "params": {
+      "timers": [
+        100,
+        500,
+        1000
+      ],
+      "elements": [
+        {
           "description": "Temperature (°C)",
           "type": "cmd_read",
           "timer": 3,

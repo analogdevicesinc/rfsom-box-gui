@@ -46,7 +46,7 @@ void MainMenu::initialize(Ui::MainWindow *_ui)
 		page->init(ui);
 	}
 
-	QFile file("/home/analog/blueScorpionApp/bin/main.json");
+	QFile file(QCoreApplication::applicationDirPath()+"/main.json");
 
 	file.open(QIODevice::ReadOnly);
 	QString jsonContent = file.readAll();

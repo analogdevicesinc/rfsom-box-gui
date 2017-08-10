@@ -143,6 +143,89 @@
   {
     "params": {
       "timers": [
+        100,
+        500,
+        1000
+      ],
+      "elements": [
+        {
+          "description": "Temperature (°C)",
+          "type": "cmd_read",
+          "timer": 3,
+          "cmd": "echo \"scale=2; (($(iio_attr -q -c adis16460 temp0 raw) + 500) * 50)/1000\" | bc",
+          "one_row": false,
+          "swap_toprow": "false",
+          "text_align": "left",
+          "stylesheet": ""
+        },
+        {
+          "description": "Acceleration X (m/s²)",
+          "type": "cmd_read",
+          "timer": 3,
+          "cmd": "echo \"scale=2; $(iio_attr -q -c adis16460 accel_x raw) * 0.000000037/1\" | bc",
+          "one_row": false,
+          "swap_toprow": "false",
+          "text_align": "left",
+          "stylesheet": ""
+        },
+        {
+          "description": "Acceleration Y (m/s²)",
+          "type": "cmd_read",
+          "timer": 3,
+          "cmd": "echo \"scale=2; $(iio_attr -q -c adis16460 accel_y raw) * 0.000000037/1\" | bc",
+          "one_row": false,
+          "swap_toprow": "false",
+          "text_align": "left",
+          "stylesheet": ""
+        },
+        {
+          "description": "Acceleration Z (m/s²)",
+          "type": "cmd_read",
+          "timer": 3,
+          "cmd": "echo \"scale=2; $(iio_attr -q -c adis16460 accel_z raw) * 0.000000037/1\" | bc",
+          "one_row": false,
+          "swap_toprow": "false",
+          "text_align": "left",
+          "stylesheet": ""
+        },
+        {
+          "description": "Angular Velocity X (rad/s)",
+          "type": "cmd_read",
+          "timer": 3,
+          "cmd": "echo \"scale=4; $(iio_attr -q -c adis16460 anglvel_x raw) * 0.000000001/1\" | bc",
+          "one_row": false,
+          "swap_toprow": "false",
+          "text_align": "left",
+          "stylesheet": ""
+        },
+        {
+          "description": "Angular Velocity Y (rad/s)",
+          "type": "cmd_read",
+          "timer": 3,
+          "cmd": "echo \"scale=4; $(iio_attr -q -c adis16460 anglvel_y raw) * 0.000000001/1\" | bc",
+          "one_row": false,
+          "swap_toprow": "false",
+          "text_align": "left",
+          "stylesheet": ""
+        },
+        {
+          "description": "Angular Velocity Z (rad/s)",
+          "type": "cmd_read",
+          "timer": 3,
+          "cmd": "echo \"scale=4; $(iio_attr -q -c adis16460 anglvel_z raw) * 0.000000001/1\" | bc",
+          "one_row": false,
+          "swap_toprow": "false",
+          "text_align": "left",
+          "stylesheet": ""
+        }
+        ]
+    },
+    "type": "list",
+    "name": "IMU"
+  },
+  {
+    "params": {
+      "timers": [
         1000,
         5000
       ],

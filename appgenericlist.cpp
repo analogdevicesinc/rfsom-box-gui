@@ -343,7 +343,7 @@ void AppGenericList::buildUi()
 bool AppGenericList::eventFilter(QObject *watched, QEvent *event)
 {
 	if (event->type()==QEvent::Wheel) {
-		watched = QApplication::focusWidget();
+		watched=list->itemWidget(list->currentItem());
 	}
 
 	if (watched == list) {
@@ -373,7 +373,7 @@ bool AppGenericList::eventFilter(QObject *watched, QEvent *event)
 
 	auto editElement = dynamic_cast<EditboxElementUi *>(watched);
 
-	if (editElement!=nullptr) {
+	if (editElement!=nullptr&&editElement->getSelected()) {
 		qDebug()<<"eventfilter - "<<event;
 
 		if (event->type()==QEvent::KeyPress) {
@@ -392,8 +392,6 @@ bool AppGenericList::eventFilter(QObject *watched, QEvent *event)
 			case Qt::Key_Return:
 				editElement->click();
 				editElement->removeEventFilter(this);
-				editElement->releaseKeyboard();
-				editElement->releaseMouse();
 				editElement->setSelected(false);
 				list->setFocus();
 				return true;
@@ -456,8 +454,6 @@ void AppGenericList::confirmListSelection()
 	if (editElement!=nullptr) {
 		if (!editElement->isReadOnly()) {
 			editElement->installEventFilter(this);
-			editElement->grabKeyboard();
-			editElement->grabMouse();
 			editElement->click();
 		}
 	}

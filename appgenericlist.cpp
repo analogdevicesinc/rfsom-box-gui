@@ -235,20 +235,7 @@ QWidget *AppGenericList::setupEditElementUi(QJsonObject obj)
 		if (obj.contains("nr_of_digits")) {
 			auto nr_of_digits = obj["nr_of_digits"].toInt();
 			num_element->setNrOfDigits(nr_of_digits);
-			/*QString mask;
-			for(auto i=0;i<nr_of_digits;i++)
-			{
-				if(i%3==0 && i!=0)
-					mask = mask.prepend(" ");
-				mask = mask.prepend("0");
-			}
-			qDebug()<<mask;
-
-			num_element->setInputMask(mask);*/
 		}
-
-		return num_element;
-
 	}
 
 	if (enum_element!=nullptr) {

@@ -2,84 +2,67 @@
   {
     "params": {
       "timers": [
-        100,
-        500,
-        1000
+        1000,
+        5000
       ],
       "elements": [
         {
-          "description": "ip",
-          "type": "cmd_read",
-          "timer": 1,
-          "cmd": "ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\\.){3}[0-9]*).*/\\2/p'",
-          "one_row": false,
-          "swap_toprow": "false",
-          "text_align": "left",
-          "stylesheet": ""
-        },
-        {
-          "description": "charge",
-          "timer": 2,
-          "type": "cmd_read",
-          "cmd": "cat charge",
-          "one_row": false,
-          "swap_toprow": false,
-          "icon_path": "./charge.png",
-          "text_align": "left",
-          "stylesheet": "\"\""
-        },
-        {
-          "description": "editElement",
-          "type": "edit",
-          "subtype": "numeric",
-          "nr_of_digits": 11,
-          "cmd_read": "cat test",
-          "cmd_read_timer": 1,
-          "cmd_write": "echo $EDIT_VAL > test",
-          "swap_toprow": false,
-          "icon_path": "./charge.png",
-          "text_align": "left",
-          "stylesheet": "\"\""
-        },
-        {
-          "description": "ipRead",
-          "timer": 2,
-          "type": "cmd_read",
-          "cmd": "cat ip",
-          "one_row": false,
-          "swap_toprow": false,
-          "icon_path": "./icons/004-computer.png",
-          "text_align": "left",
-          "stylesheet": "\"\""
-        },
-        {
-          "description": "ipelement",
+          "description": "IP Address",
           "type": "edit",
           "subtype": "ip",
-          "cmd_read": "cat ip",
+          "cmd_read": "ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\\.){3}[0-9]*).*/\\2/p'",
+          "cmd_read_only": "echo 1",
           "cmd_read_timer": 1,
-          "cmd_write": "echo $EDIT_VAL > ip",
+          "cmd_write": "echo $EDIT_VAL",
           "swap_toprow": false,
-          "icon_path": "./charge.png",
           "text_align": "left",
           "stylesheet": "\"\""
         },
         {
-          "description": "enumelement",
+          "description": "Subnet Mask",
+          "type": "edit",
+          "subtype": "ip",
+          "cmd_read": "ifconfig eth0 | awk '/Mask:/{ print $4;}' | sed 's/^.....//'",
+          "cmd_read_only": "echo 1",
+          "cmd_read_timer": 1,
+          "cmd_write": "echo $EDIT_VAL",
+          "swap_toprow": false,
+          "text_align": "left",
+          "stylesheet": "\"\""
+        },
+        {
+          "description": "Gateway",
+          "type": "edit",
+          "subtype": "ip",
+          "cmd_read": "/sbin/ip route | awk '/^default/ { print $3 }'",
+          "cmd_read_only": "echo 1",
+          "cmd_read_timer": 1,
+          "cmd_write": "echo $EDIT_VAL",
+          "swap_toprow": false,
+          "text_align": "left",
+          "stylesheet": "\"\""
+        },
+        {
+          "description": "HW Address",
+          "type": "edit",
+          "cmd_read": "cat /sys/class/net/eth0/address",
+          "cmd_read_only": "echo 1",
+          "cmd_read_timer": 1,
+          "cmd_write": "echo $EDIT_VAL",
+          "swap_toprow": false,
+          "text_align": "left",
+          "stylesheet": "\"\""
+        },
+        {
+          "description": "Mode",
           "type": "edit",
           "subtype": "enum",
-          "cmd_read": "cat enum",
           "cmd_read_timer": 1,
-          "cmd_write": "echo $EDIT_VAL > enum",
-          "swap_toprow": false,
-          "icon_path": "./charge.png",
-          "text_align": "left",
-          "stylesheet": "\"\"",
+          "cmd_read": "cat network_mode",
+          "cmd_write": "echo $EDIT_VAL > network_mode",
           "enum": [
-            "never gonna",
-            "give you up",
-            "never gonna",
-            "let you down"
+            "dhcp",
+            "manual"
           ]
         }
       ]
@@ -379,7 +362,7 @@
           "text_align": "left",
           "stylesheet": ""
         },
-       {
+        {
           "description": "IMU Temperature (°C)",
           "type": "cmd_read",
           "timer": 3,
@@ -389,11 +372,12 @@
           "text_align": "left",
           "stylesheet": ""
         }
-        ]
+      ]
     },
     "type": "list",
     "name": "Temperatures"
-  },  {
+  },
+  {
     "params": {
       "timers": [
         100,
@@ -471,7 +455,7 @@
           "text_align": "left",
           "stylesheet": ""
         }
-        ]
+      ]
     },
     "type": "list",
     "name": "IMU"

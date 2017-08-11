@@ -29,6 +29,8 @@ signals:
 public slots:
 	virtual void buildUi();
 	virtual void destroyUi();
+	virtual void load();
+	virtual void unload();
 	void confirmListSelection();
 
 private:

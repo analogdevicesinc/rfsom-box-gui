@@ -306,6 +306,22 @@ void AppGenericList::setupTimers()
 	}
 }
 
+void AppGenericList::load()
+{
+	for(auto timer:timers)
+	{
+		timer->start();
+	}
+}
+
+void AppGenericList::unload()
+{
+	for(auto timer:timers)
+	{
+		timer->stop();
+	}
+}
+
 void AppGenericList::buildUi()
 {
 

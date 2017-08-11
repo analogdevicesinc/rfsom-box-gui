@@ -71,11 +71,11 @@ QWidget *AppGenericList::setupReadOnlyElementUi(QJsonObject obj)
 	ui_element->update();
 
 	if (obj.contains("timer")) {
-		bool readOnce=true;
+		bool readOnce=false;
 		if(obj["timer"].isString())
 		{
 			if(obj["timer"].toString()=="read_once")
-				readOnce=false;
+				readOnce=true;
 		}
 
 		if(!readOnce)
@@ -139,11 +139,11 @@ QWidget *AppGenericList::setupCheckboxElementUi(QJsonObject obj)
 
 
 	if (obj.contains("cmd_read_timer")) {
-		bool readOnce=true;
+		bool readOnce=false;
 		if(obj["cmd_read_timer"].isString())
 		{
 			if(obj["cmd_read_timer"].toString()=="read_once")
-				readOnce=false;
+				readOnce=true;
 		}
 
 		if(!readOnce)

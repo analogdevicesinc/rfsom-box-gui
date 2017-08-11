@@ -205,7 +205,7 @@
         {
           "description": "RX RSSI (dB)",
           "type": "cmd_read",
-          "timer": 3,
+          "timer": 2,
           "cmd": "iio_attr -q -i -c ad9361-phy voltage0 rssi",
           "one_row": false,
           "swap_toprow": "false",
@@ -218,7 +218,7 @@
           "type": "checkbox",
           "cmd_write": "iio_attr -q -i -c ad9361-phy voltage0 bb_dc_offset_tracking_en $CHECKBOX_VAL",
           "cmd_read": "iio_attr -q -i -c ad9361-phy voltage0 bb_dc_offset_tracking_en",
-          "cmd_read_timer": "3",
+          "cmd_read_timer": 2,
           "one_row": false,
           "swap_toprow": false,
           "icon_path": "./charge.png",
@@ -230,7 +230,7 @@
           "type": "checkbox",
           "cmd_write": "iio_attr -q -i -c ad9361-phy voltage0 rf_dc_offset_tracking_en $CHECKBOX_VAL",
           "cmd_read": "iio_attr -q -i -c ad9361-phy voltage0 rf_dc_offset_tracking_en",
-          "cmd_read_timer": "3",
+          "cmd_read_timer": 2,
           "one_row": false,
           "swap_toprow": false,
           "icon_path": "./charge.png",
@@ -242,7 +242,7 @@
           "type": "checkbox",
           "cmd_write": "iio_attr -q -i -c ad9361-phy voltage0 quadrature_tracking_en $CHECKBOX_VAL",
           "cmd_read": "iio_attr -q -i -c ad9361-phy voltage0 quadrature_tracking_en",
-          "cmd_read_timer": "3",
+          "cmd_read_timer": 2,
           "one_row": false,
           "swap_toprow": false,
           "icon_path": "./charge.png",
@@ -296,7 +296,7 @@
           "type": "checkbox",
           "cmd_write": "echo $CHECKBOX_VAL > checkbox",
           "cmd_read": "cat checkbox",
-          "cmd_read_timer": "2",
+          "cmd_read_timer": 1,
           "one_row": false,
           "swap_toprow": false,
           "icon_path": "./charge.png",
@@ -331,7 +331,7 @@
         {
           "description": "PMC Temperature (°C)",
           "type": "cmd_read",
-          "timer": 3,
+          "timer": 2,
           "cmd": "echo \"scale=2; ($(iio_attr -q -c ad7291-ccbox temp0 mean_raw) * 250) / 1000\" | bc",
           "one_row": false,
           "swap_toprow": "false",
@@ -341,7 +341,7 @@
         {
           "description": "ZYNQ Temperature (°C)",
           "type": "cmd_read",
-          "timer": 3,
+          "timer": 2,
           "cmd": "echo \"scale=2; (($(iio_attr -q -c xadc temp0 raw) - 2219) * 123.040771484)/1000\" | bc",
           "one_row": false,
           "swap_toprow": "false",
@@ -351,7 +351,7 @@
         {
           "description": "AD936x Temperature (°C)",
           "type": "cmd_read",
-          "timer": 3,
+          "timer": 2,
           "cmd": "echo \"scale=2; $(iio_attr -q -c ad9361-phy temp0 input) / 1000\" | bc",
           "one_row": false,
           "swap_toprow": "false",
@@ -361,7 +361,7 @@
         {
           "description": "IMU Temperature (°C)",
           "type": "cmd_read",
-          "timer": 3,
+          "timer": 2,
           "cmd": "echo \"scale=2; (($(iio_attr -q -c adis16460 temp0 raw) + 500) * 50)/1000\" | bc",
           "one_row": false,
           "swap_toprow": "false",
@@ -384,7 +384,7 @@
         {
           "description": "Temperature (°C)",
           "type": "cmd_read",
-          "timer": 3,
+          "timer": 2,
           "cmd": "echo \"scale=2; (($(iio_attr -q -c adis16460 temp0 raw) + 500) * 50)/1000\" | bc",
           "one_row": false,
           "swap_toprow": "false",
@@ -394,7 +394,7 @@
         {
           "description": "Acceleration X (m/s²)",
           "type": "cmd_read",
-          "timer": 3,
+          "timer": 2,
           "cmd": "echo \"scale=2; $(iio_attr -q -c adis16460 accel_x raw) * 0.000000037/1\" | bc",
           "one_row": false,
           "swap_toprow": "false",
@@ -404,7 +404,7 @@
         {
           "description": "Acceleration Y (m/s²)",
           "type": "cmd_read",
-          "timer": 3,
+          "timer": 2,
           "cmd": "echo \"scale=2; $(iio_attr -q -c adis16460 accel_y raw) * 0.000000037/1\" | bc",
           "one_row": false,
           "swap_toprow": "false",
@@ -414,7 +414,7 @@
         {
           "description": "Acceleration Z (m/s²)",
           "type": "cmd_read",
-          "timer": 3,
+          "timer": 2,
           "cmd": "echo \"scale=2; $(iio_attr -q -c adis16460 accel_z raw) * 0.000000037/1\" | bc",
           "one_row": false,
           "swap_toprow": "false",
@@ -424,7 +424,7 @@
         {
           "description": "Angular Velocity X (rad/s)",
           "type": "cmd_read",
-          "timer": 3,
+          "timer": 2,
           "cmd": "echo \"scale=4; $(iio_attr -q -c adis16460 anglvel_x raw) * 0.000000001/1\" | bc",
           "one_row": false,
           "swap_toprow": "false",
@@ -434,7 +434,7 @@
         {
           "description": "Angular Velocity Y (rad/s)",
           "type": "cmd_read",
-          "timer": 3,
+          "timer": 2,
           "cmd": "echo \"scale=4; $(iio_attr -q -c adis16460 anglvel_y raw) * 0.000000001/1\" | bc",
           "one_row": false,
           "swap_toprow": "false",
@@ -444,7 +444,7 @@
         {
           "description": "Angular Velocity Z (rad/s)",
           "type": "cmd_read",
-          "timer": 3,
+          "timer": 2,
           "cmd": "echo \"scale=4; $(iio_attr -q -c adis16460 anglvel_z raw) * 0.000000001/1\" | bc",
           "one_row": false,
           "swap_toprow": "false",

@@ -84,6 +84,11 @@ void ReadOnlyElementUi::update()
 	}
 }
 
+void ReadOnlyElementUi::click()
+{
+	update();
+}
+
 bool ReadOnlyElementUi::isOneRow() const
 {
 	return oneRow;

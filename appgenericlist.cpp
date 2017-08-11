@@ -71,14 +71,23 @@ QWidget *AppGenericList::setupReadOnlyElementUi(QJsonObject obj)
 	ui_element->update();
 
 	if (obj.contains("timer")) {
-		bool ok = false;
-		int timer_id = obj["timer"].toString().toInt(&ok);
-
-		if (!(ok && timer_id >= 0 && timer_id < timers.count())) {
-			timer_id = 0; // connects to the default timer 0
+		bool readOnce=true;
+		if(obj["timer"].isString())
+		{
+			if(obj["timer"].toString()=="read_once")
+				readOnce=false;
 		}
 
-		connect(timers[timer_id],SIGNAL(timeout()),ui_element,SLOT(update()));
+		if(!readOnce)
+		{
+			bool ok = false;
+			int timer_id = obj["timer"].toString().toInt(&ok);
+
+			if (!(ok && timer_id >= 0 && timer_id < timers.count())) {
+				timer_id = 0; // connects to the default timer 0
+			}
+			connect(timers[timer_id],SIGNAL(timeout()),ui_element,SLOT(update()));
+		}
 
 	}
 
@@ -129,19 +138,27 @@ QWidget *AppGenericList::setupCheckboxElementUi(QJsonObject obj)
 	}
 
 
-
-
 	if (obj.contains("cmd_read_timer")) {
-		bool ok = false;
-		int timer_id = obj["timer"].toString().toInt(&ok);
-
-		if (!(ok && timer_id >= 0 && timer_id < timers.count())) {
-			timer_id = 0; // connects to the default timer 0
+		bool readOnce=true;
+		if(obj["cmd_read_timer"].isString())
+		{
+			if(obj["cmd_read_timer"].toString()=="read_once")
+				readOnce=false;
 		}
 
-		connect(timers[timer_id],SIGNAL(timeout()),ui_element,SLOT(update()));
+		if(!readOnce)
+		{
+			bool ok = false;
+			int timer_id = obj["cmd_read_timer"].toString().toInt(&ok);
+
+			if (!(ok && timer_id >= 0 && timer_id < timers.count())) {
+				timer_id = 0; // connects to the default timer 0
+			}
+			connect(timers[timer_id],SIGNAL(timeout()),ui_element,SLOT(update()));
+		}
 
 	}
+
 
 	ui_element->update();
 	return ui_element;
@@ -193,20 +210,26 @@ QWidget *AppGenericList::setupEditElementUi(QJsonObject obj)
 		                        ui_element));
 	}
 
-
 	if (obj.contains("cmd_read_timer")) {
-		bool ok = false;
-		int timer_id = obj["timer"].toString().toInt(&ok);
-
-		if (!(ok && timer_id >= 0 && timer_id < timers.count())) {
-			timer_id = 0; // connects to the default timer 0
+		bool readOnce=false;
+		if(obj["cmd_read_timer"].isString())
+		{
+			if(obj["cmd_read_timer"].toString()=="read_once")
+				readOnce=true;
 		}
 
-		connect(timers[timer_id],SIGNAL(timeout()),ui_element,SLOT(update()));
+		if(!readOnce)
+		{
+			bool ok = false;
+			int timer_id = obj["cmd_read_timer"].toString().toInt(&ok);
+
+			if (!(ok && timer_id >= 0 && timer_id < timers.count())) {
+				timer_id = 0; // connects to the default timer 0
+			}
+			connect(timers[timer_id],SIGNAL(timeout()),ui_element,SLOT(update()));
+		}
 
 	}
-
-
 
 	if (num_element!=nullptr) {
 		if (obj.contains("nr_of_digits")) {
@@ -455,6 +478,10 @@ void AppGenericList::confirmListSelection()
 		if (!editElement->isReadOnly()) {
 			editElement->installEventFilter(this);
 			editElement->click();
+		}
+		else
+		{
+			editElement->update();
 		}
 	}
 

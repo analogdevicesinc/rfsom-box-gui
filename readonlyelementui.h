@@ -46,6 +46,7 @@ public:
 
 public slots:
 	virtual void update();
+	virtual void click();
 };
 
 #endif // READONLYELEMENTUI_h

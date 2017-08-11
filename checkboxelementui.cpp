@@ -47,6 +47,7 @@ void CheckboxElementUi::update()
 {
 	bool ok;
 	auto val = read->run().toInt(&ok);
+	ui->topLeft->setText(description);
 	ui->checkBox->setChecked(ok && val);
 }
 

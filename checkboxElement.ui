@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>160</width>
-    <height>37</height>
+    <height>36</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -46,7 +46,7 @@
      <item>
       <widget class="QLabel" name="topLeft">
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
@@ -68,9 +68,12 @@
       </widget>
      </item>
      <item>
-      <widget class="QCheckBox" name="checkBox">
-       <property name="styleSheet">
-        <string notr="true">QCheckBox
+      <widget class="QWidget" name="widget" native="true">
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <item>
+         <widget class="QCheckBox" name="checkBox">
+          <property name="styleSheet">
+           <string notr="true">QCheckBox
 {
   spacing: 0px;
 }
@@ -86,10 +89,13 @@ QCheckBox:indicator:checked
 {
 background:#4a64ff;
 }</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </widget>
      </item>
     </layout>
@@ -99,3 +105,4 @@ background:#4a64ff;
  <resources/>
  <connections/>
 </ui>
+

@@ -43,7 +43,7 @@
           "description": "HW Address",
           "type": "edit",
           "cmd_read": "cat /sys/class/net/eth0/address",
-          "cmd_read_timer": 1,
+          "cmd_read_timer": "read_once",
           "cmd_write": "echo $EDIT_VAL",
           "swap_toprow": false,
           "text_align": "left",
@@ -79,7 +79,7 @@
           "type": "edit",
           "subtype": "enum",
           "cmd_read": "iio_attr -q -d ad9361-phy ensm_mode",
-          "cmd_read_timer": 1,
+          "cmd_read_timer": "read_once",
           "cmd_write": "iio_attr -q -d ad9361-phy ensm_mode $EDIT_VAL",
           "swap_toprow": false,
           "icon_path": "./charge.png",
@@ -99,7 +99,7 @@
           "subtype": "numeric",
           "nr_of_digits": 10,
           "cmd_read": "iio_attr -q -c ad9361-phy altvoltage0 frequency",
-          "cmd_read_timer": 1,
+          "cmd_read_timer": "read_once",
           "cmd_write": "iio_attr -q -c ad9361-phy altvoltage0 frequency $EDIT_VAL",
           "swap_toprow": false,
           "icon_path": "./charge.png",
@@ -112,7 +112,7 @@
           "subtype": "numeric",
           "nr_of_digits": 10,
           "cmd_read": "iio_attr -q -c ad9361-phy altvoltage1 frequency",
-          "cmd_read_timer": 1,
+          "cmd_read_timer": "read_once",
           "cmd_write": "iio_attr -q -c ad9361-phy altvoltage1 frequency $EDIT_VAL",
           "swap_toprow": false,
           "icon_path": "./charge.png",
@@ -125,7 +125,7 @@
           "subtype": "numeric",
           "nr_of_digits": 8,
           "cmd_read": "iio_attr -q -i -c ad9361-phy voltage0 sampling_frequency",
-          "cmd_read_timer": 1,
+          "cmd_read_timer": "read_once",
           "cmd_write": "iio_attr -q -i -c ad9361-phy voltage0 sampling_frequency $EDIT_VAL",
           "swap_toprow": false,
           "icon_path": "./charge.png",
@@ -138,7 +138,7 @@
           "subtype": "numeric",
           "nr_of_digits": 8,
           "cmd_read": "iio_attr -q -i -c ad9361-phy voltage0 rf_bandwidth",
-          "cmd_read_timer": 1,
+          "cmd_read_timer": "read_once",
           "cmd_write": "iio_attr -q -i -c ad9361-phy voltage0 rf_bandwidth $EDIT_VAL",
           "swap_toprow": false,
           "icon_path": "./charge.png",
@@ -151,7 +151,7 @@
           "subtype": "numeric",
           "nr_of_digits": 8,
           "cmd_read": "iio_attr -q -o -c ad9361-phy voltage0 rf_bandwidth",
-          "cmd_read_timer": 1,
+          "cmd_read_timer": "read_once",
           "cmd_write": "iio_attr -q -o -c ad9361-phy voltage0 rf_bandwidth $EDIT_VAL",
           "swap_toprow": false,
           "icon_path": "./charge.png",
@@ -164,7 +164,7 @@
           "subtype": "numeric",
           "nr_of_digits": 2,
           "cmd_read": "echo \"$(iio_attr -q -o  -c ad9361-phy voltage0 hardwaregain | cut -d '.' -f 1)  * -1 \" | bc",
-          "cmd_read_timer": 1,
+          "cmd_read_timer": "read_once",
           "cmd_write": "iio_attr -q -o -c ad9361-phy voltage0 hardwaregain $(echo \"$EDIT_VAL * -1\" | bc)",
           "swap_toprow": false,
           "icon_path": "./charge.png",
@@ -176,7 +176,7 @@
           "type": "edit",
           "subtype": "enum",
           "cmd_read": "iio_attr -q -i -c ad9361-phy voltage0 gain_control_mode",
-          "cmd_read_timer": 1,
+          "cmd_read_timer": "read_once",
           "cmd_write": "iio_attr -q -i -c ad9361-phy voltage0 gain_control_mode $EDIT_VAL",
           "swap_toprow": false,
           "icon_path": "./charge.png",
@@ -195,7 +195,7 @@
           "subtype": "numeric",
           "nr_of_digits": 2,
           "cmd_read": "iio_attr -q -i -c ad9361-phy voltage0 hardwaregain | cut -d '.' -f 1",
-          "cmd_read_timer": 1,
+          "cmd_read_timer": 2,
           "cmd_write": "iio_attr -q -i -c ad9361-phy voltage0 hardwaregain $EDIT_VAL",
           "swap_toprow": false,
           "icon_path": "./charge.png",
@@ -218,7 +218,7 @@
           "type": "checkbox",
           "cmd_write": "iio_attr -q -i -c ad9361-phy voltage0 bb_dc_offset_tracking_en $CHECKBOX_VAL",
           "cmd_read": "iio_attr -q -i -c ad9361-phy voltage0 bb_dc_offset_tracking_en",
-          "cmd_read_timer": 2,
+          "cmd_read_timer": "read_once",
           "one_row": false,
           "swap_toprow": false,
           "icon_path": "./charge.png",
@@ -230,7 +230,7 @@
           "type": "checkbox",
           "cmd_write": "iio_attr -q -i -c ad9361-phy voltage0 rf_dc_offset_tracking_en $CHECKBOX_VAL",
           "cmd_read": "iio_attr -q -i -c ad9361-phy voltage0 rf_dc_offset_tracking_en",
-          "cmd_read_timer": 2,
+          "cmd_read_timer": "read_once",
           "one_row": false,
           "swap_toprow": false,
           "icon_path": "./charge.png",
@@ -242,7 +242,7 @@
           "type": "checkbox",
           "cmd_write": "iio_attr -q -i -c ad9361-phy voltage0 quadrature_tracking_en $CHECKBOX_VAL",
           "cmd_read": "iio_attr -q -i -c ad9361-phy voltage0 quadrature_tracking_en",
-          "cmd_read_timer": 2,
+          "cmd_read_timer": "read_once",
           "one_row": false,
           "swap_toprow": false,
           "icon_path": "./charge.png",
@@ -255,7 +255,7 @@
           "subtype": "numeric",
           "nr_of_digits": 8,
           "cmd_read": "iio_attr -q -d ad9361-phy xo_correction",
-          "cmd_read_timer": 1,
+          "cmd_read_timer": "read_once",
           "cmd_write": "iio_attr -q -d ad9361-phy xo_correction $EDIT_VAL",
           "swap_toprow": false,
           "icon_path": "./charge.png",
@@ -266,59 +266,6 @@
     },
     "name": "Radio",
     "type": "list"
-  },
-  {
-    "params": {
-      "timers": [
-        100,
-        500,
-        1000
-      ],
-      "elements": [
-        {
-          "description": "state",
-          "type": "cmd_read",
-          "timer": 1,
-          "cmd": "cat chargepanel",
-          "one_row": false,
-          "swap_toprow": "false",
-          "text_align": "left",
-          "stylesheet": ""
-        },
-        {
-          "description": "press me!",
-          "type": "btn",
-          "cmd": "echo \"button pressed\" > chargepanel",
-          "stylesheet": ""
-        },
-        {
-          "description": "checkbox desription",
-          "type": "checkbox",
-          "cmd_write": "echo $CHECKBOX_VAL > checkbox",
-          "cmd_read": "cat checkbox",
-          "cmd_read_timer": 1,
-          "one_row": false,
-          "swap_toprow": false,
-          "icon_path": "./charge.png",
-          "text_align": "left",
-          "stylesheet": "\"\""
-        },
-        {
-          "description": "editWithReadOnly",
-          "type": "edit",
-          "cmd_read_only": "cat checkbox",
-          "cmd_read": "cat charge",
-          "cmd_read_timer": 1,
-          "cmd_write": "echo $EDIT_VAL > charge",
-          "swap_toprow": false,
-          "icon_path": "./charge.png",
-          "text_align": "left",
-          "stylesheet": "\"\""
-        }
-      ]
-    },
-    "type": "list",
-    "name": "Charge"
   },
   {
     "params": {
@@ -394,7 +341,7 @@
         {
           "description": "Acceleration X (m/s²)",
           "type": "cmd_read",
-          "timer": 2,
+          "timer": 1,
           "cmd": "echo \"scale=2; $(iio_attr -q -c adis16460 accel_x raw) * 0.000000037/1\" | bc",
           "one_row": false,
           "swap_toprow": "false",
@@ -404,7 +351,7 @@
         {
           "description": "Acceleration Y (m/s²)",
           "type": "cmd_read",
-          "timer": 2,
+          "timer": 1,
           "cmd": "echo \"scale=2; $(iio_attr -q -c adis16460 accel_y raw) * 0.000000037/1\" | bc",
           "one_row": false,
           "swap_toprow": "false",
@@ -414,7 +361,7 @@
         {
           "description": "Acceleration Z (m/s²)",
           "type": "cmd_read",
-          "timer": 2,
+          "timer": 1,
           "cmd": "echo \"scale=2; $(iio_attr -q -c adis16460 accel_z raw) * 0.000000037/1\" | bc",
           "one_row": false,
           "swap_toprow": "false",
@@ -424,7 +371,7 @@
         {
           "description": "Angular Velocity X (rad/s)",
           "type": "cmd_read",
-          "timer": 2,
+          "timer": 1,
           "cmd": "echo \"scale=4; $(iio_attr -q -c adis16460 anglvel_x raw) * 0.000000001/1\" | bc",
           "one_row": false,
           "swap_toprow": "false",
@@ -434,7 +381,7 @@
         {
           "description": "Angular Velocity Y (rad/s)",
           "type": "cmd_read",
-          "timer": 2,
+          "timer": 1,
           "cmd": "echo \"scale=4; $(iio_attr -q -c adis16460 anglvel_y raw) * 0.000000001/1\" | bc",
           "one_row": false,
           "swap_toprow": "false",
@@ -444,7 +391,7 @@
         {
           "description": "Angular Velocity Z (rad/s)",
           "type": "cmd_read",
-          "timer": 2,
+          "timer": 1,
           "cmd": "echo \"scale=4; $(iio_attr -q -c adis16460 anglvel_z raw) * 0.000000001/1\" | bc",
           "one_row": false,
           "swap_toprow": "false",
@@ -506,9 +453,69 @@
   },
   {
     "params": {
+      "cmd": "mplayer -vf scale -zoom -xy 160 -nosound -vo fbdev -tv driver=v4l2:device=/dev/video0 tv://"
+    },
+    "type": "video",
+    "name": "Camera View"
+  },
+  {
+    "params": {
       "cmd": "mplayer -vf scale -zoom -xy 160 -nosound -vo fbdev MVI_0043.AVI"
     },
     "type": "video",
     "name": "Play Video"
+  },
+    {
+    "params": {
+      "timers": [
+        100,
+        500,
+        1000
+      ],
+      "elements": [
+        {
+          "description": "state",
+          "type": "cmd_read",
+          "timer": 1,
+          "cmd": "cat chargepanel",
+          "one_row": false,
+          "swap_toprow": "false",
+          "text_align": "left",
+          "stylesheet": ""
+        },
+        {
+          "description": "press me!",
+          "type": "btn",
+          "cmd": "echo \"button pressed\" > chargepanel",
+          "stylesheet": ""
+        },
+        {
+          "description": "checkbox desription",
+          "type": "checkbox",
+          "cmd_write": "echo $CHECKBOX_VAL > checkbox",
+          "cmd_read": "cat checkbox",
+          "cmd_read_timer": 1,
+          "one_row": false,
+          "swap_toprow": false,
+          "icon_path": "./charge.png",
+          "text_align": "left",
+          "stylesheet": "\"\""
+        },
+        {
+          "description": "editWithReadOnly",
+          "type": "edit",
+          "cmd_read_only": "cat checkbox",
+          "cmd_read": "cat charge",
+          "cmd_read_timer": 1,
+          "cmd_write": "echo $EDIT_VAL > charge",
+          "swap_toprow": false,
+          "icon_path": "./charge.png",
+          "text_align": "left",
+          "stylesheet": "\"\""
+        }
+      ]
+    },
+    "type": "list",
+    "name": "Charge"
   }
 ]

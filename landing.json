@@ -2,27 +2,27 @@
   "timers": [
     100,
     1000,
-    500
+    5000
   ],
   "elements": [
     {
       "description": "",
-      "timer": 0,
-      "cmd_read": "cat ip",
+      "timer": 2,
+      "cmd_read": "ip addr show eth0 | sed -n '3p' | awk '{ print $2 }' | cut -f 1 -d \"/\"",
       "iconSize": 16,
       "icon": "/home/analog/blueScorpionApp/icons/003-plug-connector.png"
     },
     {
       "description": "",
-      "timer": 1,
-      "cmd_read": "cat temp",
+      "timer": 2,
+      "cmd_read": "echo \"scale=2; ($(iio_attr -q -c ad7291-ccbox temp0 mean_raw) * 250) / 1000\" | bc",
       "iconSize": 12,
       "icon": "/home/analog/blueScorpionApp/icons/006-weather.png"
     },
     {
       "description": "",
       "timer": 2,
-      "cmd_read": "cat charge",
+      "cmd_read": "echo 100%",
       "iconSize": 16,
       "icon": "/home/analog/blueScorpionApp/icons/005-technology.png"
     },

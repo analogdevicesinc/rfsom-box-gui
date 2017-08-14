@@ -8,7 +8,7 @@ int main(int argc, char *argv[])
 {
 	QApplication a(argc, argv);
 
-	int id = QFontDatabase::addApplicationFont(":/font/font/dejavu-fonts-ttf-2.37/ttf/DejaVuSans.ttf");
+	int id = QFontDatabase::addApplicationFont(":/font/dejavu-fonts-ttf-2.37/ttf/DejaVuSansMono.ttf");
 	QString family = QFontDatabase::applicationFontFamilies(id).at(0);
 	QFont monospace(family);
 	monospace.setPointSize(10);

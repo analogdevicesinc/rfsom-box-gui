@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.0.3, 2017-08-14T17:01:15. -->
+<!-- Written by QtCreator 4.0.3, 2017-08-14T17:42:02. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -267,35 +267,34 @@
       <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
       <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">RemoteLinux.DirectUploadStep</value>
       <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedFiles">
-       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/icons/002-wifi-signal-symbol.png</value>
-       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/icons/003-plug-connector.png</value>
-       <value type="QString">/home/adi/blueScorpion/build-helloQtWidgets-BlueScorpion-Debug/blueScorpionApp</value>
-       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/launcher.json</value>
-       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/adi.png</value>
-       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/stylesheets/appGenericList.qss</value>
-       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/icons/001-wifi-low-signal-symbol.png</value>
-       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/icons/005-technology.png</value>
-       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/icons/003-plug-connector.png</value>
-       <value type="QString">/home/adi/blueScorpion/build-helloQtWidgets-BlueScorpion-Debug/helloQtWidgets</value>
-       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/main.json</value>
-       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/icons/006-weather.png</value>
-       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/launcher.json</value>
-       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/icons/004-computer.png</value>
        <value type="QString">/home/adi/blueScorpion/blueScorpionApp/config.json</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/adi.png</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/icons/005-technology.png</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/icons/002-wifi-signal-symbol.png</value>
        <value type="QString">/home/adi/blueScorpion/blueScorpionApp/icons/004-computer.png</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/stylesheets/appGenericList.qss</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/main.json</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/launcher.json</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/icons/002-wifi-signal-symbol.png</value>
        <value type="QString">/home/adi/blueScorpion/blueScorpionApp/landing.json</value>
+       <value type="QString">/home/adi/blueScorpion/build-helloQtWidgets-BlueScorpion-Debug/helloQtWidgets</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/icons/004-computer.png</value>
+       <value type="QString">/home/adi/blueScorpion/build-helloQtWidgets-BlueScorpion-Debug/blueScorpionApp</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/icons/006-weather.png</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/stylesheets/appGenericList.qss</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/landing.json</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/launcher.json</value>
        <value type="QString">/home/adi/blueScorpion/blueScorpionApp/scorpion-512.ico</value>
        <value type="QString">/home/adi/blueScorpion/blueScorpionApp/main.json</value>
-       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/icons/006-weather.png</value>
-       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/landing.json</value>
-       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/icons/002-wifi-signal-symbol.png</value>
-       <value type="QString">/home/adi/blueScorpion/build-helloQtWidgets-BlueScorpion-Debug/blueScorpionApp</value>
-       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/stylesheets/appGenericList.qss</value>
        <value type="QString">/home/adi/blueScorpion/blueScorpionApp/icons/001-wifi-low-signal-symbol.png</value>
+       <value type="QString">/home/adi/blueScorpion/build-helloQtWidgets-BlueScorpion-Debug/blueScorpionApp</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/icons/003-plug-connector.png</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/icons/006-weather.png</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/icons/001-wifi-low-signal-symbol.png</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/icons/003-plug-connector.png</value>
        <value type="QString">/home/adi/blueScorpion/blueScorpionApp/icons/005-technology.png</value>
       </valuelist>
       <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedHosts">
-       <value type="QString">10.50.3.115</value>
        <value type="QString">10.50.3.100</value>
        <value type="QString">10.50.3.100</value>
        <value type="QString">10.50.3.115</value>
@@ -304,49 +303,50 @@
        <value type="QString">10.50.3.100</value>
        <value type="QString">10.50.3.115</value>
        <value type="QString">10.50.3.115</value>
-       <value type="QString">10.50.3.100</value>
-       <value type="QString">10.50.3.115</value>
-       <value type="QString">10.50.3.115</value>
-       <value type="QString">10.50.3.100</value>
        <value type="QString">10.50.3.115</value>
        <value type="QString">10.50.3.100</value>
        <value type="QString">10.50.3.100</value>
        <value type="QString">10.50.3.100</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
        <value type="QString">10.50.3.100</value>
        <value type="QString">10.50.3.100</value>
        <value type="QString">10.50.3.100</value>
        <value type="QString">10.50.3.115</value>
        <value type="QString">10.50.3.100</value>
-       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.100</value>
+       <value type="QString">10.50.3.100</value>
        <value type="QString">10.50.3.100</value>
        <value type="QString">10.50.3.115</value>
        <value type="QString">10.50.3.100</value>
       </valuelist>
       <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedRemotePaths">
+       <value type="QString">/home/analog/blueScorpionApp/bin</value>
        <value type="QString">/home/analog/blueScorpionApp/icons</value>
        <value type="QString">/home/analog/blueScorpionApp/icons</value>
-       <value type="QString">/home/analog/blueScorpionApp/bin</value>
-       <value type="QString">/home/analog/blueScorpionApp/bin</value>
+       <value type="QString">/home/analog/blueScorpionApp/icons</value>
        <value type="QString">/home/analog/blueScorpionApp/icons</value>
        <value type="QString">/home/analog/blueScorpionApp/stylesheets</value>
+       <value type="QString">/home/analog/blueScorpionApp/bin</value>
+       <value type="QString">/home/analog/blueScorpionApp/bin</value>
        <value type="QString">/home/analog/blueScorpionApp/icons</value>
-       <value type="QString">/home/analog/blueScorpionApp/icons</value>
-       <value type="QString">/home/analog/blueScorpionApp/icons</value>
+       <value type="QString">/home/analog/blueScorpionApp/bin</value>
        <value type="QString">/home/analog/helloQtWidgets/bin</value>
-       <value type="QString">/home/analog/blueScorpionApp/bin</value>
        <value type="QString">/home/analog/blueScorpionApp/icons</value>
        <value type="QString">/home/analog/blueScorpionApp/bin</value>
        <value type="QString">/home/analog/blueScorpionApp/icons</value>
-       <value type="QString">/home/analog/blueScorpionApp/bin</value>
-       <value type="QString">/home/analog/blueScorpionApp/icons</value>
-       <value type="QString">/home/analog/blueScorpionApp/bin</value>
-       <value type="QString">/home/analog/blueScorpionApp/icons</value>
-       <value type="QString">/home/analog/blueScorpionApp/bin</value>
-       <value type="QString">/home/analog/blueScorpionApp/icons</value>
-       <value type="QString">/home/analog/blueScorpionApp/bin</value>
-       <value type="QString">/home/analog/blueScorpionApp/icons</value>
-       <value type="QString">/home/analog/blueScorpionApp/bin</value>
        <value type="QString">/home/analog/blueScorpionApp/stylesheets</value>
+       <value type="QString">/home/analog/blueScorpionApp/bin</value>
+       <value type="QString">/home/analog/blueScorpionApp/bin</value>
+       <value type="QString">/home/analog/blueScorpionApp/icons</value>
+       <value type="QString">/home/analog/blueScorpionApp/bin</value>
+       <value type="QString">/home/analog/blueScorpionApp/icons</value>
+       <value type="QString">/home/analog/blueScorpionApp/bin</value>
+       <value type="QString">/home/analog/blueScorpionApp/icons</value>
+       <value type="QString">/home/analog/blueScorpionApp/icons</value>
+       <value type="QString">/home/analog/blueScorpionApp/icons</value>
        <value type="QString">/home/analog/blueScorpionApp/icons</value>
        <value type="QString">/home/analog/blueScorpionApp/icons</value>
       </valuelist>
@@ -379,31 +379,31 @@
        <value type="QString"></value>
       </valuelist>
       <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedTimes">
-       <value type="QDateTime">2017-08-14T16:59:26</value>
-       <value type="QDateTime">2017-08-09T17:18:17</value>
-       <value type="QDateTime">2017-08-09T17:18:17</value>
-       <value type="QDateTime">2017-08-14T16:59:26</value>
-       <value type="QDateTime">2017-07-06T14:36:10</value>
-       <value type="QDateTime">2017-08-14T16:59:27</value>
-       <value type="QDateTime">2017-08-09T17:18:17</value>
-       <value type="QDateTime">2017-08-14T16:59:26</value>
-       <value type="QDateTime">2017-08-14T16:59:26</value>
-       <value type="QDateTime">2017-06-27T17:33:57</value>
-       <value type="QDateTime">2017-08-14T16:59:26</value>
-       <value type="QDateTime">2017-08-14T16:59:26</value>
-       <value type="QDateTime">2017-08-09T17:18:17</value>
-       <value type="QDateTime">2017-08-14T16:59:26</value>
        <value type="QDateTime">2017-07-06T14:39:03</value>
+       <value type="QDateTime">2017-07-06T14:36:10</value>
+       <value type="QDateTime">2017-08-14T17:38:49</value>
        <value type="QDateTime">2017-08-09T17:18:17</value>
+       <value type="QDateTime">2017-08-14T17:38:49</value>
+       <value type="QDateTime">2017-08-09T17:18:17</value>
+       <value type="QDateTime">2017-08-14T17:38:49</value>
+       <value type="QDateTime">2017-08-14T17:38:49</value>
+       <value type="QDateTime">2017-08-14T17:38:49</value>
        <value type="QDateTime">2017-08-09T17:18:16</value>
+       <value type="QDateTime">2017-06-27T17:33:57</value>
+       <value type="QDateTime">2017-08-09T17:18:17</value>
+       <value type="QDateTime">2017-08-14T17:38:50</value>
+       <value type="QDateTime">2017-08-14T17:38:49</value>
+       <value type="QDateTime">2017-08-14T17:38:49</value>
+       <value type="QDateTime">2017-08-14T17:38:49</value>
+       <value type="QDateTime">2017-08-09T17:18:17</value>
        <value type="QDateTime">2017-07-06T14:36:10</value>
        <value type="QDateTime">2017-08-09T17:18:17</value>
+       <value type="QDateTime">2017-08-14T17:38:49</value>
        <value type="QDateTime">2017-08-09T17:18:17</value>
-       <value type="QDateTime">2017-08-14T16:59:26</value>
        <value type="QDateTime">2017-08-09T17:18:17</value>
-       <value type="QDateTime">2017-08-14T16:59:28</value>
        <value type="QDateTime">2017-08-09T17:18:17</value>
-       <value type="QDateTime">2017-08-14T16:59:26</value>
+       <value type="QDateTime">2017-08-09T17:18:17</value>
+       <value type="QDateTime">2017-08-14T17:38:49</value>
        <value type="QDateTime">2017-08-09T17:18:17</value>
       </valuelist>
       <value type="bool" key="RemoteLinux.GenericDirectUploadStep.IgnoreMissingFiles">false</value>
@@ -468,8 +468,8 @@
      <value type="QString">QT_LOGGING_RULES=qt.qpa.input=true</value>
      <value type="QString">QT_MESSAGE_PATTERN=&quot;[%{type}] ( file://%{file}:%{line} ) - %{message}&quot;</value>
      <value type="QString">QT_PLUGIN_PATH=/home/analog/Qt/5.9/plugins</value>
-     <value type="QString">QT_QPA_EVDEV_KEYBOARD_PARAMETERS=/dev/input/event3:grab=1</value>
-     <value type="QString">QT_QPA_EVDEV_MOUSE_PARAMETERS=/dev/input/event0:grab=1</value>
+     <value type="QString">QT_QPA_EVDEV_KEYBOARD_PARAMETERS=/dev/input/by-path/platform-gpio_keys-event:grab=1</value>
+     <value type="QString">QT_QPA_EVDEV_MOUSE_PARAMETERS=/dev/input/by-path/platform-rotary-event:grab=1</value>
      <value type="QString">QT_QPA_FB_DRM=1</value>
      <value type="QString">QT_QPA_FB_HIDECURSOR=0</value>
      <value type="QString">QT_QPA_FB_TSLIB=1</value>

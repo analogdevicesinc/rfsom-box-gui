@@ -3,8 +3,8 @@
 #export QT_LOGGING_RULES=qt.qpa.input=true
 #export QT_MESSAGE_PATTERN="[%{type}] ( file://%{file}:%{line} ) - %{message}"
 #QT_PLUGIN_PATH=/home/analog/Qt/5.9/plugins
-export QT_QPA_EVDEV_KEYBOARD_PARAMETERS=/dev/input/event3:grab=1
-export QT_QPA_EVDEV_MOUSE_PARAMETERS=/dev/input/event0:grab=1
+export QT_QPA_EVDEV_KEYBOARD_PARAMETERS=/dev/input/by-path/platform-gpio_keys-event:grab=1
+export QT_QPA_EVDEV_MOUSE_PARAMETERS=/dev/input/by-path/platform-rotary-event:grab=1
 export QT_QPA_FB_DRM=1
 export QT_QPA_FB_HIDECURSOR=0
 export QT_QPA_FB_TSLIB=1

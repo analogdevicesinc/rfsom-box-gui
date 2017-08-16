@@ -18,7 +18,7 @@ TEMPLATE = app
 
 scripts.path = /home/analog/blueScorpionApp/bin
 scripts.files = ./setenv.sh
-scripts.files += ./run_on_board
+scripts.files += ./run_on_board.sh
 
 stylesheets.path = /home/analog/blueScorpionApp/stylesheets
 stylesheets.files = ./stylesheets/*.qss

@@ -286,7 +286,7 @@
           "stylesheet": ""
         },
         {
-          "description": "ZYNQ Temperature (°C)",
+          "description": "ARM Temperature (°C)",
           "type": "cmd_read",
           "timer": 2,
           "cmd": "echo \"scale=2; (($(iio_attr -q -c xadc temp0 raw) - 2219) * 123.040771484)/1000\" | bc",

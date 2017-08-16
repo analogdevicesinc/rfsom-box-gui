@@ -13,6 +13,13 @@ CONFIG+= C++11
 TARGET = blueScorpionApp
 TEMPLATE = app
 
+#font.path = /home/analog/blueScorpionApp/font
+#font.files = ./font/dejavu-fonts-ttf-2.37/ttf/*.ttf
+
+scripts.path = /home/analog/blueScorpionApp/bin
+scripts.files = ./setenv.sh
+scripts.files += ./run_on_board
+
 stylesheets.path = /home/analog/blueScorpionApp/stylesheets
 stylesheets.files = ./stylesheets/*.qss
 
@@ -24,7 +31,7 @@ config.files = ./*.json
 
 target.path = /home/analog/blueScorpionApp/bin
 
-INSTALLS += target config icons stylesheets
+INSTALLS += target config icons stylesheets scripts
 
 SOURCES += main.cpp\
         mainwindow.cpp \

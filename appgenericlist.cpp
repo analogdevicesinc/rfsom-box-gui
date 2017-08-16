@@ -373,7 +373,6 @@ bool AppGenericList::eventFilter(QObject *watched, QEvent *event)
 	}
 
 	if (watched == list) {
-		qDebug()<<event;
 
 		if (event->type()==QEvent::KeyPress) {
 			QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
@@ -400,7 +399,7 @@ bool AppGenericList::eventFilter(QObject *watched, QEvent *event)
 	auto editElement = dynamic_cast<EditboxElementUi *>(watched);
 
 	if (editElement!=nullptr&&editElement->getSelected()) {
-		qDebug()<<"eventfilter - "<<event;
+
 
 		if (event->type()==QEvent::KeyPress) {
 			QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
@@ -435,7 +434,6 @@ bool AppGenericList::eventFilter(QObject *watched, QEvent *event)
 
 		if (event->type()==QEvent::Wheel) {
 			QWheelEvent *wheelEvent = static_cast<QWheelEvent *>(event);
-			qDebug()<<wheelEvent;
 
 			if (wheelEvent->delta()>0) {
 				editElement->increment();
@@ -445,7 +443,6 @@ bool AppGenericList::eventFilter(QObject *watched, QEvent *event)
 		}
 	}
 
-	qDebug()<<event << "not handeld by eventfilter";
 	return false;
 }
 

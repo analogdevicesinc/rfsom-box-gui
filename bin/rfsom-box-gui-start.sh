@@ -10,5 +10,5 @@ if [ $? -eq 0 ]; then
 	QT_QPA_FONTDIR=/home/analog/Qt/fonts \
 	QT_QPA_PLATFORM=linuxfb \
 	QT_QPA_GENERIC_PLUGINS=evdevmouse,evdevkeyboard \
-	rfsom-box-gui
+	/usr/local/bin/rfsom-box-gui;
 fi

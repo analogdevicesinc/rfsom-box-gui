@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.0.3, 2017-08-17T12:50:21. -->
+<!-- Written by QtCreator 4.0.3, 2017-08-17T15:08:36. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -297,6 +297,7 @@
        <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/adi.png</value>
        <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/icons/004-computer.png</value>
        <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/icons/002-wifi-signal-symbol.png</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/bin/rfsom-box-gui-start.sh</value>
        <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf/DejaVuMathTeXGyre.ttf</value>
        <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf/DejaVuSerifCondensed-Italic.ttf</value>
        <value type="QString">/home/adi/blueScorpion/blueScorpionApp/icons/006-weather.png</value>
@@ -422,6 +423,7 @@
        <value type="QString">10.50.3.115</value>
        <value type="QString">10.50.3.115</value>
        <value type="QString">10.50.3.100</value>
+       <value type="QString">10.50.3.115</value>
        <value type="QString">10.50.3.115</value>
        <value type="QString">10.50.3.115</value>
        <value type="QString">10.50.3.115</value>
@@ -561,6 +563,7 @@
        <value type="QString">/home/analog/rfsomgui-debug/share/rfsom-box-gui</value>
        <value type="QString">/home/analog/rfsomgui-debug/share/rfsom-box-gui/icons</value>
        <value type="QString">/home/analog/rfsomboxgui-debug/share/rfsom-box-gui/icons</value>
+       <value type="QString">/home/analog/rfsomgui-debug/bin</value>
        <value type="QString">/home/analog/rfsomboxgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf</value>
        <value type="QString">/home/analog/rfsomgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf</value>
        <value type="QString">/home/analog/blueScorpionApp/icons</value>
@@ -793,9 +796,10 @@
        <value type="QString"></value>
        <value type="QString"></value>
        <value type="QString"></value>
+       <value type="QString"></value>
       </valuelist>
       <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedTimes">
-       <value type="QDateTime">2017-08-17T12:48:24</value>
+       <value type="QDateTime">2017-08-17T15:08:34</value>
        <value type="QDateTime">2017-08-17T11:49:20</value>
        <value type="QDateTime">2017-08-17T11:49:23</value>
        <value type="QDateTime">2017-08-09T17:18:17</value>
@@ -804,127 +808,128 @@
        <value type="QDateTime">2017-08-17T11:49:20</value>
        <value type="QDateTime">2017-08-17T11:49:23</value>
        <value type="QDateTime">2017-08-09T17:18:17</value>
-       <value type="QDateTime">2017-08-17T12:48:28</value>
-       <value type="QDateTime">2017-08-17T12:48:27</value>
+       <value type="QDateTime">2017-08-17T15:05:11</value>
+       <value type="QDateTime">2017-08-17T15:05:11</value>
        <value type="QDateTime">2017-08-17T11:49:22</value>
-       <value type="QDateTime">2017-08-17T12:48:24</value>
-       <value type="QDateTime">2017-08-17T12:48:27</value>
+       <value type="QDateTime">2017-08-17T14:02:04</value>
+       <value type="QDateTime">2017-08-17T15:05:10</value>
        <value type="QDateTime">2017-08-17T11:49:23</value>
-       <value type="QDateTime">2017-08-17T12:48:25</value>
+       <value type="QDateTime">2017-08-17T15:08:35</value>
        <value type="QDateTime">2017-08-17T11:49:20</value>
        <value type="QDateTime">2017-08-17T11:49:20</value>
        <value type="QDateTime">2017-08-17T11:49:22</value>
-       <value type="QDateTime">2017-08-17T12:48:28</value>
-       <value type="QDateTime">2017-08-17T12:48:28</value>
+       <value type="QDateTime">2017-08-17T15:05:11</value>
+       <value type="QDateTime">2017-08-17T15:05:11</value>
        <value type="QDateTime">2017-08-17T11:49:22</value>
        <value type="QDateTime">2017-07-06T14:39:03</value>
        <value type="QDateTime">2017-08-16T13:54:31</value>
        <value type="QDateTime">2017-08-17T11:49:23</value>
        <value type="QDateTime">2017-08-17T11:49:23</value>
-       <value type="QDateTime">2017-08-17T12:48:27</value>
-       <value type="QDateTime">2017-08-17T12:48:24</value>
-       <value type="QDateTime">2017-08-17T12:48:28</value>
+       <value type="QDateTime">2017-08-17T15:05:10</value>
+       <value type="QDateTime">2017-08-17T15:08:34</value>
+       <value type="QDateTime">2017-08-17T15:05:11</value>
        <value type="QDateTime">2017-08-17T11:49:23</value>
+       <value type="QDateTime">2017-08-17T15:08:34</value>
        <value type="QDateTime">2017-08-17T11:49:21</value>
-       <value type="QDateTime">2017-08-17T12:48:27</value>
+       <value type="QDateTime">2017-08-17T15:05:11</value>
        <value type="QDateTime">2017-08-09T17:18:17</value>
        <value type="QDateTime">2017-08-16T13:54:31</value>
-       <value type="QDateTime">2017-08-17T12:48:25</value>
+       <value type="QDateTime">2017-08-17T15:08:35</value>
        <value type="QDateTime">2017-07-06T14:36:10</value>
-       <value type="QDateTime">2017-08-17T12:48:28</value>
-       <value type="QDateTime">2017-08-17T12:48:27</value>
-       <value type="QDateTime">2017-08-17T12:48:27</value>
+       <value type="QDateTime">2017-08-17T15:05:11</value>
+       <value type="QDateTime">2017-08-17T15:05:10</value>
+       <value type="QDateTime">2017-08-17T15:05:11</value>
        <value type="QDateTime">2017-08-17T11:49:20</value>
        <value type="QDateTime">2017-08-17T11:49:22</value>
-       <value type="QDateTime">2017-08-17T12:48:24</value>
+       <value type="QDateTime">2017-08-17T15:08:34</value>
        <value type="QDateTime">2017-08-17T11:49:21</value>
-       <value type="QDateTime">2017-08-17T12:48:25</value>
+       <value type="QDateTime">2017-08-17T15:08:35</value>
        <value type="QDateTime">2017-08-16T13:54:31</value>
        <value type="QDateTime">2017-08-17T11:49:21</value>
        <value type="QDateTime">2017-08-17T11:49:22</value>
        <value type="QDateTime">2017-08-09T17:18:17</value>
        <value type="QDateTime">2017-08-17T11:49:20</value>
-       <value type="QDateTime">2017-08-17T12:48:25</value>
+       <value type="QDateTime">2017-08-17T15:05:09</value>
        <value type="QDateTime">2017-08-16T13:54:31</value>
        <value type="QDateTime">2017-08-17T11:49:22</value>
        <value type="QDateTime">2017-08-17T11:49:21</value>
        <value type="QDateTime">2017-08-17T11:49:20</value>
-       <value type="QDateTime">2017-08-17T12:48:24</value>
-       <value type="QDateTime">2017-08-17T12:48:25</value>
-       <value type="QDateTime">2017-08-17T12:48:27</value>
-       <value type="QDateTime">2017-08-17T12:48:27</value>
+       <value type="QDateTime">2017-08-17T15:08:34</value>
+       <value type="QDateTime">2017-08-17T15:08:35</value>
+       <value type="QDateTime">2017-08-17T15:05:11</value>
+       <value type="QDateTime">2017-08-17T15:05:11</value>
        <value type="QDateTime">2017-08-17T11:49:21</value>
        <value type="QDateTime">2017-08-17T11:49:20</value>
-       <value type="QDateTime">2017-08-17T12:48:26</value>
+       <value type="QDateTime">2017-08-17T15:05:10</value>
        <value type="QDateTime">2017-08-17T11:49:20</value>
        <value type="QDateTime">2017-08-17T11:49:23</value>
        <value type="QDateTime">2017-08-17T11:49:23</value>
-       <value type="QDateTime">2017-08-17T12:48:28</value>
-       <value type="QDateTime">2017-08-17T12:48:28</value>
+       <value type="QDateTime">2017-08-17T15:05:11</value>
+       <value type="QDateTime">2017-08-17T15:05:12</value>
        <value type="QDateTime">2017-08-17T11:49:21</value>
        <value type="QDateTime">2017-08-17T11:49:22</value>
        <value type="QDateTime">2017-08-09T17:18:16</value>
        <value type="QDateTime">2017-08-17T11:49:23</value>
-       <value type="QDateTime">2017-08-17T12:48:24</value>
-       <value type="QDateTime">2017-08-17T12:48:27</value>
+       <value type="QDateTime">2017-08-17T14:02:04</value>
+       <value type="QDateTime">2017-08-17T15:05:10</value>
        <value type="QDateTime">2017-08-17T11:49:22</value>
        <value type="QDateTime">2017-08-16T13:54:31</value>
        <value type="QDateTime">2017-08-17T11:49:20</value>
        <value type="QDateTime">2017-08-17T11:49:23</value>
-       <value type="QDateTime">2017-08-17T12:48:28</value>
+       <value type="QDateTime">2017-08-17T15:05:11</value>
        <value type="QDateTime">2017-08-17T11:49:23</value>
        <value type="QDateTime">2017-08-17T11:49:20</value>
        <value type="QDateTime">2017-08-09T17:18:17</value>
        <value type="QDateTime">2017-08-17T11:49:21</value>
        <value type="QDateTime">2017-08-17T11:49:23</value>
-       <value type="QDateTime">2017-08-17T12:48:28</value>
+       <value type="QDateTime">2017-08-17T15:05:12</value>
        <value type="QDateTime">2017-08-17T11:49:23</value>
-       <value type="QDateTime">2017-08-17T12:48:25</value>
+       <value type="QDateTime">2017-08-17T15:08:35</value>
        <value type="QDateTime">2017-08-09T17:18:17</value>
        <value type="QDateTime">2017-08-17T11:49:20</value>
        <value type="QDateTime">2017-08-17T11:49:22</value>
-       <value type="QDateTime">2017-08-17T12:48:27</value>
+       <value type="QDateTime">2017-08-17T15:05:11</value>
        <value type="QDateTime">2017-08-17T11:49:23</value>
-       <value type="QDateTime">2017-08-17T12:48:27</value>
+       <value type="QDateTime">2017-08-17T15:05:10</value>
        <value type="QDateTime">2017-08-16T13:54:31</value>
        <value type="QDateTime">2017-08-16T13:54:31</value>
        <value type="QDateTime">2017-08-09T17:18:17</value>
-       <value type="QDateTime">2017-08-17T12:48:25</value>
+       <value type="QDateTime">2017-08-17T15:08:35</value>
        <value type="QDateTime">2017-08-17T11:49:23</value>
        <value type="QDateTime">2017-08-17T11:49:20</value>
        <value type="QDateTime">2017-08-17T11:49:22</value>
        <value type="QDateTime">2017-08-17T11:49:22</value>
-       <value type="QDateTime">2017-08-17T12:48:26</value>
-       <value type="QDateTime">2017-08-17T12:48:26</value>
+       <value type="QDateTime">2017-08-17T15:05:09</value>
+       <value type="QDateTime">2017-08-17T15:05:10</value>
        <value type="QDateTime">2017-08-17T11:49:20</value>
        <value type="QDateTime">2017-08-17T11:49:20</value>
-       <value type="QDateTime">2017-08-17T12:48:26</value>
+       <value type="QDateTime">2017-08-17T15:05:09</value>
        <value type="QDateTime">2017-08-16T13:54:31</value>
        <value type="QDateTime">2017-08-09T17:18:17</value>
        <value type="QDateTime">2017-08-16T13:54:31</value>
-       <value type="QDateTime">2017-08-17T12:48:26</value>
-       <value type="QDateTime">2017-08-17T12:48:25</value>
-       <value type="QDateTime">2017-08-17T12:48:28</value>
+       <value type="QDateTime">2017-08-17T15:05:10</value>
+       <value type="QDateTime">2017-08-17T15:08:35</value>
+       <value type="QDateTime">2017-08-17T15:05:12</value>
        <value type="QDateTime">2017-08-16T13:54:31</value>
-       <value type="QDateTime">2017-08-17T12:48:26</value>
+       <value type="QDateTime">2017-08-17T15:05:10</value>
        <value type="QDateTime">2017-08-16T13:54:31</value>
-       <value type="QDateTime">2017-08-17T12:48:24</value>
-       <value type="QDateTime">2017-08-17T12:48:25</value>
-       <value type="QDateTime">2017-08-17T12:48:25</value>
-       <value type="QDateTime">2017-08-17T12:48:26</value>
-       <value type="QDateTime">2017-08-17T12:48:27</value>
+       <value type="QDateTime">2017-08-17T15:08:34</value>
+       <value type="QDateTime">2017-08-17T15:08:35</value>
+       <value type="QDateTime">2017-08-17T15:08:35</value>
+       <value type="QDateTime">2017-08-17T15:05:09</value>
+       <value type="QDateTime">2017-08-17T15:05:10</value>
        <value type="QDateTime">2017-08-09T17:18:17</value>
        <value type="QDateTime">2017-08-17T11:49:21</value>
-       <value type="QDateTime">2017-08-17T12:48:26</value>
-       <value type="QDateTime">2017-08-17T12:48:28</value>
-       <value type="QDateTime">2017-08-17T12:48:28</value>
+       <value type="QDateTime">2017-08-17T15:05:09</value>
+       <value type="QDateTime">2017-08-17T15:05:11</value>
+       <value type="QDateTime">2017-08-17T15:05:11</value>
        <value type="QDateTime">2017-08-09T17:18:17</value>
        <value type="QDateTime">2017-07-06T14:36:10</value>
        <value type="QDateTime">2017-08-17T11:49:23</value>
-       <value type="QDateTime">2017-08-17T12:48:24</value>
+       <value type="QDateTime">2017-08-17T15:08:34</value>
        <value type="QDateTime">2017-08-17T11:49:23</value>
        <value type="QDateTime">2017-08-16T13:54:31</value>
-       <value type="QDateTime">2017-08-17T12:48:24</value>
+       <value type="QDateTime">2017-08-17T15:08:34</value>
       </valuelist>
       <value type="bool" key="RemoteLinux.GenericDirectUploadStep.IgnoreMissingFiles">false</value>
       <value type="bool" key="RemoteLinux.GenericDirectUploadStep.Incremental">false</value>
@@ -988,7 +993,7 @@
      <value type="QString">QT_LOGGING_RULES=qt.qpa.input=true</value>
      <value type="QString">QT_MESSAGE_PATTERN=&quot;[%{type}] ( file://%{file}:%{line} ) - %{message}&quot;</value>
      <value type="QString">QT_PLUGIN_PATH=/home/analog/Qt/5.9/plugins</value>
-     <value type="QString">QT_QPA_EVDEV_KEYBOARD_PARAMETERS=/dev/input/by-path/platform-gpio_keys-event:grab=1</value>
+     <value type="QString">QT_QPA_EVDEV_KEYBOARD_PARAMETERS=/dev/input/by-path/platform-gpio-keys-nav-switch-event:grab=1</value>
      <value type="QString">QT_QPA_EVDEV_MOUSE_PARAMETERS=/dev/input/by-path/platform-rotary-event:grab=1</value>
      <value type="QString">QT_QPA_FB_DRM=1</value>
      <value type="QString">QT_QPA_FB_HIDECURSOR=0</value>

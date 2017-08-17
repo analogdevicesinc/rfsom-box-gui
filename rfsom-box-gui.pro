@@ -20,15 +20,15 @@ TARGET = rfsom-box-gui
 TEMPLATE = app
 
 scripts.path = $$INSTALL_LOCATION/bin
-scripts.files = ./bin/setenv.sh
-scripts.files += ./bin/run_on_board.sh
+scripts.files = ./bin/rfsom-box-gui-start.sh
 
 share.path = $$INSTALL_LOCATION/share
 share.files = ./share/*
 
 target.path = $$INSTALL_LOCATION/bin
-
-INSTALLS += target scripts share
+permission.path = $$INSTALL_LOCATION/bin
+unix:permission.extra = chmod 777 $$INSTALL_LOCATION/bin/rfsom-box-gui-start.sh
+INSTALLS += target scripts share permission
 
 SRC_DIR = ./src
 UI_DIR=./ui
@@ -86,3 +86,4 @@ FORMS    += $$UI_DIR/mainwindow.ui \
 
 RESOURCES += \
    $$RES_DIR/res.qrc
+

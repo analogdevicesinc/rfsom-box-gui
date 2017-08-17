@@ -8,6 +8,7 @@
 #include <QDebug>
 #include "appgenericlist.h"
 #include "appvideoplayer.h"
+#include "common.h"
 #include <QTime>
 
 LauncherPage::LauncherPage(QWidget *parent) : MenuPage(parent)
@@ -21,7 +22,7 @@ void LauncherPage::loadJsonConfig(QString jsonFileName)
 	QString val;
 	QFile file;
 	//qDebug() << "App path : " << qApp->applicationDirPath();
-	file.setFileName(jsonFileName);
+	file.setFileName(resolveFileLocation(jsonFileName));
 	file.open(QIODevice::ReadOnly | QIODevice::Text);
 	val = file.readAll();
 	file.close();

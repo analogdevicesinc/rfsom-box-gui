@@ -10,27 +10,27 @@
       "timer": 2,
       "cmd_read": "ip addr show eth0 | sed -n '3p' | awk '{ print $2 }' | cut -f 1 -d \"/\"",
       "iconSize": 16,
-      "icon": "/home/analog/blueScorpionApp/icons/003-plug-connector.png"
+      "icon": "../share/rfsom-box-gui/icons/003-plug-connector.png"
     },
     {
       "description": "",
       "timer": 2,
       "cmd_read": "echo \"scale=2; ($(iio_attr -q -c ad7291-ccbox temp0 mean_raw) * 250) / 1000\" | bc",
       "iconSize": 12,
-      "icon": "/home/analog/blueScorpionApp/icons/006-weather.png"
+      "icon": "../share/rfsom-box-gui/icons/006-weather.png"
     },
     {
       "description": "",
       "timer": 2,
       "cmd_read": "echo 100%",
       "iconSize": 16,
-      "icon": "/home/analog/blueScorpionApp/icons/005-technology.png"
+      "icon": "../share/rfsom-box-gui/icons/005-technology.png"
     },
     {
       "description": "",
       "cmd_read": "cat test",
       "iconSize": 12,
-      "icon": "/home/analog/blueScorpionApp/icons/004-computer.png"
+      "icon": "../share/rfsom-box-gui/icons/004-computer.png"
     }
   ]
 }

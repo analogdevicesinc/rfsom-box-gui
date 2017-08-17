@@ -1,5 +1,6 @@
 #include "scriptresult.h"
 #include <QDebug>
+#include "common.h"
 #include <QCoreApplication>
 
 bool ScriptResult::getRunInBackground() const
@@ -40,7 +41,7 @@ QString ScriptResult::run_script()
 {
 
 	proc = new QProcess(this);
-	proc->setWorkingDirectory(QCoreApplication::applicationDirPath()+"/../");
+	proc->setWorkingDirectory(sharedResPath);
 
 	QProcessEnvironment qpe;
 

@@ -1,6 +1,7 @@
 #include "readonlyelementui.h"
 #include "ui_readonlyvalue.h"
 #include <QDebug>
+#include "common.h"
 
 bool ReadOnlyElementUi::getIconRight() const
 {
@@ -35,7 +36,7 @@ void ReadOnlyElementUi::setStrVal(StringValue *value)
 QString ReadOnlyElementUi::iconString()
 {
 	if (icon) {
-		return "<img src=\"" + iconPath +"\" height=\"" + QString::number(
+		return "<img src=\"" + resolveFileLocation(iconPath) +"\" height=\"" + QString::number(
 		               iconSize) +"\" width=\"" + QString::number(iconSize) +"\">";
 	} else {
 		return "";

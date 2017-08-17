@@ -2,6 +2,7 @@
 #include <QJsonObject>
 #include <QCoreApplication>
 #include <QDebug>
+#include "common.h"
 #include <QTime>
 
 AppVideoPlayer::AppVideoPlayer(QJsonValue params, QLayout *lay,
@@ -40,7 +41,7 @@ void AppVideoPlayer::load()
 {
 	unload();
 	proc = new QProcess(this);
-	proc->setWorkingDirectory(QCoreApplication::applicationDirPath()+"/../");
+	proc->setWorkingDirectory(sharedResPath);
 	proc->start("/bin/sh",QStringList() << "-c" <<  cmd);
 	qDebug()<<proc->readAll();
 

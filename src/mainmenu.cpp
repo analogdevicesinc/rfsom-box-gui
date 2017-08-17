@@ -2,6 +2,7 @@
 #include <QJsonDocument>
 #include <QFile>
 #include "mainmenu.h"
+#include "common.h"
 #include "ui_mainwindow.h"
 
 MainMenu::MainMenu(QWidget *parent) : QStackedWidget(parent)
@@ -46,7 +47,7 @@ void MainMenu::initialize(Ui::MainWindow *_ui)
 		page->init(ui);
 	}
 
-	QFile file(QCoreApplication::applicationDirPath()+"/main.json");
+	QFile file(resolveFileLocation("main.json"));
 
 	file.open(QIODevice::ReadOnly);
 	QString jsonContent = file.readAll();

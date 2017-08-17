@@ -66,7 +66,7 @@ color:white;
        <number>0</number>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="LandingPage" name="landingPage">
        <property name="styleSheet">
@@ -100,7 +100,7 @@ color:white;
            </sizepolicy>
           </property>
           <property name="styleSheet">
-           <string notr="true">image: url(:/png/adi.png);</string>
+           <string notr="true">image: url(:/share/rfsom-box-gui/adi.png);</string>
           </property>
           <property name="text">
            <string/>
@@ -256,25 +256,25 @@ QScrollBar::sub-line:vertical {
   <customwidget>
    <class>MainMenu</class>
    <extends>QStackedWidget</extends>
-   <header location="global">mainmenu.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>LandingPage</class>
-   <extends>QWidget</extends>
-   <header location="global">landingpage.h</header>
+   <header>./src/mainmenu.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>AppPage</class>
    <extends>QWidget</extends>
-   <header location="global">apppage.h</header>
+   <header>./src/apppage.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>LandingPage</class>
+   <extends>QWidget</extends>
+   <header>./src/landingpage.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>LauncherPage</class>
    <extends>QWidget</extends>
-   <header location="global">launcherpage.h</header>
+   <header>./src/launcherpage.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

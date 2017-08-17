@@ -5,6 +5,7 @@
 #include "ui_mainwindow.h"
 #include "readonlyelementui.h"
 #include "scriptresult.h"
+#include "common.h"
 
 LandingPage::LandingPage(QWidget *parent) : MenuPage(parent)
 {
@@ -38,8 +39,8 @@ void LandingPage::keyPressEvent(QKeyEvent *e)
 
 void LandingPage::loadJsonConfig(QString jsonFileName)
 {
-	QFile file(jsonFileName);
-	file.open(QIODevice::ReadOnly);
+	QFile file(resolveFileLocation(jsonFileName));
+	file.open(QIODevice::ReadOnly | QIODevice::Text);
 	QString jsonContent = file.readAll();
 	file.close();
 	QJsonDocument doc = QJsonDocument::fromJson(jsonContent.toUtf8());

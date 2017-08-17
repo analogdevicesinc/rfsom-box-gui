@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.0.3, 2017-08-16T14:03:39. -->
+<!-- Written by QtCreator 4.0.3, 2017-08-17T12:50:21. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -64,17 +64,17 @@
    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">{110316ca-f69e-4589-9c60-c9ea3330f4a5}</value>
    <value type="int" key="ProjectExplorer.Target.ActiveBuildConfiguration">0</value>
    <value type="int" key="ProjectExplorer.Target.ActiveDeployConfiguration">0</value>
-   <value type="int" key="ProjectExplorer.Target.ActiveRunConfiguration">1</value>
+   <value type="int" key="ProjectExplorer.Target.ActiveRunConfiguration">0</value>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.BuildConfiguration.0">
-    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">/home/adi/blueScorpion/build-helloQtWidgets-BlueScorpion-Debug</value>
+    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">/home/adi/blueScorpion/build-rfsom-box-gui-Debug</value>
     <valuemap type="QVariantMap" key="ProjectExplorer.BuildConfiguration.BuildStepList.0">
      <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.0">
       <value type="bool" key="ProjectExplorer.BuildStep.Enabled">true</value>
       <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">qmake</value>
       <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
       <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">QtProjectManager.QMakeBuildStep</value>
-      <value type="bool" key="QtProjectManager.QMakeBuildStep.LinkQmlDebuggingLibrary">true</value>
-      <value type="QString" key="QtProjectManager.QMakeBuildStep.QMakeArguments"></value>
+      <value type="bool" key="QtProjectManager.QMakeBuildStep.LinkQmlDebuggingLibrary">false</value>
+      <value type="QString" key="QtProjectManager.QMakeBuildStep.QMakeArguments">INSTALL_LOCATION=/home/analog/rfsomgui-debug</value>
       <value type="bool" key="QtProjectManager.QMakeBuildStep.QMakeForced">false</value>
       <value type="bool" key="QtProjectManager.QMakeBuildStep.SeparateDebugInfo">true</value>
       <value type="bool" key="QtProjectManager.QMakeBuildStep.UseQtQuickCompiler">false</value>
@@ -267,37 +267,141 @@
       <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
       <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">RemoteLinux.DirectUploadStep</value>
       <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedFiles">
-       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/config.json</value>
-       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/adi.png</value>
-       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/icons/005-technology.png</value>
-       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/icons/002-wifi-signal-symbol.png</value>
-       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/icons/004-computer.png</value>
-       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/run_on_board</value>
-       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/stylesheets/appGenericList.qss</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/fontconfig/20-unhint-small-dejavu-sans.conf</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/bin/run_on_board.sh</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/icons/004-computer.png</value>
        <value type="QString">/home/adi/blueScorpion/blueScorpionApp/main.json</value>
-       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/launcher.json</value>
-       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/icons/002-wifi-signal-symbol.png</value>
-       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/landing.json</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/run_on_board</value>
        <value type="QString">/home/adi/blueScorpion/build-helloQtWidgets-BlueScorpion-Debug/helloQtWidgets</value>
-       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/icons/004-computer.png</value>
-       <value type="QString">/home/adi/blueScorpion/build-helloQtWidgets-BlueScorpion-Debug/blueScorpionApp</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/BUGS</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf/DejaVuSerifCondensed-BoldItalic.ttf</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/icons/002-wifi-signal-symbol.png</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/icons/002-wifi-signal-symbol.png</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/unicover.txt</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf/DejaVuSerif.ttf</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/bin/setenv.sh</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf/DejaVuSansMono-Oblique.ttf</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/landing.json</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/LICENSE</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/fontconfig/20-unhint-small-dejavu-sans.conf</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/adi.png</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf/DejaVuSansMono-Bold.ttf</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/icons/005-technology.png</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/main.json</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf/DejaVuSansMono.ttf</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/config.json</value>
        <value type="QString">/home/adi/blueScorpion/blueScorpionApp/icons/006-weather.png</value>
-       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/stylesheets/appGenericList.qss</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/icons/006-weather.png</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/launcher.json</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf/DejaVuSerif-Italic.ttf</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/adi.png</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/icons/004-computer.png</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/icons/002-wifi-signal-symbol.png</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf/DejaVuMathTeXGyre.ttf</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf/DejaVuSerifCondensed-Italic.ttf</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/icons/006-weather.png</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/icons/002-wifi-signal-symbol.png</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/NEWS</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/adi.png</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/launcher.json</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf/DejaVuSansMono-BoldOblique.ttf</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf/DejaVuSerif.ttf</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/fontconfig/20-unhint-small-dejavu-sans-mono.conf</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf/DejaVuSerif-Bold.ttf</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/AUTHORS</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf/DejaVuSans-ExtraLight.ttf</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/README.md</value>
+       <value type="QString">/home/adi/blueScorpion/build-helloQtWidgets-BlueScorpion-Debug/blueScorpionApp</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf/DejaVuSans.ttf</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf/DejaVuSansCondensed-BoldOblique.ttf</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/icons/003-plug-connector.png</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/fontconfig/57-dejavu-sans-mono.conf</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf/DejaVuSans-BoldOblique.ttf</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/setenv.sh</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf/DejaVuSansMono-Oblique.ttf</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/status.txt</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/NEWS</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/fontconfig/57-dejavu-sans-mono.conf</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf/DejaVuSans-Bold.ttf</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf/DejaVuSerifCondensed-BoldItalic.ttf</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf/DejaVuSerifCondensed.ttf</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf/DejaVuSans-Oblique.ttf</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/bin/setenv.sh</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf/DejaVuSansCondensed-Oblique.ttf</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/README.md</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf/DejaVuSerifCondensed-Bold.ttf</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/main.json</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/landing.json</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/stylesheets/appGenericList.qss</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf/DejaVuSans-Bold.ttf</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf/DejaVuSansMono-BoldOblique.ttf</value>
        <value type="QString">/home/adi/blueScorpion/blueScorpionApp/landing.json</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf/DejaVuSerifCondensed.ttf</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/bin/run_on_board.sh</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf/DejaVuSerif-Bold.ttf</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf/DejaVuSansCondensed-Oblique.ttf</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/icons/004-computer.png</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/langcover.txt</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf/DejaVuSerifCondensed-Italic.ttf</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/icons/001-wifi-low-signal-symbol.png</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/scorpion-512.ico</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/fontconfig/20-unhint-small-dejavu-serif.conf</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/stylesheets/appGenericList.qss</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf/DejaVuSans-BoldOblique.ttf</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/icons/001-wifi-low-signal-symbol.png</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/scorpion-512.ico</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/unicover.txt</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/langcover.txt</value>
+       <value type="QString">/home/adi/blueScorpion/build-helloQtWidgets-BlueScorpion-Debug/blueScorpionApp</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/LICENSE</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf/DejaVuSerif-Italic.ttf</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf/DejaVuSerifCondensed-Bold.ttf</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/stylesheets/appGenericList.qss</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf/DejaVuSansMono.ttf</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/icons/001-wifi-low-signal-symbol.png</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/icons/003-plug-connector.png</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/icons/005-technology.png</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/fontconfig/57-dejavu-sans.conf</value>
+       <value type="QString">/home/adi/blueScorpion/build-rfsom-box-gui-Debug/rfsom-box-gui</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/fontconfig/57-dejavu-serif.conf</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf/DejaVuSansCondensed.ttf</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf/DejaVuSerif-BoldItalic.ttf</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf/DejaVuSansCondensed-Bold.ttf</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf/DejaVuSansCondensed.ttf</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/AUTHORS</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/fontconfig/57-dejavu-sans.conf</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf/DejaVuSans.ttf</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/launcher.json</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/icons/001-wifi-low-signal-symbol.png</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/icons/005-technology.png</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf/DejaVuSansMono-Bold.ttf</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/fontconfig/57-dejavu-serif.conf</value>
+       <value type="QString">/home/adi/blueScorpion/build-rfsom-box-gui-Debug/rfsom-box-gui</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/landing.json</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf/DejaVuSansCondensed-BoldOblique.ttf</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/main.json</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/fontconfig/20-unhint-small-dejavu-sans-mono.conf</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf/DejaVuMathTeXGyre.ttf</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/status.txt</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf/DejaVuSans-ExtraLight.ttf</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf/DejaVuSerif-BoldItalic.ttf</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/icons/004-computer.png</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf/DejaVuSansCondensed-Bold.ttf</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf/DejaVuSans-Oblique.ttf</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/icons/003-plug-connector.png</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/icons/006-weather.png</value>
        <value type="QString">/home/adi/blueScorpion/blueScorpionApp/launcher.json</value>
        <value type="QString">/home/adi/blueScorpion/blueScorpionApp/scorpion-512.ico</value>
-       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/main.json</value>
-       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/icons/001-wifi-low-signal-symbol.png</value>
-       <value type="QString">/home/adi/blueScorpion/build-helloQtWidgets-BlueScorpion-Debug/blueScorpionApp</value>
-       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/icons/003-plug-connector.png</value>
-       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/setenv.sh</value>
-       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/icons/006-weather.png</value>
-       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/icons/001-wifi-low-signal-symbol.png</value>
-       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/icons/003-plug-connector.png</value>
-       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/icons/005-technology.png</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/icons/005-technology.png</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/BUGS</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/icons/003-plug-connector.png</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/stylesheets/appGenericList.qss</value>
+       <value type="QString">/home/adi/blueScorpion/blueScorpionApp/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/fontconfig/20-unhint-small-dejavu-serif.conf</value>
       </valuelist>
       <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedHosts">
-       <value type="QString">10.50.3.100</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
        <value type="QString">10.50.3.100</value>
        <value type="QString">10.50.3.115</value>
        <value type="QString">10.50.3.100</value>
@@ -307,8 +411,112 @@
        <value type="QString">10.50.3.115</value>
        <value type="QString">10.50.3.115</value>
        <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
        <value type="QString">10.50.3.100</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
        <value type="QString">10.50.3.100</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.100</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.100</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.100</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.100</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.100</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.100</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.100</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
        <value type="QString">10.50.3.100</value>
        <value type="QString">10.50.3.115</value>
        <value type="QString">10.50.3.115</value>
@@ -316,45 +524,143 @@
        <value type="QString">10.50.3.115</value>
        <value type="QString">10.50.3.100</value>
        <value type="QString">10.50.3.100</value>
-       <value type="QString">10.50.3.100</value>
        <value type="QString">10.50.3.115</value>
-       <value type="QString">10.50.3.100</value>
-       <value type="QString">10.50.3.100</value>
        <value type="QString">10.50.3.115</value>
-       <value type="QString">10.50.3.100</value>
-       <value type="QString">10.50.3.100</value>
        <value type="QString">10.50.3.115</value>
-       <value type="QString">10.50.3.100</value>
+       <value type="QString">10.50.3.115</value>
+       <value type="QString">10.50.3.115</value>
       </valuelist>
       <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedRemotePaths">
+       <value type="QString">/home/analog/rfsomgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/fontconfig</value>
+       <value type="QString">/home/analog/rfsomboxgui-debug/bin</value>
+       <value type="QString">/home/analog/rfsomboxgui-debug/share/rfsom-box-gui/icons</value>
        <value type="QString">/home/analog/blueScorpionApp/bin</value>
-       <value type="QString">/home/analog/blueScorpionApp/icons</value>
-       <value type="QString">/home/analog/blueScorpionApp/icons</value>
-       <value type="QString">/home/analog/blueScorpionApp/icons</value>
-       <value type="QString">/home/analog/blueScorpionApp/icons</value>
-       <value type="QString">/home/analog/blueScorpionApp/bin</value>
-       <value type="QString">/home/analog/blueScorpionApp/stylesheets</value>
-       <value type="QString">/home/analog/blueScorpionApp/bin</value>
-       <value type="QString">/home/analog/blueScorpionApp/bin</value>
-       <value type="QString">/home/analog/blueScorpionApp/icons</value>
        <value type="QString">/home/analog/blueScorpionApp/bin</value>
        <value type="QString">/home/analog/helloQtWidgets/bin</value>
+       <value type="QString">/home/analog/rfsomboxgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37</value>
+       <value type="QString">/home/analog/rfsomboxgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf</value>
        <value type="QString">/home/analog/blueScorpionApp/icons</value>
+       <value type="QString">/home/analog/rfsomgui-debug/share/rfsom-box-gui/icons</value>
+       <value type="QString">/home/analog/rfsomgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37</value>
+       <value type="QString">/home/analog/rfsomboxgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf</value>
+       <value type="QString">/home/analog/rfsomgui-debug/bin</value>
+       <value type="QString">/home/analog/rfsomgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf</value>
+       <value type="QString">/home/analog/rfsomboxgui-debug/share/rfsom-box-gui</value>
+       <value type="QString">/home/analog/rfsomgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37</value>
+       <value type="QString">/home/analog/rfsomboxgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/fontconfig</value>
+       <value type="QString">/home/analog/rfsomboxgui-debug/share/rfsom-box-gui</value>
+       <value type="QString">/home/analog/rfsomboxgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf</value>
+       <value type="QString">/home/analog/rfsomgui-debug/share/rfsom-box-gui/icons</value>
+       <value type="QString">/home/analog/rfsomgui-debug/share/rfsom-box-gui</value>
+       <value type="QString">/home/analog/rfsomboxgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf</value>
        <value type="QString">/home/analog/blueScorpionApp/bin</value>
        <value type="QString">/home/analog/blueScorpionApp/icons</value>
+       <value type="QString">/home/analog/rfsomboxgui-debug/share/rfsom-box-gui/icons</value>
+       <value type="QString">/home/analog/rfsomboxgui-debug/share/rfsom-box-gui</value>
+       <value type="QString">/home/analog/rfsomgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf</value>
+       <value type="QString">/home/analog/rfsomgui-debug/share/rfsom-box-gui</value>
+       <value type="QString">/home/analog/rfsomgui-debug/share/rfsom-box-gui/icons</value>
+       <value type="QString">/home/analog/rfsomboxgui-debug/share/rfsom-box-gui/icons</value>
+       <value type="QString">/home/analog/rfsomboxgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf</value>
+       <value type="QString">/home/analog/rfsomgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf</value>
+       <value type="QString">/home/analog/blueScorpionApp/icons</value>
+       <value type="QString">/home/analog/blueScorpionApp/icons</value>
+       <value type="QString">/home/analog/rfsomgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37</value>
+       <value type="QString">/home/analog/blueScorpionApp/icons</value>
+       <value type="QString">/home/analog/rfsomgui-debug/share/rfsom-box-gui</value>
+       <value type="QString">/home/analog/rfsomgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf</value>
+       <value type="QString">/home/analog/rfsomgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf</value>
+       <value type="QString">/home/analog/rfsomboxgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/fontconfig</value>
+       <value type="QString">/home/analog/rfsomboxgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf</value>
+       <value type="QString">/home/analog/rfsomgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37</value>
+       <value type="QString">/home/analog/rfsomboxgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf</value>
+       <value type="QString">/home/analog/rfsomgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37</value>
+       <value type="QString">/home/analog/blueScorpionApp/bin</value>
+       <value type="QString">/home/analog/rfsomboxgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf</value>
+       <value type="QString">/home/analog/rfsomboxgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf</value>
+       <value type="QString">/home/analog/blueScorpionApp/icons</value>
+       <value type="QString">/home/analog/rfsomboxgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/fontconfig</value>
+       <value type="QString">/home/analog/rfsomgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf</value>
+       <value type="QString">/home/analog/blueScorpionApp/bin</value>
+       <value type="QString">/home/analog/rfsomboxgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf</value>
+       <value type="QString">/home/analog/rfsomboxgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37</value>
+       <value type="QString">/home/analog/rfsomboxgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37</value>
+       <value type="QString">/home/analog/rfsomgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/fontconfig</value>
+       <value type="QString">/home/analog/rfsomgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf</value>
+       <value type="QString">/home/analog/rfsomgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf</value>
+       <value type="QString">/home/analog/rfsomgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf</value>
+       <value type="QString">/home/analog/rfsomboxgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf</value>
+       <value type="QString">/home/analog/rfsomboxgui-debug/bin</value>
+       <value type="QString">/home/analog/rfsomgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf</value>
+       <value type="QString">/home/analog/rfsomboxgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37</value>
+       <value type="QString">/home/analog/rfsomboxgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf</value>
+       <value type="QString">/home/analog/rfsomboxgui-debug/share/rfsom-box-gui</value>
+       <value type="QString">/home/analog/rfsomgui-debug/share/rfsom-box-gui</value>
+       <value type="QString">/home/analog/rfsomgui-debug/share/rfsom-box-gui/stylesheets</value>
+       <value type="QString">/home/analog/rfsomboxgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf</value>
+       <value type="QString">/home/analog/rfsomboxgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf</value>
+       <value type="QString">/home/analog/blueScorpionApp/bin</value>
+       <value type="QString">/home/analog/rfsomboxgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf</value>
+       <value type="QString">/home/analog/rfsomgui-debug/bin</value>
+       <value type="QString">/home/analog/rfsomgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf</value>
+       <value type="QString">/home/analog/rfsomboxgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf</value>
+       <value type="QString">/home/analog/blueScorpionApp/icons</value>
+       <value type="QString">/home/analog/rfsomboxgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37</value>
+       <value type="QString">/home/analog/rfsomboxgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf</value>
+       <value type="QString">/home/analog/rfsomgui-debug/share/rfsom-box-gui/icons</value>
+       <value type="QString">/home/analog/rfsomboxgui-debug/share/rfsom-box-gui</value>
+       <value type="QString">/home/analog/rfsomboxgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/fontconfig</value>
        <value type="QString">/home/analog/blueScorpionApp/stylesheets</value>
+       <value type="QString">/home/analog/rfsomboxgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf</value>
+       <value type="QString">/home/analog/rfsomboxgui-debug/share/rfsom-box-gui/icons</value>
+       <value type="QString">/home/analog/rfsomgui-debug/share/rfsom-box-gui</value>
+       <value type="QString">/home/analog/rfsomboxgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37</value>
+       <value type="QString">/home/analog/rfsomgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37</value>
        <value type="QString">/home/analog/blueScorpionApp/bin</value>
+       <value type="QString">/home/analog/rfsomboxgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37</value>
+       <value type="QString">/home/analog/rfsomboxgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf</value>
+       <value type="QString">/home/analog/rfsomgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf</value>
+       <value type="QString">/home/analog/rfsomboxgui-debug/share/rfsom-box-gui/stylesheets</value>
+       <value type="QString">/home/analog/rfsomgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf</value>
+       <value type="QString">/home/analog/blueScorpionApp/icons</value>
+       <value type="QString">/home/analog/blueScorpionApp/icons</value>
+       <value type="QString">/home/analog/blueScorpionApp/icons</value>
+       <value type="QString">/home/analog/rfsomgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/fontconfig</value>
+       <value type="QString">/home/analog/rfsomboxgui-debug/bin</value>
+       <value type="QString">/home/analog/rfsomboxgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/fontconfig</value>
+       <value type="QString">/home/analog/rfsomboxgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf</value>
+       <value type="QString">/home/analog/rfsomboxgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf</value>
+       <value type="QString">/home/analog/rfsomgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf</value>
+       <value type="QString">/home/analog/rfsomgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf</value>
+       <value type="QString">/home/analog/rfsomboxgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37</value>
+       <value type="QString">/home/analog/rfsomboxgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/fontconfig</value>
+       <value type="QString">/home/analog/rfsomgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf</value>
        <value type="QString">/home/analog/blueScorpionApp/bin</value>
        <value type="QString">/home/analog/blueScorpionApp/icons</value>
+       <value type="QString">/home/analog/blueScorpionApp/icons</value>
+       <value type="QString">/home/analog/rfsomgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf</value>
+       <value type="QString">/home/analog/rfsomgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/fontconfig</value>
+       <value type="QString">/home/analog/rfsomgui-debug/bin</value>
+       <value type="QString">/home/analog/blueScorpionApp/bin</value>
+       <value type="QString">/home/analog/rfsomgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf</value>
+       <value type="QString">/home/analog/blueScorpionApp/bin</value>
+       <value type="QString">/home/analog/rfsomgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/fontconfig</value>
+       <value type="QString">/home/analog/rfsomgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf</value>
+       <value type="QString">/home/analog/rfsomgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37</value>
+       <value type="QString">/home/analog/rfsomgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf</value>
+       <value type="QString">/home/analog/rfsomgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf</value>
+       <value type="QString">/home/analog/blueScorpionApp/icons</value>
+       <value type="QString">/home/analog/rfsomboxgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf</value>
+       <value type="QString">/home/analog/rfsomgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/ttf</value>
+       <value type="QString">/home/analog/rfsomgui-debug/share/rfsom-box-gui/icons</value>
+       <value type="QString">/home/analog/rfsomgui-debug/share/rfsom-box-gui/icons</value>
        <value type="QString">/home/analog/blueScorpionApp/bin</value>
        <value type="QString">/home/analog/blueScorpionApp/icons</value>
-       <value type="QString">/home/analog/blueScorpionApp/bin</value>
-       <value type="QString">/home/analog/blueScorpionApp/icons</value>
-       <value type="QString">/home/analog/blueScorpionApp/bin</value>
-       <value type="QString">/home/analog/blueScorpionApp/icons</value>
-       <value type="QString">/home/analog/blueScorpionApp/icons</value>
-       <value type="QString">/home/analog/blueScorpionApp/icons</value>
-       <value type="QString">/home/analog/blueScorpionApp/icons</value>
+       <value type="QString">/home/analog/rfsomboxgui-debug/share/rfsom-box-gui/icons</value>
+       <value type="QString">/home/analog/rfsomgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37</value>
+       <value type="QString">/home/analog/rfsomboxgui-debug/share/rfsom-box-gui/icons</value>
+       <value type="QString">/home/analog/blueScorpionApp/stylesheets</value>
+       <value type="QString">/home/analog/rfsomgui-debug/share/rfsom-box-gui/font/dejavu-fonts-ttf-2.37/fontconfig</value>
       </valuelist>
       <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedSysroots">
        <value type="QString"></value>
@@ -385,36 +691,240 @@
        <value type="QString"></value>
        <value type="QString"></value>
        <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
       </valuelist>
       <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedTimes">
-       <value type="QDateTime">2017-07-06T14:39:03</value>
-       <value type="QDateTime">2017-07-06T14:36:10</value>
-       <value type="QDateTime">2017-08-16T13:54:31</value>
+       <value type="QDateTime">2017-08-17T12:48:24</value>
+       <value type="QDateTime">2017-08-17T11:49:20</value>
+       <value type="QDateTime">2017-08-17T11:49:23</value>
        <value type="QDateTime">2017-08-09T17:18:17</value>
        <value type="QDateTime">2017-08-16T13:54:31</value>
-       <value type="QDateTime">2017-08-16T13:54:31</value>
-       <value type="QDateTime">2017-08-09T17:18:17</value>
-       <value type="QDateTime">2017-08-16T13:54:31</value>
-       <value type="QDateTime">2017-08-16T13:54:31</value>
-       <value type="QDateTime">2017-08-16T13:54:31</value>
-       <value type="QDateTime">2017-08-09T17:18:16</value>
        <value type="QDateTime">2017-06-27T17:33:57</value>
+       <value type="QDateTime">2017-08-17T11:49:20</value>
+       <value type="QDateTime">2017-08-17T11:49:23</value>
+       <value type="QDateTime">2017-08-09T17:18:17</value>
+       <value type="QDateTime">2017-08-17T12:48:28</value>
+       <value type="QDateTime">2017-08-17T12:48:27</value>
+       <value type="QDateTime">2017-08-17T11:49:22</value>
+       <value type="QDateTime">2017-08-17T12:48:24</value>
+       <value type="QDateTime">2017-08-17T12:48:27</value>
+       <value type="QDateTime">2017-08-17T11:49:23</value>
+       <value type="QDateTime">2017-08-17T12:48:25</value>
+       <value type="QDateTime">2017-08-17T11:49:20</value>
+       <value type="QDateTime">2017-08-17T11:49:20</value>
+       <value type="QDateTime">2017-08-17T11:49:22</value>
+       <value type="QDateTime">2017-08-17T12:48:28</value>
+       <value type="QDateTime">2017-08-17T12:48:28</value>
+       <value type="QDateTime">2017-08-17T11:49:22</value>
+       <value type="QDateTime">2017-07-06T14:39:03</value>
+       <value type="QDateTime">2017-08-16T13:54:31</value>
+       <value type="QDateTime">2017-08-17T11:49:23</value>
+       <value type="QDateTime">2017-08-17T11:49:23</value>
+       <value type="QDateTime">2017-08-17T12:48:27</value>
+       <value type="QDateTime">2017-08-17T12:48:24</value>
+       <value type="QDateTime">2017-08-17T12:48:28</value>
+       <value type="QDateTime">2017-08-17T11:49:23</value>
+       <value type="QDateTime">2017-08-17T11:49:21</value>
+       <value type="QDateTime">2017-08-17T12:48:27</value>
        <value type="QDateTime">2017-08-09T17:18:17</value>
        <value type="QDateTime">2017-08-16T13:54:31</value>
+       <value type="QDateTime">2017-08-17T12:48:25</value>
+       <value type="QDateTime">2017-07-06T14:36:10</value>
+       <value type="QDateTime">2017-08-17T12:48:28</value>
+       <value type="QDateTime">2017-08-17T12:48:27</value>
+       <value type="QDateTime">2017-08-17T12:48:27</value>
+       <value type="QDateTime">2017-08-17T11:49:20</value>
+       <value type="QDateTime">2017-08-17T11:49:22</value>
+       <value type="QDateTime">2017-08-17T12:48:24</value>
+       <value type="QDateTime">2017-08-17T11:49:21</value>
+       <value type="QDateTime">2017-08-17T12:48:25</value>
+       <value type="QDateTime">2017-08-16T13:54:31</value>
+       <value type="QDateTime">2017-08-17T11:49:21</value>
+       <value type="QDateTime">2017-08-17T11:49:22</value>
+       <value type="QDateTime">2017-08-09T17:18:17</value>
+       <value type="QDateTime">2017-08-17T11:49:20</value>
+       <value type="QDateTime">2017-08-17T12:48:25</value>
+       <value type="QDateTime">2017-08-16T13:54:31</value>
+       <value type="QDateTime">2017-08-17T11:49:22</value>
+       <value type="QDateTime">2017-08-17T11:49:21</value>
+       <value type="QDateTime">2017-08-17T11:49:20</value>
+       <value type="QDateTime">2017-08-17T12:48:24</value>
+       <value type="QDateTime">2017-08-17T12:48:25</value>
+       <value type="QDateTime">2017-08-17T12:48:27</value>
+       <value type="QDateTime">2017-08-17T12:48:27</value>
+       <value type="QDateTime">2017-08-17T11:49:21</value>
+       <value type="QDateTime">2017-08-17T11:49:20</value>
+       <value type="QDateTime">2017-08-17T12:48:26</value>
+       <value type="QDateTime">2017-08-17T11:49:20</value>
+       <value type="QDateTime">2017-08-17T11:49:23</value>
+       <value type="QDateTime">2017-08-17T11:49:23</value>
+       <value type="QDateTime">2017-08-17T12:48:28</value>
+       <value type="QDateTime">2017-08-17T12:48:28</value>
+       <value type="QDateTime">2017-08-17T11:49:21</value>
+       <value type="QDateTime">2017-08-17T11:49:22</value>
+       <value type="QDateTime">2017-08-09T17:18:16</value>
+       <value type="QDateTime">2017-08-17T11:49:23</value>
+       <value type="QDateTime">2017-08-17T12:48:24</value>
+       <value type="QDateTime">2017-08-17T12:48:27</value>
+       <value type="QDateTime">2017-08-17T11:49:22</value>
+       <value type="QDateTime">2017-08-16T13:54:31</value>
+       <value type="QDateTime">2017-08-17T11:49:20</value>
+       <value type="QDateTime">2017-08-17T11:49:23</value>
+       <value type="QDateTime">2017-08-17T12:48:28</value>
+       <value type="QDateTime">2017-08-17T11:49:23</value>
+       <value type="QDateTime">2017-08-17T11:49:20</value>
+       <value type="QDateTime">2017-08-09T17:18:17</value>
+       <value type="QDateTime">2017-08-17T11:49:21</value>
+       <value type="QDateTime">2017-08-17T11:49:23</value>
+       <value type="QDateTime">2017-08-17T12:48:28</value>
+       <value type="QDateTime">2017-08-17T11:49:23</value>
+       <value type="QDateTime">2017-08-17T12:48:25</value>
+       <value type="QDateTime">2017-08-09T17:18:17</value>
+       <value type="QDateTime">2017-08-17T11:49:20</value>
+       <value type="QDateTime">2017-08-17T11:49:22</value>
+       <value type="QDateTime">2017-08-17T12:48:27</value>
+       <value type="QDateTime">2017-08-17T11:49:23</value>
+       <value type="QDateTime">2017-08-17T12:48:27</value>
        <value type="QDateTime">2017-08-16T13:54:31</value>
        <value type="QDateTime">2017-08-16T13:54:31</value>
+       <value type="QDateTime">2017-08-09T17:18:17</value>
+       <value type="QDateTime">2017-08-17T12:48:25</value>
+       <value type="QDateTime">2017-08-17T11:49:23</value>
+       <value type="QDateTime">2017-08-17T11:49:20</value>
+       <value type="QDateTime">2017-08-17T11:49:22</value>
+       <value type="QDateTime">2017-08-17T11:49:22</value>
+       <value type="QDateTime">2017-08-17T12:48:26</value>
+       <value type="QDateTime">2017-08-17T12:48:26</value>
+       <value type="QDateTime">2017-08-17T11:49:20</value>
+       <value type="QDateTime">2017-08-17T11:49:20</value>
+       <value type="QDateTime">2017-08-17T12:48:26</value>
        <value type="QDateTime">2017-08-16T13:54:31</value>
+       <value type="QDateTime">2017-08-09T17:18:17</value>
+       <value type="QDateTime">2017-08-16T13:54:31</value>
+       <value type="QDateTime">2017-08-17T12:48:26</value>
+       <value type="QDateTime">2017-08-17T12:48:25</value>
+       <value type="QDateTime">2017-08-17T12:48:28</value>
+       <value type="QDateTime">2017-08-16T13:54:31</value>
+       <value type="QDateTime">2017-08-17T12:48:26</value>
+       <value type="QDateTime">2017-08-16T13:54:31</value>
+       <value type="QDateTime">2017-08-17T12:48:24</value>
+       <value type="QDateTime">2017-08-17T12:48:25</value>
+       <value type="QDateTime">2017-08-17T12:48:25</value>
+       <value type="QDateTime">2017-08-17T12:48:26</value>
+       <value type="QDateTime">2017-08-17T12:48:27</value>
+       <value type="QDateTime">2017-08-09T17:18:17</value>
+       <value type="QDateTime">2017-08-17T11:49:21</value>
+       <value type="QDateTime">2017-08-17T12:48:26</value>
+       <value type="QDateTime">2017-08-17T12:48:28</value>
+       <value type="QDateTime">2017-08-17T12:48:28</value>
        <value type="QDateTime">2017-08-09T17:18:17</value>
        <value type="QDateTime">2017-07-06T14:36:10</value>
-       <value type="QDateTime">2017-08-09T17:18:17</value>
+       <value type="QDateTime">2017-08-17T11:49:23</value>
+       <value type="QDateTime">2017-08-17T12:48:24</value>
+       <value type="QDateTime">2017-08-17T11:49:23</value>
        <value type="QDateTime">2017-08-16T13:54:31</value>
-       <value type="QDateTime">2017-08-09T17:18:17</value>
-       <value type="QDateTime">2017-08-09T17:18:17</value>
-       <value type="QDateTime">2017-08-16T13:54:31</value>
-       <value type="QDateTime">2017-08-09T17:18:17</value>
-       <value type="QDateTime">2017-08-09T17:18:17</value>
-       <value type="QDateTime">2017-08-16T13:54:31</value>
-       <value type="QDateTime">2017-08-09T17:18:17</value>
+       <value type="QDateTime">2017-08-17T12:48:24</value>
       </valuelist>
       <value type="bool" key="RemoteLinux.GenericDirectUploadStep.IgnoreMissingFiles">false</value>
       <value type="bool" key="RemoteLinux.GenericDirectUploadStep.Incremental">false</value>
@@ -484,12 +994,14 @@
      <value type="QString">QT_QPA_FB_HIDECURSOR=0</value>
      <value type="QString">QT_QPA_FB_TSLIB=1</value>
      <value type="QString">QT_QPA_FONTDIR=/home/analog/Qt/fonts</value>
+     <value type="QString">QT_QPA_PLATFORM=linuxfb</value>
+     <value type="QString">QT_QPA_GENERIC_PLUGINS=evdevmouse,evdevkeyboard</value>
     </valuelist>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">blueScorpionApp (on Remote Device)</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">blueScorpionApp Debug (on Remote Device)</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">RemoteLinuxRunConfiguration:blueScorpionApp</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">rfsom-box-gui (on Remote Device)</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">RemoteLinuxRunConfiguration:rfsom-box-gui</value>
     <value type="QString" key="Qt4ProjectManager.MaemoRunConfiguration.Arguments">-platform linuxfb</value>
-    <value type="QString" key="Qt4ProjectManager.MaemoRunConfiguration.TargetName">blueScorpionApp</value>
+    <value type="QString" key="Qt4ProjectManager.MaemoRunConfiguration.TargetName">rfsom-box-gui</value>
     <value type="QString" key="RemoteLinux.RunConfig.AlternateRemoteExecutable"></value>
     <value type="bool" key="RemoteLinux.RunConfig.UseAlternateRemoteExecutable">false</value>
     <value type="QString" key="RemoteLinux.RunConfig.WorkingDirectory"></value>
@@ -500,76 +1012,7 @@
     <value type="bool" key="RunConfiguration.UseQmlDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
    </valuemap>
-   <valuemap type="QVariantMap" key="ProjectExplorer.Target.RunConfiguration.1">
-    <value type="bool" key="Analyzer.QmlProfiler.AggregateTraces">false</value>
-    <value type="bool" key="Analyzer.QmlProfiler.FlushEnabled">false</value>
-    <value type="uint" key="Analyzer.QmlProfiler.FlushInterval">1000</value>
-    <value type="QString" key="Analyzer.QmlProfiler.LastTraceFile"></value>
-    <value type="bool" key="Analyzer.QmlProfiler.Settings.UseGlobalSettings">true</value>
-    <valuelist type="QVariantList" key="Analyzer.Valgrind.AddedSuppressionFiles"/>
-    <value type="bool" key="Analyzer.Valgrind.Callgrind.CollectBusEvents">false</value>
-    <value type="bool" key="Analyzer.Valgrind.Callgrind.CollectSystime">false</value>
-    <value type="bool" key="Analyzer.Valgrind.Callgrind.EnableBranchSim">false</value>
-    <value type="bool" key="Analyzer.Valgrind.Callgrind.EnableCacheSim">false</value>
-    <value type="bool" key="Analyzer.Valgrind.Callgrind.EnableEventToolTips">true</value>
-    <value type="double" key="Analyzer.Valgrind.Callgrind.MinimumCostRatio">0.01</value>
-    <value type="double" key="Analyzer.Valgrind.Callgrind.VisualisationMinimumCostRatio">10</value>
-    <value type="bool" key="Analyzer.Valgrind.FilterExternalIssues">true</value>
-    <value type="int" key="Analyzer.Valgrind.LeakCheckOnFinish">1</value>
-    <value type="int" key="Analyzer.Valgrind.NumCallers">25</value>
-    <valuelist type="QVariantList" key="Analyzer.Valgrind.RemovedSuppressionFiles"/>
-    <value type="int" key="Analyzer.Valgrind.SelfModifyingCodeDetection">1</value>
-    <value type="bool" key="Analyzer.Valgrind.Settings.UseGlobalSettings">true</value>
-    <value type="bool" key="Analyzer.Valgrind.ShowReachable">false</value>
-    <value type="bool" key="Analyzer.Valgrind.TrackOrigins">true</value>
-    <value type="QString" key="Analyzer.Valgrind.ValgrindExecutable">valgrind</value>
-    <valuelist type="QVariantList" key="Analyzer.Valgrind.VisibleErrorKinds">
-     <value type="int">0</value>
-     <value type="int">1</value>
-     <value type="int">2</value>
-     <value type="int">3</value>
-     <value type="int">4</value>
-     <value type="int">5</value>
-     <value type="int">6</value>
-     <value type="int">7</value>
-     <value type="int">8</value>
-     <value type="int">9</value>
-     <value type="int">10</value>
-     <value type="int">11</value>
-     <value type="int">12</value>
-     <value type="int">13</value>
-     <value type="int">14</value>
-    </valuelist>
-    <value type="int" key="PE.EnvironmentAspect.Base">0</value>
-    <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes">
-     <value type="QString">LD_LIBRARY_PATH=/home/analog/Qt/5.9/lib/:/home/analog/gcc-linaro-5.4.1-2017.05-x86_64_arm-linux-gnueabihf/arm-linux-gnueabihf/lib/</value>
-     <value type="QString">QT_DEBUG_PLUGINS=1</value>
-     <value type="QString">QT_LOGGING_RULES=qt.qpa.input=true</value>
-     <value type="QString">QT_MESSAGE_PATTERN=&quot;[%{type}] ( file://%{file}:%{line} ) - %{message}&quot;</value>
-     <value type="QString">QT_PLUGIN_PATH=/home/analog/Qt/5.9/plugins</value>
-     <value type="QString">QT_QPA_EVDEV_KEYBOARD_PARAMETERS=/dev/input/event1:grab=1</value>
-     <value type="QString">QT_QPA_EVDEV_MOUSE1_PARAMETERS=/dev/input/event0:grab=1:abs=1</value>
-     <value type="QString">QT_QPA_FB_DRM=1</value>
-     <value type="QString">QT_QPA_FB_HIDECURSOR=0</value>
-     <value type="QString">QT_QPA_FB_TSLIB=1</value>
-     <value type="QString">QT_QPA_FONTDIR=/home/analog/Qt/fonts</value>
-    </valuelist>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">blueScorpionApp (on Remote Device)</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">blueScorpionDebug (on Remote VNC)</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">RemoteLinuxRunConfiguration:blueScorpionApp</value>
-    <value type="QString" key="Qt4ProjectManager.MaemoRunConfiguration.Arguments">-platform vnc</value>
-    <value type="QString" key="Qt4ProjectManager.MaemoRunConfiguration.TargetName">blueScorpionApp</value>
-    <value type="QString" key="RemoteLinux.RunConfig.AlternateRemoteExecutable"></value>
-    <value type="bool" key="RemoteLinux.RunConfig.UseAlternateRemoteExecutable">false</value>
-    <value type="QString" key="RemoteLinux.RunConfig.WorkingDirectory"></value>
-    <value type="uint" key="RunConfiguration.QmlDebugServerPort">3768</value>
-    <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
-    <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
-    <value type="bool" key="RunConfiguration.UseMultiProcess">true</value>
-    <value type="bool" key="RunConfiguration.UseQmlDebugger">false</value>
-    <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
-   </valuemap>
-   <value type="int" key="ProjectExplorer.Target.RunConfigurationCount">2</value>
+   <value type="int" key="ProjectExplorer.Target.RunConfigurationCount">1</value>
   </valuemap>
  </data>
  <data>

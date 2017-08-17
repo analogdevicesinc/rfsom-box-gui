@@ -1,5 +1,5 @@
 #include "appgenericlist.h"
-#include "hardware.h"
+#include "common.h"
 #include <QJsonValue>
 #include <QJsonObject>
 #include <QJsonArray>
@@ -28,8 +28,7 @@ AppGenericList::AppGenericList(QJsonValue params, QLayout *lay,
 	list->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	// add stylesheet for item spacing
 
-	auto filePath = QCoreApplication::applicationDirPath()
-	                +"/../stylesheets/appGenericList.qss";
+	auto filePath = resolveFileLocation("stylesheets/appGenericList.qss");
 	QFile f(filePath);
 
 	if (f.open(QIODevice::ReadOnly | QIODevice::Text)) {

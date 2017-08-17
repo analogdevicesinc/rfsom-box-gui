@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>../share/rfsom-box-gui/adi.png</file>
+        <file>../share/rfsom-box-gui/scorpion-512.ico</file>
+    </qresource>
+</RCC>

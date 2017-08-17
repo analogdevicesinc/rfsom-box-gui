@@ -2,7 +2,7 @@
 #define EDITBOXELEMENTUI_H
 
 #include <QWidget>
-#include <scriptresult.h>
+#include "scriptresult.h"
 #include "uielement.h"
 
 namespace Ui {

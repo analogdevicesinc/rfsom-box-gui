@@ -266,6 +266,67 @@
     },
     "name": "Radio",
     "type": "list"
+   },
+   {
+    "params": {
+      "timers": [
+        1000
+      ],
+      "elements": [
+        {
+          "description": "Headphone Volume (%)",
+          "type": "edit",
+          "subtype": "numeric",
+          "nr_of_digits": 3,
+          "cmd_read": "amixer sget Headphone | grep Left | awk '$0~/%/{print $5}' | tr -d '[%]'",
+          "cmd_read_timer": 0,
+          "cmd_write": "amixer sset Headphone $EDIT_VAL%",
+          "swap_toprow": false,
+          "icon_path": "./charge.png",
+          "text_align": "left",
+          "stylesheet": "\"\""
+        },
+        {
+          "description": "Headphone Mute",
+          "type": "checkbox",
+          "cmd_write": "amixer sset Headphone toggle > /dev/null",
+          "cmd_read": "amixer sget 'Headphone' | grep -q '\\[off\\]' && echo 1 || echo 0",
+          "cmd_read_timer": 0,
+          "one_row": false,
+          "swap_toprow": false,
+          "icon_path": "./charge.png",
+          "text_align": "left",
+          "stylesheet": "\"\""
+        },
+        {
+          "description": "Capture Volume (%)",
+          "type": "edit",
+          "subtype": "numeric",
+          "nr_of_digits": 3,
+          "cmd_read": "amixer sget Capture | grep Left | awk '$0~/%/{print $5}' | tr -d '[%]'",
+          "cmd_read_timer": 0,
+          "cmd_write": "amixer sset Capture $EDIT_VAL%",
+          "swap_toprow": false,
+          "icon_path": "./charge.png",
+          "text_align": "left",
+          "stylesheet": "\"\""
+        },
+        {
+          "description": "Capture Mute",
+          "type": "checkbox",
+          "cmd_write": "amixer sset Capture toggle > /dev/null",
+          "cmd_read": "amixer sget Capture | grep -q '\\[off\\]' && echo 1 || echo 0",
+          "cmd_read_timer": 0,
+          "one_row": false,
+          "swap_toprow": false,
+          "icon_path": "./charge.png",
+          "text_align": "left",
+          "stylesheet": "\"\""
+        }
+        ]
+    },
+    "type": "list",
+    "name": "Audio"
   },
   {
     "params": {

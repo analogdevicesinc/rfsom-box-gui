@@ -53,7 +53,7 @@
           "description": "Automatic DHCP Mode",
           "type": "checkbox",
           "cmd_write": "if [ $CHECKBOX_VAL -gt 0 ]; then /usr/local/bin/enable_dhcp.sh; else /usr/local/bin/enable_static_ip.sh; fi",
-          "cmd_read": "grep \"iface eth0 inet static\" /etc/network/interfaces > /dev/null && echo 0 || echo 1",
+          "cmd_read": "grep -q 'iface eth0 inet static' /etc/network/interfaces && echo 0 || echo 1",
           "cmd_read_timer": "read_once",
           "one_row": false,
           "swap_toprow": false,
@@ -381,6 +381,57 @@
     "type": "list",
     "name": "Temperatures"
   },
+    {
+    "params": {
+      "timers": [
+        1000
+      ],
+      "elements": [
+        {
+          "description": "Battery Volatge (V)",
+          "type": "cmd_read",
+          "timer": 0,
+          "cmd": "echo \"scale=3; `cat /sys/class/power_supply/ltc2942/voltage_now` / 1000000\" | bc",
+          "one_row": false,
+          "swap_toprow": "false",
+          "text_align": "left",
+          "stylesheet": ""
+        },
+        {
+          "description": "Charge (Ah)",
+          "type": "cmd_read",
+          "timer": 0,
+          "cmd": "echo \"scale=3; `cat /sys/class/power_supply/ltc2942/charge_counter` / 1000000\" | bc",
+          "one_row": false,
+          "swap_toprow": "false",
+          "text_align": "left",
+          "stylesheet": ""
+        },
+        {
+          "description": "Charge Now (Ah)",
+          "type": "cmd_read",
+          "timer": 0,
+          "cmd": "echo \"scale=3; `cat /sys/class/power_supply/ltc2942/charge_now` / 1000000\" | bc",
+          "one_row": false,
+          "swap_toprow": "false",
+          "text_align": "left",
+          "stylesheet": ""
+        },
+        {
+          "description": "Temperature (°C)",
+          "type": "cmd_read",
+          "timer": 0,
+          "cmd": "echo \"scale=1; `cat /sys/class/power_supply/ltc2942/temp` / 100\" | bc",
+          "one_row": false,
+          "swap_toprow": "false",
+          "text_align": "left",
+          "stylesheet": ""
+        }
+      ]
+    },
+    "type": "list",
+    "name": "Charge"
+  },
   {
     "params": {
       "timers": [
@@ -525,58 +576,5 @@
     },
     "type": "video",
     "name": "Play Video"
-  },
-    {
-    "params": {
-      "timers": [
-        100,
-        500,
-        1000
-      ],
-      "elements": [
-        {
-          "description": "state",
-          "type": "cmd_read",
-          "timer": 1,
-          "cmd": "cat chargepanel",
-          "one_row": false,
-          "swap_toprow": "false",
-          "text_align": "left",
-          "stylesheet": ""
-        },
-        {
-          "description": "press me!",
-          "type": "btn",
-          "cmd": "echo \"button pressed\" > chargepanel",
-          "stylesheet": ""
-        },
-        {
-          "description": "checkbox desription",
-          "type": "checkbox",
-          "cmd_write": "echo $CHECKBOX_VAL > checkbox",
-          "cmd_read": "cat checkbox",
-          "cmd_read_timer": 1,
-          "one_row": false,
-          "swap_toprow": false,
-          "icon_path": "./charge.png",
-          "text_align": "left",
-          "stylesheet": "\"\""
-        },
-        {
-          "description": "editWithReadOnly",
-          "type": "edit",
-          "cmd_read_only": "cat checkbox",
-          "cmd_read": "cat charge",
-          "cmd_read_timer": 1,
-          "cmd_write": "echo $EDIT_VAL > charge",
-          "swap_toprow": false,
-          "icon_path": "./charge.png",
-          "text_align": "left",
-          "stylesheet": "\"\""
-        }
-      ]
-    },
-    "type": "list",
-    "name": "Charge"
   }
 ]

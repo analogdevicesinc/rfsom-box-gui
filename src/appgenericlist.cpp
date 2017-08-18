@@ -416,7 +416,6 @@ bool AppGenericList::eventFilter(QObject *watched, QEvent *event)
 			case Qt::Key_Return:
 				editElement->click();
 				editElement->removeEventFilter(this);
-				editElement->setSelected(false);
 				list->setFocus();
 				return true;
 

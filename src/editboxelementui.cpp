@@ -193,8 +193,9 @@ void EditboxElementUi::click()
 
 		write->vars["EDIT_VAL"]=ui->editbox->text();
 		write->run();
-		update();
 		setSelected(false);
+		update();
+
 	} else {
 		setFocus();
 		cursorPosition=0;

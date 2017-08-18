@@ -153,8 +153,8 @@ void NumericElementUi::click()
 
 		write->vars["EDIT_VAL"]=QString::number(value);
 		write->run();
-		update();
 		setSelected(false);
+		update();
 	} else {
 		cursorPosition = 0;
 		updateCursorPosition();

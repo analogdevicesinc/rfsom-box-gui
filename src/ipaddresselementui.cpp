@@ -101,8 +101,9 @@ void IPAddressElement::click()
 		formatForReading();
 		write->vars["EDIT_VAL"]=ipStr;
 		write->run();
-		update();
 		setSelected(false);
+		update();
+
 	} else {
 		cursorPosition = 0;
 		updateCursorPosition();

@@ -79,6 +79,7 @@ void NumericElementUi::increment()
 void NumericElementUi::decrement()
 {
 	auto exp = (pow(10,cursorPosition));
+	auto oldvalue = value;
 
 	if (exp > value) {
 		return;
@@ -87,7 +88,7 @@ void NumericElementUi::decrement()
 	value-=exp;
 
 	if (value < minValue) {
-		value = minValue;
+		value = oldvalue;
 	}
 
 	formatForEditing();

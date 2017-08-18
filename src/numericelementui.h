@@ -17,8 +17,17 @@ public:
 	QString getInputMask() const;
 	void setInputMask(const QString& value);
 
+	qint64 getMaxValue() const;
+	void setMaxValue(const qint64 &value);
+
+	qint64 getMinValue() const;
+	void setMinValue(const qint64 &value);
+
 protected:
 	qint64 value;
+	qint64 maxValue;
+	qint64 minValue;
+
 	qint8 cursorPosition;
 	QString inputMask;
 

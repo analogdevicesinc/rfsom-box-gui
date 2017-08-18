@@ -7,6 +7,9 @@
 NumericElementUi::NumericElementUi(QWidget *parent) : EditboxElementUi(parent)
 {
 	separator = ' ';
+	maxValue=9;
+	minValue=0;
+	nrOfDigits=1;
 }
 
 qint64 NumericElementUi::getValue() const
@@ -40,13 +43,33 @@ void NumericElementUi::setInputMask(const QString& value)
 	ui->editbox->setInputMask(inputMask);
 }
 
+qint64 NumericElementUi::getMaxValue() const
+{
+	return maxValue;
+}
+
+void NumericElementUi::setMaxValue(const qint64 &value)
+{
+	maxValue = value;
+}
+
+qint64 NumericElementUi::getMinValue() const
+{
+	return minValue;
+}
+
+void NumericElementUi::setMinValue(const qint64 &value)
+{
+	minValue = value;
+}
+
 void NumericElementUi::increment()
 {
 	auto exp = (pow(10,cursorPosition));
 	auto oldvalue = value;
 	value+=exp;
 
-	if (QString::number(value).length()>nrOfDigits) {
+	if (value>maxValue) {
 		value = oldvalue;
 	}
 
@@ -63,8 +86,8 @@ void NumericElementUi::decrement()
 
 	value-=exp;
 
-	if (value < 0) {
-		value = 0;
+	if (value < minValue) {
+		value = minValue;
 	}
 
 	formatForEditing();
@@ -78,7 +101,7 @@ int NumericElementUi::getCursorPosition()
 
 bool NumericElementUi::cursorLeft()
 {
-	if (cursorPosition<nrOfDigits) {
+	if (cursorPosition<(nrOfDigits-1)) {
 		cursorPosition++;
 	}
 

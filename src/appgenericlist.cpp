@@ -231,9 +231,30 @@ QWidget *AppGenericList::setupEditElementUi(QJsonObject obj)
 	}
 
 	if (num_element!=nullptr) {
+
 		if (obj.contains("nr_of_digits")) {
 			auto nr_of_digits = obj["nr_of_digits"].toInt();
 			num_element->setNrOfDigits(nr_of_digits);
+
+			auto max_value_s = QString(nr_of_digits,'9');
+			auto max_value = max_value_s.toLongLong();
+			num_element->setMaxValue(max_value);
+
+		}
+
+		if (obj.contains("max_value")) {
+			auto max_value_d = obj["max_value"].toDouble();
+			auto max_value = (qint64) max_value_d;
+
+			num_element->setMaxValue(max_value);
+			auto nr_of_digits = QString::number(max_value).length();
+			num_element->setNrOfDigits(nr_of_digits);
+		}
+
+		if (obj.contains("min_value")) {
+			auto min_value_d = obj["min_value"].toDouble();
+			auto min_value = (qint64) min_value_d;
+			num_element->setMinValue(min_value);
 		}
 	}
 

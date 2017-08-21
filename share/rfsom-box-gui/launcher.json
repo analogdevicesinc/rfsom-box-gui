@@ -12,10 +12,7 @@
           "subtype": "ip",
           "cmd_read": "ip addr show eth0 | sed -n '3p' | awk '{ print $2 }' | cut -f 1 -d \"/\"",
           "cmd_read_timer": 1,
-          "cmd_write": "ifconfig eth0 $EDIT_VAL up",
-          "swap_toprow": false,
-          "text_align": "left",
-          "stylesheet": "\"\""
+          "cmd_write": "ifconfig eth0 $EDIT_VAL up"
         },
         {
           "description": "Subnet Mask",
@@ -23,10 +20,7 @@
           "subtype": "ip",
           "cmd_read": "ifconfig eth0 | awk '/Mask:/{ print $4;}' | sed 's/^.....//'",
           "cmd_read_timer": 1,
-          "cmd_write": "ifconfig eth0 netmask $EDIT_VAL up",
-          "swap_toprow": false,
-          "text_align": "left",
-          "stylesheet": "\"\""
+          "cmd_write": "ifconfig eth0 netmask $EDIT_VAL up"
         },
         {
           "description": "Gateway",
@@ -34,32 +28,21 @@
           "subtype": "ip",
           "cmd_read": "/sbin/ip route | awk '/^default/ { print $3 }'",
           "cmd_read_timer": 1,
-          "cmd_write": "route add default gw $EDIT_VAL eth0",
-          "swap_toprow": false,
-          "text_align": "left",
-          "stylesheet": "\"\""
+          "cmd_write": "route add default gw $EDIT_VAL eth0"
         },
         {
           "description": "HW Address",
           "type": "edit",
           "cmd_read": "cat /sys/class/net/eth0/address",
           "cmd_read_timer": "read_once",
-          "cmd_write": "echo $EDIT_VAL",
-          "swap_toprow": false,
-          "text_align": "left",
-          "stylesheet": "\"\""
+          "cmd_write": "echo $EDIT_VAL"
         },
         {
           "description": "Automatic DHCP Mode",
           "type": "checkbox",
           "cmd_write": "if [ $CHECKBOX_VAL -gt 0 ]; then /usr/local/bin/enable_dhcp.sh; else /usr/local/bin/enable_static_ip.sh; fi",
           "cmd_read": "grep -q 'iface eth0 inet static' /etc/network/interfaces && echo 0 || echo 1",
-          "cmd_read_timer": "read_once",
-          "one_row": false,
-          "swap_toprow": false,
-          "icon_path": "./charge.png",
-          "text_align": "left",
-          "stylesheet": "\"\""
+          "cmd_read_timer": "read_once"
         }
       ]
     },
@@ -81,10 +64,6 @@
           "cmd_read": "iio_attr -q -d ad9361-phy ensm_mode",
           "cmd_read_timer": "read_once",
           "cmd_write": "iio_attr -q -d ad9361-phy ensm_mode $EDIT_VAL",
-          "swap_toprow": false,
-          "icon_path": "./charge.png",
-          "text_align": "left",
-          "stylesheet": "\"\"",
           "enum": [
 		"fdd",
 		"alert",
@@ -101,11 +80,7 @@
 	  "min_value": 70000000,
           "cmd_read": "iio_attr -q -c ad9361-phy altvoltage0 frequency",
           "cmd_read_timer": "read_once",
-          "cmd_write": "iio_attr -q -c ad9361-phy altvoltage0 frequency $EDIT_VAL",
-          "swap_toprow": false,
-          "icon_path": "./charge.png",
-          "text_align": "left",
-          "stylesheet": "\"\""
+          "cmd_write": "iio_attr -q -c ad9361-phy altvoltage0 frequency $EDIT_VAL"
         },
         {
           "description": "TX LO Frequency (Hz)",
@@ -115,11 +90,7 @@
 	  "min_value": 46875001,
           "cmd_read": "iio_attr -q -c ad9361-phy altvoltage1 frequency",
           "cmd_read_timer": "read_once",
-          "cmd_write": "iio_attr -q -c ad9361-phy altvoltage1 frequency $EDIT_VAL",
-          "swap_toprow": false,
-          "icon_path": "./charge.png",
-          "text_align": "left",
-          "stylesheet": "\"\""
+          "cmd_write": "iio_attr -q -c ad9361-phy altvoltage1 frequency $EDIT_VAL"
         },
         {
           "description": "Baseband Rate (Hz)",
@@ -129,11 +100,7 @@
 	  "min_value": 520833,
           "cmd_read": "iio_attr -q -i -c ad9361-phy voltage0 sampling_frequency",
           "cmd_read_timer": "read_once",
-          "cmd_write": "iio_attr -q -i -c ad9361-phy voltage0 sampling_frequency $EDIT_VAL",
-          "swap_toprow": false,
-          "icon_path": "./charge.png",
-          "text_align": "left",
-          "stylesheet": "\"\""
+          "cmd_write": "iio_attr -q -i -c ad9361-phy voltage0 sampling_frequency $EDIT_VAL"
         },
         {
           "description": "RX RF Bandwidth (Hz)",
@@ -143,11 +110,7 @@
 	  "min_value": 0,
           "cmd_read": "iio_attr -q -i -c ad9361-phy voltage0 rf_bandwidth",
           "cmd_read_timer": "read_once",
-          "cmd_write": "iio_attr -q -i -c ad9361-phy voltage0 rf_bandwidth $EDIT_VAL",
-          "swap_toprow": false,
-          "icon_path": "./charge.png",
-          "text_align": "left",
-          "stylesheet": "\"\""
+          "cmd_write": "iio_attr -q -i -c ad9361-phy voltage0 rf_bandwidth $EDIT_VAL"
         },
         {
           "description": "TX RF Bandwidth (Hz)",
@@ -157,11 +120,7 @@
 	  "min_value": 0,
           "cmd_read": "iio_attr -q -o -c ad9361-phy voltage0 rf_bandwidth",
           "cmd_read_timer": "read_once",
-          "cmd_write": "iio_attr -q -o -c ad9361-phy voltage0 rf_bandwidth $EDIT_VAL",
-          "swap_toprow": false,
-          "icon_path": "./charge.png",
-          "text_align": "left",
-          "stylesheet": "\"\""
+          "cmd_write": "iio_attr -q -o -c ad9361-phy voltage0 rf_bandwidth $EDIT_VAL"
         },
         {
           "description": "TX Attenuation (dB)",
@@ -171,11 +130,7 @@
 	  "min_value": 0,
           "cmd_read": "echo \"$(iio_attr -q -o  -c ad9361-phy voltage0 hardwaregain | cut -d '.' -f 1)  * -1 \" | bc",
           "cmd_read_timer": "read_once",
-          "cmd_write": "iio_attr -q -o -c ad9361-phy voltage0 hardwaregain $(echo \"$EDIT_VAL * -1\" | bc)",
-          "swap_toprow": false,
-          "icon_path": "./charge.png",
-          "text_align": "left",
-          "stylesheet": "\"\""
+          "cmd_write": "iio_attr -q -o -c ad9361-phy voltage0 hardwaregain $(echo \"$EDIT_VAL * -1\" | bc)"
         },
 	{
           "description": "RX Gain Control Mode",
@@ -184,10 +139,6 @@
           "cmd_read": "iio_attr -q -i -c ad9361-phy voltage0 gain_control_mode",
           "cmd_read_timer": "read_once",
           "cmd_write": "iio_attr -q -i -c ad9361-phy voltage0 gain_control_mode $EDIT_VAL",
-          "swap_toprow": false,
-          "icon_path": "./charge.png",
-          "text_align": "left",
-          "stylesheet": "\"\"",
           "enum": [
 		"manual",
 		"slow_attack",
@@ -203,58 +154,34 @@
 	  "min_value": 0,
           "cmd_read": "iio_attr -q -i -c ad9361-phy voltage0 hardwaregain | cut -d '.' -f 1",
           "cmd_read_timer": 2,
-          "cmd_write": "iio_attr -q -i -c ad9361-phy voltage0 hardwaregain $EDIT_VAL",
-          "swap_toprow": false,
-          "icon_path": "./charge.png",
-          "text_align": "left",
-          "stylesheet": "\"\""
+          "cmd_write": "iio_attr -q -i -c ad9361-phy voltage0 hardwaregain $EDIT_VAL"
         },
         {
           "description": "RX RSSI (dB)",
           "type": "cmd_read",
           "timer": 2,
-          "cmd": "iio_attr -q -i -c ad9361-phy voltage0 rssi",
-          "one_row": false,
-          "swap_toprow": "false",
-          "text_align": "left",
-          "stylesheet": ""
-
-	},
+          "cmd": "iio_attr -q -i -c ad9361-phy voltage0 rssi"
+ 	},
         {
           "description": "RX BB DC Offset Tracking",
           "type": "checkbox",
           "cmd_write": "iio_attr -q -i -c ad9361-phy voltage0 bb_dc_offset_tracking_en $CHECKBOX_VAL",
           "cmd_read": "iio_attr -q -i -c ad9361-phy voltage0 bb_dc_offset_tracking_en",
-          "cmd_read_timer": "read_once",
-          "one_row": false,
-          "swap_toprow": false,
-          "icon_path": "./charge.png",
-          "text_align": "left",
-          "stylesheet": "\"\""
+          "cmd_read_timer": "read_once"
         },
         {
           "description": "RX RF DC Offset Tracking",
           "type": "checkbox",
           "cmd_write": "iio_attr -q -i -c ad9361-phy voltage0 rf_dc_offset_tracking_en $CHECKBOX_VAL",
           "cmd_read": "iio_attr -q -i -c ad9361-phy voltage0 rf_dc_offset_tracking_en",
-          "cmd_read_timer": "read_once",
-          "one_row": false,
-          "swap_toprow": false,
-          "icon_path": "./charge.png",
-          "text_align": "left",
-          "stylesheet": "\"\""
+          "cmd_read_timer": "read_once"
         },
         {
           "description": "RX Quadrature Tracking",
           "type": "checkbox",
           "cmd_write": "iio_attr -q -i -c ad9361-phy voltage0 quadrature_tracking_en $CHECKBOX_VAL",
           "cmd_read": "iio_attr -q -i -c ad9361-phy voltage0 quadrature_tracking_en",
-          "cmd_read_timer": "read_once",
-          "one_row": false,
-          "swap_toprow": false,
-          "icon_path": "./charge.png",
-          "text_align": "left",
-          "stylesheet": "\"\""
+          "cmd_read_timer": "read_once"
         },
         {
           "description": "XO Correction (Hz)",
@@ -264,11 +191,7 @@
 	  "min_value": 0,
           "cmd_read": "iio_attr -q -d ad9361-phy xo_correction",
           "cmd_read_timer": "read_once",
-          "cmd_write": "iio_attr -q -d ad9361-phy xo_correction $EDIT_VAL",
-          "swap_toprow": false,
-          "icon_path": "./charge.png",
-          "text_align": "left",
-          "stylesheet": "\"\""
+          "cmd_write": "iio_attr -q -d ad9361-phy xo_correction $EDIT_VAL"
         }
         ]
     },
@@ -289,23 +212,14 @@
 	  "min_value": 0,
           "cmd_read": "amixer sget Headphone | grep Left | awk '$0~/%/{print $5}' | tr -d '[%]'",
           "cmd_read_timer": 0,
-          "cmd_write": "amixer sset Headphone $EDIT_VAL%",
-          "swap_toprow": false,
-          "icon_path": "./charge.png",
-          "text_align": "left",
-          "stylesheet": "\"\""
+          "cmd_write": "amixer sset Headphone $EDIT_VAL%"
         },
         {
           "description": "Headphone Mute",
           "type": "checkbox",
           "cmd_write": "amixer sset Headphone toggle > /dev/null",
           "cmd_read": "amixer sget 'Headphone' | grep -q '\\[off\\]' && echo 1 || echo 0",
-          "cmd_read_timer": 0,
-          "one_row": false,
-          "swap_toprow": false,
-          "icon_path": "./charge.png",
-          "text_align": "left",
-          "stylesheet": "\"\""
+          "cmd_read_timer": 0
         },
         {
           "description": "Capture Volume (%)",
@@ -315,23 +229,14 @@
 	  "min_value": 0,
           "cmd_read": "amixer sget Capture | grep Left | awk '$0~/%/{print $5}' | tr -d '[%]'",
           "cmd_read_timer": 0,
-          "cmd_write": "amixer sset Capture $EDIT_VAL%",
-          "swap_toprow": false,
-          "icon_path": "./charge.png",
-          "text_align": "left",
-          "stylesheet": "\"\""
+          "cmd_write": "amixer sset Capture $EDIT_VAL%"
         },
         {
           "description": "Capture Mute",
           "type": "checkbox",
           "cmd_write": "amixer sset Capture toggle > /dev/null",
           "cmd_read": "amixer sget Capture | grep -q '\\[off\\]' && echo 1 || echo 0",
-          "cmd_read_timer": 0,
-          "one_row": false,
-          "swap_toprow": false,
-          "icon_path": "./charge.png",
-          "text_align": "left",
-          "stylesheet": "\"\""
+          "cmd_read_timer": 0
         }
         ]
     },
@@ -350,41 +255,25 @@
           "description": "PMC Temperature (°C)",
           "type": "cmd_read",
           "timer": 2,
-          "cmd": "echo \"scale=2; ($(iio_attr -q -c ad7291-ccbox temp0 mean_raw) * 250) / 1000\" | bc",
-          "one_row": false,
-          "swap_toprow": "false",
-          "text_align": "left",
-          "stylesheet": ""
+          "cmd": "echo \"scale=2; ($(iio_attr -q -c ad7291-ccbox temp0 mean_raw) * 250) / 1000\" | bc"
         },
         {
           "description": "ARM Temperature (°C)",
           "type": "cmd_read",
           "timer": 2,
-          "cmd": "echo \"scale=2; (($(iio_attr -q -c xadc temp0 raw) - 2219) * 123.040771484)/1000\" | bc",
-          "one_row": false,
-          "swap_toprow": "false",
-          "text_align": "left",
-          "stylesheet": ""
+          "cmd": "echo \"scale=2; (($(iio_attr -q -c xadc temp0 raw) - 2219) * 123.040771484)/1000\" | bc"
         },
         {
           "description": "AD936x Temperature (°C)",
           "type": "cmd_read",
           "timer": 2,
-          "cmd": "echo \"scale=2; $(iio_attr -q -c ad9361-phy temp0 input) / 1000\" | bc",
-          "one_row": false,
-          "swap_toprow": "false",
-          "text_align": "left",
-          "stylesheet": ""
+          "cmd": "echo \"scale=2; $(iio_attr -q -c ad9361-phy temp0 input) / 1000\" | bc"
         },
         {
           "description": "IMU Temperature (°C)",
           "type": "cmd_read",
           "timer": 2,
-          "cmd": "echo \"scale=2; (($(iio_attr -q -c adis16460 temp0 raw) + 500) * 50)/1000\" | bc",
-          "one_row": false,
-          "swap_toprow": "false",
-          "text_align": "left",
-          "stylesheet": ""
+          "cmd": "echo \"scale=2; (($(iio_attr -q -c adis16460 temp0 raw) + 500) * 50)/1000\" | bc"
         }
       ]
     },
@@ -401,41 +290,25 @@
           "description": "Battery Volatge (V)",
           "type": "cmd_read",
           "timer": 0,
-          "cmd": "echo \"scale=3; `cat /sys/class/power_supply/ltc2942/voltage_now` / 1000000\" | bc",
-          "one_row": false,
-          "swap_toprow": "false",
-          "text_align": "left",
-          "stylesheet": ""
+          "cmd": "echo \"scale=3; `cat /sys/class/power_supply/ltc2942/voltage_now` / 1000000\" | bc"
         },
         {
           "description": "Charge (Ah)",
           "type": "cmd_read",
           "timer": 0,
-          "cmd": "echo \"scale=3; `cat /sys/class/power_supply/ltc2942/charge_counter` / 1000000\" | bc",
-          "one_row": false,
-          "swap_toprow": "false",
-          "text_align": "left",
-          "stylesheet": ""
+          "cmd": "echo \"scale=3; `cat /sys/class/power_supply/ltc2942/charge_counter` / 1000000\" | bc"
         },
         {
           "description": "Charge Now (Ah)",
           "type": "cmd_read",
           "timer": 0,
-          "cmd": "echo \"scale=3; `cat /sys/class/power_supply/ltc2942/charge_now` / 1000000\" | bc",
-          "one_row": false,
-          "swap_toprow": "false",
-          "text_align": "left",
-          "stylesheet": ""
+          "cmd": "echo \"scale=3; `cat /sys/class/power_supply/ltc2942/charge_now` / 1000000\" | bc"
         },
         {
           "description": "Temperature (°C)",
           "type": "cmd_read",
           "timer": 0,
-          "cmd": "echo \"scale=1; `cat /sys/class/power_supply/ltc2942/temp` / 100\" | bc",
-          "one_row": false,
-          "swap_toprow": "false",
-          "text_align": "left",
-          "stylesheet": ""
+          "cmd": "echo \"scale=1; `cat /sys/class/power_supply/ltc2942/temp` / 100\" | bc"
         }
       ]
     },
@@ -454,71 +327,43 @@
           "description": "Temperature (°C)",
           "type": "cmd_read",
           "timer": 2,
-          "cmd": "echo \"scale=2; (($(iio_attr -q -c adis16460 temp0 raw) + 500) * 50)/1000\" | bc",
-          "one_row": false,
-          "swap_toprow": "false",
-          "text_align": "left",
-          "stylesheet": ""
+          "cmd": "echo \"scale=2; (($(iio_attr -q -c adis16460 temp0 raw) + 500) * 50)/1000\" | bc"
         },
         {
           "description": "Acceleration X (m/s²)",
           "type": "cmd_read",
           "timer": 1,
-          "cmd": "echo \"scale=2; $(iio_attr -q -c adis16460 accel_x raw) * 0.000000037/1\" | bc",
-          "one_row": false,
-          "swap_toprow": "false",
-          "text_align": "left",
-          "stylesheet": ""
+          "cmd": "echo \"scale=2; $(iio_attr -q -c adis16460 accel_x raw) * 0.000000037/1\" | bc"
         },
         {
           "description": "Acceleration Y (m/s²)",
           "type": "cmd_read",
           "timer": 1,
-          "cmd": "echo \"scale=2; $(iio_attr -q -c adis16460 accel_y raw) * 0.000000037/1\" | bc",
-          "one_row": false,
-          "swap_toprow": "false",
-          "text_align": "left",
-          "stylesheet": ""
+          "cmd": "echo \"scale=2; $(iio_attr -q -c adis16460 accel_y raw) * 0.000000037/1\" | bc"
         },
         {
           "description": "Acceleration Z (m/s²)",
           "type": "cmd_read",
           "timer": 1,
-          "cmd": "echo \"scale=2; $(iio_attr -q -c adis16460 accel_z raw) * 0.000000037/1\" | bc",
-          "one_row": false,
-          "swap_toprow": "false",
-          "text_align": "left",
-          "stylesheet": ""
+          "cmd": "echo \"scale=2; $(iio_attr -q -c adis16460 accel_z raw) * 0.000000037/1\" | bc"
         },
         {
           "description": "Angular Velocity X (rad/s)",
           "type": "cmd_read",
           "timer": 1,
-          "cmd": "echo \"scale=4; $(iio_attr -q -c adis16460 anglvel_x raw) * 0.000000001/1\" | bc",
-          "one_row": false,
-          "swap_toprow": "false",
-          "text_align": "left",
-          "stylesheet": ""
+          "cmd": "echo \"scale=4; $(iio_attr -q -c adis16460 anglvel_x raw) * 0.000000001/1\" | bc"
         },
         {
           "description": "Angular Velocity Y (rad/s)",
           "type": "cmd_read",
           "timer": 1,
-          "cmd": "echo \"scale=4; $(iio_attr -q -c adis16460 anglvel_y raw) * 0.000000001/1\" | bc",
-          "one_row": false,
-          "swap_toprow": "false",
-          "text_align": "left",
-          "stylesheet": ""
+          "cmd": "echo \"scale=4; $(iio_attr -q -c adis16460 anglvel_y raw) * 0.000000001/1\" | bc"
         },
         {
           "description": "Angular Velocity Z (rad/s)",
           "type": "cmd_read",
           "timer": 1,
-          "cmd": "echo \"scale=4; $(iio_attr -q -c adis16460 anglvel_z raw) * 0.000000001/1\" | bc",
-          "one_row": false,
-          "swap_toprow": "false",
-          "text_align": "left",
-          "stylesheet": ""
+          "cmd": "echo \"scale=4; $(iio_attr -q -c adis16460 anglvel_z raw) * 0.000000001/1\" | bc"
         }
       ]
     },
@@ -542,41 +387,25 @@
           "description": "GPS Latitude",
           "type": "cmd_read",
           "timer": 0,
-          "cmd": "cat /tmp/gpslat",
-          "one_row": false,
-          "swap_toprow": "false",
-          "text_align": "left",
-          "stylesheet": ""
+          "cmd": "cat /tmp/gpslat"
         },
         {
           "description": "GPS Longitude",
           "type": "cmd_read",
           "timer": 0,
-          "cmd": "cat /tmp/gpslon",
-          "one_row": false,
-          "swap_toprow": "false",
-          "text_align": "left",
-          "stylesheet": ""
+          "cmd": "cat /tmp/gpslon"
         },
         {
           "description": "GPS Altitude",
           "type": "cmd_read",
           "timer": 0,
-          "cmd": "cat /tmp/gpsalt",
-          "one_row": false,
-          "swap_toprow": "false",
-          "text_align": "left",
-          "stylesheet": ""
+          "cmd": "cat /tmp/gpsalt"
         },
 	{
           "description": "GPS Timestamp",
           "type": "cmd_read",
           "timer": 0,
-          "cmd": "cat /tmp/gpstime",
-          "one_row": false,
-          "swap_toprow": "false",
-          "text_align": "left",
-          "stylesheet": ""
+          "cmd": "cat /tmp/gpstime"
         }
       ]
     },

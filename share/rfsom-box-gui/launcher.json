@@ -533,36 +533,46 @@
       ],
       "tasks": [
         {
-          "cmd": "./getcoord.sh",
+          "cmd": "gps_get_coords.sh",
           "timer": 1
         }
       ],
       "elements": [
         {
-          "description": "lat",
+          "description": "GPS Latitude",
           "type": "cmd_read",
           "timer": 0,
-          "cmd": "cat gpslat",
+          "cmd": "cat /tmp/gpslat",
           "one_row": false,
           "swap_toprow": "false",
           "text_align": "left",
           "stylesheet": ""
         },
         {
-          "description": "long",
+          "description": "GPS Longitude",
           "type": "cmd_read",
           "timer": 0,
-          "cmd": "cat gpslon",
+          "cmd": "cat /tmp/gpslon",
           "one_row": false,
           "swap_toprow": "false",
           "text_align": "left",
           "stylesheet": ""
         },
         {
-          "description": "alt",
+          "description": "GPS Altitude",
           "type": "cmd_read",
           "timer": 0,
-          "cmd": "cat gpsalt",
+          "cmd": "cat /tmp/gpsalt",
+          "one_row": false,
+          "swap_toprow": "false",
+          "text_align": "left",
+          "stylesheet": ""
+        },
+	{
+          "description": "GPS Timestamp",
+          "type": "cmd_read",
+          "timer": 0,
+          "cmd": "cat /tmp/gpstime",
           "one_row": false,
           "swap_toprow": "false",
           "text_align": "left",

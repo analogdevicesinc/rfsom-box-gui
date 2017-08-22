@@ -378,7 +378,7 @@
       ],
       "tasks": [
         {
-          "cmd": "gps_get_coords.sh",
+          "cmd": "gps_get_coords.sh -q",
           "timer": 1
         }
       ],

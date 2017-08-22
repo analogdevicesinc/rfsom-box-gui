@@ -28,8 +28,8 @@ share.files = ./share/*
 
 target.path = $$INSTALL_LOCATION/bin
 permission.path = $$INSTALL_LOCATION/bin
-unix:permission.extra = chmod 777 $$INSTALL_LOCATION/bin/rfsom-box-gui-start.sh
-unix:permission.extra = chmod 777 $$INSTALL_LOCATION/bin/gps_get_coords.sh
+unix:permission.extra = chmod 777 $$INSTALL_LOCATION/bin/rfsom-box-gui-start.sh;
+unix:permission.extra += chmod 777 $$INSTALL_LOCATION/bin/gps_get_coords.sh
 
 INSTALLS += target scripts share permission
 

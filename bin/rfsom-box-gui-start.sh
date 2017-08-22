@@ -2,6 +2,7 @@
 grep -q "RFSOM-BOX" /sys/firmware/devicetree/base/model
 if [ $? -eq 0 ]; then
 	sudo service lightdm stop;
+	gpsd -n /dev/ttyPS1;
 	QT_QPA_EVDEV_KEYBOARD_PARAMETERS=/dev/input/by-path/platform-gpio-keys-nav-switch-event:grab=1 \
 	QT_QPA_EVDEV_MOUSE_PARAMETERS=/dev/input/by-path/platform-rotary-event:grab=1 \
 	QT_QPA_FB_DRM=1 \

@@ -1,7 +1,6 @@
 #!/bin/bash
 
-if ($1 = "-q")
-then
+if [ "$1" != "-q" ]; then
 date
 fi
 
@@ -11,8 +10,7 @@ lat=$( echo "$gpsdata"  | jsawk 'return this.lat' )
 lon=$( echo "$gpsdata"  | jsawk 'return this.lon' )
 alt=$( echo "$gpsdata"  | jsawk 'return this.alt' )
 dt=$( echo "$gpsdata" | jsawk 'return (this.time).replace("T"," ").slice(0,-5)' )
-if ($1 = "-q")
-then
+if [ "$1" != "-q" ]; then
 echo "$dt"
 echo "You are here: $lat, $lon at $alt"
 fi

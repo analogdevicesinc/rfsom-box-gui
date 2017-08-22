@@ -15,6 +15,11 @@ echo "$dt"
 echo "You are here: $lat, $lon at $alt"
 fi
 
+rm -rf /tmp/gpslat
+rm -rf /tmp/gpslon
+rm -rf /tmp/gpsalt
+rm -rf /tmp/gpstime
+
 echo $lat > /tmp/gpslat
 echo $lon > /tmp/gpslon
 echo $alt > /tmp/gpsalt

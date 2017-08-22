@@ -14,7 +14,7 @@ void ScriptResult::setRunInBackground(bool value)
 }
 
 ScriptResult::ScriptResult(QString cmd, QObject *parent) : StringValue(parent),
-	cmd(cmd),runInBackground(false)
+	cmd(cmd),proc(nullptr),runInBackground(false)
 
 {
 
@@ -39,6 +39,14 @@ QString ScriptResult::run()
 
 QString ScriptResult::run_script()
 {
+QString ret="";
+	if(proc!=nullptr)
+	{
+		ret=proc->readAll();
+		qDebug()<<ret;
+		delete proc;
+		proc=nullptr;
+	}
 
 	proc = new QProcess(this);
 	proc->setWorkingDirectory(sharedResPath);
@@ -50,8 +58,7 @@ QString ScriptResult::run_script()
 	}
 
 	proc->setProcessEnvironment(qpe);
-	proc->start("/bin/sh",QStringList() << "-c" <<  cmd);
-	QString ret="";
+	proc->start("/bin/sh",QStringList() << "-c" <<  cmd);	
 
 	if (!runInBackground) {
 		proc->waitForFinished(100);
@@ -59,9 +66,9 @@ QString ScriptResult::run_script()
 		delete proc;
 		proc=nullptr;
 	} else {
-		ret = proc->readAll();
+	/*	ret = proc->readAll();
 		qDebug()<<ret;
-		connect(proc,SIGNAL(finished(int)),proc,SLOT(deleteLater()));
+		connect(proc,SIGNAL(finished(int)),proc,SLOT(deleteLater()));*/
 	}
 
 	return ret;

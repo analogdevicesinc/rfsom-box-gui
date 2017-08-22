@@ -79,10 +79,8 @@ QWidget *AppGenericList::setupReadOnlyElementUi(QJsonObject obj)
 
 		if(!readOnce)
 		{
-			bool ok = false;
-			int timer_id = obj["timer"].toString().toInt(&ok);
-
-			if (!(ok && timer_id >= 0 && timer_id < timers.count())) {
+			int timer_id = obj["timer"].toInt();
+			if (!(timer_id >= 0 && timer_id < timers.count())) {
 				timer_id = 0; // connects to the default timer 0
 			}
 			connect(timers[timer_id],SIGNAL(timeout()),ui_element,SLOT(update()));
@@ -147,10 +145,9 @@ QWidget *AppGenericList::setupCheckboxElementUi(QJsonObject obj)
 
 		if(!readOnce)
 		{
-			bool ok = false;
-			int timer_id = obj["cmd_read_timer"].toString().toInt(&ok);
+			int timer_id = obj["cmd_read_timer"].toInt();
 
-			if (!(ok && timer_id >= 0 && timer_id < timers.count())) {
+			if (!(timer_id >= 0 && timer_id < timers.count())) {
 				timer_id = 0; // connects to the default timer 0
 			}
 			connect(timers[timer_id],SIGNAL(timeout()),ui_element,SLOT(update()));
@@ -219,10 +216,9 @@ QWidget *AppGenericList::setupEditElementUi(QJsonObject obj)
 
 		if(!readOnce)
 		{
-			bool ok = false;
-			int timer_id = obj["cmd_read_timer"].toString().toInt(&ok);
+			int timer_id = obj["cmd_read_timer"].toInt();
 
-			if (!(ok && timer_id >= 0 && timer_id < timers.count())) {
+			if (!(timer_id >= 0 && timer_id < timers.count())) {
 				timer_id = 0; // connects to the default timer 0
 			}
 			connect(timers[timer_id],SIGNAL(timeout()),ui_element,SLOT(update()));

@@ -534,5 +534,12 @@
     },
     "type": "list",
     "name": "GPS"
+  },
+  {
+    "params": {
+      "cmd": "/usr/local/bin/get_gmap.sh"
+    },
+    "type": "video",
+    "name": "GPS Map"
   }
 ]

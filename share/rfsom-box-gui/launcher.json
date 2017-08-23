@@ -286,6 +286,12 @@
         1000
       ],
       "elements": [
+	{
+          "description": "Power Supply Source",
+          "type": "cmd_read",
+          "timer": 0,
+          "cmd": "/usr/local/bin/read_pss -text"
+        },
         {
           "description": "Battery Volatge (V)",
           "type": "cmd_read",

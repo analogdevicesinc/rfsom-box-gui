@@ -1,0 +1,58 @@
+#!/bin/sh
+read_gpio()
+{
+#	echo $1 > /sys/class/gpio/export
+	cat /sys/class/gpio/gpio$1/value
+#	echo $1 > /sys/class/gpio/unexport
+}
+
+if [ $# -ge 1 ]
+then
+    arg1=$1
+else
+    arg1=-text
+fi
+
+poe=$( read_gpio 972)
+dcps=$( read_gpio 973)
+batt=$( read_gpio 974)
+
+txtpoestr="PoE"
+txtdcpsstr="DC Powersupply"
+txtbattstr="Battery"
+
+imgsrc="<img src=/usr/local/share/rfsom-box-gui/icons/"
+imgpoestr=$imgsrc"001-poe-img.png width=16 height=16> "
+imgdcpsstr=$imgsrc"002-dcps-img.png width=64 height=16> "
+imgbattstr=$imgsrc"003-batt-img.png width=16 height=16> "
+
+poestr=$txtpoestr
+dcpsstr=$txtdcpsstr
+battstr=$txtbattstr
+
+if [ $arg1 = "-both" ]; then
+	poestr=$imgpoestr$txtpoestr
+	dcpsstr=$imgdcpsstr$txtdcstr
+	battstr=$imgbattstr$txtbattstr
+fi
+if [ $arg1 = "-img" ]; then
+	poestr=$imgpoestr
+	dcpsstr=$imgdcpsstr
+	battstr=$imgbattstr
+fi
+
+if [ $poe -eq 0 ]; then
+	echo $poestr
+	exit
+fi
+
+if [ $dcps -eq 0 ]; then
+	echo $dcpsstr 
+	exit
+fi
+
+if [ $batt -eq 0 ]; then
+	echo $battstr
+	exit
+fi
+

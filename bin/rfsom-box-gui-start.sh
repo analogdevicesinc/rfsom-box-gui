@@ -1,6 +1,18 @@
 #!/bin/sh
 grep -q "RFSOM-BOX" /sys/firmware/devicetree/base/model
 if [ $? -eq 0 ]; then
+
+	case "$(pidof rfsom-box-gui | wc -w)" in
+
+	0)  echo "Restarting rfsom-box-gui:     $(date)" >> /var/log/rfsom-box-gui-start.txt
+	    ;;
+	1)  # all ok
+	    exit ;;
+	*)  echo "Removed double rfsom-box-gui: $(date)" >> /var/log/rfsom-box-gui-start.txt
+	    kill $(pidof rfsom-box-gui | awk '{print $1}')
+	    exit
+	    ;;
+	esac
 	sudo service lightdm stop;
 	gpsd -n /dev/ttyPS1;
 	echo 972 > /sys/class/gpio/export;
@@ -14,6 +26,7 @@ if [ $? -eq 0 ]; then
 	QT_QPA_FONTDIR=/home/analog/Qt/fonts \
 	QT_QPA_PLATFORM=linuxfb \
 	QT_QPA_GENERIC_PLUGINS=evdevmouse,evdevkeyboard \
-        /usr/local/bin/rfsom-box-gui > /dev/null 2>&1 &
-
+	FRAMEBUFFER=/dev/fb0 \
+        /usr/local/bin/rfsom-box-gui > /var/log/rfsom-box-gui 2>&1 &
 fi
+

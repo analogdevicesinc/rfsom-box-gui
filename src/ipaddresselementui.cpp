@@ -51,6 +51,7 @@ void IPAddressElement::updateCursorPosition()
 	                 cursorPosition);
 	ui->editbox->setCursorPosition(cursorPos);
 	ui->editbox->setSelection(cursorPos,3);
+	setFocus();
 }
 
 void IPAddressElement::formatForEditing()
@@ -109,6 +110,6 @@ void IPAddressElement::click()
 		updateCursorPosition();
 		setSelected(true);
 		formatForEditing();
-		setFocus();
+		//setFocus();
 	}
 }

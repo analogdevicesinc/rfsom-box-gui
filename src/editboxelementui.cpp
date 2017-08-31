@@ -176,6 +176,7 @@ void EditboxElementUi::updateCursorPosition()
 {
 	ui->editbox->setCursorPosition(cursorPosition-1);
 	ui->editbox->setSelection(cursorPosition,1);
+	setFocus();
 }
 
 void EditboxElementUi::update()
@@ -197,7 +198,7 @@ void EditboxElementUi::click()
 		update();
 
 	} else {
-		setFocus();
+		//setFocus();
 		cursorPosition=0;
 		updateCursorPosition();
 		setSelected(true);

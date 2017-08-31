@@ -140,6 +140,7 @@ void NumericElementUi::updateCursorPosition()
 	                 (cursorPosition/3))-1;
 	ui->editbox->setCursorPosition(cursorPos);
 	ui->editbox->setSelection(cursorPos,1);
+	setFocus();
 
 }
 
@@ -184,6 +185,6 @@ void NumericElementUi::click()
 		updateCursorPosition();
 		setSelected(true);
 		formatForEditing();
-		setFocus();
+		//setFocus();
 	}
 }

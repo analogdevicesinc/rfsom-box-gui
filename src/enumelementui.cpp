@@ -50,4 +50,5 @@ void EnumElementUi::decrement()
 void EnumElementUi::updateCursorPosition()
 {
 	ui->editbox->selectAll();
+	setFocus();
 }

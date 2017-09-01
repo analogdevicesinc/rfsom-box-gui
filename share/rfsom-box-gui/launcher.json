@@ -200,6 +200,13 @@
    },
    {
     "params": {
+	"cmd": "/usr/local/bin/fft_plot"
+     },
+     "type": "video",
+     "name": "FFT plot"
+   },
+   {
+     "params": {
       "timers": [
         1000
       ],

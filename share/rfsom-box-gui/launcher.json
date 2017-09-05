@@ -496,11 +496,19 @@
     "type": "video",
     "name": "Camera View"
   },
-  {
+{
     "params": {
       "cmd": "mplayer -vf scale -zoom -xy 160 -nosound -vo fbdev MVI_0043.AVI"
     },
     "type": "video",
     "name": "Play Video"
+  },
+
+  {
+    "params": {
+      "cmd": "ip=$(cat /tmp/modem-ip);netcat -l $ip -p 440 | mplayer -vf scale -zoom -x 160 -y 128 -nosound -vo fbdev -cache 32 -"
+    },
+    "type": "video",
+    "name": "Play Stream"
   }
 ]

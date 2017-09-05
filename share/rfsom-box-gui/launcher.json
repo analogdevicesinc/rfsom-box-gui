@@ -234,7 +234,7 @@
         {
           "description": "Restart",
           "type": "btn",
-          "cmd": "ip=$(cat /tmp/modem-ip);subnet=$(cat /tmp/modem-subnet);delay=$(cat /tmp/modem-delay);restart_modem.sh $ip $subnet $delay",
+          "cmd": "/usr/local/bin/restart_modem_gui.sh",
 	  "background_task": true,
           "stylesheet": ""
         }

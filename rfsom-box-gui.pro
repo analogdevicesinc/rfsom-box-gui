@@ -24,6 +24,10 @@ scripts.files = ./bin/rfsom-box-gui-start.sh
 scripts.files += ./bin/gps_get_coords.sh
 scripts.files += ./bin/read_pss
 
+scripts.files += ./tun_tap/restart_modem_gui.sh
+scripts.files += ./tun_tap/modemd
+
+
 share.path = $$INSTALL_LOCATION/share
 share.files = ./share/*
 
@@ -31,7 +35,10 @@ target.path = $$INSTALL_LOCATION/bin
 permission.path = $$INSTALL_LOCATION/bin
 unix:permission.extra = chmod 777 $$INSTALL_LOCATION/bin/rfsom-box-gui-start.sh;
 unix:permission.extra += chmod 777 $$INSTALL_LOCATION/bin/gps_get_coords.sh;
-unix:permission.extra += chmod 777 $$INSTALL_LOCATION/bin/read_pss
+unix:permission.extra += chmod 777 $$INSTALL_LOCATION/bin/read_pss;
+
+unix:permission.extra += chmod 777 $$INSTALL_LOCATION/bin/restart_modem_gui.sh;
+unix:permission.extra += chmod 777 $$INSTALL_LOCATION/bin/modemd
 
 INSTALLS += target scripts share permission
 

@@ -39,7 +39,7 @@ QString ScriptResult::run()
 
 QString ScriptResult::run_script()
 {
-QString ret="";
+	QString ret="";
 	if(proc!=nullptr)
 	{
 		ret=proc->readAll();
@@ -58,20 +58,28 @@ QString ret="";
 	}
 
 	proc->setProcessEnvironment(qpe);
-	proc->start("/bin/sh",QStringList() << "-c" <<  cmd);	
+	proc->start("/bin/sh",QStringList() << "-c" <<  cmd);
 
 	if (!runInBackground) {
 		proc->waitForFinished(100);
 		ret = proc->readAll();
 		delete proc;
-		proc=nullptr;
+		proc=nullptr;	
 	} else {
-	/*	ret = proc->readAll();
+		connect(proc,SIGNAL(finished(int)),this,SLOT(scriptFinished(int)));
+		ret = proc->readAll();
 		qDebug()<<ret;
-		connect(proc,SIGNAL(finished(int)),proc,SLOT(deleteLater()));*/
+		//connect(proc,SIGNAL(finished(int)),proc,SLOT(deleteLater()));
 	}
 
 	return ret;
+}
+
+void ScriptResult::scriptFinished(int)
+{
+	qDebug()<<(proc->readAll());
+	delete proc;
+	proc=nullptr;
 }
 
 QString ScriptResult::convert(QString v)

@@ -29,6 +29,19 @@ ScriptResult *ButtonElementUi::getScript() const
 void ButtonElementUi::setScript(ScriptResult *value)
 {
 	script = value;
+	script->setRunInBackground(runInBackground);
+}
+
+bool ButtonElementUi::getRunInBackground() const
+{
+	return runInBackground;
+}
+
+void ButtonElementUi::setRunInBackground(bool value)
+{
+	runInBackground = value;
+	if(script)
+		script->setRunInBackground(value);
 }
 
 QString ButtonElementUi::iconString()

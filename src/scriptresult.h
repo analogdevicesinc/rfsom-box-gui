@@ -13,6 +13,8 @@ class ScriptResult : public StringValue
 	QProcess *proc;
 	QString setVars();
 	bool runInBackground;
+signals:
+	//void getScriptResult(QString);
 public:
 	QMap<QString, QString> vars;
 
@@ -27,6 +29,7 @@ public:
 
 public slots:
 	virtual QString run();
+	virtual void scriptFinished(int);
 
 protected:
 	virtual QString run_script();

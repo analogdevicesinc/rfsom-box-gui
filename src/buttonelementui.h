@@ -19,6 +19,7 @@ class ButtonElementUi : public UiElement
 	quint16 iconSize;
 	bool icon;
 	bool iconRight;
+	bool runInBackground;
 	Ui::buttonElement *ui;
 
 private:
@@ -39,6 +40,9 @@ public:
 
 	ScriptResult *getScript() const;
 	void setScript(ScriptResult *value);
+
+	bool getRunInBackground() const;
+	void setRunInBackground(bool value);
 
 public slots:
 	virtual void click();

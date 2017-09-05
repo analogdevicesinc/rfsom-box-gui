@@ -87,10 +87,7 @@ QWidget *AppGenericList::setupReadOnlyElementUi(QJsonObject obj)
 		}
 
 	}
-
 	return ui_element;
-
-
 }
 
 
@@ -102,6 +99,10 @@ QWidget *AppGenericList::setupButtonElementUi(QJsonObject obj)
 
 	if (obj.contains("description")) {
 		ui_element->setDescription(obj["description"].toString());
+	}
+
+	if(obj.contains("background_task"))	{
+		ui_element->setRunInBackground(obj["background_task"].toBool());
 	}
 
 	if (obj.contains("stylesheet")) {

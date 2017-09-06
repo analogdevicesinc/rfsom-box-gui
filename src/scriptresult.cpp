@@ -43,8 +43,9 @@ QString ScriptResult::run_script()
 	if(proc!=nullptr)
 	{
 		ret=proc->readAll();
-		qDebug()<<ret;
-		delete proc;
+		proc->waitForFinished(1000);
+		qDebug()<<ret;		
+		proc->deleteLater();
 		proc=nullptr;
 	}
 
@@ -77,9 +78,10 @@ QString ScriptResult::run_script()
 
 void ScriptResult::scriptFinished(int)
 {
-	qDebug()<<(proc->readAll());
-	delete proc;
-	proc=nullptr;
+	if(proc)
+	{
+		qDebug()<<(proc->readAll());
+	}
 }
 
 QString ScriptResult::convert(QString v)

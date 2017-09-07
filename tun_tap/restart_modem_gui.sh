@@ -75,4 +75,5 @@ cat /sys/kernel/debug/iio/iio:device3/direct_reg_access
 
 mknod /dev/net/tap c 10 200
 /usr/local/bin/modemd -a $ip -m $subnet -d $delay &
+/usr/local/bin/en_macsec.sh
 echo Done

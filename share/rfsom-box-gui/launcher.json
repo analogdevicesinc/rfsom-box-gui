@@ -53,7 +53,7 @@
     "params": {
       "timers": [
         10000,
-        500,
+        5000,
         1000
       ],
       "elements": [
@@ -190,7 +190,7 @@
           "max_value": 70000000,
           "min_value": 0,
           "cmd_read": "iio_attr -q -d ad9361-phy xo_correction",
-          "cmd_read_timer": "read_once",
+          "cmd_read_timer": 1,
           "cmd_write": "iio_attr -q -d ad9361-phy xo_correction $EDIT_VAL"
         },
         {

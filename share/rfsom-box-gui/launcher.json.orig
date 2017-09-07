@@ -299,7 +299,12 @@
         {
           "description": "On/Off",
           "type": "checkbox",
+<<<<<<< HEAD
+          "cmd_write": "echo $CHECKBOX_VAL > /tmp/enc-onoff",
+          "cmd": "/usr/local/bin/enc-onoff.sh",
+=======
           "cmd_write": "echo $CHECKBOX_VAL > /tmp/enc-onoff;/usr/local/bin/enc-onoff.sh",
+>>>>>>> 37c6e237dc375ce43eeeead74aac1f58d4d27183
           "cmd_read": "cat /tmp/enc-onoff",
           "cmd_read_timer": 0
         }

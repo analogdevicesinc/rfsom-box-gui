@@ -16,8 +16,6 @@
 #include <linux/ioctl.h>
 #include <net/route.h>
 #include <netinet/in.h>
-#include <sys/socket.h>
-#include <arpa/inet.h>
 #include <pthread.h>
 #include "mac.h"
 
@@ -28,385 +26,334 @@
 #define INTERFACE_NAME "adi_radio"
 #define INTERFACE_ADDRESS htonl(IP(192, 168, 23, 1))
 #define INTERFACE_NETMASK htonl(IP(255, 255, 255, 0))
-#define DELAY 10000
 
-#define MTU 				1500
-#define HEADER_DATA_SIZE 	8
-#define HEADER_FRAME_SIZE 	16
-#define CRC_SIZE			8
-#define PADDING_SIZE		12
-#define TX_BUF_SIZE			HEADER_DATA_SIZE + HEADER_FRAME_SIZE + MTU + PADDING_SIZE
-#define RX_BUF_SIZE			HEADER_FRAME_SIZE + MTU + PADDING_SIZE + CRC_SIZE
+#define MTU                             1500
+#define HEADER_DATA_SIZE        8
+#define HEADER_FRAME_SIZE       16
+#define CRC_SIZE                        8
+#define PADDING_SIZE            12
+#define TX_BUF_SIZE                     HEADER_DATA_SIZE + HEADER_FRAME_SIZE + MTU + PADDING_SIZE
+#define RX_BUF_SIZE                     HEADER_FRAME_SIZE + MTU + PADDING_SIZE + CRC_SIZE
 
-extern char 	*optarg;
-static char 	tx_buffer[TX_BUF_SIZE];
-static char 	rx_buffer[RX_BUF_SIZE];
-static struct 	pollfd pfd[2];
+static char     tx_buffer[TX_BUF_SIZE];
+static char     rx_buffer[RX_BUF_SIZE];
+static struct   pollfd pfd[2];
 
 static int tun_alloc(const char *name, int flags)
 {
-	static const char *clonedev = "/dev/net/tun";
-	struct ifreq ifr;
-	int fd, ret;
+        static const char *clonedev = "/dev/net/tap";
+        struct ifreq ifr;
+        int fd, ret;
 
-	fd = open(clonedev, O_RDWR);
-	if (fd < 0)
-		return -errno;
+        fd = open(clonedev, O_RDWR);
+        if (fd < 0)
+                return -errno;
 
-	memset(&ifr, 0, sizeof(ifr));
+        memset(&ifr, 0, sizeof(ifr));
 
-	ifr.ifr_flags = flags;
-	strncpy(ifr.ifr_name, name, IFNAMSIZ);
+        ifr.ifr_flags = flags;
+        strncpy(ifr.ifr_name, name, IFNAMSIZ);
 
-	ret = ioctl(fd, TUNSETIFF, &ifr);
-	if (ret < 0) {
-		close(fd);
-		return -errno;
-	}
+        ret = ioctl(fd, TUNSETIFF, &ifr);
+        if (ret < 0) {
+                close(fd);
+                return -errno;
+        }
 
-	return fd;
+        return fd;
 }
 
 static int set_ip(const char *name, in_addr_t addr)
 {
-	struct ifreq ifr;
-	struct sockaddr_in sin;
-	int ret, fd;
+        struct ifreq ifr;
+        struct sockaddr_in sin;
+        int ret, fd;
 
-	memset(&ifr, 0, sizeof(struct ifreq));
-	memset(&sin, 0, sizeof(struct sockaddr_in));
-	strncpy(ifr.ifr_name, name, IFNAMSIZ);
-	sin.sin_addr.s_addr = addr;
-	sin.sin_family = AF_INET;
-	memcpy(&ifr.ifr_addr, &sin, sizeof(struct sockaddr_in));
+        memset(&ifr, 0, sizeof(struct ifreq));
+        memset(&sin, 0, sizeof(struct sockaddr_in));
+        strncpy(ifr.ifr_name, name, IFNAMSIZ);
+        sin.sin_addr.s_addr = addr;
+        sin.sin_family = AF_INET;
+        memcpy(&ifr.ifr_addr, &sin, sizeof(struct sockaddr_in));
 
-	fd = socket(AF_INET, SOCK_STREAM, 0);
-	if (fd < 0)
-		return -errno;
-	ret = ioctl(fd, SIOCSIFADDR, &ifr);
-	if (ret < 0) {
-		ret = -errno;
-		goto err;
-	}
+        fd = socket(AF_INET, SOCK_STREAM, 0);
+        if (fd < 0)
+                return -errno;
+        ret = ioctl(fd, SIOCSIFADDR, &ifr);
+        if (ret < 0) {
+                ret = -errno;
+                goto err;
+        }
 
-	ret = ioctl(fd, SIOCGIFFLAGS, &ifr);
-	if (ret < 0) {
-		ret = -errno;
-		goto err;
-	}
-	ifr.ifr_flags |= IFF_UP | IFF_RUNNING;
-	ioctl(fd, SIOCSIFFLAGS, &ifr);
-	if (ret < 0)
-		ret = -errno;
+        ret = ioctl(fd, SIOCGIFFLAGS, &ifr);
+        if (ret < 0) {
+                ret = -errno;
+                goto err;
+        }
+        ifr.ifr_flags |= IFF_UP | IFF_RUNNING;
+        ioctl(fd, SIOCSIFFLAGS, &ifr);
+        if (ret < 0)
+                ret = -errno;
 err:
-	close(fd);
+        close(fd);
 
-	if (ret < 0)
-		return ret;
+        if (ret < 0)
+                return ret;
 
-	return 0;
+        return 0;
 }
 
 static int add_route(const char *dev, in_addr_t host_addr, in_addr_t mask)
 {
-	struct sockaddr_in *addr;
-	struct rtentry route;
-	int fd, ret;
+        struct sockaddr_in *addr;
+        struct rtentry route;
+        int fd, ret;
 
-	memset(&route, 0, sizeof(route));
+        memset(&route, 0, sizeof(route));
 
-	/* gateway IP */
-	addr = (struct sockaddr_in *)&route.rt_gateway;
-	addr->sin_family = AF_INET;
-	addr->sin_addr.s_addr = INADDR_ANY;
+        /* gateway IP */
+        addr = (struct sockaddr_in *)&route.rt_gateway;
+        addr->sin_family = AF_INET;
+        addr->sin_addr.s_addr = INADDR_ANY;
 
-	/* target IP */
-	addr = (struct sockaddr_in *)&route.rt_dst;
-	addr->sin_family = AF_INET;
-	addr->sin_addr.s_addr = host_addr & mask;
+        /* target IP */
+        addr = (struct sockaddr_in *)&route.rt_dst;
+        addr->sin_family = AF_INET;
+        addr->sin_addr.s_addr = host_addr & mask;
 
-	/* subnet mask */
-	addr = (struct sockaddr_in *)&route.rt_genmask;
-	addr->sin_family = AF_INET;
-	addr->sin_addr.s_addr = mask;
+        /* subnet mask */
+        addr = (struct sockaddr_in *)&route.rt_genmask;
+        addr->sin_family = AF_INET;
+        addr->sin_addr.s_addr = mask;
 
-	route.rt_flags = RTF_UP;
-	route.rt_metric = 0;
-	route.rt_dev = (char *)dev;
+        route.rt_flags = RTF_UP;
+        route.rt_metric = 0;
+        route.rt_dev = (char *)dev;
 
-	fd = socket(PF_INET, SOCK_DGRAM, IPPROTO_IP);
-	if (fd < 0)
-		return -errno;
- 	ret = ioctl(fd, SIOCADDRT, &route);
-	if (ret < 0)
-		ret = -errno;
-	close(fd);
+        fd = socket(PF_INET, SOCK_DGRAM, IPPROTO_IP);
+        if (fd < 0)
+                return -errno;
+        ret = ioctl(fd, SIOCADDRT, &route);
+        if (ret < 0)
+                ret = -errno;
+        close(fd);
 
-	if (ret < 0)
-		return ret;
+        if (ret < 0)
+                return ret;
 
-	return 0;
+        return 0;
 }
 
 static int setup_signal_handler(void)
 {
-	sigset_t mask;
-	int ret;
+        sigset_t mask;
+        int ret;
 
-	sigemptyset(&mask);
-	sigaddset(&mask, SIGINT);
-	sigaddset(&mask, SIGPIPE);
-	sigaddset(&mask, SIGHUP);
-	sigaddset(&mask, SIGTERM);
+        sigemptyset(&mask);
+        sigaddset(&mask, SIGINT);
+        sigaddset(&mask, SIGPIPE);
+        sigaddset(&mask, SIGHUP);
+        sigaddset(&mask, SIGTERM);
 
-	ret = sigprocmask(SIG_BLOCK, &mask, NULL);
-	if (ret) {
-		perror("Failed to setup signal mask");
-		return -errno;
-	}
+        ret = sigprocmask(SIG_BLOCK, &mask, NULL);
+        if (ret) {
+                perror("Failed to setup signal mask");
+                return -errno;
+        }
 
-	ret = signalfd(-1, &mask, 0);
-	if (ret < 0) {
-		perror("Failed to create signalfd");
-		return -errno;
-	}
+        ret = signalfd(-1, &mask, 0);
+        if (ret < 0) {
+                perror("Failed to create signalfd");
+                return -errno;
+        }
 
-	return ret;
+        return ret;
 }
 
 static int receive_data(int fd)
 {
-	int ret;
+        int ret;
 
-	do {
-		ret = read(fd, &tx_buffer[HEADER_DATA_SIZE + HEADER_FRAME_SIZE], MTU);
-	} while (ret == -1 && errno == EAGAIN);
+        do {
+                ret = read(fd, &tx_buffer[HEADER_DATA_SIZE + HEADER_FRAME_SIZE], MTU);
+        } while (ret == -1 && errno == EAGAIN);
 
-	if (ret < 0) {
-		perror("Failed to receive data");
-		return -errno;
-	}
+        if (ret < 0) {
+                perror("Failed to receive data");
+                return -errno;
+        }
 
-#if(DEBUG >= 2)	
-	printf("ETH: Received %d bytes of data....\n", ret);
+#if(DEBUG >= 1)
+        printf("ETH: Received %d bytes of data....\n", ret);
 #endif
-	
-#if(DEBUG >= 3)	
-	for(int i = 16; i < ret + 16; i++)
-		printf("%x, ", tx_buffer[i]);
-	printf("\n");
-#endif
-	
-	*(uint64_t*)(&tx_buffer[0]) = MTU + PADDING_SIZE + HEADER_FRAME_SIZE;
-	*(uint64_t*)(&tx_buffer[HEADER_DATA_SIZE]) = ret;
-	*(uint64_t*)(&tx_buffer[HEADER_FRAME_SIZE]) = ret;
-	modem_write((uint64_t*)tx_buffer, TX_BUF_SIZE, 0);
 
-#if(DEBUG >= 3)	
-	for(int i = 0; i < ret + HEADER_FRAME_SIZE + HEADER_DATA_SIZE; i++)
-		printf("%x, ", tx_buffer[i]);
-	printf("\n");
+#if(DEBUG >= 2)
+        for(int i = 16; i < ret + 16; i++)
+                printf("%x, ", tx_buffer[i]);
+        printf("\n");
 #endif
-	
-#if(DEBUG >= 2)	
-	printf("ETH: Received Done\n");
+
+        *(uint64_t*)(&tx_buffer[0]) = MTU + PADDING_SIZE + HEADER_FRAME_SIZE;
+        *(uint64_t*)(&tx_buffer[HEADER_DATA_SIZE]) = ret;
+        *(uint64_t*)(&tx_buffer[HEADER_FRAME_SIZE]) = ret;
+        tx_write((uint64_t*)tx_buffer, TX_BUF_SIZE, 0);
+
+#if(DEBUG >= 2)
+        for(int i = 0; i < ret + HEADER_FRAME_SIZE + HEADER_DATA_SIZE; i++)
+                printf("%x, ", tx_buffer[i]);
+        printf("\n");
 #endif
-	
-	return 0;
+
+#if(DEBUG >= 1)
+        printf("ETH: Received Done\n");
+#endif
+
+        return 0;
 }
 
 static int send_data(int fd, unsigned char* buf, size_t len)
 {
-	int ret;
-#if(DEBUG >= 3)	
-	int i;
-#endif
+        int ret;
+        int i;
 
-#if(DEBUG >= 2)	
-	printf("RADIO: Sent %d bytes of data\n", len);
-#endif
-
-	if(len > MTU)
-	{
 #if(DEBUG >= 1)
-		printf("RADIO: ERROR frame larger than MTU\n");
-#endif	
-		return -1;
-	}
-
-#if(DEBUG >= 3)
-	for(i = 0; i < len; i++)
-		printf("%x, ", buf[i]);
-	printf("\n");	
-#endif
-	
-	do {
-		ret = write(fd, buf, len);
-	} while (ret == -1 && errno == EAGAIN);
-
-	if (ret < 0) {
-		perror("RADIO: Failed to send data");
-		return -errno;
-	}
-
-#if(DEBUG >= 2)	
-	printf("RADIO: Sent Done\n");
+        printf("RADIO: Sent %d bytes of data\n", len);
 #endif
 
-	return 0;
+#if(DEBUG >= 2)
+        for(i = 0; i < len; i++)
+                printf("%x, ", buf[i]);
+        printf("\n");
+#endif
+
+        do {
+                ret = write(fd, buf, len);
+        } while (ret == -1 && errno == EAGAIN);
+
+        if (ret < 0) {
+                perror("RADIO: Failed to send data");
+                return -errno;
+        }
+
+#if(DEBUG >= 1)
+        printf("RADIO: Sent Done\n");
+#endif
+
+        return 0;
 }
 
-void *rx_thread_fnc(void* ptr) 
+void *rx_thread_fnc(void* ptr)
 {
-#if(DEBUG >= 3)	
-	int i = 0;
+        int i = 0;
+
+#if(DEBUG >= 1)
+        printf("Running Rx thread\n");
 #endif
-	
-	printf("TUN/TAP: Running Rx thread...\n");
-	
-	while(modem_running())
-	{
-		modem_read((uint64_t*)rx_buffer, RX_BUF_SIZE);
 
-	#if(DEBUG >= 3)		
-		for(i = 0; i < HEADER_FRAME_SIZE; i++)
-			printf("%x, ", rx_buffer[i]);
-		printf("\n");
-	#endif
-	#if(DEBUG >= 1)	
-		if(*(uint64_t*)&(rx_buffer[RX_BUF_SIZE - CRC_SIZE]))
-			printf("RADIO: CRC ERROR\n");
-	#endif	
-		//if(*(uint64_t*)&(rx_buffer[RX_BUF_SIZE - CRC_SIZE]) == 0)
-			send_data(pfd[1].fd, (unsigned char*)&rx_buffer[HEADER_FRAME_SIZE], *(uint64_t*)&rx_buffer[HEADER_FRAME_SIZE/2]);
-	}	
+        while(1)
+        {
+                rx_read((uint64_t*)rx_buffer, RX_BUF_SIZE);
 
-	printf("TUN/TAP: Exiting Rx thread\n");
-	
-	return NULL;
+        #if(DEBUG >= 2)
+                for(i = 0; i < HEADER_FRAME_SIZE; i++)
+                        printf("%x, ", rx_buffer[i]);
+                printf("\n");
+        #endif
+                send_data(pfd[1].fd, (unsigned char*)&rx_buffer[HEADER_FRAME_SIZE], *(uint64_t*)&rx_buffer[HEADER_FRAME_SIZE/2]);
+        }
+
+        return NULL;
 }
 
 int main(int argc, char *argv[])
 {
-	int ret;
-	int opt;
-	pthread_t rx_thread;
-	struct in_addr addr;
-	struct in_addr mask;
-	unsigned int usec_delay;
-	
-	addr.s_addr = INTERFACE_ADDRESS;
-	mask.s_addr = INTERFACE_NETMASK;
-	usec_delay = DELAY;
-	
-	while ((opt = getopt(argc, argv, "a:m:d:")) != -1) {
-        switch (opt) {
-        case 'a':
-			if (inet_aton(optarg, &addr) == 0) {
-				perror("Invalid IP address\n");
-				return 1;
-			}
-            break;
-		case 'm':
-			if (inet_aton(optarg, &mask) == 0) {
-				perror("Invalid IP mask\n");
-				return 1;
-			}
-            break;
-		case 'd':
-			usec_delay = atoi(optarg);
-            break;
-        default: /* '?' */
-            fprintf(stderr, "Usage: %s [-a IP address] [-m IP mask] [-d us delay between frames]\n", argv[0]);
-		}
-    }
+        int ret;
+        pthread_t rx_thread;
 
-	printf("Running TUN/TAP daemon...\n");
-	printf("   *IP address: %s\n", inet_ntoa(addr));
-	printf("   *Netmask: %s\n", inet_ntoa(mask));
-	printf("   *Max data rate: %d kBps\n", (unsigned int)(((float)MTU / usec_delay) * 1e3f));
-	
-	ret = setup_signal_handler();
-	if (ret < 0)
-		return 1;
+        printf("Running TUN/TAP daemon...\n");
 
-	pfd[0].fd = ret;
-	pfd[0].events = POLLIN;
+        ret = setup_signal_handler();
+        if (ret < 0)
+                return 1;
 
-	ret = tun_alloc(INTERFACE_NAME, IFF_TUN | IFF_NO_PI);
-	if (ret < 0) {
-		perror("TUN/TAP: Failed to create TUN device");
-		return 1;
-	}
+        pfd[0].fd = ret;
+        pfd[0].events = POLLIN;
 
-	pfd[1].fd = ret;
-	pfd[1].events = POLLIN;
+        ret = tun_alloc(INTERFACE_NAME, IFF_TAP | IFF_NO_PI);
+        if (ret < 0) {
+                perror("Failed to create TUN device");
+                return 1;
+        }
 
-	ret = set_ip(INTERFACE_NAME, addr.s_addr);
-	if (ret < 0) {
-		perror("TUN/TAP: Failed to set IP address on TUN device");
-		return 1;
-	}
+        pfd[1].fd = ret;
+        pfd[1].events = POLLIN;
 
-	ret = add_route(INTERFACE_NAME, addr.s_addr, mask.s_addr);
-	if (ret < 0) {
-		perror("TUN/TAP: Failed to create route");
-		return 1;
-	}
+        ret = set_ip(INTERFACE_NAME, INTERFACE_ADDRESS);
+        if (ret < 0) {
+                perror("Failed to set IP address on TUN device");
+                return 1;
+        }
 
-	ret = modem_setup();
-	if(ret)
+        ret = add_route(INTERFACE_NAME, INTERFACE_ADDRESS, INTERFACE_NETMASK);
+        if (ret < 0) {
+                perror("Failed to create route");
+                return 1;
+        }
+
+        ret = modem_reset();
+        if(ret)
     {
-        perror("TUN/TAP: Failed to setup modem");
-        return ret;
-    }
-	
-	ret = modem_reset();
-	if(ret)
-    {
-        perror("TUN/TAP: Failed to reset modem");
-        return 1;
-    }
-	
-	ret = modem_start();
-	if(ret)
-    {
-        perror("TUN/TAP: Failed to start modem");
+        perror("Failed to reset Modem");
         return 1;
     }
 
-	ret = pthread_create(&rx_thread, NULL, rx_thread_fnc, NULL);
+        ret = tx_setup();
+        if(ret)
+    {
+        perror("Failed to setup Tx");
+        return 1;
+    }
+
+        ret = rx_setup();
+        if(ret)
+    {
+        perror("Failed to setup Rx");
+        return 1;
+    }
+
+        ret = pthread_create(&rx_thread, NULL, rx_thread_fnc, NULL);
     if(ret)
     {
-        perror("TUN/TAP: Error - pthread_create");
+        perror("Error - pthread_create");
         return 1;
     }
-	
-	while (1) {
-		do {
-			ret = poll(pfd, 2, -1);
-		} while (ret == -1 && errno == EINTR);
 
-		/* If any signals are pending cleanup and exit */
-		if (pfd[0].revents & POLLIN)
-			break;
+        while (1) {
+                do {
+                        ret = poll(pfd, 2, -1);
+                } while (ret == -1 && errno == EINTR);
 
-		if (pfd[1].revents & POLLIN) {
-			ret = receive_data(pfd[1].fd);
-			if (ret < 0)
-				break;
-			usleep(usec_delay);
-		}
-	}
-	
-	modem_stop();
-	pthread_join(rx_thread, NULL);
-	modem_close();
-	
-	close(pfd[1].fd);
-	close(pfd[0].fd);
+                /* If any signals are pending cleanup and exit */
+                if (pfd[0].revents & POLLIN)
+                        break;
 
-	printf("Exiting TUN/TAP daemon\n");
+                if (pfd[1].revents & POLLIN) {
+                        ret = receive_data(pfd[1].fd);
+                        if (ret < 0)
+                                break;
+                        usleep(10000);
+                }
+        }
 
-	return 0;
+        pthread_join(rx_thread, NULL);
+
+        close(pfd[1].fd);
+        close(pfd[0].fd);
+
+        rx_close();
+        tx_close();
+
+        printf("Exiting TUN/TAP daemon\n");
+
+        return 0;
 }

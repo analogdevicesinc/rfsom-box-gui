@@ -31,7 +31,7 @@ void AppVideoPlayer::unload()
 {
 	if (proc!=nullptr) {
 		proc->write("q");
-		proc->waitForFinished();
+		proc->waitForFinished(1000);
 		delete proc;
 		proc=nullptr;
 	}

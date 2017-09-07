@@ -73,5 +73,6 @@ done
 echo 0x44 0x1 > /sys/kernel/debug/iio/iio:device3/direct_reg_access
 cat /sys/kernel/debug/iio/iio:device3/direct_reg_access
 
+mknod /dev/net/tap c 10 200
 /usr/local/bin/modemd -a $ip -m $subnet -d $delay &
 echo Done

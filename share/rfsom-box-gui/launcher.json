@@ -63,7 +63,7 @@
           "subtype": "enum",
           "cmd_read": "iio_attr -q -d ad9361-phy ensm_mode",
           "cmd_read_timer": "read_once",
-          "cmd_write": "iio_attr -q -d ad9361-phy ensm_mode $EDIT_VAL",
+          "cmd_write": "iio_attr -q -d ad9361-phy ensm_mode $EDIT_VAL;echo $EDIT_VAL > /usr/local/etc/rfsom-box-gui/radio-ensm_mode",
           "enum": [
             "fdd",
             "alert",
@@ -80,7 +80,7 @@
           "min_value": 70000000,
           "cmd_read": "iio_attr -q -c ad9361-phy altvoltage0 frequency",
           "cmd_read_timer": "read_once",
-          "cmd_write": "iio_attr -q -c ad9361-phy altvoltage0 frequency $EDIT_VAL"
+          "cmd_write": "iio_attr -q -c ad9361-phy altvoltage0 frequency $EDIT_VAL;echo $EDIT_VAL > /usr/local/etc/rfsom-box-gui/radio-rx_lo_freq"
         },
         {
           "description": "TX LO Frequency (Hz)",
@@ -90,7 +90,7 @@
           "min_value": 46875001,
           "cmd_read": "iio_attr -q -c ad9361-phy altvoltage1 frequency",
           "cmd_read_timer": "read_once",
-          "cmd_write": "iio_attr -q -c ad9361-phy altvoltage1 frequency $EDIT_VAL"
+          "cmd_write": "iio_attr -q -c ad9361-phy altvoltage1 frequency $EDIT_VAL;echo $EDIT_VAL > /usr/local/etc/rfsom-box-gui/radio-tx_lo_freq"
         },
         {
           "description": "Baseband Rate (Hz)",
@@ -100,7 +100,7 @@
           "min_value": 520833,
           "cmd_read": "iio_attr -q -i -c ad9361-phy voltage0 sampling_frequency",
           "cmd_read_timer": "read_once",
-          "cmd_write": "iio_attr -q -i -c ad9361-phy voltage0 sampling_frequency $EDIT_VAL"
+          "cmd_write": "iio_attr -q -i -c ad9361-phy voltage0 sampling_frequency $EDIT_VAL;echo $EDIT_VAL > /usr/local/etc/rfsom-box-gui/radio-sampling_freq"
         },
         {
           "description": "RX RF Bandwidth (Hz)",
@@ -110,7 +110,7 @@
           "min_value": 0,
           "cmd_read": "iio_attr -q -i -c ad9361-phy voltage0 rf_bandwidth",
           "cmd_read_timer": "read_once",
-          "cmd_write": "iio_attr -q -i -c ad9361-phy voltage0 rf_bandwidth $EDIT_VAL"
+          "cmd_write": "iio_attr -q -i -c ad9361-phy voltage0 rf_bandwidth $EDIT_VAL;echo $EDIT_VAL > /usr/local/etc/rfsom-box-gui/radio-rx_rf_bandwidth"
         },
         {
           "description": "TX RF Bandwidth (Hz)",
@@ -120,7 +120,7 @@
           "min_value": 0,
           "cmd_read": "iio_attr -q -o -c ad9361-phy voltage0 rf_bandwidth",
           "cmd_read_timer": "read_once",
-          "cmd_write": "iio_attr -q -o -c ad9361-phy voltage0 rf_bandwidth $EDIT_VAL"
+          "cmd_write": "iio_attr -q -o -c ad9361-phy voltage0 rf_bandwidth $EDIT_VAL;echo $EDIT_VAL > /usr/local/etc/rfsom-box-gui/radio-tx_rf_bandwidth"
         },
         {
           "description": "TX Attenuation (dB)",
@@ -130,7 +130,7 @@
           "min_value": 0,
           "cmd_read": "echo \"$(iio_attr -q -o  -c ad9361-phy voltage0 hardwaregain | cut -d '.' -f 1)  * -1 \" | bc",
           "cmd_read_timer": "read_once",
-          "cmd_write": "iio_attr -q -o -c ad9361-phy voltage0 hardwaregain $(echo \"$EDIT_VAL * -1\" | bc)"
+          "cmd_write": "iio_attr -q -o -c ad9361-phy voltage0 hardwaregain $(echo \"$EDIT_VAL * -1\" | bc);echo $EDIT_VAL > /usr/local/etc/rfsom-box-gui/radio-tx_atten"
         },
         {
           "description": "RX Gain Control Mode",
@@ -138,7 +138,7 @@
           "subtype": "enum",
           "cmd_read": "iio_attr -q -i -c ad9361-phy voltage0 gain_control_mode",
           "cmd_read_timer": "read_once",
-          "cmd_write": "iio_attr -q -i -c ad9361-phy voltage0 gain_control_mode $EDIT_VAL",
+          "cmd_write": "iio_attr -q -i -c ad9361-phy voltage0 gain_control_mode $EDIT_VAL;echo $EDIT_VAL > /usr/local/etc/rfsom-box-gui/radio-rx_gain_ctrl_mode",
           "enum": [
             "manual",
             "slow_attack",
@@ -154,7 +154,7 @@
           "min_value": 0,
           "cmd_read": "iio_attr -q -i -c ad9361-phy voltage0 hardwaregain | cut -d '.' -f 1",
           "cmd_read_timer": 2,
-          "cmd_write": "iio_attr -q -i -c ad9361-phy voltage0 hardwaregain $EDIT_VAL"
+          "cmd_write": "iio_attr -q -i -c ad9361-phy voltage0 hardwaregain $EDIT_VAL; echo $EDIT_VAL > /usr/local/etc/rfsom-box-gui/radio-rx_gain"
         },
         {
           "description": "RX RSSI (dB)",
@@ -166,20 +166,20 @@
           "description": "RX BB DC Offset Tracking",
           "type": "checkbox",
           "cmd_write": "iio_attr -q -i -c ad9361-phy voltage0 bb_dc_offset_tracking_en $CHECKBOX_VAL",
-          "cmd_read": "iio_attr -q -i -c ad9361-phy voltage0 bb_dc_offset_tracking_en",
+          "cmd_read": "iio_attr -q -i -c ad9361-phy voltage0 bb_dc_offset_tracking_en;echo $EDIT_VAL > /usr/local/etc/rfsom-box-gui/radio-rx_bb_dc_offset_track",
           "cmd_read_timer": "read_once"
         },
         {
           "description": "RX RF DC Offset Tracking",
           "type": "checkbox",
-          "cmd_write": "iio_attr -q -i -c ad9361-phy voltage0 rf_dc_offset_tracking_en $CHECKBOX_VAL",
+          "cmd_write": "iio_attr -q -i -c ad9361-phy voltage0 rf_dc_offset_tracking_en $CHECKBOX_VAL;echo $EDIT_VAL > /usr/local/etc/rfsom-box-gui/radio-rx_rf_dc_offset_track",
           "cmd_read": "iio_attr -q -i -c ad9361-phy voltage0 rf_dc_offset_tracking_en",
           "cmd_read_timer": "read_once"
         },
         {
           "description": "RX Quadrature Tracking",
           "type": "checkbox",
-          "cmd_write": "iio_attr -q -i -c ad9361-phy voltage0 quadrature_tracking_en $CHECKBOX_VAL",
+          "cmd_write": "iio_attr -q -i -c ad9361-phy voltage0 quadrature_tracking_en $CHECKBOX_VAL;echo $EDIT_VAL > /usr/local/etc/rfsom-box-gui/radio-rx_quad_track",
           "cmd_read": "iio_attr -q -i -c ad9361-phy voltage0 quadrature_tracking_en",
           "cmd_read_timer": "read_once"
         },
@@ -191,12 +191,12 @@
           "min_value": 0,
           "cmd_read": "iio_attr -q -d ad9361-phy xo_correction",
           "cmd_read_timer": 1,
-          "cmd_write": "iio_attr -q -d ad9361-phy xo_correction $EDIT_VAL"
+          "cmd_write": "iio_attr -q -d ad9361-phy xo_correction $EDIT_VAL;echo $EDIT_VAL > /usr/local/etc/rfsom-box-gui/radio-xo_correction"
         },
         {
           "description": "Calibrate XO",
           "type": "btn",
-          "cmd": "/usr/local/bin/cal_ad9361 -a -g",
+          "cmd": "/usr/local/bin/cal_ad9361 -a -g;iio_attr -q -d ad9361-phy xo_correction > /usr/local/etc/rfsom-box-gui/radio-xo_correction",
           "background_task": true,
           "stylesheet": ""
         }

@@ -19,24 +19,61 @@ if [ $? -eq 0 ]; then
 	echo 973 > /sys/class/gpio/export;
 	echo 974 > /sys/class/gpio/export;
 
-	if [ ! -d /usr/local/etc/rfsom-box-gui ]; then
-		mkdir /usr/local/etc/rfsom-box-gui
+	cfg_path=/usr/local/etc/rfsom-box-gui
+	if [ ! -d $cfg_path ]; then
+		mkdir $cfg_path 
 	fi	
-	if [ ! -e /usr/local/etc/rfsom-box-gui/modem-ip ]; then
-		echo 192.168.23.1 > //usr/local/etc/rfsom-box-gui/modem-ip
-	fi	
-	if [ ! -e /usr/local/etc/rfsom-box-gui/modem-subnet ]; then
-		echo 255.255.255.0 > /usr/local/etc/rfsom-box-gui/modem-subnet
+	# Radio config
+	if [ -e $cfg_path/radio-ensm_mode ]; then
+		iio_attr -q -d ad9361-phy ensm_mode $(cat $cfg_path/radio-ensm_mode)
 	fi
-	if [ ! -e /usr/local/etc/rfsom-box-gui/modem-delay ]; then
-		echo 10000 > /usr/local/etc/rfsom-box-gui/modem-delay
-	fi	
-	if [ ! -e /usr/local/etc/rfsom-box-gui/modem-port ]; then
-		echo 2000 > /usr/local/etc/rfsom-box-gui/modem-port
-	fi	
-	if [ ! -e /usr/local/etc/rfsom-box-gui/stream-ip ]; then
-		echo 192.168.23.2 >  /usr/local/etc/rfsom-box-gui/stream-ip
+	if [ -e $cfg_path/radio-rx_lo_freq ]; then
+		iio_attr -q -c ad9361-phy altvoltage0 frequency $(cat $cfg_path/radio-rx_lo_freq)
 	fi
+	if [ -e $cfg_path/radio-tx_lo_freq ]; then
+		iio_attr -q -c ad9361-phy altvoltage1 frequency $(cat $cfg_path/radio-tx_lo_freq)
+	fi
+	if [ -e $cfg_path/radio-sampling_freq ]; then
+		iio_attr -q -i -c ad9361-phy voltage0 sampling_frequency $(cat $cfg_path/radio-sampling_freq)
+	fi
+	if [ -e $cfg_path/radio-rx_rf_bandwidth ]; then
+		iio_attr -q -i -c ad9361-phy voltage0 rf_bandwidth $(cat $cfg_path/radio-rx_rf_bandwidth)
+	fi
+	if [ -e $cfg_path/radio-tx_rf_bandwidth ]; then
+		iio_attr -q -o -c ad9361-phy voltage0 rf_bandwidth $(cat $cfg_path/radio-tx_rf_bandwidth)
+	fi
+	if [ -e $cfg_path/radio-tx_atten ]; then
+		iio_attr -q -o -c ad9361-phy voltage0 hardwaregain $(echo "$(cat $cfg_path/radio-tx_atten) * -1" |  bc)	
+	fi
+	if [ -e $cfg_path/radio-rx_gain_ctrl_mode ]; then
+		iio_attr -q -i -c ad9361-phy voltage0 gain_control_mode $(cat $cfg_path/radio-rx_gain_ctrl_mode)
+	fi
+	if [ -e $cfg_path/radio-rx_gain ]; then
+		iio_attr -q -i -c ad9361-phy voltage0 hardwaregain $(cat $cfg_path/radio-rx_gain)
+	fi
+
+	if [ -e $cfg_path/radio-xo_correction ]; then
+		iio_attr -q -d ad9361-phy xo_correction $(cat $cfg_path/radio-xo_correction)
+	fi
+
+
+	#Modem config
+	if [ ! -e $cfg_path/modem-ip ]; then
+		echo 192.168.23.1 > $cfg_path/modem-ip
+	fi	
+	if [ ! -e $cfg_path/modem-subnet ]; then
+		echo 255.255.255.0 > $cfg_path/modem-subnet
+	fi
+	if [ ! -e $cfg_path/modem-delay ]; then
+		echo 10000 > $cfg_path/modem-delay
+	fi	
+	if [ ! -e $cfg_path/modem-port ]; then
+		echo 2000 > $cfg_path/modem-port
+	fi	
+	if [ ! -e $cfg_path/stream-ip ]; then
+		echo 192.168.23.2 >  $cfg_path/stream-ip
+	fi
+
 
 	QT_QPA_EVDEV_KEYBOARD_PARAMETERS=/dev/input/by-path/platform-gpio-keys-nav-switch-event:grab=1 \
 	QT_QPA_EVDEV_MOUSE_PARAMETERS=/dev/input/by-path/platform-rotary-event:grab=1 \

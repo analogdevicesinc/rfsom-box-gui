@@ -38,42 +38,33 @@ void LauncherPage::loadJsonConfig(QString jsonFileName)
 
 void LauncherPage::buildUi(int index)
 {
-	if (oldIndex != index) {
-		//auto key = item->text();
-		auto uiJson = launcher[index].toObject();
-		auto name = uiJson["name"];
-		auto type = uiJson["type"];
-		auto params = uiJson["params"];
+	//auto key = item->text();
+	auto uiJson = launcher[index].toObject();
+	auto name = uiJson["name"];
+	auto type = uiJson["type"];
+	auto params = uiJson["params"];
 
-		qDebug()<<"name "<<name;
-		qDebug()<<"type "<<type;
+	qDebug()<<"name "<<name;
+	qDebug()<<"type "<<type;
 
-		QStringList myOptions;
-		myOptions << "list" << "video" <<"imu";// << "goRegister";
+	QStringList myOptions;
+	myOptions << "list" << "video" <<"imu";// << "goRegister";
 
-		switch (myOptions.indexOf(type.toString())) {
-		case 0:
-			currentApp->destroyUi();
-			delete currentApp;
-			currentApp = new AppGenericList(params,ui->appLayout,ui->appPage);
-			// set keys
-			break;
+	switch (myOptions.indexOf(type.toString())) {
+	case 0:
 
-		case 1:
-			currentApp->destroyUi();
-			delete currentApp;
-			currentApp = new AppVideoPlayer(params,ui->appLayout, ui->appPage);
+		currentApp = new AppGenericList(params,ui->appLayout,ui->appPage);
+		break;
 
-		default:
-			break;
-		}
+	case 1:
+		currentApp = new AppVideoPlayer(params,ui->appLayout, ui->appPage);
 
-		currentApp->buildUi();
-		oldIndex = index;
-
-	} else {
-		currentApp->load();
+	default:
+		break;
 	}
+
+	currentApp->buildUi();
+	oldIndex = index;
 }
 
 void LauncherPage::unload()
@@ -84,7 +75,13 @@ void LauncherPage::unload()
 void LauncherPage::load()
 {
 	qDebug()<<"load";
-	currentApp->unload();
+	if(currentApp)
+	{
+		currentApp->unload();
+		currentApp->destroyUi();
+		delete currentApp;
+		currentApp=nullptr;
+	}
 	list->setFocus();
 	qDebug()<<updatesEnabled();
 	update();

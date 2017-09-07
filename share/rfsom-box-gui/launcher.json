@@ -192,6 +192,13 @@
           "cmd_read": "iio_attr -q -d ad9361-phy xo_correction",
           "cmd_read_timer": "read_once",
           "cmd_write": "iio_attr -q -d ad9361-phy xo_correction $EDIT_VAL"
+        },
+        {
+          "description": "Calibrate XO",
+          "type": "btn",
+          "cmd": "/usr/local/bin/cal_ad9361 -a -g",
+          "background_task": true,
+          "stylesheet": ""
         }
       ]
     },
@@ -209,25 +216,25 @@
           "description": "Device IP Address",
           "type": "edit",
           "subtype": "ip",
-          "cmd_read": "cat /tmp/modem-ip",
+          "cmd_read": "cat /usr/local/etc/rfsom-box-gui/modem-ip",
           "cmd_read_timer": 1,
-          "cmd_write": "echo $EDIT_VAL > /tmp/modem-ip"
+          "cmd_write": "echo $EDIT_VAL > /usr/local/etc/rfsom-box-gui/modem-ip"
         },
         {
           "description": "Device Subnet Mask",
           "type": "edit",
           "subtype": "ip",
-          "cmd_read": "cat /tmp/modem-subnet",
+          "cmd_read": "cat /usr/local/etc/rfsom-box-gui/modem-subnet",
           "cmd_read_timer": 1,
-          "cmd_write": "echo $EDIT_VAL > /tmp/modem-subnet"
+          "cmd_write": "echo $EDIT_VAL > /usr/local/etc/rfsom-box-gui/modem-subnet"
         },
         {
           "description": "Peer IP Address",
           "type": "edit",
           "subtype": "ip",
-          "cmd_read": "cat /tmp/stream-ip",
+          "cmd_read": "cat /usr/local/etc/rfsom-box-gui/stream-ip",
           "cmd_read_timer": 1,
-          "cmd_write": "echo $EDIT_VAL > /tmp/stream-ip"
+          "cmd_write": "echo $EDIT_VAL > /usr/local/etc/rfsom-box-gui/stream-ip"
         },
         {
           "description": "Port",
@@ -235,9 +242,9 @@
           "subtype": "numeric",
           "min_value": 1025,
           "max_value": 65535,
-          "cmd_read": "cat /tmp/modem-port",
+          "cmd_read": "cat /usr/local/etc/rfsom-box-gui/modem-port",
           "cmd_read_timer": 1,
-          "cmd_write": "echo $EDIT_VAL > /tmp/modem-port"
+          "cmd_write": "echo $EDIT_VAL > /usr/local/etc/rfsom-box-gui/modem-port"
         },
         {
           "description": "Delay",
@@ -245,9 +252,9 @@
           "subtype": "numeric",
           "min_value": 0,
           "max_value": 1000000,
-          "cmd_read": "cat /tmp/modem-delay",
+          "cmd_read": "cat /usr/local/etc/rfsom-box-gui/modem-delay",
           "cmd_read_timer": 1,
-          "cmd_write": "echo $EDIT_VAL > /tmp/modem-delay"
+          "cmd_write": "echo $EDIT_VAL > /usr/local/etc/rfsom-box-gui/modem-delay"
         },
         {
           "description": "Restart",
@@ -277,7 +284,7 @@
   },
   {
     "params": {
-      "cmd": "ip=$(cat /tmp/modem-ip);port=$(cat /tmp/modem-port);netcat -l $ip -p $port| mplayer -fps 20 -vf scale -zoom -x 160 -y 128 -nosound -vo fbdev -cache 32 -cache-min 1 -"
+      "cmd": "ip=$(cat /usr/local/etc/rfsom-box-gui/modem-ip);port=$(cat /usr/local/etc/rfsom-box-gui/modem-port);netcat -l $ip -p $port| mplayer -fps 20 -vf scale -zoom -x 160 -y 128 -nosound -vo fbdev -cache 32 -cache-min 1 -"
     },
     "type": "video",
     "name": "Recv Video"

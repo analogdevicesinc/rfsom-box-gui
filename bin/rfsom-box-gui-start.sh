@@ -18,11 +18,26 @@ if [ $? -eq 0 ]; then
 	echo 972 > /sys/class/gpio/export;
 	echo 973 > /sys/class/gpio/export;
 	echo 974 > /sys/class/gpio/export;
-	echo 192.168.23.1 > /tmp/modem-ip
-	echo 255.255.255.0 > /tmp/modem-subnet
-	echo 10000 > /tmp/modem-delay
-	echo 2000 > /tmp/modem-port
-	echo 192.168.23.2 > /tmp/stream-ip
+
+	if [ ! -d /usr/local/etc/rfsom-box-gui ]; then
+		mkdir /usr/local/etc/rfsom-box-gui
+	fi	
+	if [ ! -e /usr/local/etc/rfsom-box-gui/modem-ip ]; then
+		echo 192.168.23.1 > //usr/local/etc/rfsom-box-gui/modem-ip
+	fi	
+	if [ ! -e /usr/local/etc/rfsom-box-gui/modem-subnet ]; then
+		echo 255.255.255.0 > /usr/local/etc/rfsom-box-gui/modem-subnet
+	fi
+	if [ ! -e /usr/local/etc/rfsom-box-gui/modem-delay ]; then
+		echo 10000 > /usr/local/etc/rfsom-box-gui/modem-delay
+	fi	
+	if [ ! -e /usr/local/etc/rfsom-box-gui/modem-port ]; then
+		echo 2000 > /usr/local/etc/rfsom-box-gui/modem-port
+	fi	
+	if [ ! -e /usr/local/etc/rfsom-box-gui/stream-ip ]; then
+		echo 192.168.23.2 >  /usr/local/etc/rfsom-box-gui/stream-ip
+	fi
+
 	QT_QPA_EVDEV_KEYBOARD_PARAMETERS=/dev/input/by-path/platform-gpio-keys-nav-switch-event:grab=1 \
 	QT_QPA_EVDEV_MOUSE_PARAMETERS=/dev/input/by-path/platform-rotary-event:grab=1 \
 	QT_QPA_FB_DRM=1 \

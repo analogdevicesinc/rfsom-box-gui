@@ -541,5 +541,31 @@
     },
     "type": "video",
     "name": "GPS Map"
-  }
+  },
+  {
+    "params": {
+      "timers": [
+        1000,
+        5000
+      ],
+      "elements": [
+        {
+          "description": "Reboot",
+          "type": "btn",
+          "cmd": "reboot",
+          "background_task": true,
+          "stylesheet": ""
+        },
+        {
+          "description": "Shut down",
+          "type": "btn",
+          "cmd": "poweroff",
+          "background_task": true,
+          "stylesheet": ""
+        }
+      ]
+    },
+    "type": "list",
+    "name": "System"
+  } 
 ]

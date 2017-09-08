@@ -88,5 +88,15 @@ if [ $? -eq 0 ]; then
 	QT_QPA_GENERIC_PLUGINS=evdevmouse,evdevkeyboard \
 	FRAMEBUFFER=/dev/fb0 \
         /usr/local/bin/rfsom-box-gui > /var/log/rfsom-box-gui 2>&1 &
+else
+set -x
+	# could it still be the BOX, with a wrong model?
+	iio_attr -a -d | grep -q ad7291-ccbox
+	if [ $? -eq 0 ]; then
+		command fw_setenv >/dev/null 2>&1
+		if [ $? -eq 1 ]; then
+			fw_setenv model "Analog Devices ADRV9361-Z7035 RFSOM-BOX (Z7035/AD9361)"
+		fi
+	fi
 fi
 

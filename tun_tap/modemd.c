@@ -45,7 +45,7 @@ static struct 	pollfd pfd[2];
 
 static int tun_alloc(const char *name, int flags)
 {
-	static const char *clonedev = "/dev/net/tun";
+	static const char *clonedev = "/dev/net/tap";
 	struct ifreq ifr;
 	int fd, ret;
 
@@ -333,9 +333,9 @@ int main(int argc, char *argv[])
 	pfd[0].fd = ret;
 	pfd[0].events = POLLIN;
 
-	ret = tun_alloc(INTERFACE_NAME, IFF_TUN | IFF_NO_PI);
+	ret = tun_alloc(INTERFACE_NAME, IFF_TAP | IFF_NO_PI);
 	if (ret < 0) {
-		perror("TUN/TAP: Failed to create TUN device");
+		perror("TUN/TAP: Failed to create TAP device");
 		return 1;
 	}
 
@@ -344,7 +344,7 @@ int main(int argc, char *argv[])
 
 	ret = set_ip(INTERFACE_NAME, addr.s_addr);
 	if (ret < 0) {
-		perror("TUN/TAP: Failed to set IP address on TUN device");
+		perror("TUN/TAP: Failed to set IP address on TAP device");
 		return 1;
 	}
 

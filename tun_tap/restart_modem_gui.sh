@@ -1,8 +1,8 @@
 #!/bin/sh
 
-ip=$(cat /tmp/modem-ip)
-subnet=$(cat /tmp/modem-subnet)
-delay=$(cat /tmp/modem-delay)
+ip=$(cat /usr/local/etc/rfsom-box-gui/modem-ip)
+subnet=$(cat /usr/local/etc/rfsom-box-gui/modem-subnet)
+delay=$(cat /usr/local/etc/rfsom-box-gui/modem-delay)
 echo $ip
 echo $subnet
 echo $delay

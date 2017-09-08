@@ -51,6 +51,9 @@ if [ $? -eq 0 ]; then
 	if [ -e $cfg_path/radio-rx_gain ]; then
 		iio_attr -q -i -c ad9361-phy voltage0 hardwaregain $(cat $cfg_path/radio-rx_gain)
 	fi
+	if [ ! -e $cfg_path/netcat-param ]; then
+		touch $cfg_path/netcat-param
+	fi
 
 	if [ -e $cfg_path/radio-xo_correction ]; then
 		iio_attr -q -d ad9361-phy xo_correction $(cat $cfg_path/radio-xo_correction)

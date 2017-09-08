@@ -257,6 +257,13 @@
           "cmd_write": "echo $EDIT_VAL > /usr/local/etc/rfsom-box-gui/modem-delay"
         },
         {
+          "description": "UDP",
+          "type": "checkbox",
+          "cmd_write": "if [ \"$CHECKBOX_VAL\" -eq \"1\" ]; then printf \"%s\"-u > /usr/local/etc/rfsom-box-gui/netcat-param;else rm /usr/local/etc/rfsom-box-gui/netcat-param;touch /usr/local/etc/rfsom-box-gui/netcat-param;fi",
+          "cmd_read": "if [ ! -s /usr/local/etc/rfsom-box-gui/netcat-param ]; then echo 0; else echo 1;fi",
+          "cmd_read_timer": 0
+        },
+        {
           "description": "Restart",
           "type": "btn",
           "cmd": "/usr/local/bin/restart_modem_gui.sh",
@@ -284,7 +291,7 @@
   },
   {
     "params": {
-      "cmd": "ip=$(cat /usr/local/etc/rfsom-box-gui/modem-ip);port=$(cat /usr/local/etc/rfsom-box-gui/modem-port);netcat -l $ip -p $port| mplayer -fps 20 -vf scale -zoom -x 160 -y 128 -nosound -vo fbdev -cache 32 -cache-min 1 -"
+      "cmd": "ip=$(cat /usr/local/etc/rfsom-box-gui/modem-ip);port=$(cat /usr/local/etc/rfsom-box-gui/modem-port);udp=$(cat /usr/local/etc/rfsom-box-gui/netcat-param);netcat -l $udp $ip -p $port| mplayer -fps 20 -vf scale -zoom -x 160 -y 128 -nosound -vo fbdev -cache 32 -cache-min 1 -"
     },
     "type": "video",
     "name": "Recv Video"
@@ -567,5 +574,5 @@
     },
     "type": "list",
     "name": "System"
-  } 
+  }
 ]

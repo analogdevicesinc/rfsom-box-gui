@@ -45,7 +45,7 @@ static struct 	pollfd pfd[2];
 
 static int tun_alloc(const char *name, int flags)
 {
-	static const char *clonedev = "/dev/net/tap";
+	static const char *clonedev = "/dev/net/tun";
 	struct ifreq ifr;
 	int fd, ret;
 

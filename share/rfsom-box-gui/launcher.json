@@ -551,18 +551,18 @@
   },
   {
     "params": {
+      "cmd": "bterm -f -f /usr/share/fonts/truetype/droid/DroidSansMono.bgf /bin/bash < /dev/tty0"
+    },
+    "type": "video",
+    "name": "Terminal"
+  },
+  {
+    "params": {
       "timers": [
         1000,
         5000
       ],
       "elements": [
-        {
-          "description": "Terminal",
-          "type": "btn",
-          "cmd": "bterm -f -f /usr/share/fonts/truetype/droid/DroidSansMono.bgf /bin/bash < /dev/tty0",
-          "background_task": false,
-          "stylesheet": ""
-        },
         {
           "description": "Reboot",
           "type": "btn",

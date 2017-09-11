@@ -27,6 +27,8 @@ public:
 	bool getRunInBackground() const;
 	void setRunInBackground(bool value);
 
+	int getReturnVal() const;
+
 public slots:
 	virtual QString run();
 	virtual void scriptFinished(int);

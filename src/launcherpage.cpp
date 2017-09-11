@@ -57,7 +57,7 @@ void LauncherPage::buildUi(int index)
 		break;
 
 	case 1:
-		currentApp = new AppVideoPlayer(params,ui->appLayout, ui->appPage);
+		currentApp = new AppVideoPlayer(params,ui->appLayout,ui->plainTextEdit, ui->appPage);
 
 	default:
 		break;

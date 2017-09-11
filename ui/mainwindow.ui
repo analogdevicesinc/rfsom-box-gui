@@ -44,6 +44,12 @@ color:white;
      <verstretch>0</verstretch>
     </sizepolicy>
    </property>
+   <property name="maximumSize">
+    <size>
+     <width>160</width>
+     <height>128</height>
+    </size>
+   </property>
    <layout class="QVBoxLayout" name="verticalLayout">
     <property name="spacing">
      <number>0</number>
@@ -244,6 +250,16 @@ QScrollBar::sub-line:vertical {
         <property name="bottomMargin">
          <number>0</number>
         </property>
+        <item>
+         <widget class="QPlainTextEdit" name="plainTextEdit">
+          <property name="maximumSize">
+           <size>
+            <width>160</width>
+            <height>128</height>
+           </size>
+          </property>
+         </widget>
+        </item>
        </layout>
       </widget>
      </widget>

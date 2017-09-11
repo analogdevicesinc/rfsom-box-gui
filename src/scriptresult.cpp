@@ -13,6 +13,11 @@ void ScriptResult::setRunInBackground(bool value)
 	runInBackground = value;
 }
 
+int ScriptResult::getReturnVal() const
+{
+	return proc->exitCode();
+}
+
 ScriptResult::ScriptResult(QString cmd, QObject *parent) : StringValue(parent),
 	cmd(cmd),proc(nullptr),runInBackground(false)
 

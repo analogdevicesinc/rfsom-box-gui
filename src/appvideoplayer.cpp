@@ -6,14 +6,17 @@
 #include <QTime>
 #include <QPlainTextEdit>
 
-AppVideoPlayer::AppVideoPlayer(QJsonValue params, QLayout *lay, QPlainTextEdit* te,
-			       QWidget *parent) : App(parent) , params(params), lay(lay), te(te)
+AppVideoPlayer::AppVideoPlayer(QJsonValue params, QLayout *lay, //QPlainTextEdit* te,
+			       QWidget *parent) : App(parent) , params(params), lay(lay), te(nullptr)
 {
 	proc=nullptr;
 	cmd = params.toObject()["cmd"].toString();
+	te=new QPlainTextEdit(parent);
+	te->setPlainText("");
+	lay->addWidget(te);
 	te->setReadOnly(true);
 	te->setFocusPolicy(Qt::NoFocus);
-	//te = qApp->findChild<QPlainTextEdit*>("plainTextEdit");
+
 }
 
 AppVideoPlayer::~AppVideoPlayer()
@@ -27,6 +30,11 @@ void AppVideoPlayer::buildUi()
 
 void AppVideoPlayer::destroyUi()
 {
+	if(te!=nullptr)
+	{
+		delete te;
+		te=nullptr;
+	}
 	unload();
 }
 
@@ -38,11 +46,6 @@ void AppVideoPlayer::unload()
 		delete proc;
 		proc=nullptr;
 	}
-	/*if(te!=nullptr)
-	{
-		delete te;
-	}*/
-	te->setPlainText("");
 }
 
 void AppVideoPlayer::load()

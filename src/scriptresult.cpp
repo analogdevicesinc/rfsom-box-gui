@@ -2,6 +2,8 @@
 #include <QDebug>
 #include "common.h"
 #include <QCoreApplication>
+#include "toastnotification.h"
+
 
 bool ScriptResult::getRunInBackground() const
 {
@@ -18,8 +20,18 @@ int ScriptResult::getReturnVal() const
 	return proc->exitCode();
 }
 
+bool ScriptResult::getErrEnabled() const
+{
+	return errEnabled;
+}
+
+void ScriptResult::setErrEnabled(bool value)
+{
+	errEnabled = value;
+}
+
 ScriptResult::ScriptResult(QString cmd, QObject *parent) : StringValue(parent),
-	cmd(cmd),proc(nullptr),runInBackground(false)
+	cmd(cmd),proc(nullptr),runInBackground(false),errEnabled(false)
 
 {
 
@@ -69,6 +81,7 @@ QString ScriptResult::run_script()
 	if (!runInBackground) {
 		proc->waitForFinished(100);
 		ret = proc->readAll();
+
 		delete proc;
 		proc=nullptr;	
 	} else {
@@ -76,6 +89,11 @@ QString ScriptResult::run_script()
 		ret = proc->readAll();
 		qDebug()<<ret;
 		//connect(proc,SIGNAL(finished(int)),proc,SLOT(deleteLater()));
+	}
+	if(errEnabled)
+	{
+		if(proc->exitCode()!=0)
+		       ToastNotification *tn= new ToastNotification("Error 0x"+QString::number(proc->exitCode(),16),500);
 	}
 
 	return ret;
@@ -86,6 +104,25 @@ void ScriptResult::scriptFinished(int)
 	if(proc)
 	{
 		qDebug()<<(proc->readAll());
+		auto exit=proc->exitCode();
+		QString err = proc->readAllStandardError();
+
+		if(exit==0)
+		{
+			if(err=="")
+			{
+				ToastNotification *tn= new ToastNotification("Success",500);
+			}
+			else
+			{
+				ToastNotification *tn= new ToastNotification(err,500);
+			}
+		}
+		else
+		{
+			ToastNotification *tn= new ToastNotification("err: 0x"+QString::number(exit)+" "+err,500);
+		}
+
 	}
 }
 

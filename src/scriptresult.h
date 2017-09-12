@@ -13,6 +13,7 @@ class ScriptResult : public StringValue
 	QProcess *proc;
 	QString setVars();
 	bool runInBackground;
+	bool errEnabled;
 signals:
 	//void getScriptResult(QString);
 public:
@@ -28,6 +29,9 @@ public:
 	void setRunInBackground(bool value);
 
 	int getReturnVal() const;
+
+	bool getErrEnabled() const;
+	void setErrEnabled(bool value);
 
 public slots:
 	virtual QString run();

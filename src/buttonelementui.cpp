@@ -30,6 +30,7 @@ void ButtonElementUi::setScript(ScriptResult *value)
 {
 	script = value;
 	script->setRunInBackground(runInBackground);
+	script->setErrEnabled(true);
 }
 
 bool ButtonElementUi::getRunInBackground() const

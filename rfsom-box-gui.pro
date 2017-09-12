@@ -93,7 +93,8 @@ HEADERS  += $$SRC_DIR/mainwindow.h \
     $$SRC_DIR/ipaddresselementui.h \
     $$SRC_DIR/uielement.h \
     $$SRC_DIR/enumelementui.h \
-    $$SRC_DIR/common.h
+    $$SRC_DIR/common.h \
+    src/toastnotification.h
 
 FORMS    += $$UI_DIR/mainwindow.ui \
     $$UI_DIR/readonlyvalue.ui \

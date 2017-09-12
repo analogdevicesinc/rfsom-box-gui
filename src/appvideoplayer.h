@@ -16,7 +16,7 @@ class AppVideoPlayer : public App
 	QPlainTextEdit *te;
 	QWidget *parent;
 public:
-	explicit AppVideoPlayer(QJsonValue params, QLayout *lay, QPlainTextEdit* te, QWidget *parent = 0);
+	explicit AppVideoPlayer(QJsonValue params, QLayout *lay, QWidget *parent = 0);
 	~AppVideoPlayer();
 
 signals:

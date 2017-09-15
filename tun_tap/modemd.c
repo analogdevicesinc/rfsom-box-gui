@@ -37,6 +37,8 @@
 #define PADDING_SIZE		12
 #define TX_BUF_SIZE			HEADER_DATA_SIZE + HEADER_FRAME_SIZE + MTU + PADDING_SIZE
 #define RX_BUF_SIZE			HEADER_FRAME_SIZE + MTU + PADDING_SIZE + CRC_SIZE
+#define ETH_HEADER_SIZE     10
+#define MTU_IP              MTU-ETH_HEADER_SIZE
 
 extern char 	*optarg;
 static char 	tx_buffer[TX_BUF_SIZE];
@@ -45,7 +47,7 @@ static struct 	pollfd pfd[2];
 
 static int tun_alloc(const char *name, int flags)
 {
-	static const char *clonedev = "/dev/net/tun";
+	static const char *clonedev = "/dev/net/tap";
 	struct ifreq ifr;
 	int fd, ret;
 
@@ -96,8 +98,19 @@ static int set_ip(const char *name, in_addr_t addr)
 	}
 	ifr.ifr_flags |= IFF_UP | IFF_RUNNING;
 	ioctl(fd, SIOCSIFFLAGS, &ifr);
-	if (ret < 0)
+	if (ret < 0) {
 		ret = -errno;
+        goto err;
+    }
+    
+    //If using TAP reduce MTU
+    ifr.ifr_mtu = MTU_IP;
+    if(!ioctl(fd,SIOCSIFMTU, &ifr))
+    { 
+       ret = -errno;
+       goto err;
+    }
+        
 err:
 	close(fd);
 
@@ -333,7 +346,7 @@ int main(int argc, char *argv[])
 	pfd[0].fd = ret;
 	pfd[0].events = POLLIN;
 
-	ret = tun_alloc(INTERFACE_NAME, IFF_TUN | IFF_NO_PI);
+	ret = tun_alloc(INTERFACE_NAME, IFF_TAP | IFF_NO_PI);
 	if (ret < 0) {
 		perror("TUN/TAP: Failed to create TUN device");
 		return 1;

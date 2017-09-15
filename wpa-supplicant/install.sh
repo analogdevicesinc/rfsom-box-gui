@@ -44,6 +44,9 @@ cp wpa_cli wpa_supplicant /usr/local/bin
 chmod 777 /usr/local/bin/wpa_cli
 chmod 777 /usr/local/bin/wpa_supplicant
 
+#need to call wpa_supplicant once before relinking libnl libraries below
+wpa_supplicant -h
+
 cd /lib/arm-linux-gnueabihf/
 rm libnl-3.so.200
 ln -s /usr/local/lib/libnl-3.so.200 libnl-3.so.200

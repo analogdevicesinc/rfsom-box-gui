@@ -37,7 +37,7 @@
 #define PADDING_SIZE		12
 #define TX_BUF_SIZE			HEADER_DATA_SIZE + HEADER_FRAME_SIZE + MTU + PADDING_SIZE
 #define RX_BUF_SIZE			HEADER_FRAME_SIZE + MTU + PADDING_SIZE + CRC_SIZE
-#define ETH_HEADER_SIZE     10
+#define ETH_HEADER_SIZE     18
 #define MTU_IP              MTU-ETH_HEADER_SIZE
 
 extern char 	*optarg;

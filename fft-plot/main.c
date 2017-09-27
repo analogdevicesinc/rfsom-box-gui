@@ -1,3 +1,25 @@
+/*
+ *  Copyright (c) 2017 Analog Devices
+ */
+
+/*
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+ */
+
+#define _GNU_SOURCE
+
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <stdbool.h>
@@ -10,6 +32,17 @@
 #include <math.h>
 #include "basic_graph.h"
 #include <termios.h>
+#include <string.h>
+#include <locale.h>
+#include <dirent.h>
+
+#include <linux/input.h>
+
+#ifndef EV_SYN
+#define EV_SYN 0
+#endif
+#define DEV_INPUT_EVENT "/dev/input"
+#define EVENT_DEV_NAME "event"
 
 #define FFT_SIZE (8192)
 #define IIO_DEVICE_STR "cf-ad9361-lpc"
@@ -26,9 +59,12 @@
 	} \
 }
 static struct iio_device  *dev  =NULL;
+static struct iio_device  *phy  =NULL;
 static struct iio_context *ctx  = NULL;
 static struct iio_channel *rx_i = NULL;
+static struct iio_channel *rx1  = NULL;
 static struct iio_channel *rx_q = NULL;
+static struct iio_channel *rx_lo = NULL;
 static struct iio_buffer  *rxbuf = NULL;
 static bool stop = false;
 fftw_complex in[FFT_SIZE], out[FFT_SIZE];
@@ -91,6 +127,110 @@ static void handle_sig(int sig)
 	printf("Waiting for process to finish...\n");
 	stop = true;
 }
+
+/* next two functions are borrowed from:
+ * https://cgit.freedesktop.org/evtest/tree/evtest.c
+ * Copyright (c) 1999-2000 Vojtech Pavlik
+ * Copyright (c) 2009-2011 Red Hat, Inc
+ * released under GNU General Public License 2, or any later version
+ */
+
+/**
+ * Filter for the AutoDevProbe scandir on /dev/input.
+ *
+ * @param dir The current directory entry provided by scandir.
+ *
+ * @return Non-zero if the given directory entry starts with "event", or zero
+ * otherwise.
+ */
+static int is_event_device(const struct dirent *dir) {
+	return strncmp(EVENT_DEV_NAME, dir->d_name, 5) == 0;
+}
+
+/**
+ * Scans all /dev/input/event*, display them and ask the user which one to
+ * open.
+ *
+ * @return The event device file name of the device file selected. This
+ * string is allocated and must be freed by the caller.
+ */
+static char* scan_devices(void)
+{
+	struct dirent **namelist;
+	int i, ndev, devnum;
+	char *filename;
+	int max_device = 0;
+
+	ndev = scandir(DEV_INPUT_EVENT, &namelist, is_event_device, versionsort);
+	if (ndev <= 0)
+		return NULL;
+
+	fprintf(stderr, "Available devices:\n");
+
+	for (i = 0; i < ndev; i++)
+	{
+		char fname[64];
+		int fd = -1, rc;
+		char name[256] = "???";
+		unsigned long evbit = 0;
+		size_t nchar = KEY_MAX/8 + 1;
+		unsigned char bits[nchar];
+
+		snprintf(fname, sizeof(fname),
+			 "%s/%s", DEV_INPUT_EVENT, namelist[i]->d_name);
+
+		fd = open(fname, O_RDONLY);
+		if (fd < 0)
+			continue;
+
+		ioctl(fd, EVIOCGBIT(0, sizeof(evbit)), &evbit);
+		if ((evbit & (1 << EV_KEY)) != (1 << EV_KEY)) {
+			fprintf(stderr, "%s: skipping, does not report any EV_KEY events.\n", fname);
+			close(fd);
+			free(namelist[i]);
+			continue;
+		}
+
+		ioctl(fd, EVIOCGBIT(0, sizeof(bits)), &bits);
+		if (!bits[KEY_Q/8] & (1 << (KEY_Q % 8))) {
+			fprintf(stderr, "%s: skipping, does not support KEY_Q\n", fname);
+			close(fd);
+			free(namelist[i]);
+			continue;
+		}
+
+		ioctl(fd, EVIOCGNAME(sizeof(name)), name);
+
+		/* try to grab it */
+		rc = ioctl(fd, EVIOCGRAB, (void*)1);
+		if (rc == 0) {
+			ioctl(fd, EVIOCGRAB, (void*)0);
+		} else {
+			fprintf(stderr, "%s: skipping, is grabbed by another process\n", fname);
+			close(fd);
+			free(namelist[i]);
+			continue;
+		}
+
+		close(fd);
+		fprintf(stderr, "%s:    %s\n", fname, name);
+
+		sscanf(namelist[i]->d_name, "event%d", &devnum);
+		if (devnum > max_device)
+			max_device = devnum;
+
+		free(namelist[i]);
+		asprintf(&filename, "%s/%s%d",
+			DEV_INPUT_EVENT, EVENT_DEV_NAME, devnum);
+
+		break;
+	}
+	if (devnum > max_device || devnum < 0)
+		return NULL;
+
+	return filename;
+}
+
 static double limit_d(double val, double min, double max)
 {
 	if (val>max) {
@@ -125,9 +265,28 @@ int map(int output_start, int output_end, double input, double input_start,
 	return output;
 }
 
+void change_lo(long long *lo, long long increment)
+{
+	printf("%lli\n", *lo);
+	*lo = *lo + increment;
+	if (*lo < 70e6)
+		*lo = 70e6;
+	if (*lo > 6e9)
+		*lo = 6e9;
+	iio_channel_attr_write_longlong(rx_lo, "frequency", *lo);
+
+}
+
 int main(int argc, char **argv)
 {
 	int pfd;
+	char buf[128], *keyboard = NULL;
+	int ret;
+	long long lo = 70e6, sampling_freq;
+	int kfd;
+	struct input_event ev[64];
+	fd_set rdfs;
+	struct timeval dontwait;
 
 	if (argc>1) {
 		char *filename = argv[1];
@@ -144,6 +303,17 @@ int main(int argc, char **argv)
 
 	FILE *fp = fdopen(pfd, "w");
 
+	keyboard = scan_devices();
+	kfd = open(keyboard, O_RDONLY | O_NONBLOCK);
+	if (kfd < 0) {
+		free(keyboard);
+		keyboard = NULL;
+	}
+	FD_ZERO(&rdfs);
+	FD_SET(kfd, &rdfs);
+	dontwait.tv_sec = 0;
+	dontwait.tv_usec = 0;
+
 
 	signal(SIGINT, handle_sig);
 	printf("* Acquiring IIO context\n");
@@ -151,10 +321,21 @@ int main(int argc, char **argv)
 
 	printf("* Acquiring AD9361 streaming devices\n");
 	dev = iio_context_find_device(ctx,IIO_DEVICE_STR);
+	if (!dev)
+		exit(1);
+	phy = iio_context_find_device(ctx, "ad9361-phy");
+	if (!phy)
+		exit(1);
 
 	printf("* Initializing AD9361 IIO streaming channels\n");
 	rx_i = iio_device_find_channel(dev, "voltage0", 0); // INPUT
 	rx_q = iio_device_find_channel(dev, "voltage1", 0); // INPUT
+	rx1 =  iio_device_find_channel(phy, "voltage0", 0); // INPUT
+	iio_channel_attr_read_longlong(rx1, "sampling_frequency", &sampling_freq);
+	iio_channel_attr_write_longlong(rx1, "sampling_frequency", (long long)(30.72e6));
+	printf("sampling rate = %f\n", (double)sampling_freq/1e6);
+	rx_lo =  iio_device_find_channel(phy, "RX_LO", 1); // OUTPUT
+	ret = iio_channel_attr_read_longlong(rx_lo, "frequency", &lo);
 
 	printf("* Enabling IIO streaming channels\n");
 	iio_channel_enable(rx_i);
@@ -192,11 +373,28 @@ int main(int argc, char **argv)
 	}
 
 	nonblock(NB_ENABLE);
+	setlocale(LC_NUMERIC, "");
 
 	while (!stop) {
 		ssize_t nbytes_rx, nbytes_tx;
 		void *p_dat, *p_end;
 		ptrdiff_t p_inc;
+		double gain;
+		unsigned int keypress = 0;
+
+		if (kfd) {
+			select(kfd + 1, &rdfs, NULL, NULL, &dontwait);
+			ret = read(kfd, ev, sizeof(ev));
+			if (ret > 0) {
+				for (i = 0; i < ret / sizeof(struct input_event); i++) {
+					if (ev[i].type != EV_KEY)
+						continue;
+					if (ev[i].value == 0)
+						continue;
+					keypress = ev[i].code;
+				}
+			}
+		}
 
 		nbytes_rx = iio_buffer_refill(rxbuf);
 
@@ -262,8 +460,62 @@ int main(int argc, char **argv)
 		draw_line(0,0,5,0,axis_color);
 		draw_line(0,0,0,127,axis_color);
 		draw_line(0,127,5,127,axis_color);
-		draw_text("-140db",2,112,axis_color);
-		draw_text(" 0db",2,2,axis_color);
+		draw_text(" 0dB",2,2,axis_color);
+
+		switch (keypress) {
+		case KEY_Q:
+			change_lo(&lo, 1e9);
+			break;
+		case KEY_A:
+			change_lo(&lo, -1e9);
+			break;
+		case KEY_W:
+			change_lo(&lo, 1e8);
+			break;
+		case KEY_S:
+			change_lo(&lo, -1e8);
+			break;
+		case KEY_E:
+			change_lo(&lo, 1e7);
+			break;
+		case KEY_D:
+			change_lo(&lo, -1e7);
+			break;
+		case KEY_R:
+			change_lo(&lo, 1e6);
+			break;
+		case KEY_F:
+			change_lo(&lo, -1e6);
+			break;
+		case KEY_T:
+			change_lo(&lo, 1e5);
+			break;
+		case KEY_G:
+			change_lo(&lo, -1e5);
+			break;
+		case 0:
+		default:
+			break;
+		}
+
+		sprintf(buf, "-");
+		iio_channel_attr_read(rx1, "rssi", &buf[1], sizeof(buf) -1);
+		for (cnt=2; cnt <= 13; cnt++)
+			draw_line(80, cnt, X_RES - 1, cnt,0x00);
+		draw_text(buf,80,2, axis_color);
+
+		iio_channel_attr_read_double(rx1, "hardwaregain", &gain);
+		sprintf(buf, "%2.1f GAIN", gain);
+		for (cnt=14; cnt <= 26; cnt++)
+			draw_line(80, cnt, X_RES - 1, cnt,0x00);
+		draw_text(buf,80,14, axis_color);
+
+		draw_text("-140dB",2,112,axis_color);
+
+		sprintf(buf, "%0.4f GHz", (double)lo/1e9 );
+		for (cnt=112; cnt <= 112 + 13; cnt++)
+			 draw_line(70, cnt, X_RES - 1, cnt,0x00);
+		draw_text(buf,70,112, axis_color);
 
 		if (kbhit()) {
 			char c=fgetc(stdin);

@@ -16,6 +16,7 @@ public:
 	virtual void initialize();
 	virtual void loadJsonConfig(QString);
 	void keyPressEvent(QKeyEvent *);
+	void wheelEvent(QWheelEvent *event);
 
 public slots:
 	virtual void updateUi();

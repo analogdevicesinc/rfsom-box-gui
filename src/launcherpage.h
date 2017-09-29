@@ -15,6 +15,7 @@ public:
 	virtual void unload();
 	virtual void load();
 	virtual void keyPressEvent(QKeyEvent *);
+	virtual void wheelEvent(QWheelEvent*);
 	void buildUi(int index);
 	void loadJsonConfig(QString);
 	QListWidget *getList() const;

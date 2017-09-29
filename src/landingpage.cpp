@@ -1,5 +1,7 @@
 #include "landingpage.h"
 #include <QDebug>
+#include <QKeyEvent>
+#include <QApplication>
 #include <QJsonDocument>
 #include <QFile>
 #include "ui_mainwindow.h"
@@ -29,6 +31,14 @@ void LandingPage::unload()
 
 void LandingPage::initialize()
 {
+}
+
+void LandingPage::wheelEvent(QWheelEvent *event)
+{
+	QKeyEvent *kev;
+	kev=new QKeyEvent( QEvent::KeyPress,Qt::Key_Right,Qt::NoModifier);
+	QApplication::sendEvent(this, kev);
+
 }
 
 void LandingPage::keyPressEvent(QKeyEvent *e)

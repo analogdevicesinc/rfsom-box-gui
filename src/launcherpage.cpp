@@ -94,6 +94,17 @@ void LauncherPage::initialize()
 	list->setCurrentRow(0);
 }
 
+void LauncherPage::wheelEvent(QWheelEvent *event)
+{
+	QKeyEvent *kev;
+	if (event->delta()>0) {
+		kev=new QKeyEvent( QEvent::KeyPress,Qt::Key_Up,Qt::NoModifier);
+	} else {
+		kev=new QKeyEvent( QEvent::KeyPress,Qt::Key_Down,Qt::NoModifier);
+	}
+	QApplication::sendEvent(ui->listWidget, kev);
+}
+
 void LauncherPage::keyPressEvent(QKeyEvent *e)
 {
 	switch (e->key()) {

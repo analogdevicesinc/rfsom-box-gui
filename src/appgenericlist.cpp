@@ -458,6 +458,20 @@ bool AppGenericList::eventFilter(QObject *watched, QEvent *event)
 			}
 		}
 	}
+	else
+	{
+		if (event->type()==QEvent::Wheel) {
+			QWheelEvent *wheelEvent = static_cast<QWheelEvent *>(event);
+			QKeyEvent *kev;
+			if (wheelEvent->delta()>0) {
+				kev=new QKeyEvent( QEvent::KeyPress,Qt::Key_Up,Qt::NoModifier);
+			} else {
+				kev=new QKeyEvent( QEvent::KeyPress,Qt::Key_Down,Qt::NoModifier);
+			}
+			QApplication::sendEvent(list, kev);
+			return true;
+		}
+	}
 
 	return false;
 }

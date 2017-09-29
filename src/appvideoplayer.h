@@ -18,6 +18,7 @@ class AppVideoPlayer : public App
 public:
 	explicit AppVideoPlayer(QJsonValue params, QLayout *lay, QWidget *parent = 0);
 	~AppVideoPlayer();
+	bool eventFilter(QObject *watched, QEvent *event);
 
 signals:
 

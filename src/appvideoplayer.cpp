@@ -1,6 +1,8 @@
 #include "appvideoplayer.h"
 #include <QJsonObject>
 #include <QCoreApplication>
+#include <QScrollBar>
+#include <QApplication>
 #include <QDebug>
 #include "common.h"
 #include <QTime>
@@ -17,10 +19,12 @@ AppVideoPlayer::AppVideoPlayer(QJsonValue params, QLayout *lay, //QPlainTextEdit
 	te->setReadOnly(true);
 	te->setFocusPolicy(Qt::NoFocus);
 
+	te->installEventFilter(this);
 }
 
 AppVideoPlayer::~AppVideoPlayer()
 {
+	te->removeEventFilter(this);
 }
 
 void AppVideoPlayer::buildUi()
@@ -36,6 +40,23 @@ void AppVideoPlayer::destroyUi()
 		te=nullptr;
 	}
 	unload();
+}
+
+bool AppVideoPlayer::eventFilter(QObject *watched, QEvent *event)
+{
+	if(watched==te && event->type()==QEvent::Wheel)
+	{
+		QWheelEvent *wheelEvent = static_cast<QWheelEvent *>(event);
+
+		auto val = te->verticalScrollBar()->value();
+		if (wheelEvent->delta()>0) {
+			val--;
+		} else {
+			val++;
+		}
+		te->verticalScrollBar()->setValue(val);
+	}
+	return false;
 }
 
 void AppVideoPlayer::unload()

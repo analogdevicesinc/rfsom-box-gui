@@ -198,6 +198,7 @@
           "type": "btn",
           "cmd": "/usr/local/bin/cal_ad9361 -a -g;iio_attr -q -d ad9361-phy xo_correction > /usr/local/etc/rfsom-box-gui/radio-xo_correction",
           "background_task": true,
+          "muted": false,
           "stylesheet": ""
         }
       ]
@@ -268,6 +269,7 @@
           "type": "btn",
           "cmd": "/usr/local/bin/restart_modem_gui.sh",
           "background_task": true,
+          "muted": false,
           "stylesheet": ""
         }
       ]
@@ -509,6 +511,7 @@
       "tasks": [
         {
           "cmd": "/usr/local/bin/gps_get_coords.sh -q",
+          "muted": true,
           "timer": 1
         }
       ],
@@ -568,6 +571,7 @@
           "type": "btn",
           "cmd": "reboot",
           "background_task": true,
+          "muted": false,
           "stylesheet": ""
         },
         {
@@ -575,6 +579,7 @@
           "type": "btn",
           "cmd": "poweroff",
           "background_task": true,
+          "muted": false,
           "stylesheet": ""
         }
       ]

@@ -30,11 +30,21 @@ void ScriptResult::setErrEnabled(bool value)
 	errEnabled = value;
 }
 
-ScriptResult::ScriptResult(QString cmd, QObject *parent) : StringValue(parent),
-	cmd(cmd),proc(nullptr),runInBackground(false),errEnabled(false)
+ScriptResult::ScriptResult(QString cmd, QObject *parent,bool muted) : StringValue(parent),
+	cmd(cmd),proc(nullptr),runInBackground(false),errEnabled(false),muted(muted)
 
 {
 
+}
+
+bool ScriptResult::getMuted() const
+{
+	return muted;
+}
+
+void ScriptResult::setMuted(bool value)
+{
+	muted = value;
 }
 
 ScriptResult::~ScriptResult()
@@ -90,7 +100,7 @@ QString ScriptResult::run_script()
 		qDebug()<<ret;
 		//connect(proc,SIGNAL(finished(int)),proc,SLOT(deleteLater()));
 	}
-	if(errEnabled)
+	if(errEnabled && ! muted)
 	{
 		if(proc->exitCode()!=0)
 		       ToastNotification *tn= new ToastNotification("Error 0x"+QString::number(proc->exitCode(),16),500);
@@ -106,23 +116,26 @@ void ScriptResult::scriptFinished(int)
 		qDebug()<<(proc->readAll());
 		auto exit=proc->exitCode();
 		QString err = proc->readAllStandardError();
+		qDebug()<<exit<<" code "<< err;
 
-		if(exit==0)
+		if(!muted)
 		{
-			if(err=="")
+			if(exit==0)
 			{
-				ToastNotification *tn= new ToastNotification("Success",500);
+				if(err=="")
+				{
+					ToastNotification *tn= new ToastNotification("Success",500);
+				}
+				else
+				{
+					ToastNotification *tn= new ToastNotification(err,500);
+				}
 			}
 			else
 			{
-				ToastNotification *tn= new ToastNotification(err,500);
+				ToastNotification *tn= new ToastNotification("err: 0x"+QString::number(exit)+" "+err,500);
 			}
 		}
-		else
-		{
-			ToastNotification *tn= new ToastNotification("err: 0x"+QString::number(exit)+" "+err,500);
-		}
-
 	}
 }
 

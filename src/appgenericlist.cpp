@@ -17,6 +17,7 @@
 #include <QDirIterator>
 #include <QKeyEvent>
 #include <QApplication>
+#include <QMessageBox>
 
 AppGenericList::AppGenericList(QJsonValue params, QLayout *lay,
                                QWidget *parent) : App(parent) , params(params)
@@ -94,8 +95,13 @@ QWidget *AppGenericList::setupReadOnlyElementUi(QJsonObject obj)
 QWidget *AppGenericList::setupButtonElementUi(QJsonObject obj)
 {
 	auto ui_element = new ButtonElementUi(list);
+	bool muted=true;
 
-	ui_element->setScript(new ScriptResult(obj["cmd"].toString(),ui_element));
+	if (obj.contains("muted")) {
+		muted=obj["muted"].toBool();
+	}
+
+	ui_element->setScript(new ScriptResult(obj["cmd"].toString(),ui_element,muted));
 
 	if (obj.contains("description")) {
 		ui_element->setDescription(obj["description"].toString());
@@ -282,9 +288,13 @@ void AppGenericList::setupTasks()
 	if (params.toObject().contains("tasks")) {
 		for (QJsonValue val : params.toObject()["tasks"].toArray()) {
 			auto obj = val.toObject();
-
+			bool muted = true;
+			if (obj.contains("muted"))
+			{
+				muted = obj["muted"].toBool();
+			}
 			if (obj.contains("cmd")) {
-				ScriptResult *res = new ScriptResult(obj["cmd"].toString(),this);
+				ScriptResult *res = new ScriptResult(obj["cmd"].toString(),this,muted);
 				//res->setProc(proc);
 				res->setRunInBackground(true);
 				auto timerid = obj["timer"].toInt();

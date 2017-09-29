@@ -40,6 +40,7 @@ public:
 
 	ScriptResult *getScript() const;
 	void setScript(ScriptResult *value);
+	bool mutedNotification();
 
 	bool getRunInBackground() const;
 	void setRunInBackground(bool value);

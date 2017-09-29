@@ -26,6 +26,11 @@ ScriptResult *ButtonElementUi::getScript() const
 	return script;
 }
 
+bool ButtonElementUi::mutedNotification()
+{
+	return script->getMuted();
+}
+
 void ButtonElementUi::setScript(ScriptResult *value)
 {
 	script = value;

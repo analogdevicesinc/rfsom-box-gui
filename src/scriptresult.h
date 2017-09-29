@@ -14,12 +14,13 @@ class ScriptResult : public StringValue
 	QString setVars();
 	bool runInBackground;
 	bool errEnabled;
+	bool muted;
 signals:
 	//void getScriptResult(QString);
 public:
 	QMap<QString, QString> vars;
 
-	ScriptResult(QString cmd, QObject *parent=0);
+	ScriptResult(QString cmd, QObject *parent=0,bool muted=true);
 	virtual ~ScriptResult();
 	QString get();
 	QString getCmd() const;
@@ -32,6 +33,9 @@ public:
 
 	bool getErrEnabled() const;
 	void setErrEnabled(bool value);
+
+	bool getMuted() const;
+	void setMuted(bool value);
 
 public slots:
 	virtual QString run();

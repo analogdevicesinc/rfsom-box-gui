@@ -196,7 +196,7 @@
         {
           "description": "Calibrate XO",
           "type": "btn",
-          "cmd": "/usr/local/bin/cal_ad9361 -a -g;iio_attr -q -d ad9361-phy xo_correction > /usr/local/etc/rfsom-box-gui/radio-xo_correction",
+          "cmd": "/usr/local/bin/cal_ad9361 -a -g;err=$(echo $?);iio_attr -q -d ad9361-phy xo_correction > /usr/local/etc/rfsom-box-gui/radio-xo_correction;exit $err;",
           "background_task": true,
           "muted": false,
           "stylesheet": ""

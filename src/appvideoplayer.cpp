@@ -18,13 +18,12 @@ AppVideoPlayer::AppVideoPlayer(QJsonValue params, QLayout *lay, //QPlainTextEdit
 	lay->addWidget(te);
 	te->setReadOnly(true);
 	te->setFocusPolicy(Qt::NoFocus);
-
 	te->installEventFilter(this);
 }
 
 AppVideoPlayer::~AppVideoPlayer()
 {
-	te->removeEventFilter(this);
+
 }
 
 void AppVideoPlayer::buildUi()
@@ -36,6 +35,7 @@ void AppVideoPlayer::destroyUi()
 {
 	if(te!=nullptr)
 	{
+		te->removeEventFilter(this);
 		delete te;
 		te=nullptr;
 	}
@@ -95,7 +95,11 @@ void AppVideoPlayer::handleExitCode(int exitCode)
 	}
 	else
 	{
+		qDebug()<<"App finished";
 
+		QKeyEvent *kev = new QKeyEvent( QEvent::KeyPress,Qt::Key_Left,Qt::NoModifier);
+		QApplication::sendEvent(this, kev);
 	}
+
 
 }

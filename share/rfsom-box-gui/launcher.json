@@ -279,7 +279,7 @@
   },
   {
     "params": {
-      "cmd": "mplayer -vf scale -zoom -xy 160 -nosound -vo fbdev -tv driver=v4l2:device=$(ls /dev/video* | head -n1 | cut -d \" \" -f1) tv://"
+      "cmd": "sh /usr/local/bin/camera_view.sh"
     },
     "type": "video",
     "name": "Camera View"

@@ -30,7 +30,7 @@
 #define INTERFACE_NETMASK htonl(IP(255, 255, 255, 0))
 #define DELAY 10000
 
-#define MTU 				1500
+#define MTU 				1564
 #define HEADER_DATA_SIZE 	8
 #define HEADER_FRAME_SIZE 	16
 #define CRC_SIZE			8
@@ -294,12 +294,14 @@ int main(int argc, char *argv[])
 	struct in_addr addr;
 	struct in_addr mask;
 	unsigned int usec_delay;
+	int net_type;
 	
 	addr.s_addr = INTERFACE_ADDRESS;
 	mask.s_addr = INTERFACE_NETMASK;
 	usec_delay = DELAY;
+	net_type = IFF_TUN;
 	
-	while ((opt = getopt(argc, argv, "a:m:d:")) != -1) {
+	while ((opt = getopt(argc, argv, "a:m:d:n:")) != -1) {
         switch (opt) {
         case 'a':
 			if (inet_aton(optarg, &addr) == 0) {
@@ -316,12 +318,19 @@ int main(int argc, char *argv[])
 		case 'd':
 			usec_delay = atoi(optarg);
             break;
+		case 'n':
+			if (strcasecmp(optarg, "tun") && strcasecmp(optarg, "tap")) {
+				perror("Invalid netowrk interface type, should be TUN or TAP\n");
+				return 1;
+			}
+			net_type = strcasecmp(optarg, "tun") ? IFF_TAP : IFF_TUN;
+            break;	
         default: /* '?' */
-            fprintf(stderr, "Usage: %s [-a IP address] [-m IP mask] [-d us delay between frames]\n", argv[0]);
+            fprintf(stderr, "Usage: %s [-a IP address] [-m IP mask] [-d us delay between frames] [-n tun or tap interface]\n", argv[0]);
 		}
     }
 
-	printf("Running TUN/TAP daemon...\n");
+	printf("Running %s daemon...\n", net_type == IFF_TUN ? "TUN" : "TAP");
 	printf("   *IP address: %s\n", inet_ntoa(addr));
 	printf("   *Netmask: %s\n", inet_ntoa(mask));
 	printf("   *Max data rate: %d kBps\n", (unsigned int)(((float)MTU / usec_delay) * 1e3f));
@@ -333,7 +342,7 @@ int main(int argc, char *argv[])
 	pfd[0].fd = ret;
 	pfd[0].events = POLLIN;
 
-	ret = tun_alloc(INTERFACE_NAME, IFF_TUN | IFF_NO_PI);
+	ret = tun_alloc(INTERFACE_NAME, net_type | IFF_NO_PI);
 	if (ret < 0) {
 		perror("TUN/TAP: Failed to create TUN device");
 		return 1;

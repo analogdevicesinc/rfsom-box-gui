@@ -74,6 +74,6 @@ echo 0x44 0x1 > /sys/kernel/debug/iio/iio:device3/direct_reg_access
 cat /sys/kernel/debug/iio/iio:device3/direct_reg_access
 
 
-/usr/local/bin/modemd -a $ip -m $subnet -d $delay & 
-#/usr/local/bin/en_macsec.sh
+/usr/local/bin/modemd -a $ip -m $subnet -d $delay -n tap & 
+/usr/local/bin/en_macsec.sh
 

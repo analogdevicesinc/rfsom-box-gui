@@ -5,14 +5,16 @@
 # instead of adi_radio when enabling and changes it back when disabling
 # This was done this way to minimize impact on the rest of the demo.
 
-ip=$(</tmp/modem-ip)
+ip=$(</usr/local/etc/rfsom-box-gui/modem-ip)
 macsecen=$(</tmp/enc-onoff)
-
+echo $macsecen
 
 if [ "$macsecen" = "1" ]; then
+   echo enc ON
    sudo ifconfig macsec0 $ip
    sudo ifconfig adi_radio 192.168.24.1
 else
+   echo enc OFF
    sudo ifconfig adi_radio $ip
    sudo ifconfig macsec0 192.168.24.1
 fi

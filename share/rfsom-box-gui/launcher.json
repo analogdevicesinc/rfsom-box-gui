@@ -326,7 +326,7 @@
   },
   {
     "params": {
-      "cmd": "/usr/local/bin/fft_plot"
+      "cmd": "sh /usr/local/bin/start_plot.sh"
     },
     "type": "video",
     "name": "FFT plot"

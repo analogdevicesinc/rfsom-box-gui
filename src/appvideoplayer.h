@@ -12,9 +12,12 @@ class AppVideoPlayer : public App
 	QJsonValue params;
 	QProcess *proc;
 	QString cmd;
+	QString post_cmd;
 	QLayout *lay;
 	QPlainTextEdit *te;
 	QWidget *parent;
+	bool exitRequested;
+
 public:
 	explicit AppVideoPlayer(QJsonValue params, QLayout *lay, QWidget *parent = 0);
 	~AppVideoPlayer();

@@ -561,7 +561,8 @@
   },
   {
     "params": {
-      "cmd": "bterm -f -f /usr/share/fonts/truetype/droid/DroidSansMono.bgf /bin/bash < /dev/tty0"
+      "cmd": "bash /usr/local/bin/start_terminal.sh",
+      "post_cmd": "killall -9 bterm"
     },
     "type": "video",
     "name": "Terminal"

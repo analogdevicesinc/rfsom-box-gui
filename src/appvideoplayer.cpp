@@ -12,13 +12,20 @@ AppVideoPlayer::AppVideoPlayer(QJsonValue params, QLayout *lay, //QPlainTextEdit
 			       QWidget *parent) : App(parent) , params(params), lay(lay), te(nullptr)
 {
 	proc=nullptr;
+	post_cmd="";
+	if(params.toObject().contains("post_cmd"))
+	{
+		post_cmd=params.toObject()["post_cmd"].toString();
+	}
 	cmd = params.toObject()["cmd"].toString();
+
 	te=new QPlainTextEdit(parent);
 	te->setPlainText("");
 	lay->addWidget(te);
 	te->setReadOnly(true);
 	te->setFocusPolicy(Qt::NoFocus);
 	te->installEventFilter(this);
+	exitRequested=false;
 }
 
 AppVideoPlayer::~AppVideoPlayer()
@@ -62,29 +69,28 @@ bool AppVideoPlayer::eventFilter(QObject *watched, QEvent *event)
 void AppVideoPlayer::unload()
 {
 	if (proc!=nullptr) {
+		disconnect(proc,SIGNAL(finished(int)),this,SLOT(handleExitCode(int)));
 		proc->write("q");
 		proc->waitForFinished(1000);		
-	/*	proc->kill();
+		proc->kill();
+		proc->deleteLater();
 		proc = new QProcess(this);
 		proc->start("/bin/sh",QStringList() << "-c" <<  post_cmd);
-		proc->waitForFinished(1000);*/
+		proc->waitForFinished(1000);
 		proc->kill();
-		delete proc;		
+		proc->deleteLater();
 		proc=nullptr;
+		exitRequested=true;
 	}
 }
 
 void AppVideoPlayer::load()
 {
-	unload();
+	//unload();
 	proc = new QProcess(this);
 	proc->setWorkingDirectory(sharedResPath);
 	proc->start("/bin/sh",QStringList() << "-c" <<  cmd);
 	qDebug()<<proc->readAll();
-	/*te=new QPlainTextEdit(this);
-	te->setWordWrapMode(QTextOption::WrapAnywhere);
-	te->setReadOnly(true);
-	lay->addWidget(te);*/
 	connect(proc,SIGNAL(finished(int)),this,SLOT(handleExitCode(int)));
 }
 
@@ -102,8 +108,11 @@ void AppVideoPlayer::handleExitCode(int exitCode)
 	{
 		qDebug()<<"App finished";
 
-		QKeyEvent *kev = new QKeyEvent( QEvent::KeyPress,Qt::Key_Left,Qt::NoModifier);
-		QApplication::sendEvent(this, kev);
+		if(!exitRequested)
+		{
+			QKeyEvent *kev = new QKeyEvent( QEvent::KeyPress,Qt::Key_Left,Qt::NoModifier);
+			QApplication::sendEvent(this, kev);
+		}
 	}
 
 

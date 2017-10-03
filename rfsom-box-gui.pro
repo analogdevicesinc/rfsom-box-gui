@@ -24,6 +24,7 @@ scripts.files = ./bin/rfsom-box-gui-start.sh
 scripts.files += ./bin/gps_get_coords.sh
 scripts.files += ./bin/get_gmap.sh
 scripts.files += ./bin/camera_view.sh
+scripts.files += ./bin/start_terminal.sh
 scripts.files += ./bin/read_pss
 scripts.files += ./bin/start_stream.sh
 scripts.files += ./bin/enc-onoff.sh

@@ -213,6 +213,13 @@
         1000
       ],
       "elements": [
+          {
+          "description": "Modem Tx",
+          "type": "checkbox",
+          "cmd_write": "if [ \"$CHECKBOX_VAL\" -eq \"1\" ]; then echo 0x800000bc 0xffffffff > /sys/kernel/debug/iio/iio\\:device3/direct_reg_access;else echo 0x800000bc 0x00000000 > /sys/kernel/debug/iio/iio\\:device3/direct_reg_access; fi",
+          "cmd_read": "echo 0x800000bc > /sys/kernel/debug/iio/iio\\:device3/direct_reg_access;tmp=$(($(cat /sys/kernel/debug/iio/iio\\:device3/direct_reg_access)));if [ $tmp -eq 0 ]; then echo 0; else echo 1; fi",
+          "cmd_read_timer": 0
+        },
         {
           "description": "Device IP Address",
           "type": "edit",
@@ -293,7 +300,7 @@
   },
   {
     "params": {
-      "cmd": "ip=$(cat /usr/local/etc/rfsom-box-gui/modem-ip);port=$(cat /usr/local/etc/rfsom-box-gui/modem-port);udp=$(cat /usr/local/etc/rfsom-box-gui/netcat-param);netcat -l $udp $ip -p $port| mplayer -fps 20 -vf scale -zoom -x 160 -y 128 -nosound -vo fbdev -cache 32 -cache-min 1 -"
+      "cmd": "killall -9 netcat;ip=$(cat /usr/local/etc/rfsom-box-gui/modem-ip);port=$(cat /usr/local/etc/rfsom-box-gui/modem-port);udp=$(cat /usr/local/etc/rfsom-box-gui/netcat-param);netcat -l $udp $ip -p $port| mplayer -fps 20 -vf scale -zoom -x 160 -y 128 -nosound -vo fbdev -cache 32 -cache-min 1 -"
     },
     "type": "video",
     "name": "Recv Video"

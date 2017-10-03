@@ -33,13 +33,13 @@ void AppVideoPlayer::buildUi()
 
 void AppVideoPlayer::destroyUi()
 {
+	unload();
 	if(te!=nullptr)
 	{
 		te->removeEventFilter(this);
 		delete te;
 		te=nullptr;
 	}
-	unload();
 }
 
 bool AppVideoPlayer::eventFilter(QObject *watched, QEvent *event)
@@ -63,8 +63,13 @@ void AppVideoPlayer::unload()
 {
 	if (proc!=nullptr) {
 		proc->write("q");
-		proc->waitForFinished(1000);
-		delete proc;
+		proc->waitForFinished(1000);		
+	/*	proc->kill();
+		proc = new QProcess(this);
+		proc->start("/bin/sh",QStringList() << "-c" <<  post_cmd);
+		proc->waitForFinished(1000);*/
+		proc->kill();
+		delete proc;		
 		proc=nullptr;
 	}
 }

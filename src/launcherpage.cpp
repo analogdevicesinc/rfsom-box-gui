@@ -77,7 +77,7 @@ void LauncherPage::load()
 	qDebug()<<"load";
 	if(currentApp)
 	{
-		currentApp->unload();
+//		currentApp->unload();
 		currentApp->destroyUi();
 		delete currentApp;
 		currentApp=nullptr;

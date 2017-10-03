@@ -46,7 +46,10 @@ void CheckboxElementUi::setDescription(const QString& value)
 void CheckboxElementUi::update()
 {
 	bool ok;
-	auto val = read->run().toInt(&ok);
+	auto str = read->run();
+	auto val = str.toLong(&ok);
+	if(!ok)
+		val=str.toLong(&ok,16); // try hex
 	ui->topLeft->setText(description);
 	ui->checkBox->setChecked(ok && val);
 }

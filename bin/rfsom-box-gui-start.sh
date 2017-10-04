@@ -19,6 +19,7 @@ if [ $? -eq 0 ]; then
 	echo 973 > /sys/class/gpio/export;
 	echo 974 > /sys/class/gpio/export;
 
+	echo 0x800000bc 0xffffffff > /sys/kernel/debug/iio/iio\:device3/direct_reg_access
 	cfg_path=/usr/local/etc/rfsom-box-gui
 	if [ ! -d $cfg_path ]; then
 		mkdir $cfg_path 

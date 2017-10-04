@@ -101,7 +101,7 @@ void AppVideoPlayer::load()
 void AppVideoPlayer::readStdErr()
 {
 	auto errStr=proc->readAllStandardError();
-	te->appendPlainText(errStr);
+	te->appendPlainText(errStr.simplified());
 }
 
 void AppVideoPlayer::handleExitCode(int exitCode)
@@ -109,9 +109,9 @@ void AppVideoPlayer::handleExitCode(int exitCode)
 	if(exitCode!=0)
 	{
 		QString text="Errorcode "+QString::number(exitCode,16);
-		te->appendPlainText(text);
+		te->appendPlainText(text.simplified());
 		auto errStr=proc->readAllStandardError();
-		te->appendPlainText(errStr);
+		te->appendPlainText(errStr.simplified());
 		setFocus();
 	}
 	else

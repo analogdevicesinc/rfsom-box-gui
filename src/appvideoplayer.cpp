@@ -25,7 +25,9 @@ AppVideoPlayer::AppVideoPlayer(QJsonValue params, QLayout *lay, //QPlainTextEdit
 	te->setReadOnly(true);
 	te->setFocusPolicy(Qt::NoFocus);
 	te->installEventFilter(this);
+	te->setStyleSheet("font-size:8px");
 	exitRequested=false;
+	scrollToBottom=true;
 }
 
 AppVideoPlayer::~AppVideoPlayer()
@@ -62,6 +64,10 @@ bool AppVideoPlayer::eventFilter(QObject *watched, QEvent *event)
 			val++;
 		}
 		te->verticalScrollBar()->setValue(val);
+		if(val!=te->verticalScrollBar()->maximum())
+		{
+			scrollToBottom=false;
+		}
 	}
 	return false;
 }
@@ -100,8 +106,14 @@ void AppVideoPlayer::load()
 
 void AppVideoPlayer::readStdErr()
 {
-	auto errStr=proc->readAllStandardError();
-	te->appendPlainText(errStr.simplified());
+	auto errStr=proc->readAllStandardError().simplified();
+
+	if(errStr==".")
+		te->insertPlainText(errStr);
+	else
+		te->appendPlainText(errStr);
+	if(scrollToBottom)
+		te->verticalScrollBar()->setValue(te->verticalScrollBar()->maximum());
 }
 
 void AppVideoPlayer::handleExitCode(int exitCode)

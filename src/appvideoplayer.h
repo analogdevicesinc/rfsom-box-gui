@@ -15,6 +15,7 @@ class AppVideoPlayer : public App
 	QString post_cmd;
 	QLayout *lay;
 	QPlainTextEdit *te;
+	bool scrollToBottom;
 	QWidget *parent;
 	bool exitRequested;
 

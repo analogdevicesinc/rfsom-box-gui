@@ -210,15 +210,37 @@
     "params": {
       "timers": [
         10000,
-        1000
+        1000,
+	2000
+      ],
+      "tasks": [
+        {
+          "cmd": "ifconfig | grep adi_radio>/dev/null;modemst=$(echo $?); echo $modemst > /tmp/modem-connectivity; if [ $modemst -eq 0 ]; then echo Modem ON > /tmp/modem-connectivity-str; else echo Modem OFF > /tmp/modem-connectivity-str;fi;ping $(cat /usr/local/etc/rfsom-box-gui/stream-ip) -c 1 -W 1 > /dev/null;conn=$(echo $?);echo $conn > /tmp/peer-connectivity;if [ $conn -eq 0 ]; then echo Peer ON > /tmp/peer-connectivity-str; else echo Peer OFF > /tmp/peer-connectivity-str; fi;echo $(cat /tmp/modem-connectivity-str), $(cat /tmp/peer-connectivity-str) > /tmp/connectivity-str;",
+          "muted": true,
+          "timer": 2
+        }
       ],
       "elements": [
+	{
+          "description": "Status",
+          "type": "cmd_read",
+          "timer": 1,
+          "cmd": "cat /tmp/connectivity-str"
+        },        
           {
           "description": "Modem Tx",
           "type": "checkbox",
           "cmd_write": "if [ \"$CHECKBOX_VAL\" -eq \"1\" ]; then echo 0x800000bc 0xffffffff > /sys/kernel/debug/iio/iio\\:device3/direct_reg_access;else echo 0x800000bc 0x00000000 > /sys/kernel/debug/iio/iio\\:device3/direct_reg_access; fi",
           "cmd_read": "echo 0x800000bc > /sys/kernel/debug/iio/iio\\:device3/direct_reg_access;tmp=$(($(cat /sys/kernel/debug/iio/iio\\:device3/direct_reg_access)));if [ $tmp -eq 0 ]; then echo 0; else echo 1; fi",
           "cmd_read_timer": 0
+        },
+        {
+          "description": "Restart",
+          "type": "btn",
+          "cmd": "/usr/local/bin/restart_modem_gui.sh",
+          "background_task": true,
+          "muted": true,
+          "stylesheet": ""
         },
         {
           "description": "Device IP Address",
@@ -254,6 +276,13 @@
           "cmd_read_timer": 1,
           "cmd_write": "echo $EDIT_VAL > /usr/local/etc/rfsom-box-gui/modem-port"
         },
+	{
+          "description": "UDP",
+          "type": "checkbox",
+          "cmd_write": "if [ \"$CHECKBOX_VAL\" -eq \"1\" ]; then printf \"%s\"-u > /usr/local/etc/rfsom-box-gui/netcat-param;else rm /usr/local/etc/rfsom-box-gui/netcat-param;touch /usr/local/etc/rfsom-box-gui/netcat-param;fi",
+          "cmd_read": "if [ ! -s /usr/local/etc/rfsom-box-gui/netcat-param ]; then echo 0; else echo 1;fi",
+          "cmd_read_timer": 0
+        },
         {
           "description": "Delay",
           "type": "edit",
@@ -263,21 +292,6 @@
           "cmd_read": "cat /usr/local/etc/rfsom-box-gui/modem-delay",
           "cmd_read_timer": 1,
           "cmd_write": "echo $EDIT_VAL > /usr/local/etc/rfsom-box-gui/modem-delay"
-        },
-        {
-          "description": "UDP",
-          "type": "checkbox",
-          "cmd_write": "if [ \"$CHECKBOX_VAL\" -eq \"1\" ]; then printf \"%s\"-u > /usr/local/etc/rfsom-box-gui/netcat-param;else rm /usr/local/etc/rfsom-box-gui/netcat-param;touch /usr/local/etc/rfsom-box-gui/netcat-param;fi",
-          "cmd_read": "if [ ! -s /usr/local/etc/rfsom-box-gui/netcat-param ]; then echo 0; else echo 1;fi",
-          "cmd_read_timer": 0
-        },
-        {
-          "description": "Restart",
-          "type": "btn",
-          "cmd": "/usr/local/bin/restart_modem_gui.sh",
-          "background_task": true,
-          "muted": false,
-          "stylesheet": ""
         }
       ]
     },

@@ -74,11 +74,14 @@ void AppVideoPlayer::unload()
 		proc->waitForFinished(1000);		
 		proc->kill();
 		proc->deleteLater();
-		proc = new QProcess(this);
-		proc->start("/bin/sh",QStringList() << "-c" <<  post_cmd);
-		proc->waitForFinished(1000);
-		proc->kill();
-		proc->deleteLater();
+		if(!post_cmd.isEmpty())
+		{
+			proc = new QProcess(this);
+			proc->start("/bin/sh",QStringList() << "-c" <<  post_cmd);
+			proc->waitForFinished(1000);
+			proc->kill();
+			proc->deleteLater();
+		}
 		proc=nullptr;
 		exitRequested=true;
 	}
@@ -92,6 +95,13 @@ void AppVideoPlayer::load()
 	proc->start("/bin/sh",QStringList() << "-c" <<  cmd);
 	qDebug()<<proc->readAll();
 	connect(proc,SIGNAL(finished(int)),this,SLOT(handleExitCode(int)));
+	connect(proc,SIGNAL(readyReadStandardError()),this,SLOT(readStdErr()));
+}
+
+void AppVideoPlayer::readStdErr()
+{
+	auto errStr=proc->readAllStandardError();
+	te->appendPlainText(errStr);
 }
 
 void AppVideoPlayer::handleExitCode(int exitCode)
@@ -99,9 +109,9 @@ void AppVideoPlayer::handleExitCode(int exitCode)
 	if(exitCode!=0)
 	{
 		QString text="Errorcode "+QString::number(exitCode,16);
-		te->setPlainText(text);
-		te->appendPlainText(proc->errorString());
-		te->appendPlainText(proc->readAllStandardError());
+		te->appendPlainText(text);
+		auto errStr=proc->readAllStandardError();
+		te->appendPlainText(errStr);
 		setFocus();
 	}
 	else

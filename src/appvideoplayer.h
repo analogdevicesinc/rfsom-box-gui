@@ -31,6 +31,7 @@ public slots:
 	virtual void load();
 	virtual void unload();
 	virtual void handleExitCode(int);
+	virtual void readStdErr();
 
 private:
 

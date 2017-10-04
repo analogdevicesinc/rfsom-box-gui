@@ -45,4 +45,4 @@ while [ $conn -ne 0 ];do
 done
 
 (>&2 echo "Started the stream")
-/usr/local/bin/ffmpeg -f v4l2 -framerate 20 -video_size 320x240 -i $video -r 20 -s 160x128 -movflags faststart -an -vcodec libx264 -preset superfast -tune zerolatency -f avi pipe:1 | netcat $udp $ip $port #2>/dev/null 
+/usr/local/bin/ffmpeg -f v4l2 -framerate 20 -video_size 320x240 -i $video -r 20 -s 160x128 -movflags faststart -an -vcodec libx264 -preset superfast -tune zerolatency -f avi pipe:1 | netcat $udp $ip $port 2>/dev/null 

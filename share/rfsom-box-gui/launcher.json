@@ -314,7 +314,7 @@
   },
   {
     "params": {
-      "cmd": "killall -9 netcat;ip=$(cat /usr/local/etc/rfsom-box-gui/modem-ip);port=$(cat /usr/local/etc/rfsom-box-gui/modem-port);udp=$(cat /usr/local/etc/rfsom-box-gui/netcat-param);netcat -l $udp $ip -p $port| mplayer -fps 20 -vf scale -zoom -x 160 -y 128 -nosound -vo fbdev -cache 32 -cache-min 1 -"
+      "cmd": "sh /usr/local/bin/recv_stream.sh"
     },
     "type": "video",
     "name": "Recv Video"

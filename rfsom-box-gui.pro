@@ -27,6 +27,7 @@ scripts.files += ./bin/camera_view.sh
 scripts.files += ./bin/start_terminal.sh
 scripts.files += ./bin/read_pss
 scripts.files += ./bin/start_stream.sh
+scripts.files += ./bin/recv_stream.sh
 scripts.files += ./bin/start_plot.sh
 scripts.files += ./bin/enc-onoff.sh
 scripts.files += ./tun_tap/restart_modem_gui.sh

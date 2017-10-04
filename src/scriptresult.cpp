@@ -91,8 +91,7 @@ QString ScriptResult::run_script()
 	if (!runInBackground) {
 		proc->waitForFinished(100);
 		ret = proc->readAll();
-
-		delete proc;
+		proc->deleteLater();
 		proc=nullptr;	
 	} else {
 		connect(proc,SIGNAL(finished(int)),this,SLOT(scriptFinished(int)));

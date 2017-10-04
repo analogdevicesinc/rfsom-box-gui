@@ -493,7 +493,7 @@ void AppGenericList::destroyUi()
 
 AppGenericList::~AppGenericList()
 {
-	delete list;
+	list->deleteLater();
 }
 
 void AppGenericList::confirmListSelection()

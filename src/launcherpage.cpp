@@ -79,7 +79,7 @@ void LauncherPage::load()
 	{
 //		currentApp->unload();
 		currentApp->destroyUi();
-		delete currentApp;
+		currentApp->deleteLater();
 		currentApp=nullptr;
 	}
 	list->setFocus();

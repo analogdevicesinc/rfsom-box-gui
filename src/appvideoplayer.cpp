@@ -44,7 +44,7 @@ void AppVideoPlayer::destroyUi()
 	if(te!=nullptr)
 	{
 		te->removeEventFilter(this);
-		delete te;
+		te->deleteLater();
 		te=nullptr;
 	}
 }

@@ -226,22 +226,22 @@
           "type": "cmd_read",
           "timer": 1,
           "cmd": "cat /tmp/connectivity-str"
-        },        
-          {
-          "description": "Modem Tx",
-          "type": "checkbox",
-          "cmd_write": "if [ \"$CHECKBOX_VAL\" -eq \"1\" ]; then echo 0x800000bc 0xffffffff > /sys/kernel/debug/iio/iio\\:device3/direct_reg_access;else echo 0x800000bc 0x00000000 > /sys/kernel/debug/iio/iio\\:device3/direct_reg_access; fi",
-          "cmd_read": "echo 0x800000bc > /sys/kernel/debug/iio/iio\\:device3/direct_reg_access;tmp=$(($(cat /sys/kernel/debug/iio/iio\\:device3/direct_reg_access)));if [ $tmp -eq 0 ]; then echo 0; else echo 1; fi",
-          "cmd_read_timer": 0
         },
-        {
+	{
           "description": "Restart",
           "type": "btn",
           "cmd": "/usr/local/bin/restart_modem_gui.sh",
           "background_task": true,
           "muted": true,
           "stylesheet": ""
-        },
+        },        
+        {
+          "description": "Modem Tx",
+          "type": "checkbox",
+          "cmd_write": "if [ \"$CHECKBOX_VAL\" -eq \"1\" ]; then echo 0x800000bc 0xffffffff > /sys/kernel/debug/iio/iio\\:device3/direct_reg_access;else echo 0x800000bc 0x00000000 > /sys/kernel/debug/iio/iio\\:device3/direct_reg_access; fi",
+          "cmd_read": "echo 0x800000bc > /sys/kernel/debug/iio/iio\\:device3/direct_reg_access;tmp=$(($(cat /sys/kernel/debug/iio/iio\\:device3/direct_reg_access)));if [ $tmp -eq 0 ]; then echo 0; else echo 1; fi",
+          "cmd_read_timer": 0
+        },        
         {
           "description": "Device IP Address",
           "type": "edit",

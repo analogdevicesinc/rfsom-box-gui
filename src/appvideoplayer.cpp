@@ -106,12 +106,9 @@ void AppVideoPlayer::load()
 
 void AppVideoPlayer::readStdErr()
 {
-	auto errStr=proc->readAllStandardError().simplified();
+	auto errStr=proc->readAllStandardError();//.simplified();
 
-	if(errStr==".")
-		te->insertPlainText(errStr);
-	else
-		te->appendPlainText(errStr);
+	te->insertPlainText(errStr);
 	if(scrollToBottom)
 		te->verticalScrollBar()->setValue(te->verticalScrollBar()->maximum());
 }
@@ -120,10 +117,10 @@ void AppVideoPlayer::handleExitCode(int exitCode)
 {
 	if(exitCode!=0)
 	{
-		QString text="Errorcode "+QString::number(exitCode,16);
-		te->appendPlainText(text.simplified());
+		QString text="Errorcode "+QString::number(exitCode,16)+"\n";
+		te->insertPlainText(text);
 		auto errStr=proc->readAllStandardError();
-		te->appendPlainText(errStr.simplified());
+		te->insertPlainText(errStr);
 		setFocus();
 	}
 	else

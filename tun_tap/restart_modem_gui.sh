@@ -7,6 +7,12 @@ echo $ip
 echo $subnet
 echo $delay
 
+devnr=$(cat /sys/bus/iio/devices/iio\:device*/name | grep cf-ad9361-lpc | wc -l)
+if [ $devnr -eq 0 ]
+then
+        echo cf-ad9361-lpc device not found
+fi
+
 
 PID=$(pidof modemd)
 kill -9 $PID 

@@ -7,7 +7,7 @@ lon=$(cat /tmp/gpslon)
 key=$(cat /usr/local/share/rfsom-box-gui/gmaps.key)
 if [ "$key" = "paste-google-api-key-here" ];
 then
-(>&2 echo Put google pi key in /usr/local/share/rfsom-box-gui/gmaps.key)
+(>&2 echo Put google api key in /usr/local/share/rfsom-box-gui/gmaps.key)
 exit 1
 fi;
 (>&2 echo reaching google)

@@ -230,9 +230,8 @@
 	{
           "description": "Restart",
           "type": "btn",
-          "cmd": "/usr/local/bin/restart_modem_gui.sh",
+          "cmd": "/usr/local/bin/restart_modem_gui.sh >/tmp/modem.log 2>&1",
           "background_task": true,
-          "muted": true,
           "stylesheet": ""
         },        
         {
@@ -241,7 +240,14 @@
           "cmd_write": "if [ \"$CHECKBOX_VAL\" -eq \"1\" ]; then echo 0x800000bc 0xffffffff > /sys/kernel/debug/iio/iio\\:device3/direct_reg_access;else echo 0x800000bc 0x00000000 > /sys/kernel/debug/iio/iio\\:device3/direct_reg_access; fi",
           "cmd_read": "echo 0x800000bc > /sys/kernel/debug/iio/iio\\:device3/direct_reg_access;tmp=$(($(cat /sys/kernel/debug/iio/iio\\:device3/direct_reg_access)));if [ $tmp -eq 0 ]; then echo 0; else echo 1; fi",
           "cmd_read_timer": 0
-        },        
+        },
+	{
+          "description": "UDP",
+          "type": "checkbox",
+          "cmd_write": "if [ \"$CHECKBOX_VAL\" -eq \"1\" ]; then printf \"%s\"-u > /usr/local/etc/rfsom-box-gui/netcat-param;else rm /usr/local/etc/rfsom-box-gui/netcat-param;touch /usr/local/etc/rfsom-box-gui/netcat-param;fi",
+          "cmd_read": "if [ ! -s /usr/local/etc/rfsom-box-gui/netcat-param ]; then echo 0; else echo 1;fi",
+          "cmd_read_timer": 0
+        },
         {
           "description": "Device IP Address",
           "type": "edit",
@@ -275,14 +281,7 @@
           "cmd_read": "cat /usr/local/etc/rfsom-box-gui/modem-port",
           "cmd_read_timer": 1,
           "cmd_write": "echo $EDIT_VAL > /usr/local/etc/rfsom-box-gui/modem-port"
-        },
-	{
-          "description": "UDP",
-          "type": "checkbox",
-          "cmd_write": "if [ \"$CHECKBOX_VAL\" -eq \"1\" ]; then printf \"%s\"-u > /usr/local/etc/rfsom-box-gui/netcat-param;else rm /usr/local/etc/rfsom-box-gui/netcat-param;touch /usr/local/etc/rfsom-box-gui/netcat-param;fi",
-          "cmd_read": "if [ ! -s /usr/local/etc/rfsom-box-gui/netcat-param ]; then echo 0; else echo 1;fi",
-          "cmd_read_timer": 0
-        },
+        },	
         {
           "description": "Delay",
           "type": "edit",
@@ -297,7 +296,7 @@
     },
     "name": "Modem",
     "type": "list"
-  },
+  },  
   {
     "params": {
       "cmd": "sh /usr/local/bin/camera_view.sh"
@@ -580,6 +579,14 @@
     },
     "type": "video",
     "name": "Terminal"
+  },
+  {
+    "params": {
+      "cmd": "(>&2 cat /tmp/modem.log)",
+      "hang_on_finish": true
+    },
+    "type": "video",
+    "name": "Modem log"
   },
   {
     "params": {

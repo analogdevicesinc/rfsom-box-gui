@@ -18,6 +18,7 @@ class AppVideoPlayer : public App
 	bool scrollToBottom;
 	QWidget *parent;
 	bool exitRequested;
+	bool hangOnFinish;
 
 public:
 	explicit AppVideoPlayer(QJsonValue params, QLayout *lay, QWidget *parent = 0);

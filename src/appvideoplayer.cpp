@@ -13,9 +13,14 @@ AppVideoPlayer::AppVideoPlayer(QJsonValue params, QLayout *lay, //QPlainTextEdit
 {
 	proc=nullptr;
 	post_cmd="";
+	hangOnFinish=false;
 	if(params.toObject().contains("post_cmd"))
 	{
 		post_cmd=params.toObject()["post_cmd"].toString();
+	}
+	if(params.toObject().contains("hang_on_finish"))
+	{
+		hangOnFinish=params.toObject()["hang_on_finish"].toBool();
 	}
 	cmd = params.toObject()["cmd"].toString();
 
@@ -127,7 +132,7 @@ void AppVideoPlayer::handleExitCode(int exitCode)
 	{
 		qDebug()<<"App finished";
 
-		if(!exitRequested)
+		if(!exitRequested && !hangOnFinish)
 		{
 			QKeyEvent *kev = new QKeyEvent( QEvent::KeyPress,Qt::Key_Left,Qt::NoModifier);
 			QApplication::sendEvent(this, kev);

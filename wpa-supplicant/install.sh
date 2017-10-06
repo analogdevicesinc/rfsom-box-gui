@@ -1,5 +1,5 @@
 #!/bin/sh
-
+killall -9 wpa_supplicant
 #install the tools needed by macsec
 cd /usr/local/src
 rm -rf crypto

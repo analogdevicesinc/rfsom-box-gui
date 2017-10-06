@@ -111,11 +111,13 @@ void AppVideoPlayer::load()
 
 void AppVideoPlayer::readStdErr()
 {
-	auto errStr=proc->readAllStandardError();//.simplified();
-
-	te->insertPlainText(errStr);
-	if(scrollToBottom)
-		te->verticalScrollBar()->setValue(te->verticalScrollBar()->maximum());
+	if(proc)
+	{
+		auto errStr=proc->readAllStandardError();//.simplified();
+		te->insertPlainText(errStr);
+		if(scrollToBottom)
+			te->verticalScrollBar()->setValue(te->verticalScrollBar()->maximum());
+	}
 }
 
 void AppVideoPlayer::handleExitCode(int exitCode)

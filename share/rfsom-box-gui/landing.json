@@ -22,7 +22,7 @@
     {
       "description": "",
       "timer": 2,
-      "cmd_read": "echo 100%",
+      "cmd_read": "cat /tmp/rfsom_batt_soc",
       "iconSize": 16,
       "icon": "../share/rfsom-box-gui/icons/005-technology.png"
     },

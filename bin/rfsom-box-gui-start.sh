@@ -14,6 +14,7 @@ if [ $? -eq 0 ]; then
 	    ;;
 	esac
 	sudo service lightdm stop;
+	/usr/local/bin/batt_man.sh &
 	gpsd -n /dev/ttyPS1;
 	echo 972 > /sys/class/gpio/export;
 	echo 973 > /sys/class/gpio/export;

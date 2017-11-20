@@ -30,6 +30,7 @@ scripts.files += ./bin/start_stream.sh
 scripts.files += ./bin/recv_stream.sh
 scripts.files += ./bin/start_plot.sh
 scripts.files += ./bin/enc-onoff.sh
+scripts.files += ./bin/batt_man.sh
 scripts.files += ./tun_tap/restart_modem_gui.sh
 scripts.files += ./tun_tap/en_macsec.sh
 scripts.files += ./tun_tap/modemd
@@ -48,6 +49,7 @@ unix:permission.extra += chmod 777 $$INSTALL_LOCATION/bin/restart_modem_gui.sh;
 unix:permission.extra += chmod 777 $$INSTALL_LOCATION/bin/en_macsec.sh;
 unix:permission.extra += chmod 777 $$INSTALL_LOCATION/bin/get_gmap.sh;
 unix:permission.extra += chmod 777 $$INSTALL_LOCATION/bin/enc-onoff.sh;
+unix:permission.extra += chmod 777 $$INSTALL_LOCATION/bin/batt_man.sh;
 unix:permission.extra += chmod 777 $$INSTALL_LOCATION/bin/modemd
 
 INSTALLS += target scripts share permission

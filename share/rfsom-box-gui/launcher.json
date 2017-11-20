@@ -439,6 +439,24 @@
           "cmd": "/usr/local/bin/read_pss -text"
         },
         {
+          "description": "Charger Status",
+          "type": "cmd_read",
+          "timer": 0,
+          "cmd": "cat /tmp/rfsom_batt_mode"
+        },
+        {
+          "description": "Battery SoC (voltage)",
+          "type": "cmd_read",
+          "timer": 0,
+          "cmd": "cat /tmp/rfsom_batt_soc"
+        },
+        {
+          "description": "Battery SoC (charge)",
+          "type": "cmd_read",
+          "timer": 0,
+          "cmd": "echo \"scale=0;p=`cat /sys/class/power_supply/ltc2942/charge_now` / 32000; if (p > 100) 100 else if (p < 0) 0 else p\" | bc"
+        },
+        {
           "description": "Battery Volatge (V)",
           "type": "cmd_read",
           "timer": 0,

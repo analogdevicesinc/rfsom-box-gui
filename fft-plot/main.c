@@ -519,9 +519,41 @@ int main(int argc, char **argv)
 
 		if (kbhit()) {
 			char c=fgetc(stdin);
-
-			if (c=='q') {
+			switch(c)
+			{
+			case 'q':
 				stop=1;
+				break;
+			case 'Q':
+				change_lo(&lo, 1e9);
+				break;
+			case 'A':
+				change_lo(&lo, -1e9);
+				break;
+			case 'W':
+				change_lo(&lo, 1e8);
+				break;
+			case 'S':
+				change_lo(&lo, -1e8);
+				break;
+			case 'E':
+				change_lo(&lo, 1e7);
+				break;
+			case 'D':
+				change_lo(&lo, -1e7);
+				break;
+			case 'R':
+				change_lo(&lo, 1e6);
+				break;
+			case 'F':
+				change_lo(&lo, -1e6);
+				break;
+			case 'T':
+				change_lo(&lo, 1e5);
+				break;
+			case 'G':
+				change_lo(&lo, -1e5);
+				break;
 			}
 		}
 	}

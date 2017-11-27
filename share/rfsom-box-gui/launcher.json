@@ -339,7 +339,14 @@
   },
   {
     "params": {
-      "cmd": "sh /usr/local/bin/start_plot.sh"
+      "cmd": "sh /usr/local/bin/start_plot.sh",
+      "console": true ,
+      "scroll_console":false ,
+      "input_map" : {
+	   "right_btn":"q", 
+           "wheel_up":"E", 
+           "wheel_down":"D"
+     }
     },
     "type": "video",
     "name": "FFT plot"

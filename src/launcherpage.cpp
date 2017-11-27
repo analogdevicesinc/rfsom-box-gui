@@ -94,6 +94,11 @@ void LauncherPage::initialize()
 	list->setCurrentRow(0);
 }
 
+App *LauncherPage::getCurrentApp() const
+{
+	return currentApp;
+}
+
 void LauncherPage::wheelEvent(QWheelEvent *event)
 {
 	QKeyEvent *kev;

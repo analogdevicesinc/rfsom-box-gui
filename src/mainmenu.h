@@ -29,6 +29,7 @@ public:
 	MainMenu(QWidget *parent);
 	void initialize(Ui::MainWindow *_ui);
 	void keyPressEvent(QKeyEvent *e);
+	bool eventFilter(QObject *watched, QEvent *event);
 
 
 public slots:

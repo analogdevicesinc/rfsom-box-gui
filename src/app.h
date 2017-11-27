@@ -9,6 +9,17 @@ class App : public QWidget
 public:
 	explicit App(QWidget *parent = 0);
 	virtual ~App() {}
+	enum inputKeys
+	{
+		INPUT_NONE,
+		INPUT_LEFT,
+		INPUT_RIGHT,
+		INPUT_UP,
+		INPUT_DOWN,
+		INPUT_CENTER,
+		INPUT_WHEEL_UP,
+		INPUT_WHEEL_DOWN
+	};
 
 public slots:
 	virtual void setKeys() {}

@@ -19,6 +19,7 @@ public:
 	void buildUi(int index);
 	void loadJsonConfig(QString);
 	QListWidget *getList() const;
+	App *getCurrentApp() const;
 
 private:
 	QJsonArray launcher;

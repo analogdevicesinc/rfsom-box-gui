@@ -19,11 +19,16 @@ class AppVideoPlayer : public App
 	QWidget *parent;
 	bool exitRequested;
 	bool hangOnFinish;
+	bool consoleEnabled;
+	bool scrollConsole;
+	QMap<inputKeys,QString> inputMap;
 
 public:
 	explicit AppVideoPlayer(QJsonValue params, QLayout *lay, QWidget *parent = 0);
 	~AppVideoPlayer();
+	bool isKeyMapped(int key);
 	bool eventFilter(QObject *watched, QEvent *event);
+	void keyPressEvent(QKeyEvent *event);
 
 signals:
 

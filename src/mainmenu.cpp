@@ -3,10 +3,35 @@
 #include <QFile>
 #include "mainmenu.h"
 #include "common.h"
+#include "appvideoplayer.h"
 #include "ui_mainwindow.h"
 
 MainMenu::MainMenu(QWidget *parent) : QStackedWidget(parent)
 {
+	installEventFilter(this);
+}
+
+bool MainMenu::eventFilter(QObject *watched, QEvent *event)
+{
+	qDebug()<<event<<watched;
+	if(event->type()==QEvent::KeyPress)
+	{
+		QKeyEvent *key = static_cast<QKeyEvent *>(event);
+		qDebug()<<key;
+		auto videoApp = dynamic_cast<AppVideoPlayer*>(launcherPage->getCurrentApp());
+		if(videoApp && currentIndex()==appPageId)
+		{
+			if(videoApp->isKeyMapped(key->key()))
+			{
+				QApplication::sendEvent(launcherPage->getCurrentApp(),key);
+				return true;
+			}
+		}
+		keyPressEvent(key);
+		return true;
+	}
+	return false;
+
 }
 
 void MainMenu::keyPressEvent(QKeyEvent *e)

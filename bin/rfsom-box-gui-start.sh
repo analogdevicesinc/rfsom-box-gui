@@ -14,6 +14,7 @@ if [ $? -eq 0 ]; then
 	    ;;
 	esac
 	sudo service lightdm stop;
+	/usr/local/bin/batt_man.sh &
 	gpsd -n /dev/ttyPS1;
 	echo 972 > /sys/class/gpio/export;
 	echo 973 > /sys/class/gpio/export;
@@ -76,9 +77,6 @@ if [ $? -eq 0 ]; then
 	fi	
 	if [ ! -e $cfg_path/stream-ip ]; then
 		echo 192.168.23.2 >  $cfg_path/stream-ip
-	fi
-	if [ ! -e $cfg_path/stream-audio ]; then
-		echo 0 >  $cfg_path/stream-audio
 	fi
 
 

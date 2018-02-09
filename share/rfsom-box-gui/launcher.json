@@ -248,13 +248,6 @@
           "cmd_read": "if [ ! -s /usr/local/etc/rfsom-box-gui/netcat-param ]; then echo 0; else echo 1;fi",
           "cmd_read_timer": 0
         },
-	{
-          "description": "Audio (Experimental)",
-          "type": "checkbox",
-          "cmd_write": "echo $CHECKBOX_VAL > /usr/local/etc/rfsom-box-gui/stream-audio",
-          "cmd_read": "cat /usr/local/etc/rfsom-box-gui/stream-audio",
-          "cmd_read_timer": 0
-        },
         {
           "description": "Device IP Address",
           "type": "edit",

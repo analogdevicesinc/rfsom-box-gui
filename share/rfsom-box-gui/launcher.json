@@ -7,6 +7,14 @@
       ],
       "elements": [
         {
+          "description": "Automatic DHCP Client",
+          "type": "checkbox",
+          "cmd_write": "if [ $CHECKBOX_VAL -gt 0 ]; then /usr/local/bin/enable_dhcp.sh; else /usr/local/bin/enable_static_
+ip.sh; fi",
+          "cmd_read": "grep -q 'iface eth0 inet static' /etc/network/interfaces && echo 0 || echo 1",
+          "cmd_read_timer": "read_once"
+        },
+        {
           "description": "IP Address",
           "type": "edit",
           "subtype": "ip",
@@ -38,11 +46,12 @@
           "cmd_write": "echo $EDIT_VAL"
         },
         {
-          "description": "Automatic DHCP Mode",
-          "type": "checkbox",
-          "cmd_write": "if [ $CHECKBOX_VAL -gt 0 ]; then /usr/local/bin/enable_dhcp.sh; else /usr/local/bin/enable_static_ip.sh; fi",
-          "cmd_read": "grep -q 'iface eth0 inet static' /etc/network/interfaces && echo 0 || echo 1",
-          "cmd_read_timer": "read_once"
+          "description": "Peer IP Address",
+          "type": "edit",
+          "subtype": "ip",
+          "cmd_read": "cat /usr/local/etc/rfsom-box-gui/peer-cal-ip",
+          "cmd_read_timer": 1,
+          "cmd_write": "echo $EDIT_VAL > /usr/local/etc/rfsom-box-gui/peer-cal-ip"
         }
       ]
     },
@@ -194,9 +203,17 @@
           "cmd_write": "iio_attr -q -d ad9361-phy xo_correction $EDIT_VAL;echo $EDIT_VAL > /usr/local/etc/rfsom-box-gui/radio-xo_correction"
         },
         {
-          "description": "Calibrate XO",
+          "description": "Calibrate XO GPS",
           "type": "btn",
           "cmd": "/usr/local/bin/cal_ad9361 -a -g;err=$(echo $?);iio_attr -q -d ad9361-phy xo_correction > /usr/local/etc/rfsom-box-gui/radio-xo_correction;exit $err;",
+          "background_task": true,
+          "muted": false,
+          "stylesheet": ""
+        },
+	{
+          "description": "Calibrate XO IP",
+          "type": "btn",
+          "cmd": "/usr/local/bin/send_tone.sh",
           "background_task": true,
           "muted": false,
           "stylesheet": ""

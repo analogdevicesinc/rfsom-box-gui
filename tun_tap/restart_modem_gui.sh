@@ -79,7 +79,12 @@ done
 echo 0x44 0x1 > /sys/kernel/debug/iio/iio:device3/direct_reg_access
 cat /sys/kernel/debug/iio/iio:device3/direct_reg_access
 
+#load a custom FIR
+echo 0 > /sys/bus/iio/devices/iio:device1/in_voltage_filter_fir_en
+cat /usr/local/share/rfsom-box-gui/modem_filter.ftr > /sys/bus/iio/devices/iio:device1/filter_fir_config
+echo 1 > /sys/bus/iio/devices/iio:device1/in_voltage_filter_fir_en
 
+#start modem daemon
 /usr/local/bin/modemd -a $ip -m $subnet -d $delay -n tap & 
 /usr/local/bin/en_macsec.sh
 

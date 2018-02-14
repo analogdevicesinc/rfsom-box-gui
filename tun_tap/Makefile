@@ -10,6 +10,7 @@ prefix=/usr/local
 modemd: $(OBJ)
 	$(CC) $(CFLAGS) -pthread -o $@ $^ -lm
 install:
-	install -m 0755 modemd $(prefix)/bin	
+	install -m 0755 modemd $(prefix)/bin
+	install -m 0444 modem_filter.ftr $(prefix)/share/rfsom-box-gui
 clean:
 	rm -rf modemd *.o

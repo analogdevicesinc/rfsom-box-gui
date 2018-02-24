@@ -1,10 +1,16 @@
 #!/bin/sh
+
+if [ "$(id -u)" != "0" ] ; then
+	echo "This script must be run as root"
+	exit 1
+fi
+
 grep -q "RFSOM-BOX" /sys/firmware/devicetree/base/model
 if [ $? -eq 0 ]; then
 
 	case "$(pidof rfsom-box-gui | wc -w)" in
 
-	0)  echo "Restarting rfsom-box-gui:     $(date)" >> /var/log/rfsom-box-gui-start.txt
+	0)  echo "Starting rfsom-box-gui:     $(date)" >> /var/log/rfsom-box-gui-start.txt
 	    ;;
 	1)  # all ok
 	    exit ;;
@@ -13,14 +19,25 @@ if [ $? -eq 0 ]; then
 	    exit
 	    ;;
 	esac
-	sudo service lightdm stop;
+	if ps -p $(cat /var/run/lightdm.pid) > /dev/null
+	then
+		service lightdm stop;
+	fi
 	/usr/local/bin/batt_man.sh &
 	gpsd -n /dev/ttyPS1;
-	echo 972 > /sys/class/gpio/export;
-	echo 973 > /sys/class/gpio/export;
-	echo 974 > /sys/class/gpio/export;
+	if [ ! -d /sys/class/gpio/gpio972 ] ; then
+		echo 972 > /sys/class/gpio/export;
+	fi
+	if [ ! -d /sys/class/gpio/gpio973 ] ; then
+		echo 973 > /sys/class/gpio/export;
+	fi
+	if [ ! -d /sys/class/gpio/gpio974 ] ; then
+		echo 974 > /sys/class/gpio/export;
+	fi
 
-	echo 0x800000bc 0xffffffff > /sys/kernel/debug/iio/iio\:device3/direct_reg_access
+	# Not sure what this is for?
+	iio_reg cf-ad9361-dds-core-lpc 0x800000bc 0xffffffff
+
 	cfg_path=/usr/local/etc/rfsom-box-gui
 	if [ ! -d $cfg_path ]; then
 		mkdir $cfg_path 
@@ -94,7 +111,6 @@ if [ $? -eq 0 ]; then
 	FRAMEBUFFER=/dev/fb0 \
         /usr/local/bin/rfsom-box-gui > /var/log/rfsom-box-gui 2>&1 &
 else
-set -x
 	# could it still be the BOX, with a wrong model?
 	iio_attr -a -d | grep -q ad7291-ccbox
 	if [ $? -eq 0 ]; then

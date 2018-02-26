@@ -241,9 +241,7 @@ int32_t modem_read(uint64_t* buf, uint32_t size)
 		rx_buff_virt_addr = (mapping_addr + (rx_buff_mem_addr & page_mask));
 	}
 	
-	for(index = 0; index < size/sizeof(uint64_t); index++) {
-		buf[index] = *(((uint64_t *)rx_buff_virt_addr) + index);
-	}
+	memcpy(buf, rx_buff_virt_addr, size);
 
 	return 0;
 }

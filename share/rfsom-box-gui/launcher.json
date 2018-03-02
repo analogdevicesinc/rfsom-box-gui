@@ -9,8 +9,7 @@
         {
           "description": "Automatic DHCP Client",
           "type": "checkbox",
-          "cmd_write": "if [ $CHECKBOX_VAL -gt 0 ]; then /usr/local/bin/enable_dhcp.sh; else /usr/local/bin/enable_static_
-ip.sh; fi",
+          "cmd_write": "if [ \"$CHECKBOX_VAL\" -eq \"1\" ]; then /usr/local/bin/enable_dhcp.sh; else /usr/local/bin/enable_static_ip.sh; fi",
           "cmd_read": "grep -q 'iface eth0 inet static' /etc/network/interfaces && echo 0 || echo 1",
           "cmd_read_timer": "read_once"
         },

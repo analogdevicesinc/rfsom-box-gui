@@ -146,17 +146,20 @@ int32_t adc_capture(uint32_t size)
 	/* Wait until the new transfer is queued. */
 	do {
 		uio_read(rx_dma_uio_addr, DMAC_REG_START_TRANSFER, &reg_val);
+		usleep(1);
 	} while(reg_val == 1 && running);
 	
 	/* Wait until the current transfer is completed. */
 	do {
 		uio_read(rx_dma_uio_addr, DMAC_REG_IRQ_PENDING, &reg_val);
+		usleep(1);
 	} while(reg_val != (DMAC_IRQ_SOT | DMAC_IRQ_EOT) && running);
 	uio_write(rx_dma_uio_addr, DMAC_REG_IRQ_PENDING, reg_val);
 	
 	/* Wait until the transfer with the ID transfer_id is completed. */
 	do {
 		uio_read(rx_dma_uio_addr, DMAC_REG_TRANSFER_DONE, &reg_val);
+		usleep(1);
 	} while((reg_val & (1 << transfer_id)) != (uint32_t)(1 << transfer_id) && running);
 
 	return 0;

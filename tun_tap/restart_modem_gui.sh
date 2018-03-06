@@ -7,82 +7,106 @@ echo $ip
 echo $subnet
 echo $delay
 
-devnr=$(cat /sys/bus/iio/devices/iio\:device*/name | grep cf-ad9361-lpc | wc -l)
+devnr=$(/usr/bin/iio_attr -d | grep cf-ad9361-lpc | wc -l)
 if [ $devnr -eq 0 ]
 then
         echo cf-ad9361-lpc device not found
+	exit
 fi
 
-
 PID=$(pidof modemd)
-kill -9 $PID 
+if [ ! -z "$PID" ] ; then
+	kill -9 $PID
+fi
 
 # en_radio.sh
-echo 20000000 > /sys/bus/iio/devices/iio:device1/in_voltage_sampling_frequency
-cat /sys/bus/iio/devices/iio:device1/in_voltage_sampling_frequency
+/usr/bin/iio_attr -c -i ad9361-phy voltage0 sampling_frequency 20000000
+/usr/bin/iio_attr -c -o ad9361-phy voltage0 sampling_frequency 20000000
 
-echo 20000000 > /sys/bus/iio/devices/iio:device1/out_voltage_sampling_frequency
-cat /sys/bus/iio/devices/iio:device1/out_voltage_sampling_frequency
+/usr/bin/iio_attr -c -i ad9361-phy voltage0 rf_bandwidth 20000000
+/usr/bin/iio_attr -c -o ad9361-phy voltage0 rf_bandwidth 20000000
 
-echo 20000000 > /sys/bus/iio/devices/iio:device1/in_voltage_rf_bandwidth
-echo 20000000 > /sys/bus/iio/devices/iio:device1/out_voltage_rf_bandwidth
-cat /sys/bus/iio/devices/iio:device1/in_voltage_rf_bandwidth
-cat /sys/bus/iio/devices/iio:device1/out_voltage_rf_bandwidth
+/usr/bin/iio_attr -c -i ad9361-phy voltage0 rssi
 
-cat /sys/bus/iio/devices/iio:device1/in_voltage0_rssi
 # en_dds.sh
-echo 0x40 0x0 > /sys/kernel/debug/iio/iio:device3/direct_reg_access
-cat /sys/kernel/debug/iio/iio:device3/direct_reg_access
-echo 0x40 0x2 > /sys/kernel/debug/iio/iio:device3/direct_reg_access
-cat /sys/kernel/debug/iio/iio:device3/direct_reg_access
-echo 0x40 0x3 > /sys/kernel/debug/iio/iio:device3/direct_reg_access
-cat /sys/kernel/debug/iio/iio:device3/direct_reg_access
+/usr/bin/iio_reg cf-ad9361-dds-core-lpc 0x40 0x0
+echo -n "cf-ad9361-dds-core-lpc reg 0x040 : "
+/usr/bin/iio_reg cf-ad9361-dds-core-lpc 0x40
 
-echo 0x4C 0x3 > /sys/kernel/debug/iio/iio:device3/direct_reg_access
-cat /sys/kernel/debug/iio/iio:device3/direct_reg_access
+/usr/bin/iio_reg cf-ad9361-dds-core-lpc 0x40 0x2
+echo -n "cf-ad9361-dds-core-lpc reg 0x040 : "
+/usr/bin/iio_reg cf-ad9361-dds-core-lpc 0x40
 
-echo 0x44 0x0 > /sys/kernel/debug/iio/iio:device3/direct_reg_access
-cat /sys/kernel/debug/iio/iio:device3/direct_reg_access
+/usr/bin/iio_reg cf-ad9361-dds-core-lpc 0x40 0x3
+echo -n "cf-ad9361-dds-core-lpc reg 0x040 : "
+/usr/bin/iio_reg cf-ad9361-dds-core-lpc 0x40
 
-echo 0x48 0x0 > /sys/kernel/debug/iio/iio:device3/direct_reg_access
-cat /sys/kernel/debug/iio/iio:device3/direct_reg_access
+/usr/bin/iio_reg cf-ad9361-dds-core-lpc 0x4C 0x3
+echo -n "cf-ad9361-dds-core-lpc reg 0x04c : "
+/usr/bin/iio_reg cf-ad9361-dds-core-lpc 0x4C
+
+/usr/bin/iio_reg cf-ad9361-dds-core-lpc 0x44 0x0
+echo -n "cf-ad9361-dds-core-lpc reg 0x044 : "
+/usr/bin/iio_reg cf-ad9361-dds-core-lpc 0x44
+
+/usr/bin/iio_reg cf-ad9361-dds-core-lpc 0x48 0x0
+echo -n "cf-ad9361-dds-core-lpc reg 0x048 : "
+/usr/bin/iio_reg cf-ad9361-dds-core-lpc 0x48
+
 for i in $(seq 0 3)
 do
-	echo $((0x418 + $i * 0x40)) 0 > /sys/kernel/debug/iio/iio:device3/direct_reg_access
-	cat /sys/kernel/debug/iio/iio:device3/direct_reg_access
+	/usr/bin/iio_reg cf-ad9361-dds-core-lpc $((0x418 + $i * 0x40)) 0x0
+	echo -n "cf-ad9361-dds-core-lpc reg" $(printf "0x%x" $((0x418 + 1 * 0x40))) " : "
+	/usr/bin/iio_reg cf-ad9361-dds-core-lpc $((0x418 + $i * 0x40))
 done
 
-echo 0x44 0x1 > /sys/kernel/debug/iio/iio:device3/direct_reg_access
-cat /sys/kernel/debug/iio/iio:device3/direct_reg_access
+/usr/bin/iio_reg cf-ad9361-dds-core-lpc 0x44 0x1
+echo -n "cf-ad9361-dds-core-lpc reg 0x044 : "
+/usr/bin/iio_reg cf-ad9361-dds-core-lpc 0x44
+
 # en_dma.sh
-echo 0x40 0x0 > /sys/kernel/debug/iio/iio:device3/direct_reg_access
-cat /sys/kernel/debug/iio/iio:device3/direct_reg_access
-echo 0x40 0x2 > /sys/kernel/debug/iio/iio:device3/direct_reg_access
-cat /sys/kernel/debug/iio/iio:device3/direct_reg_access
-echo 0x40 0x3 > /sys/kernel/debug/iio/iio:device3/direct_reg_access
-cat /sys/kernel/debug/iio/iio:device3/direct_reg_access
+/usr/bin/iio_reg cf-ad9361-dds-core-lpc 0x40 0x0
+echo -n "cf-ad9361-dds-core-lpc reg 0x040 : "
+/usr/bin/iio_reg cf-ad9361-dds-core-lpc 0x40
 
-echo 0x4C 0x3 > /sys/kernel/debug/iio/iio:device3/direct_reg_access
-cat /sys/kernel/debug/iio/iio:device3/direct_reg_access
+/usr/bin/iio_reg cf-ad9361-dds-core-lpc 0x40 0x2
+echo -n "cf-ad9361-dds-core-lpc reg 0x040 : "
+/usr/bin/iio_reg cf-ad9361-dds-core-lpc 0x40
 
-echo 0x44 0x0 > /sys/kernel/debug/iio/iio:device3/direct_reg_access
-cat /sys/kernel/debug/iio/iio:device3/direct_reg_access
+/usr/bin/iio_reg cf-ad9361-dds-core-lpc 0x40 0x3
+echo -n "cf-ad9361-dds-core-lpc reg 0x040 : "
+/usr/bin/iio_reg cf-ad9361-dds-core-lpc 0x40
 
-echo 0x48 0x0 > /sys/kernel/debug/iio/iio:device3/direct_reg_access
-cat /sys/kernel/debug/iio/iio:device3/direct_reg_access
+/usr/bin/iio_reg cf-ad9361-dds-core-lpc 0x4c 0x3
+echo -n "cf-ad9361-dds-core-lpc reg 0x04c : "
+/usr/bin/iio_reg cf-ad9361-dds-core-lpc 0x4c
+
+/usr/bin/iio_reg cf-ad9361-dds-core-lpc 0x44 0x0
+echo -n "cf-ad9361-dds-core-lpc reg 0x044 : "
+/usr/bin/iio_reg cf-ad9361-dds-core-lpc 0x44
+
+/usr/bin/iio_reg cf-ad9361-dds-core-lpc 0x48 0x0
+echo -n "cf-ad9361-dds-core-lpc reg 0x048 : "
+/usr/bin/iio_reg cf-ad9361-dds-core-lpc 0x48
+
 for i in $(seq 0 3)
 do
-	echo $((0x418 + $i * 0x40)) 2 > /sys/kernel/debug/iio/iio:device3/direct_reg_access
-	cat /sys/kernel/debug/iio/iio:device3/direct_reg_access
+	/usr/bin/iio_reg cf-ad9361-dds-core-lpc $((0x418 + $i * 0x40)) 0x2
+	echo -n "cf-ad9361-dds-core-lpc reg" $(printf "0x%x" $((0x418 + 1 * 0x40))) " : "
+	/usr/bin/iio_reg cf-ad9361-dds-core-lpc $((0x418 + $i * 0x40))
 done
 
-echo 0x44 0x1 > /sys/kernel/debug/iio/iio:device3/direct_reg_access
-cat /sys/kernel/debug/iio/iio:device3/direct_reg_access
+/usr/bin/iio_reg cf-ad9361-dds-core-lpc 0x44 0x1
+echo -n "cf-ad9361-dds-core-lpc reg 0x044 : "
+/usr/bin/iio_reg cf-ad9361-dds-core-lpc 0x44
 
 #load a custom FIR
-echo 0 > /sys/bus/iio/devices/iio:device1/in_voltage_filter_fir_en
-cat /usr/local/share/rfsom-box-gui/modem_filter.ftr > /sys/bus/iio/devices/iio:device1/filter_fir_config
-echo 1 > /sys/bus/iio/devices/iio:device1/in_voltage_filter_fir_en
+if [ -f /usr/local/share/rfsom-box-gui/modem_filter.ftr ] ; then
+	/usr/bin/iio_attr -c -i ad9361-phy voltage0 filter_fir_en 0
+	echo "loading filter file"
+	cat /usr/local/share/rfsom-box-gui/modem_filter.ftr > /sys/bus/iio/devices/iio:device1/filter_fir_config
+	/usr/bin/iio_attr -c -i ad9361-phy voltage0 filter_fir_en 1
+fi
 
 #start modem daemon
 /usr/local/bin/modemd -a $ip -m $subnet -d $delay -n tap & 

@@ -9,8 +9,7 @@
         {
           "description": "Automatic DHCP Client",
           "type": "checkbox",
-          "cmd_write": "if [ \"$CHECKBOX_VAL\" -eq \"1\" ]; then /usr/local/bin/enable_dhcp.sh; else /usr/local/bin/enable_static_ip.sh; fi",
-          "cmd_read": "grep -q 'iface eth0 inet static' /etc/network/interfaces && echo 0 || echo 1",
+          "cmd_write": "if [ \"$CHECKBOX_VAL\" -eq \"1\" ]; then /usr/local/bin/enable_dhcp.sh; else /usr/local/bin/enable_static_ip.sh; fi", "cmd_read": "grep -q 'iface eth0 inet static' /etc/network/interfaces && echo 0 || echo 1",
           "cmd_read_timer": "read_once"
         },
         {
@@ -640,9 +639,36 @@
     "params": {
       "timers": [
         1000,
-        5000
+        5000,
+       10000
       ],
       "elements": [
+        {
+          "description": "Git tag",
+          "type": "cmd_read",
+          "timer": 2,
+          "cmd": "cat /tmp/git_tag"
+        },
+
+        {
+          "description": "Git date",
+          "type": "cmd_read",
+          "timer": 2,
+          "cmd": "cat /tmp/git_date"
+        },
+        {
+          "description": "Kernel release",
+          "type": "cmd_read",
+          "timer": 2,
+          "cmd": "cat /tmp/unamer"
+        },
+	{
+          "description": "Kernel version",
+          "type": "cmd_read",
+          "timer": 2,
+          "cmd": "cat /tmp/unamev"
+        },
+
         {
           "description": "Reboot",
           "type": "btn",

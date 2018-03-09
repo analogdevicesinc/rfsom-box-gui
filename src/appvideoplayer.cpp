@@ -166,9 +166,9 @@ void AppVideoPlayer::keyPressEvent(QKeyEvent *event)
 	case Qt::Key_Down:
 		val=INPUT_DOWN;
 		break;
-	/*case Qt::Key_Left:
-		val=INPUT_LEFT;
-		break;*/
+	case Qt::Key_Left:
+		App::keyPressEvent(event);
+		break;
 	case Qt::Key_Right:
 		val=INPUT_RIGHT;
 		break;

@@ -332,7 +332,9 @@ int main(int argc, char **argv)
 	rx_q = iio_device_find_channel(dev, "voltage1", 0); // INPUT
 	rx1 =  iio_device_find_channel(phy, "voltage0", 0); // INPUT
 	iio_channel_attr_read_longlong(rx1, "sampling_frequency", &sampling_freq);
-	iio_channel_attr_write_longlong(rx1, "sampling_frequency", (long long)(30.72e6));
+	/* Don't set the sample rate, incase the modem is running, since that messes it up
+	 * iio_channel_attr_write_longlong(rx1, "sampling_frequency", (long long)(30.72e6));
+	 */
 	printf("sampling rate = %f\n", (double)sampling_freq/1e6);
 	rx_lo =  iio_device_find_channel(phy, "RX_LO", 1); // OUTPUT
 	ret = iio_channel_attr_read_longlong(rx_lo, "frequency", &lo);

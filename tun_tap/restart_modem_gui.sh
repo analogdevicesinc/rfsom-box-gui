@@ -111,4 +111,5 @@ fi
 #start modem daemon
 /usr/local/bin/modemd -a $ip -m $subnet -d $delay -n tap & 
 /usr/local/bin/en_macsec.sh
+/usr/local/bin/ip_reg -x
 

@@ -4,6 +4,7 @@
 #include <signal.h>
 #include <stdio.h>
 #include <string.h>
+#include <strings.h>
 #include <sys/ioctl.h>
 #include <sys/signalfd.h>
 #include <sys/socket.h>
@@ -40,7 +41,7 @@
 
 extern char 	*optarg;
 static char 	tx_buffer[TX_BUF_SIZE];
-static char 	rx_buffer[RX_BUF_SIZE];
+static char 	*rx_buffer;
 static struct 	pollfd pfd[2];
 
 static int tun_alloc(const char *name, int flags)
@@ -266,7 +267,7 @@ void *rx_thread_fnc(void* ptr)
 	
 	while(modem_running())
 	{
-		modem_read((uint64_t*)rx_buffer, RX_BUF_SIZE);
+		rx_buffer = modem_read();
 
 	#if(DEBUG >= 3)		
 		for(i = 0; i < HEADER_FRAME_SIZE; i++)
@@ -363,7 +364,7 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 
-	ret = modem_setup();
+	ret = modem_setup(RX_BUF_SIZE);
 	if(ret)
     {
         perror("TUN/TAP: Failed to setup modem");

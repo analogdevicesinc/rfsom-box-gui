@@ -58,13 +58,9 @@
 /******************************************************************************/
 /************************ Variables Definitions *******************************/
 /******************************************************************************/
-static uint32_t rx_buf_start_address;
 static int		rx_dma_uio_fd;
 static void		*rx_dma_uio_addr;
-static uint32_t	rx_buff_mem_size;
-static uint32_t	rx_buff_mem_addr;
 static int 		rx_dev_mem_fd = 0;
-static void 	*rx_buff_virt_addr;
 
 static int		tx_dma_uio_fd;
 static void		*tx_dma_uio_addr;
@@ -74,6 +70,16 @@ static void		*tx_buff_virt_addr;
 static int		tx_dev_mem_fd = 0;
 
 static int32_t 	running = 0;
+
+struct dmac_transfer {
+	void *virt_addr;
+	uint32_t phys_addr;
+	uint32_t size;
+	int32_t id;
+};
+
+static struct dmac_transfer rx_transfer[2];
+static unsigned int active_rx_transfer;
 
 /***************************************************************************//**
  * @brief get_file_info
@@ -114,66 +120,61 @@ void uio_write(void *uio_addr, uint32_t reg_addr, uint32_t data)
 	*((uint32_t *) (uio_addr + reg_addr)) = data;
 }
 
-/***************************************************************************//**
- * @brief adc_capture
-*******************************************************************************/
-int32_t adc_capture(uint32_t size)
+static void dmac_rx_enable(void)
+{
+	uio_write(rx_dma_uio_addr, DMAC_REG_CTRL, DMAC_CTRL_ENABLE);
+}
+
+static void dmac_rx_disable(void)
+{
+	uio_write(rx_dma_uio_addr, DMAC_REG_CTRL, 0x0);
+}
+
+static void dmac_rx_queue_transfer(struct dmac_transfer *transfer)
 {
 	uint32_t reg_val;
 	uint32_t transfer_id;
-	
-	if(size > rx_buff_mem_size) {
-		fprintf(stderr, "MODEM: %s: Desired length (%d) is bigger than the buffer size (%d).",
-		__func__, size, rx_buff_mem_size);
-
-		return -1;
-	}	
-	
-	uio_write(rx_dma_uio_addr, DMAC_REG_CTRL, 0x0);
-	uio_write(rx_dma_uio_addr, DMAC_REG_CTRL, DMAC_CTRL_ENABLE);
-	uio_write(rx_dma_uio_addr, DMAC_REG_IRQ_MASK, 0x0);
 
 	uio_read(rx_dma_uio_addr, DMAC_REG_TRANSFER_ID, &transfer_id);
-	uio_read(rx_dma_uio_addr, DMAC_REG_IRQ_PENDING, &reg_val);
-	uio_write(rx_dma_uio_addr, DMAC_REG_IRQ_PENDING, reg_val);
 	
-	uio_write(rx_dma_uio_addr, DMAC_REG_DEST_ADDRESS, rx_buf_start_address);
-	uio_write(rx_dma_uio_addr, DMAC_REG_DEST_STRIDE, 0x0);
-	uio_write(rx_dma_uio_addr, DMAC_REG_X_LENGTH, size - 1);
-	uio_write(rx_dma_uio_addr, DMAC_REG_Y_LENGTH, 0x0);
+	uio_write(rx_dma_uio_addr, DMAC_REG_DEST_ADDRESS, transfer->phys_addr);
+	uio_write(rx_dma_uio_addr, DMAC_REG_X_LENGTH, transfer->size - 1);
 
 	uio_write(rx_dma_uio_addr, DMAC_REG_START_TRANSFER, 0x1);
 	/* Wait until the new transfer is queued. */
 	do {
 		uio_read(rx_dma_uio_addr, DMAC_REG_START_TRANSFER, &reg_val);
-		usleep(1);
-	} while(reg_val == 1 && running);
-	
-	/* Wait until the current transfer is completed. */
-	do {
-		uio_read(rx_dma_uio_addr, DMAC_REG_IRQ_PENDING, &reg_val);
-		usleep(1);
-	} while(reg_val != (DMAC_IRQ_SOT | DMAC_IRQ_EOT) && running);
-	uio_write(rx_dma_uio_addr, DMAC_REG_IRQ_PENDING, reg_val);
-	
+		usleep(0);
+	} while (reg_val == 1 && running);
+
+	transfer->id = transfer_id;
+}
+
+static void dmac_rx_wait_complete(struct dmac_transfer *transfer)
+{
+	uint32_t reg_val;
+
 	/* Wait until the transfer with the ID transfer_id is completed. */
 	do {
 		uio_read(rx_dma_uio_addr, DMAC_REG_TRANSFER_DONE, &reg_val);
-		usleep(1);
-	} while((reg_val & (1 << transfer_id)) != (uint32_t)(1 << transfer_id) && running);
+		usleep(0);
+	} while((reg_val & (1 << transfer->id)) != (uint32_t)(1 << transfer->id) && running);
 
-	return 0;
+	transfer->id = -1;
 }
 
 /***************************************************************************//**
  * @brief rx_setup
 *******************************************************************************/
-int32_t rx_setup(void)
+int32_t rx_setup(uint32_t size)
 {
+	void *mapping_addr;
+	uint32_t rx_buff_mem_size;
+	uint32_t rx_buff_mem_addr;
+
 	rx_dma_uio_fd = open(RX_DMA_UIO_DEV, O_RDWR);
 	if(rx_dma_uio_fd < 1) {
 		fprintf(stderr, "MODEM: %s: Can't open rx_dma_uio device\n\r", __func__);
-
 		return rx_dma_uio_fd;
 	}
 	
@@ -186,7 +187,37 @@ int32_t rx_setup(void)
 			  
 	get_file_info(RX_BUFF_MEM_SIZE, &rx_buff_mem_size);
 	get_file_info(RX_BUFF_MEM_ADDR, &rx_buff_mem_addr);
-	rx_buf_start_address = rx_buff_mem_addr;
+
+	rx_dev_mem_fd = open("/dev/mem", O_RDWR | O_SYNC);
+	if(rx_dev_mem_fd == -1) {
+		fprintf(stderr, "MODEM: %s: Can't open /dev/mem device\n\r", __func__);
+		rx_dev_mem_fd = 0;
+		return -1;
+	}
+
+	mapping_addr = mmap(NULL,
+			   rx_buff_mem_size,
+			   PROT_READ | PROT_WRITE,
+			   MAP_SHARED,
+			   rx_dev_mem_fd,
+			   rx_buff_mem_addr);
+	if(mapping_addr == MAP_FAILED) {
+		fprintf(stderr, "MODEM: %s: mmap error\n\r", __func__);
+		return -1;
+	}
+
+	rx_transfer[0].virt_addr = mapping_addr;
+	rx_transfer[0].phys_addr = rx_buff_mem_addr;
+	rx_transfer[0].size = size;
+	rx_transfer[1].virt_addr = mapping_addr + rx_buff_mem_size / 2;
+	rx_transfer[1].phys_addr = rx_buff_mem_addr + rx_buff_mem_size / 2;
+	rx_transfer[1].size = size;
+
+	dmac_rx_disable();
+	dmac_rx_enable();
+	dmac_rx_queue_transfer(&rx_transfer[0]);
+	dmac_rx_queue_transfer(&rx_transfer[1]);
+	active_rx_transfer = 0;
 	
 	return 0;
 }
@@ -196,6 +227,8 @@ int32_t rx_setup(void)
 *******************************************************************************/
 int32_t rx_close(void)
 {
+	dmac_rx_disable();
+
 	munmap(rx_dma_uio_addr, 4096);
 
 	close(rx_dma_uio_fd);
@@ -208,45 +241,17 @@ int32_t rx_close(void)
 /***************************************************************************//**
  * @brief modem_read
 *******************************************************************************/
-int32_t modem_read(uint64_t* buf, uint32_t size)
+void *modem_read(void)
 {
-	uint32_t index;
-	void *mapping_addr;
-	uint32_t mapping_length, page_mask, page_size;
-	
-	adc_capture(size);
-
-	if(!rx_dev_mem_fd)
-	{	
-		rx_dev_mem_fd = open("/dev/mem", O_RDWR | O_SYNC);
-		if(rx_dev_mem_fd == -1) {
-			fprintf(stderr, "MODEM: %s: Can't open /dev/mem device\n\r", __func__);
-			rx_dev_mem_fd = 0;
-			
-			return -1;
-		}
-
-		page_size = sysconf(_SC_PAGESIZE);
-		mapping_length = ((((size * 8) / page_size) + 1) * page_size);
-		page_mask = (page_size - 1);
-		mapping_addr = mmap(NULL,
-				   mapping_length,
-				   PROT_READ | PROT_WRITE,
-				   MAP_SHARED,
-				   rx_dev_mem_fd,
-				   (rx_buff_mem_addr & ~page_mask));
-		if(mapping_addr == MAP_FAILED) {
-			fprintf(stderr, "MODEM: %s: mmap error\n\r", __func__);
-
-			return -1;
-		}
-
-		rx_buff_virt_addr = (mapping_addr + (rx_buff_mem_addr & page_mask));
+	if (rx_transfer[active_rx_transfer].id == -1) {
+		dmac_rx_queue_transfer(&rx_transfer[active_rx_transfer]);
+		active_rx_transfer += 1;
+		active_rx_transfer %= 2;
 	}
-	
-	memcpy(buf, rx_buff_virt_addr, size);
 
-	return 0;
+	dmac_rx_wait_complete(&rx_transfer[active_rx_transfer]);
+
+	return rx_transfer[active_rx_transfer].virt_addr;
 }
 
 /***************************************************************************//**
@@ -372,7 +377,7 @@ int32_t modem_reset(void)
 /***************************************************************************//**
  * @brief modem_setup
 *******************************************************************************/
-int32_t modem_setup(void)
+int32_t modem_setup(uint32_t rx_size)
 {
 	int32_t ret;
 	
@@ -383,7 +388,7 @@ int32_t modem_setup(void)
         return ret;
     }
 
-	ret = rx_setup();
+	ret = rx_setup(rx_size);
 	if(ret)
     {
         fprintf(stderr, "MODEM: Failed to setup Rx");

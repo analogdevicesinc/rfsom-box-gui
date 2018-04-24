@@ -1,17 +1,26 @@
 
 CFLAGS=-std=c99 -pedantic -Wall -D_POSIX_SOURCE
 DEPS = mac.h
-OBJ = modemd.o mac.o
+OBJ_MODEMD = modemd.o mac.o
+OBJ_IP_REG = ip_reg.o
 prefix=/usr/local
+
+all: modemd ip_reg
 
 %.o: %.c $(DEPS)
 	$(CC) $(CFLAGS) -c -o $@ $< 
 
-modemd: $(OBJ)
+modemd: $(OBJ_MODEMD)
 	$(CC) $(CFLAGS) -pthread -o $@ $^ -lm
+	
+ip_reg: $(OBJ_IP_REG)
+	$(CC) $(CFLAGS) -pthread -o $@ $^ -lm
+
 install:
 	install -m 0755 modemd $(prefix)/bin
+	install -m 0755 ip_reg $(prefix)/bin
 	install -m 0777 restart_modem_gui.sh $(prefix)/bin
 	install -m 0444 modem_filter.ftr $(prefix)/share/rfsom-box-gui
+
 clean:
-	rm -rf modemd *.o
+	rm -rf modemd ip_reg *.o

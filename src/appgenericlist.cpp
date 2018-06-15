@@ -271,11 +271,41 @@ QWidget *AppGenericList::setupEditElementUi(QJsonObject obj)
 						strlist.append(val.toString());
 					}
 				}
-			}
 
 			enum_element->setElements(strlist);
-		}
+			}
+		} else {
+			QStringList strlist;
+			if (obj.contains("cmd_enum")){
+			if (obj["cmd_enum"].isString()) {
+				enum_element->setElementsCmd(new ScriptResult(obj["cmd_enum"].toString(), ui_element));
+				if (obj.contains("cmd_enum_timer")) {
+					bool readOnce=false;
+					if(obj["cmd_enum_timer"].isString())
+					{
+						if(obj["cmd_enum_timer"].toString()=="read_once")
+							readOnce=true;
+					}
 
+					if(!readOnce)
+					{
+						int timer_id = obj["cmd_enum_timer"].toInt();
+
+						if (!(timer_id >= 0 && timer_id < timers.count())) {
+							timer_id = 0; // connects to the default timer 0
+						}
+						connect(timers[timer_id],SIGNAL(timeout()),enum_element,SLOT(updateElements()));
+					}
+
+
+			}
+				if(obj.contains("cmd_enum_sep")) {
+					if(obj["cmd_enum_sep"].isString())
+						enum_element->setElementsSep(obj["cmd_enum_sep"].toString());
+				}
+			}
+		}
+		}
 	}
 
 	ui_element->update();
@@ -371,7 +401,7 @@ void AppGenericList::buildUi()
 			element = setupButtonElementUi(obj);
 		} else if (obj["type"].toString()=="checkbox") {
 			element = setupCheckboxElementUi(obj);
-		} else if (obj["type"].toString()=="edit")	{
+		} else if (obj["type"].toString()=="edit") {
 			element = setupEditElementUi(obj);
 		}
 

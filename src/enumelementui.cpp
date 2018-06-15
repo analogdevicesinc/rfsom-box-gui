@@ -13,9 +13,31 @@ void EnumElementUi::setElements(const QStringList& value)
 	elements = value;
 }
 
+ScriptResult *EnumElementUi::getElementsCmd() const
+{
+	return elementsCmd;
+}
+
+void EnumElementUi::setElementsCmd(ScriptResult *value)
+{
+	elementsCmd = value;
+}
+
+QString EnumElementUi::getElementsSep() const
+{
+	return elementsSep;
+}
+
+void EnumElementUi::setElementsSep(const QString &value)
+{
+	elementsSep = value;
+}
+
 EnumElementUi::EnumElementUi(QWidget *parent) : EditboxElementUi(parent)
 {
 	current=0;
+	elementsCmd = nullptr;
+	elementsSep = " ";
 }
 
 EnumElementUi::~EnumElementUi()
@@ -51,4 +73,20 @@ void EnumElementUi::updateCursorPosition()
 {
 	ui->editbox->selectAll();
 	setFocus();
+}
+
+void EnumElementUi::update()
+{
+	EditboxElementUi::update();
+	if(!selected)
+		updateElements();
+}
+void EnumElementUi::updateElements()
+{
+	QStringList val;
+	if(elementsCmd)
+	{
+		val = elementsCmd->run().split(' ',QString::SkipEmptyParts);
+		setElements(val);
+	}
 }

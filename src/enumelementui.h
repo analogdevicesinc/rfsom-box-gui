@@ -7,6 +7,8 @@
 class EnumElementUi : public EditboxElementUi
 {
 	QStringList elements;
+	ScriptResult *elementsCmd;
+	QString elementsSep;
 	int current;
 public:
 	EnumElementUi(QWidget *parent=0);
@@ -14,6 +16,12 @@ public:
 
 	QStringList getElements() const;
 	void setElements(const QStringList& value);
+
+	ScriptResult *getElementsCmd() const;
+	void setElementsCmd(ScriptResult *value);
+
+	QString getElementsSep() const;
+	void setElementsSep(const QString &value);
 
 public slots:
 	virtual void increment();
@@ -27,6 +35,8 @@ public slots:
 		return true;
 	}
 	void updateCursorPosition();
+	void update();
+	void updateElements();
 
 };
 

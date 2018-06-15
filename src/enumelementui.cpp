@@ -79,7 +79,11 @@ void EnumElementUi::update()
 {
 	EditboxElementUi::update();
 	if(!selected)
+	{
 		updateElements();
+		if(elements.contains(ui->editbox->text()))
+			current = elements.indexOf(ui->editbox->text());
+	}
 }
 void EnumElementUi::updateElements()
 {

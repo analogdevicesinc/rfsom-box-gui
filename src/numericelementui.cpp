@@ -3,6 +3,7 @@
 #include "ui_editboxElement.h"
 #include <QDebug>
 #include <QLocale>
+#include <math.h>
 
 NumericElementUi::NumericElementUi(QWidget *parent) : EditboxElementUi(parent)
 {

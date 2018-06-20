@@ -81,7 +81,8 @@ if [ $? -eq 0 ]; then
 	if [ ! -e $cfg_path/stream-audio ]; then
 		echo 0 >  $cfg_path/stream-audio
 	fi
-
+	
+	echo "No file selected" > /tmp/buffer_file.txt
 	git --git-dir=/usr/local/src/rfsom-box-gui/.git describe --always --tags > /tmp/git_tag
 	git --git-dir=/usr/local/src/rfsom-box-gui/.git log -1 --format=%cd > /tmp/git_date
 	uname -r > /tmp/unamer

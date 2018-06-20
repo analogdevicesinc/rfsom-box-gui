@@ -248,7 +248,25 @@
           "cmd": "/usr/local/bin/restart_modem_gui.sh >/tmp/modem.log 2>&1",
           "background_task": true,
           "stylesheet": ""
-        },        
+        },
+	{
+              "description": "Files",
+              "type": "edit",
+              "subtype": "enum",
+              "cmd_read": "cat /tmp/buffer_file.txt",
+              "cmd_read_timer": "read_once",
+              "cmd_write": "echo $EDIT_VAL > /tmp/buffer_file.txt",
+              "cmd_enum": "ls /usr/local/share/rfsom-box-gui/buffer",
+	      "cmd_enum_timer": "read_once",
+              "cmd_enum_sep": " "
+        }, 
+	{
+          "description": "Send Buffer",
+          "type": "btn",
+          "cmd": "/usr/local/bin/start_buffer_stream.sh > /tmp/modem.log 2>&1",
+          "background_task": true,
+          "stylesheet": ""
+        },
         {
           "description": "Modem Tx",
           "type": "checkbox",
@@ -691,3 +709,4 @@
     "name": "System"
   }
 ]
+

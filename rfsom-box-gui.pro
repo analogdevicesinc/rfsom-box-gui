@@ -34,6 +34,8 @@ scripts.files += ./bin/batt_man.sh
 scripts.files += ./bin/send_tone.sh
 scripts.files += ./tun_tap/en_macsec.sh
 scripts.files += ./bin/start_buffer_stream.sh
+scripts.files += ./bin/configure_peer.sh
+scripts.files += ./bin/testmode.sh
 
 share.path = $$INSTALL_LOCATION/share
 share.files = ./share/*
@@ -50,6 +52,8 @@ unix:permission.extra += chmod 777 $$INSTALL_LOCATION/bin/enc-onoff.sh;
 unix:permission.extra += chmod 777 $$INSTALL_LOCATION/bin/batt_man.sh;
 unix:permission.extra += chmod 777 $$INSTALL_LOCATION/bin/send_tone.sh;
 unix:permission.extra += chmod 777 $$INSTALL_LOCATION/bin/start_buffer_stream.sh;
+unix:permission.extra += chmod 777 $$INSTALL_LOCATION/bin/configure_peer.sh;
+unix:permission.extra += chmod 777 $$INSTALL_LOCATION/bin/testmode.sh;
 
 INSTALLS += target scripts share permission
 

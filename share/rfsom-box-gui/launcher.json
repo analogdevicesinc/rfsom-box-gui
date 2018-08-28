@@ -215,6 +215,14 @@
           "background_task": true,
           "muted": false,
           "stylesheet": ""
+        },
+        {
+          "description": "Configure peer",
+          "type": "btn",
+          "cmd": "/usr/local/bin/configure_peer.sh",
+          "background_task": true,
+          "muted": false,
+          "stylesheet": ""
         }
       ]
     },
@@ -337,6 +345,14 @@
     "name": "Modem",
     "type": "list"
   },  
+  {
+    "params": {
+      "cmd": "sh /usr/local/bin/testmode.sh"
+    },
+    "type": "video",
+    "name": "Testmode",
+    "hang_on_finish": true
+  },
   {
     "params": {
       "cmd": "sh /usr/local/bin/camera_view.sh"

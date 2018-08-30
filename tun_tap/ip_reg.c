@@ -132,39 +132,61 @@ int32_t modem_read(uint32_t reg_addr, uint32_t *data)
 int main(int argc, char *argv[])
 {
 	uint32_t data;
+	uint32_t reg;
 	int opt;
-	
-	printf("Configuring modem IP\n");
-	
-	while ((opt = getopt(argc, argv, "f:e:s:d:t:x")) != -1) {
+	uint32_t i;
+	uint8_t quiet;
+//	printf("Configuring modem IP\n");
+	quiet=0;	
+	while ((opt = getopt(argc, argv, "qf:e:s:d:t:xr:")) != -1) {
         switch (opt) {
+		case 'q':
+			quiet = 1;
+		break;
 		case 'f': //FRLoopBw
-			printf("Setting the FRLoopBw\n");
+			if(!quiet) 
+				printf("Setting the FRLoopBw\n");
 			data = atoi(optarg);
 			modem_write(0x100, data); 
-            break;
+		break;
 		case 'e': //EQmu
-			printf("Setting the EQmu\n");
+			if(!quiet) 
+				printf("Setting the EQmu\n");
 			data = atoi(optarg);
 			modem_write(0x104, data); 
-            break;
+		break;
 		case 's': //Scope select
-			printf("Setting the Scope select\n");
+			if(!quiet) 
+				printf("Setting the Scope select\n");
 			data = atoi(optarg);
 			modem_write(0x108, data);  
-            break;
+		break;
 		case 'd': //Debug selector
-			printf("Setting the Debug selector\n");
+			if(!quiet) 
+				printf("Setting the Debug selector\n");
 			data = atoi(optarg);
 			modem_write(0x10C, data);  
-            break;			
+		break;			
 		case 't': //Tx DMA select
-			printf("Setting the Tx DMA select\n");
+			if(!quiet) 
+				printf("Setting the Tx DMA select\n");
 			data = atoi(optarg);
 			modem_write(0x110, data);  
-            break;
+		break;
+		case 'r': // read
+			reg = strtol(optarg,NULL,16);
+			if(reg % 4 ==0 && reg>=0x100 && reg<=0x134) {
+				modem_read(reg, &data);
+				printf("%d\n",data);
+			} else { 
+				if(!quiet) 
+					printf("No register @ address 0x%x", reg); 
+			}
+		break;
+
 		case 'x':
-			printf("Setting the defaults\n");
+			if(!quiet) 
+				printf("Setting the defaults\n");
 			modem_write(0x118, (uint32_t)0);  	//Rx Enable
 			modem_write(0x100, (uint32_t)40); 	//FRLoopBw
 			modem_write(0x104, (uint32_t)200); 	//EQmu
@@ -181,14 +203,15 @@ int main(int argc, char *argv[])
 			modem_write(0x118, (uint32_t)1);  	//Rx Enable
 			break;
 		default: /* '?' */
-            fprintf(stderr, "Usage: %s [-f FRLoopBw] [-e EQmu] [-s Scope select] [-d Debug Selector] [-t Tx DMA Select] [-x Default values]\n", argv[0]);
+            fprintf(stderr, "Usage: %s [-f FRLoopBw] [-e EQmu] [-s Scope select] [-d Debug Selector] [-t Tx DMA Select] [-x Default values] [-r]\n", argv[0]);
 		}
     }
 	
 	modem_read(0x134, &data); //payloadLen
-	printf("payloadLen: %d\n", data);
-
-	printf("All Done\n");
+	if(!quiet) { 
+		printf("payloadLen: %d\n", data);
+		printf("All Done\n");
+	}
 	
 	return 0;
 }

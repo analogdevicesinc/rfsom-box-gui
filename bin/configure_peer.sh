@@ -1,11 +1,41 @@
-peer_ip = $("root@"$(cat /usr/local/etc/rfsom-box-gui/peer-cal-ip))
-echo $peer_ip
-#ping $peer_ip -c 1 -W 1 > /dev/null;
-#conn=$(echo $?);echo $conn > /tmp/peer-connectivity;
-#if [ $conn -eq 0 ]; 
-#then 
-#echo Peer ON > /tmp/peer-connectivity-str; 
-#else 
-#echo Peer OFF > /tmp/peer-connectivity-str; 
-#fi;
-ssh $peer_ip 'echo "analog"'| 'sudo -Sv && bash -s' < /usr/local/share/configure_peer_remote.sh
+#!/bin/bash
+
+SSH_IP=$(cat /usr/local/etc/rfsom-box-gui/peer-cal-ip)
+SSH_HOST="root@"$SSH_IP
+SSH_PASS="analog"
+SSH_ARGS="-o StrictHostKeyChecking=no"
+log_in_remote() {
+   sshpass -p $SSH_PASS "$@"
+}
+
+a=(modem-ip radio-rx_lo_freq radio-sampling_freq)
+b=(stream-ip radio-tx_lo_freq radio-sampling_freq)
+
+# Update IPs
+for i in "${!a[@]}"; do
+  printf "%s\t%s\n" "$i" "${foo[$i]}"
+  echo "scp /usr/local/etc/rfsom-box-gui/${b[$i]} $SSH_IP:/usr/local/etc/rfsom-box-gui/${a[$i]}"
+  log_in_remote scp $SSH_ARGS /usr/local/etc/rfsom-box-gui/${b[$i]} $SSH_IP:/usr/local/etc/rfsom-box-gui/${a[$i]}
+  echo "scp /usr/local/etc/rfsom-box-gui/${a[$i]} $SSH_IP:/usr/local/etc/rfsom-box-gui/${b[$i]}"
+  log_in_remote scp $SSH_ARGS /usr/local/etc/rfsom-box-gui/${a[$i]} $SSH_IP:/usr/local/etc/rfsom-box-gui/${b[$i]}
+done
+
+iio_attr -u ip:$SSH_IP -c ad9361-phy altvoltage1 frequency $(cat /usr/local/etc/rfsom-box-gui/radio-tx_lo_freq)
+iio_attr -u ip:$SSH_IP -c ad9361-phy altvoltage0 frequency $(cat /usr/local/etc/rfsom-box-gui/radio-rx_lo_freq)
+iio_attr -u ip:localhost -c ad9361-phy altvoltage1 frequency $(cat /usr/local/etc/rfsom-box-gui/radio-rx_lo_freq)
+iio_attr -u ip:localhost -c ad9361-phy altvoltage0 frequency $(cat /usr/local/etc/rfsom-box-gui/radio-tx_lo_freq)
+
+sleep 3
+
+echo "Restarting GUI"
+log_in_remote ssh $SSH_ARGS $SSH_HOST '/usr/local/bin/rfsom-box-gui-start.sh'
+
+echo "Calibrating"
+log_in_remote ssh $SSH_ARGS $SSH_HOST '/usr/local/bin/send_tone.sh'
+/usr/local/bin/send_tone.sh
+
+echo "Restarting MODEM Remotely"
+log_in_remote ssh $SSH_ARGS $SSH_HOST '/usr/local/bin/restart_modem_gui.sh >/tmp/modem.log 2>&1' &
+
+echo "Restarting MODEM Locally"
+/usr/local/bin/restart_modem_gui.sh >/tmp/modem.log 2>&1

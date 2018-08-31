@@ -175,13 +175,14 @@ int main(int argc, char *argv[])
 		break;
 		case 'r': // read
 			reg = strtol(optarg,NULL,16);
-			if(reg % 4 ==0 && reg>=0x100 && reg<=0x134) {
-				modem_read(reg, &data);
+//			if(reg % 4 ==0 && reg>=0x00 && reg<=0x134) {
+				modem_write(0x10c,reg);
+				modem_read(0x140, &data);
 				printf("%d\n",data);
-			} else { 
-				if(!quiet) 
-					printf("No register @ address 0x%x", reg); 
-			}
+//			} else { 
+//				if(!quiet) 
+//					printf("No register @ address 0x%x", reg); 
+//			}
 		break;
 
 		case 'x':

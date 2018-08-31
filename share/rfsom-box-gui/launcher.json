@@ -9,7 +9,8 @@
         {
           "description": "Automatic DHCP Client",
           "type": "checkbox",
-          "cmd_write": "if [ \"$CHECKBOX_VAL\" -eq \"1\" ]; then /usr/local/bin/enable_dhcp.sh; else /usr/local/bin/enable_static_ip.sh; fi", "cmd_read": "grep -q 'iface eth0 inet static' /etc/network/interfaces && echo 0 || echo 1",
+          "cmd_write": "if [ \"$CHECKBOX_VAL\" -eq \"1\" ]; then /usr/local/bin/enable_dhcp.sh; else /usr/local/bin/enable_static_ip.sh; fi",
+          "cmd_read": "grep -q 'iface eth0 inet static' /etc/network/interfaces && echo 0 || echo 1",
           "cmd_read_timer": "read_once"
         },
         {
@@ -208,18 +209,10 @@
           "muted": false,
           "stylesheet": ""
         },
-	{
+        {
           "description": "Calibrate XO IP",
           "type": "btn",
           "cmd": "/usr/local/bin/send_tone.sh",
-          "background_task": true,
-          "muted": false,
-          "stylesheet": ""
-        },
-        {
-          "description": "Configure peer",
-          "type": "btn",
-          "cmd": "/usr/local/bin/configure_peer.sh",
           "background_task": true,
           "muted": false,
           "stylesheet": ""
@@ -234,7 +227,7 @@
       "timers": [
         10000,
         1000,
-	2000
+        2000
       ],
       "tasks": [
         {
@@ -244,31 +237,31 @@
         }
       ],
       "elements": [
-	{
+        {
           "description": "Status",
           "type": "cmd_read",
           "timer": 1,
           "cmd": "cat /tmp/connectivity-str"
         },
-	{
+        {
           "description": "Restart",
           "type": "btn",
           "cmd": "/usr/local/bin/restart_modem_gui.sh >/tmp/modem.log 2>&1",
           "background_task": true,
           "stylesheet": ""
         },
-	{
-              "description": "Files",
-              "type": "edit",
-              "subtype": "enum",
-              "cmd_read": "cat /tmp/buffer_file.txt",
-              "cmd_read_timer": "read_once",
-              "cmd_write": "echo $EDIT_VAL > /tmp/buffer_file.txt",
-              "cmd_enum": "ls /usr/local/share/rfsom-box-gui/buffer",
-	      "cmd_enum_timer": "read_once",
-              "cmd_enum_sep": " "
-        }, 
-	{
+        {
+          "description": "Files",
+          "type": "edit",
+          "subtype": "enum",
+          "cmd_read": "cat /tmp/buffer_file.txt",
+          "cmd_read_timer": "read_once",
+          "cmd_write": "echo $EDIT_VAL > /tmp/buffer_file.txt",
+          "cmd_enum": "ls /usr/local/share/rfsom-box-gui/buffer",
+          "cmd_enum_timer": "read_once",
+          "cmd_enum_sep": " "
+        },
+        {
           "description": "Send Buffer",
           "type": "btn",
           "cmd": "/usr/local/bin/start_buffer_stream.sh > /tmp/modem.log 2>&1",
@@ -282,14 +275,14 @@
           "cmd_read": "echo 0x800000bc > /sys/kernel/debug/iio/iio\\:device3/direct_reg_access;tmp=$(($(cat /sys/kernel/debug/iio/iio\\:device3/direct_reg_access)));if [ $tmp -eq 0 ]; then echo 0; else echo 1; fi",
           "cmd_read_timer": 0
         },
-	{
+        {
           "description": "UDP",
           "type": "checkbox",
           "cmd_write": "if [ \"$CHECKBOX_VAL\" -eq \"1\" ]; then printf \"%s\"-u > /usr/local/etc/rfsom-box-gui/netcat-param;else rm /usr/local/etc/rfsom-box-gui/netcat-param;touch /usr/local/etc/rfsom-box-gui/netcat-param;fi",
           "cmd_read": "if [ ! -s /usr/local/etc/rfsom-box-gui/netcat-param ]; then echo 0; else echo 1;fi",
           "cmd_read_timer": 0
         },
-	{
+        {
           "description": "Audio (Experimental)",
           "type": "checkbox",
           "cmd_write": "echo $CHECKBOX_VAL > /usr/local/etc/rfsom-box-gui/stream-audio",
@@ -329,7 +322,7 @@
           "cmd_read": "cat /usr/local/etc/rfsom-box-gui/modem-port",
           "cmd_read_timer": 1,
           "cmd_write": "echo $EDIT_VAL > /usr/local/etc/rfsom-box-gui/modem-port"
-        },	
+        },
         {
           "description": "Delay",
           "type": "edit",
@@ -344,7 +337,7 @@
     },
     "name": "Modem",
     "type": "list"
-  },  
+  },
   {
     "params": {
       "cmd": "sh /usr/local/bin/testmode.sh"
@@ -396,13 +389,13 @@
   {
     "params": {
       "cmd": "sh /usr/local/bin/start_plot.sh",
-      "console": true ,
-      "scroll_console":false ,
-      "input_map" : {
-	   "right_btn":"q", 
-           "wheel_up":"E", 
-           "wheel_down":"D"
-     }
+      "console": true,
+      "scroll_console": false,
+      "input_map": {
+        "right_btn": "q",
+        "wheel_up": "E",
+        "wheel_down": "D"
+      }
     },
     "type": "video",
     "name": "FFT plot"
@@ -674,7 +667,206 @@
       "timers": [
         1000,
         5000,
-       10000
+        10000
+      ],
+      "elements": [
+        {
+          "description": "Timing Lock",
+          "type": "cmd_read",
+          "timer": 0,
+          "cmd": "/usr/local/bin/ip_reg -q -r 0"
+        },
+        {
+          "description": "Peaks detected",
+          "type": "cmd_read",
+          "timer": 0,
+          "cmd": "/usr/local/bin/ip_reg -q -r 1"
+        },
+        {
+          "description": "Frequency Lock",
+          "type": "cmd_read",
+          "timer": 0,
+          "cmd": "/usr/local/bin/ip_reg -q -r 2"
+        },
+        {
+          "description": "Header failures",
+          "type": "cmd_read",
+          "timer": 0,
+          "cmd": "/usr/local/bin/ip_reg -q -r 3"
+        },
+        {
+          "description": "CRC Errors",
+          "type": "cmd_read",
+          "timer": 0,
+          "cmd": "/usr/local/bin/ip_reg -q -r 4"
+        },
+        {
+          "description": "Packet Count",
+          "type": "cmd_read",
+          "timer": 0,
+          "cmd": "/usr/local/bin/ip_reg -q -r 5"
+        },
+        {
+          "description": "Last payload length",
+          "type": "cmd_read",
+          "timer": 0,
+          "cmd": "/usr/local/bin/ip_reg -q -r 6"
+        },
+        {
+          "description": "FRLoopBw",
+          "type": "edit",
+          "subtype": "numeric",
+          "max_value": 4294967295,
+          "min_value": 0,
+          "cmd_read": "cat /tmp/ip_modem_reg_100",
+          "cmd_read_timer": "read_once",
+          "cmd_write": "/usr/local/bin/ip_reg -q -f $EDIT_VAL;echo $EDIT_VAL > /tmp/ip_modem_reg_100"
+        },
+        {
+          "description": "EQmu",
+          "type": "edit",
+          "subtype": "numeric",
+          "max_value": 4294967295,
+          "min_value": 0,
+          "cmd_read": "cat /tmp/ip_modem_reg_104",
+          "cmd_read_timer": "read_once",
+          "cmd_write": "/usr/local/bin/ip_reg -q -e $EDIT_VAL;echo $EDIT_VAL > /tmp/ip_modem_reg_104"
+        },
+        {
+          "description": "Scope Select",
+          "type": "edit",
+          "subtype": "numeric",
+          "max_value": 4294967295,
+          "min_value": 0,
+          "cmd_read": "cat /tmp/ip_modem_reg_108",
+          "cmd_read_timer": "read_once",
+          "cmd_write": "/usr/local/bin/ip_reg -q -s $EDIT_VAL;echo $EDIT_VAL > /tmp/ip_modem_reg_108"
+        },
+        {
+          "description": "Debug Select",
+          "type": "edit",
+          "subtype": "numeric",
+          "max_value": 4294967295,
+          "min_value": 0,
+          "cmd_read": "cat /tmp/ip_modem_reg_10c",
+          "cmd_read_timer": "read_once",
+          "cmd_write": "/usr/local/bin/ip_reg -q -d $EDIT_VAL;echo $EDIT_VAL > /tmp/ip_modem_reg_10c"
+        },
+        {
+          "description": "Tx DMA select",
+          "type": "edit",
+          "subtype": "numeric",
+          "max_value": 4294967295,
+          "min_value": 0,
+          "cmd_read": "cat /tmp/ip_modem_reg_110",
+          "cmd_read_timer": "read_once",
+          "cmd_write": "/usr/local/bin/ip_reg -q -t $EDIT_VAL;echo $EDIT_VAL > /tmp/ip_modem_reg_110"
+        },
+        {
+          "description": "EQ Bypass",
+          "type": "edit",
+          "subtype": "numeric",
+          "max_value": 4294967295,
+          "min_value": 0,
+          "cmd_read": "cat /tmp/ip_modem_reg_114",
+          "cmd_read_timer": "read_once",
+          "cmd_write": "/usr/local/bin/ip_reg -q -b $EDIT_VAL;echo $EDIT_VAL > /tmp/ip_modem_reg_114"
+        },
+        {
+          "description": "Rx Decode Enable",
+          "type": "edit",
+          "subtype": "numeric",
+          "max_value": 4294967295,
+          "min_value": 0,
+          "cmd_read": "cat /tmp/ip_modem_reg_118",
+          "cmd_read_timer": "read_once",
+          "cmd_write": "/usr/local/bin/ip_reg -q -p $EDIT_VAL;echo $EDIT_VAL > /tmp/ip_modem_reg_118"
+        },
+        {
+          "description": "Packet Detection Threshold",
+          "type": "edit",
+          "subtype": "numeric",
+          "max_value": 4294967295,
+          "min_value": 0,
+          "cmd_read": "cat /tmp/ip_modem_reg_11c",
+          "cmd_read_timer": "read_once",
+          "cmd_write": "/usr/local/bin/ip_reg -q -z $EDIT_VAL;echo $EDIT_VAL > /tmp/ip_modem_reg_11c"
+        },
+        {
+          "description": "Send single packet",
+          "type": "btn",
+          "cmd": "/usr/local/bin/ip_reg -q -1 1",
+          "background_task": true,
+          "muted": false,
+          "stylesheet": ""
+        },
+        {
+          "description": "Send Always Trigger",
+          "type": "edit",
+          "subtype": "numeric",
+          "max_value": 4294967295,
+          "min_value": 0,
+          "cmd_read": "cat /tmp/ip_modem_reg_124",
+          "cmd_read_timer": "read_once",
+          "cmd_write": "/usr/local/bin/ip_reg -q -A $EDIT_VAL;echo $EDIT_VAL > /tmp/ip_modem_reg_124"
+        },
+        {
+          "description": "Set packet source",
+          "type": "edit",
+          "subtype": "numeric",
+          "max_value": 4294967295,
+          "min_value": 0,
+          "cmd_read": "cat /tmp/ip_modem_reg_128",
+          "cmd_read_timer": "read_once",
+          "cmd_write": "/usr/local/bin/ip_reg -q -S $EDIT_VAL;echo $EDIT_VAL > /tmp/ip_modem_reg_128"
+        },
+        {
+          "description": "Enable internal IP loopback",
+          "type": "edit",
+          "subtype": "numeric",
+          "max_value": 4294967295,
+          "min_value": 0,
+          "cmd_read": "cat /tmp/ip_modem_reg_12c",
+          "cmd_read_timer": "read_once",
+          "cmd_write": "/usr/local/bin/ip_reg -q -L $EDIT_VAL;echo $EDIT_VAL > /tmp/ip_modem_reg_12c"
+        },
+        {
+          "description": "Enable encoding",
+          "type": "edit",
+          "subtype": "numeric",
+          "max_value": 4294967295,
+          "min_value": 0,
+          "cmd_read": "cat /tmp/ip_modem_reg_130",
+          "cmd_read_timer": "read_once",
+          "cmd_write": "/usr/local/bin/ip_reg -q -V $EDIT_VAL;echo $EDIT_VAL > /tmp/ip_modem_reg_130"
+        },
+        {
+          "description": "Set default",
+          "type": "btn",
+          "cmd": "/usr/local/bin/ip_reg_default.sh",
+          "background_task": true,
+          "muted": false,
+          "stylesheet": ""
+        }
+      ]
+    },
+    "type": "list",
+    "name": "Debug"
+  },
+  {
+    "params": {
+      "cmd": "(>&2 /usr/local/bin/configure_peer.sh )"
+    },
+    "type": "video",
+    "name": "Autoconfig",
+    "hang_on_finish": true
+  },
+  {
+    "params": {
+      "timers": [
+        1000,
+        5000,
+        10000
       ],
       "elements": [
         {
@@ -683,7 +875,6 @@
           "timer": 2,
           "cmd": "cat /tmp/git_tag"
         },
-
         {
           "description": "Git date",
           "type": "cmd_read",
@@ -696,13 +887,12 @@
           "timer": 2,
           "cmd": "cat /tmp/unamer"
         },
-	{
+        {
           "description": "Kernel version",
           "type": "cmd_read",
           "timer": 2,
           "cmd": "cat /tmp/unamev"
         },
-
         {
           "description": "Reboot",
           "type": "btn",
@@ -725,4 +915,3 @@
     "name": "System"
   }
 ]
-

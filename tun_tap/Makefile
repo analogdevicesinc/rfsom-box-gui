@@ -20,6 +20,7 @@ install:
 	install -m 0755 modemd $(prefix)/bin
 	install -m 0755 ip_reg $(prefix)/bin
 	install -m 0777 restart_modem_gui.sh $(prefix)/bin
+	install -m 0777 ip_reg_default.sh $(prefix)/bin
 	install -m 0444 modem_filter.ftr $(prefix)/share/rfsom-box-gui
 
 clean:

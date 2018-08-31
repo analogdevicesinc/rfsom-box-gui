@@ -14,6 +14,7 @@ if [ $? -eq 0 ]; then
 	    ;;
 	esac
 	sudo service lightdm stop;
+	iiod &
 	/usr/local/bin/batt_man.sh &
 	gpsd -n /dev/ttyPS1;
 	echo 972 > /sys/class/gpio/export;
@@ -88,6 +89,7 @@ if [ $? -eq 0 ]; then
 	uname -r > /tmp/unamer
 	uname -v > /tmp/unamev
 	
+	/usr/local/bin/ip_reg_default.sh
 	QT_QPA_EVDEV_KEYBOARD_PARAMETERS=/dev/input/by-path/platform-gpio-keys-nav-switch-event:grab=1 \
 	QT_QPA_EVDEV_MOUSE_PARAMETERS=/dev/input/by-path/platform-rotary-event:grab=1 \
 	QT_QPA_FB_DRM=1 \

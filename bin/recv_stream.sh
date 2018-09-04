@@ -15,7 +15,8 @@ scanport=$(($port+1))
 netcat -l $ip -p $scanport &
 if [ $audio -eq 1 ]
 then
-netcat -l $udp $ip -p $port| mplayer -fps 20 -vf scale -zoom -x 160 -y 128 -vo fbdev -cache 32 -cache-min 1 - 2>/dev/null
+echo "Audio"
+netcat -l $udp $ip -p $port| mplayer -fps 15 -vf scale -zoom -x 160 -y 120 -vo fbdev -cache 64 -cache-min 1 - 2>/dev/null
 else
-netcat -l $udp $ip -p $port| mplayer -fps 20 -vf scale -zoom -x 160 -y 128 -nosound -vo fbdev -cache 32 -cache-min 1 - 2>/dev/null
+netcat -l $udp $ip -p $port| mplayer -fps 15 -vf scale -zoom -x 160 -y 120 -nosound -vo fbdev -framedrop -cache 64 -cache-min 1 - 2>/dev/null
 fi

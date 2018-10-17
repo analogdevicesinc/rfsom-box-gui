@@ -32,4 +32,4 @@ CMD="timed_log '/usr/local/share/rfsom-box-gui/test_imu.py accel_y \>9.6';"
 CMD+="/usr/local/share/rfsom-box-gui/tests/test_imu.py accel_y \>9.6"
 run_test $TEST_ID "$SHORT_DESC" "$CMD"
 
-return 1
+: #if reached this point, ensure exit code 0

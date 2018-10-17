@@ -29,10 +29,10 @@ timed_log_no_newline "$str"
 read -r -p "[Y/n]" response
 case "$response" in
     [nN][oO]|[nN]) 
-	return 0
+	return 1
 	;;
     *)	
-	return 1
+	return 0
 	;;
 esac
 }
@@ -44,7 +44,7 @@ then
 	return
 fi
 
-if [ $1 -eq 0 ]
+if [ $1 -eq 1 ]
 then
 	if [ -z "$2" ]  
 	then

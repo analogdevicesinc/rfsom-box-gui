@@ -22,21 +22,21 @@ run_test $TEST_ID "$SHORT_DESC" "$CMD"
 echo
 TEST_ID="3"
 SHORT_DESC="red screen"
-CMD="python /usr/local/share/rfsom-box-gui/create_fb_data.py 31 0 0 > /dev/fb0;"
+CMD="python /usr/local/share/rfsom-box-gui/tests/create_fb_data.py 31 0 0 > /dev/fb0;"
 CMD+="YES_no 'Is the display filled with red ? '"
 run_test $TEST_ID "$SHORT_DESC" "$CMD"
 
 echo
 TEST_ID="4"
 SHORT_DESC="green screen"
-CMD="python /usr/local/share/rfsom-box-gui/create_fb_data.py 0 63 0 > /dev/fb0;"
+CMD="python /usr/local/share/rfsom-box-gui/tests/create_fb_data.py 0 63 0 > /dev/fb0;"
 CMD+="YES_no 'Is the display filled with green ? '"
 run_test $TEST_ID "$SHORT_DESC" "$CMD"
 
 echo
 TEST_ID="5"
 SHORT_DESC="blue screen"
-CMD="python /usr/local/share/rfsom-box-gui/create_fb_data.py 0 0 31 > /dev/fb0;"
+CMD="python /usr/local/share/rfsom-box-gui/tests/create_fb_data.py 0 0 31 > /dev/fb0;"
 CMD+="YES_no 'Is the display filled with blue ? '"
 run_test $TEST_ID "$SHORT_DESC" "$CMD"
 

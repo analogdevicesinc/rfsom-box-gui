@@ -8,8 +8,16 @@ log_in_remote() {
    sshpass -p $SSH_PASS "$@"
 }
 
-a=(modem-ip radio-rx_lo_freq radio-sampling_freq)
-b=(stream-ip radio-tx_lo_freq radio-sampling_freq)
+a=(modem-ip radio-rx_lo_freq radio-sampling_freq radio-xo_correction modem-ip)
+b=(stream-ip radio-tx_lo_freq radio-sampling_freq radio-xo_correction stream-ip)
+
+# Set default values
+echo 900000000 > /usr/local/etc/rfsom-box-gui/radio-rx_lo_freq
+echo 950000000 > /usr/local/etc/rfsom-box-gui/radio-tx_lo_freq
+echo 20000000 > /usr/local/etc/rfsom-box-gui/radio-sampling_freq
+echo 40000000 > /usr/local/etc/rfsom-box-gui/radio-xo_correction
+echo "192.168.23.1" > /usr/local/etc/rfsom-box-gui/modem-ip
+echo "192.168.23.2" > /usr/local/etc/rfsom-box-gui/stream-ip
 
 # Update IPs
 for i in "${!a[@]}"; do
@@ -22,8 +30,10 @@ done
 
 iio_attr -u ip:$SSH_IP -c ad9361-phy altvoltage1 frequency $(cat /usr/local/etc/rfsom-box-gui/radio-tx_lo_freq)
 iio_attr -u ip:$SSH_IP -c ad9361-phy altvoltage0 frequency $(cat /usr/local/etc/rfsom-box-gui/radio-rx_lo_freq)
+iio_attr -u ip:$SSH_IP -d ad9361-phy xo_correction $(cat /usr/local/etc/rfsom-box-gui/radio-xo_correction)
 iio_attr -u ip:localhost -c ad9361-phy altvoltage1 frequency $(cat /usr/local/etc/rfsom-box-gui/radio-rx_lo_freq)
 iio_attr -u ip:localhost -c ad9361-phy altvoltage0 frequency $(cat /usr/local/etc/rfsom-box-gui/radio-tx_lo_freq)
+iio_attr -u ip:localhost -d ad9361-phy xo_correction $(cat /usr/local/etc/rfsom-box-gui/radio-xo_correction)
 
 sleep 3
 

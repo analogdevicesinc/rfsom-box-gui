@@ -27,38 +27,38 @@ if [ $? -eq 0 ]; then
 	fi	
 	# Radio config
 	if [ -e $cfg_path/radio-ensm_mode ]; then
-		iio_attr -q -d ad9361-phy ensm_mode $(cat $cfg_path/radio-ensm_mode)
+		iio_attr  -d ad9361-phy ensm_mode $(cat $cfg_path/radio-ensm_mode)
 	fi
 	if [ -e $cfg_path/radio-rx_lo_freq ]; then
-		iio_attr -q -c ad9361-phy altvoltage0 frequency $(cat $cfg_path/radio-rx_lo_freq)
+		iio_attr  -c ad9361-phy altvoltage0 frequency $(cat $cfg_path/radio-rx_lo_freq)
 	fi
 	if [ -e $cfg_path/radio-tx_lo_freq ]; then
-		iio_attr -q -c ad9361-phy altvoltage1 frequency $(cat $cfg_path/radio-tx_lo_freq)
+		iio_attr  -c ad9361-phy altvoltage1 frequency $(cat $cfg_path/radio-tx_lo_freq)
 	fi
 	if [ -e $cfg_path/radio-sampling_freq ]; then
-		iio_attr -q -i -c ad9361-phy voltage0 sampling_frequency $(cat $cfg_path/radio-sampling_freq)
+		iio_attr  -i -c ad9361-phy voltage0 sampling_frequency $(cat $cfg_path/radio-sampling_freq)
 	fi
 	if [ -e $cfg_path/radio-rx_rf_bandwidth ]; then
-		iio_attr -q -i -c ad9361-phy voltage0 rf_bandwidth $(cat $cfg_path/radio-rx_rf_bandwidth)
+		iio_attr  -i -c ad9361-phy voltage0 rf_bandwidth $(cat $cfg_path/radio-rx_rf_bandwidth)
 	fi
 	if [ -e $cfg_path/radio-tx_rf_bandwidth ]; then
-		iio_attr -q -o -c ad9361-phy voltage0 rf_bandwidth $(cat $cfg_path/radio-tx_rf_bandwidth)
+		iio_attr  -o -c ad9361-phy voltage0 rf_bandwidth $(cat $cfg_path/radio-tx_rf_bandwidth)
 	fi
 	if [ -e $cfg_path/radio-tx_atten ]; then
-		iio_attr -q -o -c ad9361-phy voltage0 hardwaregain $(echo "$(cat $cfg_path/radio-tx_atten) * -1" |  bc)	
+		iio_attr  -o -c ad9361-phy voltage0 hardwaregain $(echo "$(cat $cfg_path/radio-tx_atten) * -1" |  bc)
 	fi
 	if [ -e $cfg_path/radio-rx_gain_ctrl_mode ]; then
-		iio_attr -q -i -c ad9361-phy voltage0 gain_control_mode $(cat $cfg_path/radio-rx_gain_ctrl_mode)
+		iio_attr  -i -c ad9361-phy voltage0 gain_control_mode $(cat $cfg_path/radio-rx_gain_ctrl_mode)
 	fi
 	if [ -e $cfg_path/radio-rx_gain ]; then
-		iio_attr -q -i -c ad9361-phy voltage0 hardwaregain $(cat $cfg_path/radio-rx_gain)
+		iio_attr  -i -c ad9361-phy voltage0 hardwaregain $(cat $cfg_path/radio-rx_gain)
 	fi
 	if [ ! -e $cfg_path/netcat-param ]; then
 		touch $cfg_path/netcat-param
 	fi
 
 	if [ -e $cfg_path/radio-xo_correction ]; then
-		iio_attr -q -d ad9361-phy xo_correction $(cat $cfg_path/radio-xo_correction)
+		iio_attr  -d ad9361-phy xo_correction $(cat $cfg_path/radio-xo_correction)
 	fi
 
 

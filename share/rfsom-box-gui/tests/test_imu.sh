@@ -6,7 +6,7 @@ TEST_NAME="TEST_IMU"
 
 TEST_ID="01"
 SHORT_DESC="adis16460 IIO device exists" 
-CMD="pid=\$(iio_attr -q -D adis16460 product_id);"
+CMD="pid=\$(iio_attr  -D adis16460 product_id);"
 CMD+="test \$pid == \"16460\""
 run_test $TEST_ID "$SHORT_DESC" "$CMD"
 

@@ -69,9 +69,9 @@
           "description": "ENSM Mode",
           "type": "edit",
           "subtype": "enum",
-          "cmd_read": "iio_attr -q -d ad9361-phy ensm_mode",
+          "cmd_read": "iio_attr  -d ad9361-phy ensm_mode",
           "cmd_read_timer": "read_once",
-          "cmd_write": "iio_attr -q -d ad9361-phy ensm_mode $EDIT_VAL;echo $EDIT_VAL > /usr/local/etc/rfsom-box-gui/radio-ensm_mode",
+          "cmd_write": "iio_attr  -d ad9361-phy ensm_mode $EDIT_VAL;echo $EDIT_VAL > /usr/local/etc/rfsom-box-gui/radio-ensm_mode",
           "enum": [
             "fdd",
             "alert",
@@ -86,9 +86,9 @@
           "subtype": "numeric",
           "max_value": 6000000000,
           "min_value": 70000000,
-          "cmd_read": "iio_attr -q -c ad9361-phy altvoltage0 frequency",
+          "cmd_read": "iio_attr  -c ad9361-phy altvoltage0 frequency",
           "cmd_read_timer": "read_once",
-          "cmd_write": "iio_attr -q -c ad9361-phy altvoltage0 frequency $EDIT_VAL;echo $EDIT_VAL > /usr/local/etc/rfsom-box-gui/radio-rx_lo_freq"
+          "cmd_write": "iio_attr  -c ad9361-phy altvoltage0 frequency $EDIT_VAL;echo $EDIT_VAL > /usr/local/etc/rfsom-box-gui/radio-rx_lo_freq"
         },
         {
           "description": "TX LO Frequency (Hz)",
@@ -96,9 +96,9 @@
           "subtype": "numeric",
           "max_value": 6000000000,
           "min_value": 46875001,
-          "cmd_read": "iio_attr -q -c ad9361-phy altvoltage1 frequency",
+          "cmd_read": "iio_attr  -c ad9361-phy altvoltage1 frequency",
           "cmd_read_timer": "read_once",
-          "cmd_write": "iio_attr -q -c ad9361-phy altvoltage1 frequency $EDIT_VAL;echo $EDIT_VAL > /usr/local/etc/rfsom-box-gui/radio-tx_lo_freq"
+          "cmd_write": "iio_attr  -c ad9361-phy altvoltage1 frequency $EDIT_VAL;echo $EDIT_VAL > /usr/local/etc/rfsom-box-gui/radio-tx_lo_freq"
         },
         {
           "description": "Baseband Rate (Hz)",
@@ -106,9 +106,9 @@
           "subtype": "numeric",
           "max_value": 61440000,
           "min_value": 520833,
-          "cmd_read": "iio_attr -q -i -c ad9361-phy voltage0 sampling_frequency",
+          "cmd_read": "iio_attr  -i -c ad9361-phy voltage0 sampling_frequency",
           "cmd_read_timer": "read_once",
-          "cmd_write": "iio_attr -q -i -c ad9361-phy voltage0 sampling_frequency $EDIT_VAL;echo $EDIT_VAL > /usr/local/etc/rfsom-box-gui/radio-sampling_freq"
+          "cmd_write": "iio_attr  -i -c ad9361-phy voltage0 sampling_frequency $EDIT_VAL;echo $EDIT_VAL > /usr/local/etc/rfsom-box-gui/radio-sampling_freq"
         },
         {
           "description": "RX RF Bandwidth (Hz)",
@@ -116,9 +116,9 @@
           "subtype": "numeric",
           "max_value": 56000000,
           "min_value": 0,
-          "cmd_read": "iio_attr -q -i -c ad9361-phy voltage0 rf_bandwidth",
+          "cmd_read": "iio_attr  -i -c ad9361-phy voltage0 rf_bandwidth",
           "cmd_read_timer": "read_once",
-          "cmd_write": "iio_attr -q -i -c ad9361-phy voltage0 rf_bandwidth $EDIT_VAL;echo $EDIT_VAL > /usr/local/etc/rfsom-box-gui/radio-rx_rf_bandwidth"
+          "cmd_write": "iio_attr  -i -c ad9361-phy voltage0 rf_bandwidth $EDIT_VAL;echo $EDIT_VAL > /usr/local/etc/rfsom-box-gui/radio-rx_rf_bandwidth"
         },
         {
           "description": "TX RF Bandwidth (Hz)",
@@ -126,9 +126,9 @@
           "subtype": "numeric",
           "max_value": 56000000,
           "min_value": 0,
-          "cmd_read": "iio_attr -q -o -c ad9361-phy voltage0 rf_bandwidth",
+          "cmd_read": "iio_attr  -o -c ad9361-phy voltage0 rf_bandwidth",
           "cmd_read_timer": "read_once",
-          "cmd_write": "iio_attr -q -o -c ad9361-phy voltage0 rf_bandwidth $EDIT_VAL;echo $EDIT_VAL > /usr/local/etc/rfsom-box-gui/radio-tx_rf_bandwidth"
+          "cmd_write": "iio_attr  -o -c ad9361-phy voltage0 rf_bandwidth $EDIT_VAL;echo $EDIT_VAL > /usr/local/etc/rfsom-box-gui/radio-tx_rf_bandwidth"
         },
         {
           "description": "TX Attenuation (dB)",
@@ -136,17 +136,17 @@
           "subtype": "numeric",
           "max_value": 89,
           "min_value": 0,
-          "cmd_read": "echo \"$(iio_attr -q -o  -c ad9361-phy voltage0 hardwaregain | cut -d '.' -f 1)  * -1 \" | bc",
+          "cmd_read": "echo \"$(iio_attr  -o  -c ad9361-phy voltage0 hardwaregain | cut -d '.' -f 1)  * -1 \" | bc",
           "cmd_read_timer": "read_once",
-          "cmd_write": "iio_attr -q -o -c ad9361-phy voltage0 hardwaregain $(echo \"$EDIT_VAL * -1\" | bc);echo $EDIT_VAL > /usr/local/etc/rfsom-box-gui/radio-tx_atten"
+          "cmd_write": "iio_attr  -o -c ad9361-phy voltage0 hardwaregain $(echo \"$EDIT_VAL * -1\" | bc);echo $EDIT_VAL > /usr/local/etc/rfsom-box-gui/radio-tx_atten"
         },
         {
           "description": "RX Gain Control Mode",
           "type": "edit",
           "subtype": "enum",
-          "cmd_read": "iio_attr -q -i -c ad9361-phy voltage0 gain_control_mode",
+          "cmd_read": "iio_attr  -i -c ad9361-phy voltage0 gain_control_mode",
           "cmd_read_timer": "read_once",
-          "cmd_write": "iio_attr -q -i -c ad9361-phy voltage0 gain_control_mode $EDIT_VAL;echo $EDIT_VAL > /usr/local/etc/rfsom-box-gui/radio-rx_gain_ctrl_mode",
+          "cmd_write": "iio_attr  -i -c ad9361-phy voltage0 gain_control_mode $EDIT_VAL;echo $EDIT_VAL > /usr/local/etc/rfsom-box-gui/radio-rx_gain_ctrl_mode",
           "enum": [
             "manual",
             "slow_attack",
@@ -160,35 +160,35 @@
           "subtype": "numeric",
           "max_value": 77,
           "min_value": 0,
-          "cmd_read": "iio_attr -q -i -c ad9361-phy voltage0 hardwaregain | cut -d '.' -f 1",
+          "cmd_read": "iio_attr  -i -c ad9361-phy voltage0 hardwaregain | cut -d '.' -f 1",
           "cmd_read_timer": 2,
-          "cmd_write": "iio_attr -q -i -c ad9361-phy voltage0 hardwaregain $EDIT_VAL; echo $EDIT_VAL > /usr/local/etc/rfsom-box-gui/radio-rx_gain"
+          "cmd_write": "iio_attr  -i -c ad9361-phy voltage0 hardwaregain $EDIT_VAL; echo $EDIT_VAL > /usr/local/etc/rfsom-box-gui/radio-rx_gain"
         },
         {
           "description": "RX RSSI (dB)",
           "type": "cmd_read",
           "timer": 2,
-          "cmd": "iio_attr -q -i -c ad9361-phy voltage0 rssi"
+          "cmd": "iio_attr  -i -c ad9361-phy voltage0 rssi"
         },
         {
           "description": "RX BB DC Offset Tracking",
           "type": "checkbox",
-          "cmd_write": "iio_attr -q -i -c ad9361-phy voltage0 bb_dc_offset_tracking_en $CHECKBOX_VAL",
-          "cmd_read": "iio_attr -q -i -c ad9361-phy voltage0 bb_dc_offset_tracking_en;echo $EDIT_VAL > /usr/local/etc/rfsom-box-gui/radio-rx_bb_dc_offset_track",
+          "cmd_write": "iio_attr  -i -c ad9361-phy voltage0 bb_dc_offset_tracking_en $CHECKBOX_VAL",
+          "cmd_read": "iio_attr  -i -c ad9361-phy voltage0 bb_dc_offset_tracking_en;echo $EDIT_VAL > /usr/local/etc/rfsom-box-gui/radio-rx_bb_dc_offset_track",
           "cmd_read_timer": "read_once"
         },
         {
           "description": "RX RF DC Offset Tracking",
           "type": "checkbox",
-          "cmd_write": "iio_attr -q -i -c ad9361-phy voltage0 rf_dc_offset_tracking_en $CHECKBOX_VAL;echo $EDIT_VAL > /usr/local/etc/rfsom-box-gui/radio-rx_rf_dc_offset_track",
-          "cmd_read": "iio_attr -q -i -c ad9361-phy voltage0 rf_dc_offset_tracking_en",
+          "cmd_write": "iio_attr  -i -c ad9361-phy voltage0 rf_dc_offset_tracking_en $CHECKBOX_VAL;echo $EDIT_VAL > /usr/local/etc/rfsom-box-gui/radio-rx_rf_dc_offset_track",
+          "cmd_read": "iio_attr  -i -c ad9361-phy voltage0 rf_dc_offset_tracking_en",
           "cmd_read_timer": "read_once"
         },
         {
           "description": "RX Quadrature Tracking",
           "type": "checkbox",
-          "cmd_write": "iio_attr -q -i -c ad9361-phy voltage0 quadrature_tracking_en $CHECKBOX_VAL;echo $EDIT_VAL > /usr/local/etc/rfsom-box-gui/radio-rx_quad_track",
-          "cmd_read": "iio_attr -q -i -c ad9361-phy voltage0 quadrature_tracking_en",
+          "cmd_write": "iio_attr  -i -c ad9361-phy voltage0 quadrature_tracking_en $CHECKBOX_VAL;echo $EDIT_VAL > /usr/local/etc/rfsom-box-gui/radio-rx_quad_track",
+          "cmd_read": "iio_attr  -i -c ad9361-phy voltage0 quadrature_tracking_en",
           "cmd_read_timer": "read_once"
         },
         {
@@ -197,14 +197,14 @@
           "subtype": "numeric",
           "max_value": 70000000,
           "min_value": 0,
-          "cmd_read": "iio_attr -q -d ad9361-phy xo_correction",
+          "cmd_read": "iio_attr  -d ad9361-phy xo_correction",
           "cmd_read_timer": 1,
-          "cmd_write": "iio_attr -q -d ad9361-phy xo_correction $EDIT_VAL;echo $EDIT_VAL > /usr/local/etc/rfsom-box-gui/radio-xo_correction"
+          "cmd_write": "iio_attr  -d ad9361-phy xo_correction $EDIT_VAL;echo $EDIT_VAL > /usr/local/etc/rfsom-box-gui/radio-xo_correction"
         },
         {
           "description": "Calibrate XO GPS",
           "type": "btn",
-          "cmd": "/usr/local/bin/cal_ad9361 -a -g;err=$(echo $?);iio_attr -q -d ad9361-phy xo_correction > /usr/local/etc/rfsom-box-gui/radio-xo_correction;exit $err;",
+          "cmd": "/usr/local/bin/cal_ad9361 -a -g;err=$(echo $?);iio_attr  -d ad9361-phy xo_correction > /usr/local/etc/rfsom-box-gui/radio-xo_correction;exit $err;",
           "background_task": true,
           "muted": false,
           "stylesheet": ""
@@ -457,25 +457,25 @@
           "description": "PMC Temperature (°C)",
           "type": "cmd_read",
           "timer": 2,
-          "cmd": "echo \"scale=2; ($(iio_attr -q -c ad7291-ccbox temp0 mean_raw) * 250) / 1000\" | bc"
+          "cmd": "echo \"scale=2; ($(iio_attr  -c ad7291-ccbox temp0 mean_raw) * 250) / 1000\" | bc"
         },
         {
           "description": "ARM Temperature (°C)",
           "type": "cmd_read",
           "timer": 2,
-          "cmd": "echo \"scale=2; (($(iio_attr -q -c xadc temp0 raw) - 2219) * 123.040771484)/1000\" | bc"
+          "cmd": "echo \"scale=2; (($(iio_attr  -c xadc temp0 raw) - 2219) * 123.040771484)/1000\" | bc"
         },
         {
           "description": "AD936x Temperature (°C)",
           "type": "cmd_read",
           "timer": 2,
-          "cmd": "echo \"scale=2; $(iio_attr -q -c ad9361-phy temp0 input) / 1000\" | bc"
+          "cmd": "echo \"scale=2; $(iio_attr  -c ad9361-phy temp0 input) / 1000\" | bc"
         },
         {
           "description": "IMU Temperature (°C)",
           "type": "cmd_read",
           "timer": 2,
-          "cmd": "echo \"scale=2; (($(iio_attr -q -c adis16460 temp0 raw) + 500) * 50)/1000\" | bc"
+          "cmd": "echo \"scale=2; (($(iio_attr  -c adis16460 temp0 raw) + 500) * 50)/1000\" | bc"
         }
       ]
     },
@@ -553,43 +553,43 @@
           "description": "Temperature (°C)",
           "type": "cmd_read",
           "timer": 2,
-          "cmd": "echo \"scale=2; (($(iio_attr -q -c adis16460 temp0 raw) + 500) * 50)/1000\" | bc"
+          "cmd": "echo \"scale=2; (($(iio_attr  -c adis16460 temp0 raw) + 500) * 50)/1000\" | bc"
         },
         {
           "description": "Acceleration X (m/s²)",
           "type": "cmd_read",
           "timer": 1,
-          "cmd": "echo \"scale=2; $(iio_attr -q -c adis16460 accel_x raw) * 0.000000037/1\" | bc"
+          "cmd": "echo \"scale=2; $(iio_attr  -c adis16460 accel_x raw) * 0.000000037/1\" | bc"
         },
         {
           "description": "Acceleration Y (m/s²)",
           "type": "cmd_read",
           "timer": 1,
-          "cmd": "echo \"scale=2; $(iio_attr -q -c adis16460 accel_y raw) * 0.000000037/1\" | bc"
+          "cmd": "echo \"scale=2; $(iio_attr  -c adis16460 accel_y raw) * 0.000000037/1\" | bc"
         },
         {
           "description": "Acceleration Z (m/s²)",
           "type": "cmd_read",
           "timer": 1,
-          "cmd": "echo \"scale=2; $(iio_attr -q -c adis16460 accel_z raw) * 0.000000037/1\" | bc"
+          "cmd": "echo \"scale=2; $(iio_attr  -c adis16460 accel_z raw) * 0.000000037/1\" | bc"
         },
         {
           "description": "Angular Velocity X (rad/s)",
           "type": "cmd_read",
           "timer": 1,
-          "cmd": "echo \"scale=4; $(iio_attr -q -c adis16460 anglvel_x raw) * 0.000000001/1\" | bc"
+          "cmd": "echo \"scale=4; $(iio_attr  -c adis16460 anglvel_x raw) * 0.000000001/1\" | bc"
         },
         {
           "description": "Angular Velocity Y (rad/s)",
           "type": "cmd_read",
           "timer": 1,
-          "cmd": "echo \"scale=4; $(iio_attr -q -c adis16460 anglvel_y raw) * 0.000000001/1\" | bc"
+          "cmd": "echo \"scale=4; $(iio_attr  -c adis16460 anglvel_y raw) * 0.000000001/1\" | bc"
         },
         {
           "description": "Angular Velocity Z (rad/s)",
           "type": "cmd_read",
           "timer": 1,
-          "cmd": "echo \"scale=4; $(iio_attr -q -c adis16460 anglvel_z raw) * 0.000000001/1\" | bc"
+          "cmd": "echo \"scale=4; $(iio_attr  -c adis16460 anglvel_z raw) * 0.000000001/1\" | bc"
         }
       ]
     },

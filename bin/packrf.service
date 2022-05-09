@@ -1,0 +1,14 @@
+[Unit]
+Description=Start packrf GUI
+
+[Service]
+Environment=DISPLAY=:0
+Environment=XAUTHORITY=/home/analog/.Xauthority
+ExecStart=/usr/local/bin/rfsom-box-gui-start.sh
+Restart=always
+RestartSec=10s
+KillMode=process
+TimeoutSec=infinity
+
+[Install]
+WantedBy=graphical.target

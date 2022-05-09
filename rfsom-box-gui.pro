@@ -40,6 +40,9 @@ scripts.files += ./bin/testmode.sh
 share.path = $$INSTALL_LOCATION/share
 share.files = ./share/*
 
+systemd.path = /lib/systemd/system
+systemd.files = ./bin/packrf.service
+
 target.path = $$INSTALL_LOCATION/bin
 permission.path = $$INSTALL_LOCATION/bin
 unix:permission.extra = chmod 777 $$INSTALL_LOCATION/bin/rfsom-box-gui-start.sh;
@@ -55,7 +58,7 @@ unix:permission.extra += chmod 777 $$INSTALL_LOCATION/bin/start_buffer_stream.sh
 unix:permission.extra += chmod 777 $$INSTALL_LOCATION/bin/configure_peer.sh;
 unix:permission.extra += chmod 777 $$INSTALL_LOCATION/bin/testmode.sh;
 
-INSTALLS += target scripts share permission
+INSTALLS += target scripts share permission systemd
 
 SRC_DIR = ./src
 UI_DIR=./ui

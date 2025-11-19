@@ -1,0 +1,44 @@
+#!/usr/bin/make -f
+
+export QT_SELECT=qt5
+
+%:
+	dh $@
+
+override_dh_auto_configure:
+	# Configure main GUI with installation path (out-of-source build)
+	mkdir -p build-gui
+	cd build-gui && qmake INSTALL_LOCATION=/usr ../rfsom-box-gui.pro
+
+override_dh_auto_build:
+	# Build main GUI
+	cd build-gui && $(MAKE)
+
+	# Build FFT plot
+	mkdir -p fft-plot/build
+	cd fft-plot/build && cmake -DCMAKE_INSTALL_PREFIX=/usr .. && $(MAKE)
+
+	# Build TUN/TAP components
+	cd tun_tap && $(MAKE) PREFIX=/usr
+
+override_dh_auto_install:
+	# Install main GUI from build directory
+	cd build-gui && $(MAKE) INSTALL_ROOT=$(CURDIR)/debian/rfsom-box-gui install
+
+	# Install FFT plot
+	cd fft-plot/build && $(MAKE) DESTDIR=$(CURDIR)/debian/rfsom-box-gui install
+
+	# Install TUN/TAP components using Makefile install target
+	cd tun_tap && $(MAKE) install DESTDIR=$(CURDIR)/debian/rfsom-box-gui PREFIX=/usr
+
+override_dh_installsystemd:
+	dh_installsystemd --name=rfsom-box-gui --no-enable --no-start
+
+override_dh_auto_clean:
+	dh_auto_clean
+	rm -rf build-gui
+	rm -rf fft-plot/build
+	cd tun_tap && $(MAKE) clean || true
+
+override_dh_auto_test:
+	# Skip tests for now

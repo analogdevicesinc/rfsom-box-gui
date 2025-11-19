@@ -46,3 +46,6 @@ target_wrapper.*
 CMakeLists.txt.user*
 
 astylerc
+
+# Generated files
+bin/rfsom-box-gui.service

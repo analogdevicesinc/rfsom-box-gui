@@ -1,0 +1,32 @@
+Source: rfsom-box-gui
+Section: misc
+Priority: optional
+Maintainer: Engineerzone <https://ez.analog.com/sw-interface-tools>
+Build-Depends: debhelper-compat (= 13),
+               qtbase5-dev,
+               qt5-qmake,
+               cmake,
+               libfftw3-dev,
+               libiio0
+Standards-Version: 4.5.1
+Homepage: https://github.com/analogdevicesinc/rfsom-box-gui
+Rules-Requires-Root: no
+
+Package: rfsom-box-gui
+Architecture: @ARCHITECTURE@
+Multi-Arch: foreign
+Depends: ${misc:Depends}, ${shlibs:Depends},
+         libqt5core5a,
+         libqt5gui5,
+         libqt5widgets5,
+         libfftw3-3,
+         libiio0,
+         iio-utils,
+         gpsd,
+         gpsd-clients,
+         bc
+Recommends: systemd
+Description: RFSOM-BOX-GUI is a Qt5-based graphical user interface for the RFSOM
+ Software Defined Radio platform. It provides a menu-driven interface
+ for RF operations, spectrum analysis, and radio networking.
+ Includes FFT spectrum analyzer and TUN/TAP modem for IP-over-radio.

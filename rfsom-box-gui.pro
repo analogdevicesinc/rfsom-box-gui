@@ -45,7 +45,7 @@ systemd_template.input = ./bin/rfsom-box-gui.service.in
 systemd_template.output = ./bin/rfsom-box-gui.service
 QMAKE_SUBSTITUTES += systemd_template
 
-systemd.path = /lib/systemd/system
+systemd.path = /$$INSTALL_LOCATION/lib/systemd/system
 systemd.files = ./bin/rfsom-box-gui.service
 
 target.path = $$INSTALL_LOCATION/bin

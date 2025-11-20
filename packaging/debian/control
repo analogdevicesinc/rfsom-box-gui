@@ -16,12 +16,7 @@ Package: rfsom-box-gui
 Architecture: @ARCHITECTURE@
 Multi-Arch: foreign
 Depends: ${misc:Depends}, ${shlibs:Depends},
-         libqt5core5a,
-         libqt5gui5,
-         libqt5widgets5,
-         libfftw3-3,
          libiio0,
-         iio-utils,
          gpsd,
          gpsd-clients,
          bc

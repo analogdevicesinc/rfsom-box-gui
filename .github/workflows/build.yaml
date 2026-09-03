@@ -8,6 +8,7 @@ on:
   push:
     branches:
       - main
+      - master
       - '20[1-9][0-9]_R[1-9]'
       - staging/*
     tags:
@@ -15,6 +16,7 @@ on:
   pull_request:
     branches:
       - main
+      - master
       - '20[1-9][0-9]_R[1-9]'
 
 jobs:
@@ -79,10 +81,10 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - docker_image: aandrisa/kuiper_basic_64:latest
+          - docker_image: docker.cloudsmith.io/adi/containers/kuiper_basic_64:latest
             image_arch: linux/arm64
             architecture: arm64
-          - docker_image: aandrisa/kuiper_basic_32:latest
+          - docker_image: docker.cloudsmith.io/adi/containers/kuiper_basic_32:latest
             image_arch: linux/arm/v7
             architecture: armhf
     steps:

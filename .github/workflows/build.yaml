@@ -91,6 +91,12 @@ jobs:
       with:
         path: ${{env.APP_NAME}}
 
+    - name: Checkout deb-generator action
+      uses: actions/checkout@v4
+      with:
+        repository: analogdevicesinc/shared-actions
+        path: shared-actions
+
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v3
 
@@ -100,18 +106,24 @@ jobs:
             --platform ${{matrix.image_arch}} \
             --name ${{env.CONTAINER_BASE_NAME}}-${{matrix.architecture}} \
             -v "$GITHUB_WORKSPACE/${{env.APP_NAME}}:/workspace/${{env.APP_NAME}}" \
+            -v "$GITHUB_WORKSPACE/shared-actions:/workspace/shared-actions" \
             -w /workspace/${{env.APP_NAME}} \
             ${{matrix.docker_image}} tail -f /dev/null
 
     - name: Create debian package
       run: |
-        docker exec ${{env.CONTAINER_BASE_NAME}}-${{matrix.architecture}} sh -c ".github/scripts/create_debian.sh ${{needs.identify_version.outputs.app-version}} ${{matrix.architecture}}"
+        docker exec \
+          -e VERSION=${{needs.identify_version.outputs.app-version}} \
+          -e WORKING_DIRECTORY=/workspace/${{env.APP_NAME}} \
+          -e GITHUB_WORKSPACE=/workspace \
+          ${{env.CONTAINER_BASE_NAME}}-${{matrix.architecture}} \
+          bash /workspace/shared-actions/deb-generator-action/build-deb.sh
 
     - name: Install application
       env:
         DEB_FILE_NAME: ${{env.APP_NAME}}_${{needs.identify_version.outputs.app-version}}-1_${{matrix.architecture}}
       run: |
-        docker exec ${{env.CONTAINER_BASE_NAME}}-${{matrix.architecture}} sh -c "sudo dpkg -i ../${{env.DEB_FILE_NAME}}.deb"
+        docker exec ${{env.CONTAINER_BASE_NAME}}-${{matrix.architecture}} sh -c "sudo apt-get install -y /workspace/artifacts/${{env.DEB_FILE_NAME}}.deb"
 
     - name: Verify install locations
       run: |
@@ -121,7 +133,7 @@ jobs:
       env:
         DEB_FILE_NAME: ${{env.APP_NAME}}_${{needs.identify_version.outputs.app-version}}-1_${{matrix.architecture}}
       run: |
-          docker cp ${{env.CONTAINER_BASE_NAME}}-${{matrix.architecture}}:/workspace/${{env.DEB_FILE_NAME}}.deb ./${{env.DEB_FILE_NAME}}.deb
+          docker cp ${{env.CONTAINER_BASE_NAME}}-${{matrix.architecture}}:/workspace/artifacts/${{env.DEB_FILE_NAME}}.deb ./${{env.DEB_FILE_NAME}}.deb
 
     - name: Upload .deb artifacts to github
       uses: actions/upload-artifact@v4
@@ -144,14 +156,17 @@ jobs:
         path: ${{env.APP_NAME}}
 
     - name: Create .deb package
-      run: |
-        .github/scripts/create_debian.sh ${{needs.identify_version.outputs.app-version}} ${{env.architecture}}
+      id: deb
+      uses: analogdevicesinc/shared-actions/deb-generator-action@main
+      with:
+        version: ${{needs.identify_version.outputs.app-version}}
+        working-directory: ${{env.APP_NAME}}
 
     - name: Install application
       env:
         DEB_FILE_NAME: ${{env.APP_NAME}}_${{needs.identify_version.outputs.app-version}}-1_${{env.architecture}}
       run: |
-        sudo dpkg -i ../${{env.DEB_FILE_NAME}}.deb
+        sudo apt-get install -y ${{steps.deb.outputs.artifact-dir}}/${{env.DEB_FILE_NAME}}.deb
 
     - name: Verify install locations
       run: |
@@ -161,7 +176,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: ${{env.APP_NAME}}-ubuntu
-        path: ${{env.APP_NAME}}_${{needs.identify_version.outputs.app-version}}-1_${{env.architecture}}.deb
+        path: ${{steps.deb.outputs.artifact-dir}}/${{env.APP_NAME}}_${{needs.identify_version.outputs.app-version}}-1_${{env.architecture}}.deb
         if-no-files-found: error
   create_release_from_tag:
     needs:

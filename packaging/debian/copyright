@@ -1,6 +1,6 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: rfsom-box-gui
-Upstream-Contact: Analog Devices Inc. <https://ez.analog.com/sw-interface-tools>
+Upstream-Contact: Analog Devices Inc. <linux@analog.com>
 Source: https://github.com/analogdevicesinc/rfsom-box-gui
 
 Files: *

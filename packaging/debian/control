@@ -1,7 +1,7 @@
 Source: rfsom-box-gui
 Section: misc
 Priority: optional
-Maintainer: Engineerzone <https://ez.analog.com/sw-interface-tools>
+Maintainer: Engineerzone <linux@analog.com>
 Build-Depends: debhelper-compat (= 13),
                qtbase5-dev,
                qt5-qmake,
